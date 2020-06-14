@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Ideas/> should render ideas 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <div
+      class="container"
+    >
+      <div
+        class="title"
+      >
+        <p>
+          Some Crazy Idea
+        </p>
+        <p
+          class="votes"
+        >
+          Votes: 
+          0
+        </p>
+      </div>
+      <div
+        class="description"
+      >
+        An elaborate description of why this idea will change the world!
+      </div>
+      <div
+        class="btnContainer"
+      >
+        <button
+          class="btnSuccess"
+        >
+           Upvote 
+        </button>
+        <button
+          class="btnDanger"
+          disabled=""
+        >
+           Downvote 
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

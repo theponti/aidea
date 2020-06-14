@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import Ideas from './Ideas'
+import Ideas from '.'
 
 describe('<Ideas/>', () => {
   it('should render ideas', () => {

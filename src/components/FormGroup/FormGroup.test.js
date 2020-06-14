@@ -1,7 +1,6 @@
-
 import React from 'react'
 import { render } from '@testing-library/react'
-import FormGroup from './FormGroup'
+import FormGroup from '.'
 
 describe('<FormGroup/>', () => {
   it('should render component', () => {
@@ -9,4 +8,3 @@ describe('<FormGroup/>', () => {
     expect(container).toMatchSnapshot()
   })
 })
-
