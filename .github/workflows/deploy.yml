@@ -1,17 +1,17 @@
-name: Idears Test
+name: Idears Deploy
 
-# Workflow is triggers on pushes to repository
 on:
-  pull_request:
-    branches: [ master ]
+  push:
+    branches:
+      - master
 
 jobs:
-  test:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: npm install
-      - run: npm test
+      - run: npm run build
+      - run: firebase deploy --token "$FIREBASE_TOKEN"
