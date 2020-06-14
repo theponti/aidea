@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<IdeaListItem/> should render component 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <div
+      class="title"
+    >
+      <p>
+        Some Idea
+      </p>
+      <p
+        class="votes"
+      >
+        Votes: 
+        0
+      </p>
+    </div>
+    <div
+      class="description"
+    >
+      some description
+    </div>
+    <div
+      class="btnContainer"
+    >
+      <button
+        class="btnSuccess"
+      >
+         Upvote 
+      </button>
+      <button
+        class="btnDanger"
+        disabled=""
+      >
+         Downvote 
+      </button>
+    </div>
+  </div>
+</div>
+`;

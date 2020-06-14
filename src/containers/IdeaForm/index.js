@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import t from 'prop-types'
 import { useForm } from 'react-hook-form'
 import FormGroup from '../../components/FormGroup'
 import FormLabel from '../../components/FormLabel'

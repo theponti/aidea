@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { render } from '@testing-library/react'
-import Button from './Button'
+import Button from '.'
 
 describe('<Button/>', () => {
   it('should render component', () => {
@@ -9,4 +9,3 @@ describe('<Button/>', () => {
     expect(container).toMatchSnapshot()
   })
 })
-
