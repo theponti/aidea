@@ -1,25 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import styles from './App.module.scss';
+import IdeaForm from './containers/IdeaForm';
+import Ideas from './containers/Ideas';
+import { GlobalProvider } from './context/GlobalState';
+
+function Brain () {
+  return (
+    <span 
+      role="img" 
+      className={styles.brain}
+      aria-label="brain">🧠</span>
+  )
+}
 
 function App() {
+  useEffect(() => {
+    document.title = 'Idears ??'
+    return () => {}
+  }, [])
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <GlobalProvider>
+      <div className={styles.container}>
+        <header className={styles.header}>
+          <Brain />
+          <h1 style={{ marginLeft: '3rem' }}>Idearz</h1>
+          <Brain/>
+        </header>
+        <main className={styles.main}>
+          <IdeaForm/>
+          <Ideas/>
+        </main>
+      </div>
+    </GlobalProvider>
   );
 }
 

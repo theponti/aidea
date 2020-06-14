@@ -1,0 +1,27 @@
+$border-radius: 3px;
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+
+  input {
+    min-height: 2.5rem;
+    padding-left: 0.5rem;
+  }
+
+  textarea {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+}
+
+.button {
+  height: 100%;
+  border-radius: 4px;
+  background-color: greenyellow;
+  color: green;
+  font-weight: 800;
+  letter-spacing: 1.25px;
+  opacity: 0.9;
+  padding: 0.75rem 0;
+}

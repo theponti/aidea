@@ -1,0 +1,21 @@
+@mixin btn {
+  border-radius: 4px;
+  padding: 0.5rem;
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+.btnDanger {
+  @include btn;
+  color: white;
+  background-color: red;
+}
+
+.btnSuccess {
+  @include btn;
+  color: white;
+  background-color: rgb(11, 154, 11);
+}
