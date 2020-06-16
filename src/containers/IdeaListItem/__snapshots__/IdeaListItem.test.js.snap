@@ -27,11 +27,13 @@ exports[`<IdeaListItem/> should render component 1`] = `
       class="btnContainer"
     >
       <button
+        aria-label="upvote idea"
         class="btnSuccess"
       >
          Upvote 
       </button>
       <button
+        aria-label="downvote idea"
         class="btnDanger"
         disabled=""
       >

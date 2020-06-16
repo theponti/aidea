@@ -17,10 +17,12 @@ function IdeaListItem({ idea: { _id, title, description, votes  }}) {
       </div>
       <div className={styles.description}>{description}</div>
       <div className={styles.btnContainer}>
-        <button 
+        <button
+          aria-label="upvote idea"
           className={buttonStyles.btnSuccess} 
           onClick={() => upvoteIdea(_id)}> Upvote </button>
         <button 
+          aria-label="downvote idea"
           className={buttonStyles.btnDanger}
           onClick={() => downvoteIdea(_id)} 
           disabled={votes === 0}> Downvote </button>
