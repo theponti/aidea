@@ -20,7 +20,6 @@ function App() {
   }, [])
   
   return (
-    <GlobalProvider>
       <div className={styles.container}>
         <header className={styles.header}>
           <Brain />
@@ -28,11 +27,12 @@ function App() {
           <Brain/>
         </header>
         <main className={styles.main}>
-          <IdeaForm/>
-          <Ideas/>
+          <GlobalProvider>
+            <IdeaForm/>
+            <Ideas/>
+          </GlobalProvider>
         </main>
       </div>
-    </GlobalProvider>
   );
 }
 
