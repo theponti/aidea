@@ -9,11 +9,16 @@ import buttonStyles from '../../styles/button.module.scss'
 IdeaForm.propTypes = {}
 
 export default function IdeaForm() {
-  const { register, handleSubmit } = useForm()
-  const { addIdea } = useContext(GlobalContext)
+  const { register, handleSubmit, setValue } = useForm()
+  const { addIdea,  } = useContext(GlobalContext)
 
   function onSubmit(record) {
+    // Dispatch event
     addIdea({ ...record, votes: 0 })
+
+    // Clear values from form
+    setValue('title', '')
+    setValue('description', '')
   }
   
   return (
