@@ -25,8 +25,7 @@ describe('<IdeaForm/>', () => {
     
     expect(addIdea).toHaveBeenCalledWith({
       title: 'Rocketship for Cats',
-      description: 'Backpack for cats that takes them to space',
-      votes: 0
+      description: 'Backpack for cats that takes them to space'
     })
 
     expect(title.value).toEqual('')

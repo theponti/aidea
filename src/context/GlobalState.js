@@ -1,5 +1,6 @@
 import React, { createContext, useReducer } from 'react'
 import AppReducer from '../reducers/AppReducer'
+import actionTypes from 'src/reducers/action-types'
 
 // Initial State
 const initialState = {
@@ -21,15 +22,15 @@ export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState)
 
   function addIdea(payload) {
-    dispatch({ type: 'ADD_IDEA', payload })
+    dispatch({ type: actionTypes.ADD_IDEA, payload })
   }
 
   function downvoteIdea(payload) {
-    dispatch({ type: 'DOWNVOTE_IDEA', payload })
+    dispatch({ type: actionTypes.DOWNVOTE_IDEA, payload })
   }
   
   function upvoteIdea(payload) {
-    dispatch({ type: 'UPVOTE_IDEA', payload })
+    dispatch({ type: actionTypes.UPVOTE_IDEA, payload })
   }
 
   return (

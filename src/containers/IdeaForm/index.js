@@ -14,7 +14,7 @@ export default function IdeaForm() {
 
   function onSubmit(record) {
     // Dispatch event
-    addIdea({ ...record, votes: 0 })
+    addIdea({ ...record })
 
     // Clear values from form
     setValue('title', '')
