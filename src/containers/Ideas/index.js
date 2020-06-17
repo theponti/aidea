@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import { GlobalContext } from '../../context/GlobalState'
 
-import styles from './Ideas.module.scss'
 import IdeaListItem from '../IdeaListItem'
+import styles from './Ideas.module.scss'
 
 export default function Ideas() {
   const { ideas } = useContext(GlobalContext)
