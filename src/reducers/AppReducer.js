@@ -1,3 +1,5 @@
+import actions from './action-types'
+
 function voteOnIdea(ideas, id, amount) {
   return ideas.map(idea => {
     if (idea._id !== id) return idea
@@ -7,15 +9,22 @@ function voteOnIdea(ideas, id, amount) {
 
 export default (state, action) => {
   switch(action.type) {
-    case 'ADD_IDEA':
+    case actions.ADD_IDEA:
       return {
-        ideas: [...state.ideas, { ...action.payload, _id: state.ideas.length }]
+        ideas: [
+          ...state.ideas, 
+          { 
+            ...action.payload, 
+            _id: state.ideas.length, 
+            votes: 0  
+          }
+        ]
       }
-    case 'DOWNVOTE_IDEA':
+    case actions.DOWNVOTE_IDEA:
       return { 
         ideas: voteOnIdea(state.ideas, action.payload, -1)
       }
-    case 'UPVOTE_IDEA':
+    case actions.UPVOTE_IDEA:
       return { 
         ideas: voteOnIdea(state.ideas, action.payload, 1)
       }

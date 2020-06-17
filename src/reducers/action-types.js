@@ -1,0 +1,5 @@
+export default {
+  ADD_IDEA: 'ADD_IDEA',
+  UPVOTE_IDEA: 'UPVOTE_IDEA',
+  DOWNVOTE_IDEA: 'DOWNVOTE_IDEA'
+}
