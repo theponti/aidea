@@ -4,6 +4,7 @@ import actionTypes from 'src/reducers/action-types'
 
 // Initial State
 const initialState = {
+  user: {},
   ideas: [
     { 
       _id: 0,

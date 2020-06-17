@@ -4,9 +4,9 @@ import ListItem from '../../components/ListItem'
 import { GlobalContext } from 'src/context/GlobalState'
 import buttonStyles from '../../styles/button.module.scss'
 
-function IdeaListItem({ idea: { _id, title, description, votes  }}) {
-  const { upvoteIdea, downvoteIdea } = useContext(GlobalContext)
-  
+function IdeaListItem({ idea: { _id, title, description, votes, ...idea  }}) {
+  const { upvoteIdea, downvoteIdea, user } = useContext(GlobalContext)
+  const isUser = user && idea.user === user._id
   return (
     <ListItem key={_id}> 
       <div className={styles.title}>
@@ -20,12 +20,14 @@ function IdeaListItem({ idea: { _id, title, description, votes  }}) {
         <button
           aria-label="upvote idea"
           className={buttonStyles.btnSuccess} 
-          onClick={() => upvoteIdea(_id)}> Upvote </button>
+          onClick={() => upvoteIdea(_id)}
+          disabled={isUser}
+          > Upvote </button>
         <button 
           aria-label="downvote idea"
           className={buttonStyles.btnDanger}
           onClick={() => downvoteIdea(_id)} 
-          disabled={votes === 0}> Downvote </button>
+          disabled={isUser || votes === 0}> Downvote </button>
       </div>
     </ListItem>
   )

@@ -2,15 +2,13 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import Ideas from '.'
 import { GlobalContext } from 'src/context/GlobalState'
+import { getMockState } from 'src/mocks'
 
 describe('<Ideas/>', () => {
   it('should render ideas', () => {
-    const ideas = [
-      { _id: 0, title: 'Some idea', description: 'Some description', votes: 0 },
-      { _id: 1, title: 'Some another idea', description: 'Some another description', votes: 5 }
-    ]
+    const state = getMockState()
     const { container } = render(
-      <GlobalContext.Provider value={{ ideas }}>
+      <GlobalContext.Provider value={state}>
         <Ideas/>
       </GlobalContext.Provider>
     )
