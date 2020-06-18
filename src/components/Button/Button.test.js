@@ -5,7 +5,17 @@ import Button from '.'
 
 describe('<Button/>', () => {
   it('should render component', () => {
-    const { container } = render(<Button/>)
-    expect(container).toMatchSnapshot()
+    const { getByTestId } = render(<Button/>)
+    expect(getByTestId('button')).toMatchSnapshot()
+  })
+
+  it('should render a success button', () => {
+    const { getByTestId } = render(<Button variant="success" />)
+    expect(getByTestId('button').classList).toContain('btnSuccess')
+  })
+
+  it('should render a danger button', () => {
+    const { getByTestId } = render(<Button variant="danger" />)
+    expect(getByTestId('button').classList).toContain('btnDanger')
   })
 })

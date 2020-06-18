@@ -1,16 +1,23 @@
+@import "../../styles/colors.module.scss";
+
 $border-radius: 3px;
 
 .container {
   display: flex;
   flex-wrap: wrap;
+  background-color: $card-background--dark;
+  border-radius: 3px;
+  padding: 1rem;
 
   input {
-    min-height: 2.5rem;
+    min-height: 100%;
     padding-left: 0.5rem;
+    border-radius: $border-radius;
   }
 
   textarea {
     padding: 1rem;
+    border-radius: $border-radius;
   }
 }
 

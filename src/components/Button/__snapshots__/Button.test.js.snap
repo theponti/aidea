@@ -1,9 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Button/> should render component 1`] = `
-<div>
-  <div
-    class="container"
-  />
-</div>
+<button
+  class="container"
+  data-testid="button"
+/>
 `;
