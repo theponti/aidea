@@ -1,11 +1,11 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import styles from './Button.module.scss'
 import cx from 'classnames'
 
-function Button({ children, className, ...props }) {
+function Button({ children, className, variant, ...props }) {
   let buttonStyle
 
-  switch(props.variant) {
+  switch(variant) {
     case 'success':
       buttonStyle = styles.btnSuccess
       break;
