@@ -1,7 +1,9 @@
 export function getMockState() {
   return {
     user: {
-      _id: 'USER_ID'
+      _id: 'USER_ID',
+      ideas: [],
+      votes: []
     },
     ideas: [
       { 
@@ -14,7 +16,7 @@ export function getMockState() {
         _id: 1, 
         title: 'Some another idea', 
         description: 'Some another description', 
-        votes: 5 
+        votes: 5
       }
     ]
   }

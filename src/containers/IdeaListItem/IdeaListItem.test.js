@@ -58,6 +58,25 @@ describe('<IdeaListItem/>', () => {
     expect(downvoteIdea).toBeCalledWith(0)
   })
 
+  it('should disable voting on ideas user already voted for', async () => {
+    // Increase number of votes in order to enable downvote button
+    idea.votes = 5
+    state.user.votes = [
+      idea._id
+    ]
+
+    const { getByLabelText } = render(
+      <GlobalContext.Provider value={{ user: state.user }}>
+        <IdeaListItem idea={idea}/>
+      </GlobalContext.Provider>
+    )
+    
+    const downvoteButton = getByLabelText(/downvote/i)
+    const upvoteButton = getByLabelText(/upvote/i)
+    expect(downvoteButton.attributes.getNamedItem('disabled')).toBeTruthy()
+    expect(upvoteButton.attributes.getNamedItem('disabled')).toBeTruthy()
+  })
+
   it('should enable upvote button', async () => {
     // Increase number of votes in order to enable downvote button
     idea.votes = 0
