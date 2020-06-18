@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import styles from './IdeaListItem.module.scss'
 import ListItem from '../../components/ListItem'
 import { GlobalContext } from 'src/context/GlobalState'
-import buttonStyles from '../../styles/button.module.scss'
+import Button from 'src/components/Button'
 
 function IdeaListItem({ idea: { _id, title, description, votes, ...idea  }}) {
   const { upvoteIdea, downvoteIdea, user } = useContext(GlobalContext)
@@ -17,17 +17,17 @@ function IdeaListItem({ idea: { _id, title, description, votes, ...idea  }}) {
       </div>
       <div className={styles.description}>{description}</div>
       <div className={styles.btnContainer}>
-        <button
+        <Button
           aria-label="upvote idea"
-          className={buttonStyles.btnSuccess} 
+          variant="success"
           onClick={() => upvoteIdea(_id)}
           disabled={isUser}
-          > Upvote </button>
-        <button 
+          > Upvote </Button>
+        <Button 
           aria-label="downvote idea"
-          className={buttonStyles.btnDanger}
+          variant="danger"
           onClick={() => downvoteIdea(_id)} 
-          disabled={isUser || votes === 0}> Downvote </button>
+          disabled={isUser || votes === 0}> Downvote </Button>
       </div>
     </ListItem>
   )
