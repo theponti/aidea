@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react';
-import styles from './App.module.scss';
+
+import { GlobalProvider } from './context/GlobalState';
+import { FirebaseProvider } from './context/Firebase';
+
 import IdeaForm from './containers/IdeaForm';
 import Ideas from './containers/Ideas';
 import { GlobalProvider } from './context/GlobalState';
 
-function Brain () {
+import styles from './App.module.scss';
   return (
     <span 
       role="img" 
@@ -27,10 +30,12 @@ function App() {
           <Brain/>
         </header>
         <main className={styles.main}>
-          <GlobalProvider>
-            <IdeaForm/>
-            <Ideas/>
-          </GlobalProvider>
+          <FirebaseProvider>
+            <GlobalProvider>
+              <IdeaForm/>
+              <Ideas/>
+            </GlobalProvider>
+          </FirebaseProvider>
         </main>
       </div>
   );
