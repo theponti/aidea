@@ -1,30 +1,25 @@
 import React, { useEffect } from 'react';
-import styles from './App.module.scss';
+
+import { GlobalProvider } from './context/GlobalState'
+
 import IdeaForm from './containers/IdeaForm';
 import Ideas from './containers/Ideas';
-import { GlobalProvider } from './context/GlobalState';
+import Emoji from './components/Emoji';
 
-function Brain () {
-  return (
-    <span 
-      role="img" 
-      className={styles.brain}
-      aria-label="brain">🧠</span>
-  )
-}
+import styles from './App.module.scss';
 
 function App() {
   useEffect(() => {
-    document.title = 'Idears ??'
+    document.title = 'Idears'
     return () => {}
   }, [])
   
   return (
       <div className={styles.container}>
         <header className={styles.header}>
-          <Brain />
+          <Emoji className={styles.brain} label="brain" emoji="🧠" />
           <h1 style={{ marginLeft: '3rem' }}>Idearz</h1>
-          <Brain/>
+          <Emoji className={styles.brain} label="brain" emoji="🧠" />
         </header>
         <main className={styles.main}>
           <GlobalProvider>

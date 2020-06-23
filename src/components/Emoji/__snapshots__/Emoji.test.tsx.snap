@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Emoji/> should render component 1`] = `
+<div>
+  <span
+    aria-label="sheep"
+    class="container"
+    role="img"
+  >
+    🐑
+  </span>
+</div>
+`;
