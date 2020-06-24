@@ -5,29 +5,27 @@ import { FirebaseProvider } from './context/Firebase';
 
 import IdeaForm from './containers/IdeaForm';
 import Ideas from './containers/Ideas';
-import { GlobalProvider } from './context/GlobalState';
 
+import brain from './brain.svg';
 import styles from './App.module.scss';
-  return (
-    <span 
-      role="img" 
-      className={styles.brain}
-      aria-label="brain">🧠</span>
-  )
-}
 
 function App() {
+  const Brain = () => (
+    <img src={brain} className={styles.brain} alt="brain emoji"/>
+  )
+  
   useEffect(() => {
-    document.title = 'Idears ??'
+    document.title = 'Idears'
     return () => {}
   }, [])
   
+
   return (
       <div className={styles.container}>
         <header className={styles.header}>
           <Brain />
-          <h1 style={{ marginLeft: '3rem' }}>Idearz</h1>
-          <Brain/>
+          <h1>Idearz</h1>
+          <Brain />
         </header>
         <main className={styles.main}>
           <FirebaseProvider>
