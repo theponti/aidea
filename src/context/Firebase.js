@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { createContext } from 'react'
+import t from 'prop-types'
 import app from 'firebase/app'
-import { createContext } from 'react';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -9,11 +9,11 @@ const firebaseConfig = {
   projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID,
-};
+  appId: process.env.REACT_APP_FIREBASE_APP_ID
+}
 
 class Firebase {
-  constructor() {
+  constructor () {
     app.initializeApp(firebaseConfig)
   }
 }
@@ -26,6 +26,10 @@ export const FirebaseProvider = ({ children }) => {
       {children}
     </FirebaseContext.Provider>
   )
+}
+
+FirebaseProvider.propTypes = {
+  children: t.node
 }
 
 export default Firebase

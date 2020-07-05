@@ -8,7 +8,7 @@ import { getMockState } from 'src/mocks'
 describe('<IdeaListItem/>', () => {
   let idea
   let state
-  
+
   beforeEach(() => {
     state = getMockState()
     idea = { _id: 0, title: 'Some Idea', description: 'some description', votes: 0 }
@@ -45,7 +45,7 @@ describe('<IdeaListItem/>', () => {
   it('should downvote idea if idea > 0 votes', async () => {
     // Increase number of votes in order to enable downvote button
     idea.votes = 5
-    
+
     const downvoteIdea = jest.fn()
 
     const { getByLabelText } = render(
@@ -70,7 +70,7 @@ describe('<IdeaListItem/>', () => {
         <IdeaListItem idea={idea}/>
       </GlobalContext.Provider>
     )
-    
+
     const downvoteButton = getByLabelText(/downvote/i)
     const upvoteButton = getByLabelText(/upvote/i)
     expect(downvoteButton.attributes.getNamedItem('disabled')).toBeTruthy()
@@ -80,7 +80,7 @@ describe('<IdeaListItem/>', () => {
   it('should enable upvote button', async () => {
     // Increase number of votes in order to enable downvote button
     idea.votes = 0
-    
+
     const downvoteIdea = jest.fn()
 
     const { getByLabelText } = render(
@@ -124,7 +124,7 @@ describe('<IdeaListItem/>', () => {
   it('should disable downvote button if idea.votes is === 0', async () => {
     // Increase number of votes in order to enable downvote button
     idea.votes = 0
-    
+
     const downvoteIdea = jest.fn()
 
     const { getByLabelText } = render(

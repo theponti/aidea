@@ -17,8 +17,8 @@ Emoji.propTypes = {
 
 function Emoji ({ className = '', label, emoji, ...props }: EmojiProps) {
   return (
-    <span 
-      role="img" 
+    <span
+      role="img"
       className={cx(styles.container, className)}
       aria-label={label}
       {...props}

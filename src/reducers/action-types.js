@@ -4,18 +4,18 @@ export const actionTypes = {
   DOWNVOTE_IDEA: 'DOWNVOTE_IDEA'
 }
 
-export function getActions(dispatch) {
+export function getActions (dispatch) {
   return {
-      addIdea(payload) {
-        dispatch({ type: actionTypes.ADD_IDEA, payload })
-      },
+    addIdea (payload) {
+      dispatch({ type: actionTypes.ADD_IDEA, payload })
+    },
 
-      downvoteIdea(payload) {
-        dispatch({ type: actionTypes.DOWNVOTE_IDEA, payload })
-      },
-      
-      upvoteIdea(payload) {
-        dispatch({ type: actionTypes.UPVOTE_IDEA, payload })
-      }
+    downvoteIdea (payload) {
+      dispatch({ type: actionTypes.DOWNVOTE_IDEA, payload })
+    },
+
+    upvoteIdea (payload) {
+      dispatch({ type: actionTypes.UPVOTE_IDEA, payload })
     }
   }
+}

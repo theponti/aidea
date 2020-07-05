@@ -9,4 +9,3 @@ describe('<Label/>', () => {
     expect(container).toMatchSnapshot()
   })
 })
-

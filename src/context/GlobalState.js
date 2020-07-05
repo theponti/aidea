@@ -1,4 +1,5 @@
 import React, { createContext, useReducer } from 'react'
+import t from 'prop-types'
 import AppReducer from '../reducers/AppReducer'
 import { getActions } from 'src/reducers/action-types'
 
@@ -10,7 +11,7 @@ const initialState = {
     ideas: []
   },
   ideas: [
-    { 
+    {
       _id: 0,
       title: 'Some Crazy Idea',
       description: 'An elaborate description of why this idea will change the world!',
@@ -30,5 +31,9 @@ export const GlobalProvider = ({ children }) => {
     <GlobalContext.Provider value={{ ...state, ...getActions(dispatch) }}>
       {children}
     </GlobalContext.Provider>
-  );
+  )
+}
+
+GlobalProvider.propTypes = {
+  children: t.node
 }
