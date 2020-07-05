@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
-import { GlobalProvider } from './context/GlobalState'
+import { GlobalProvider } from './context/GlobalState';
+import { FirebaseProvider } from './context/Firebase';
 
 import IdeaForm from './containers/IdeaForm';
 import Ideas from './containers/Ideas';
@@ -27,10 +28,12 @@ function App() {
           <Brain />
         </header>
         <main className={styles.main}>
-          <GlobalProvider>
-            <IdeaForm/>
-            <Ideas/>
-          </GlobalProvider>
+          <FirebaseProvider>
+            <GlobalProvider>
+              <IdeaForm/>
+              <Ideas/>
+            </GlobalProvider>
+          </FirebaseProvider>
         </main>
       </div>
   );
