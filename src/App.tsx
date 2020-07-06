@@ -1,42 +1,39 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from 'react'
 
-import { GlobalProvider } from './context/GlobalState';
-import { FirebaseProvider } from './context/Firebase';
+import { GlobalProvider } from './context/GlobalState'
 
-import IdeaForm from './containers/IdeaForm';
-import Ideas from './containers/Ideas';
+import brain from './brain.svg'
+import styles from './App.module.scss'
 
-import brain from './brain.svg';
-import styles from './App.module.scss';
+import Application from './containers/Application'
+import UserProvider from './providers/UserProvider'
 
-function App() {
+function App () {
   const Brain = () => (
     <img src={brain} className={styles.brain} alt="brain emoji"/>
   )
-  
+
   useEffect(() => {
     document.title = 'Idears'
     return () => {}
   }, [])
-  
 
   return (
-      <div className={styles.container}>
-        <header className={styles.header}>
-          <Brain />
-          <h1>Idearz</h1>
-          <Brain />
-        </header>
-        <main className={styles.main}>
-          <FirebaseProvider>
-            <GlobalProvider>
-              <IdeaForm/>
-              <Ideas/>
-            </GlobalProvider>
-          </FirebaseProvider>
-        </main>
-      </div>
-  );
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <Brain />
+        <h1>Idearz</h1>
+        <Brain />
+      </header>
+      <main className={styles.main}>
+        <GlobalProvider>
+          <UserProvider>
+            <Application />
+          </UserProvider>
+        </GlobalProvider>
+      </main>
+    </div>
+  )
 }
 
-export default App;
+export default App
