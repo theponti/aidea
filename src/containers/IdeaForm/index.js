@@ -7,11 +7,11 @@ import Button from 'src/components/Button'
 
 IdeaForm.propTypes = {}
 
-export default function IdeaForm() {
+export default function IdeaForm () {
   const { register, handleSubmit, setValue } = useForm()
-  const { addIdea,  } = useContext(GlobalContext)
+  const { addIdea } = useContext(GlobalContext)
 
-  function onSubmit(record) {
+  function onSubmit (record) {
     // Dispatch event
     addIdea({ ...record })
 
@@ -19,18 +19,18 @@ export default function IdeaForm() {
     setValue('title', '')
     setValue('description', '')
   }
-  
+
   return (
     <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
       <FormGroup>
         <input type="text" name="title" ref={register} placeholder="What's your idea's name?"/>
       </FormGroup>
       <FormGroup>
-        <textarea name="description" ref={register} placeholder="Describe it to us..."/>  
+        <textarea name="description" ref={register} placeholder="Describe it to us..."/>
       </FormGroup>
       <FormGroup>
-        <Button type="submit" variant="success"> 
-          Submit For Inspection 
+        <Button type="submit" variant="success">
+          Submit For Inspection
           <span role="img" aria-label="inspect" className="ml1">🕵️‍♀️</span>
         </Button>
       </FormGroup>

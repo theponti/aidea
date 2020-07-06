@@ -6,12 +6,12 @@ import styles from './List.module.scss'
 
 List.propTypes = {
   data: t.arrayOf(
-    t.shape({ 
-      description: t.string 
+    t.shape({
+      description: t.string
     })
   )
 }
-export function List({ data }) {
+export function List ({ data }) {
   return (
     <div className={styles.container}>
       {

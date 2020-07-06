@@ -4,16 +4,16 @@ import ListItem from '../../components/ListItem'
 import { GlobalContext } from 'src/context/GlobalState'
 import Button from 'src/components/Button'
 
-function IdeaListItem({ idea: { _id, title, description, votes, ...idea  }}) {
+function IdeaListItem ({ idea: { _id, title, description, votes, ...idea } }) {
   const { upvoteIdea, downvoteIdea, user } = useContext(GlobalContext)
   const isUser = idea.user === user._id
   const hasVoted = (
-    user.votes 
-    && user.votes.indexOf(_id) !== -1
+    user.votes &&
+    user.votes.indexOf(_id) !== -1
   )
-  
+
   return (
-    <ListItem key={_id}> 
+    <ListItem key={_id}>
       <div className={styles.title}>
         <p>{title}</p>
         <p className={styles.votes}>
@@ -27,11 +27,11 @@ function IdeaListItem({ idea: { _id, title, description, votes, ...idea  }}) {
           variant="success"
           onClick={() => upvoteIdea(_id)}
           disabled={hasVoted || isUser}
-          > Upvote </Button>
-        <Button 
+        > Upvote </Button>
+        <Button
           aria-label="downvote idea"
           variant="danger"
-          onClick={() => downvoteIdea(_id)} 
+          onClick={() => downvoteIdea(_id)}
           disabled={hasVoted || isUser || votes === 0}> Downvote </Button>
       </div>
     </ListItem>

@@ -1,16 +1,16 @@
 import { actionTypes as actions } from './action-types'
 
-export function addIdeaToUser(user, id) {
+export function addIdeaToUser (user, id) {
   user.ideas.push(id)
   return user
 }
 
-export function addVoteToUser(user, id) {
+export function addVoteToUser (user, id) {
   user.votes.push(id)
   return user
 }
 
-export function voteOnIdea(ideas, id, amount) {
+export function voteOnIdea (ideas, id, amount) {
   return ideas.map(idea => {
     if (idea._id !== id) return idea
     return { ...idea, votes: idea.votes + amount }
@@ -18,16 +18,15 @@ export function voteOnIdea(ideas, id, amount) {
 }
 
 export default (state, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case actions.ADD_IDEA:
-      let _id = state.ideas.length
       return {
         ...state,
-        user: addIdeaToUser(state.user, _id),
+        user: addIdeaToUser(state.user, state.ideas.length + ''),
         ideas: [
-          ...state.ideas, 
-          { 
-            _id,
+          ...state.ideas,
+          {
+            _id: state.ideas.length + '',
             votes: 0,
             user: state.user._id,
             ...action.payload
@@ -35,13 +34,13 @@ export default (state, action) => {
         ]
       }
     case actions.DOWNVOTE_IDEA:
-      return { 
+      return {
         ...state,
         user: addVoteToUser(state.user, action.payload),
         ideas: voteOnIdea(state.ideas, action.payload, -1)
       }
     case actions.UPVOTE_IDEA:
-      return { 
+      return {
         ...state,
         user: addVoteToUser(state.user, action.payload),
         ideas: voteOnIdea(state.ideas, action.payload, 1)

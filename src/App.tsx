@@ -2,11 +2,11 @@ import React, { useEffect } from 'react'
 
 import { GlobalProvider } from './context/GlobalState'
 
+import IdeaForm from './containers/IdeaForm'
+import Ideas from './containers/Ideas'
+
 import brain from './brain.svg'
 import styles from './App.module.scss'
-
-import Application from './containers/Application'
-import UserProvider from './providers/UserProvider'
 
 function App () {
   const Brain = () => (
@@ -27,9 +27,8 @@ function App () {
       </header>
       <main className={styles.main}>
         <GlobalProvider>
-          <UserProvider>
-            <Application />
-          </UserProvider>
+          <IdeaForm/>
+          <Ideas/>
         </GlobalProvider>
       </main>
     </div>

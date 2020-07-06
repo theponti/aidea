@@ -2,28 +2,28 @@ import React from 'react'
 import styles from './Button.module.scss'
 import cx from 'classnames'
 
-function Button({ children, className, variant, ...props }) {
+function Button ({ children, className, variant, ...props }) {
   let buttonStyle
 
-  switch(variant) {
+  switch (variant) {
     case 'success':
       buttonStyle = styles.btnSuccess
-      break;
+      break
     case 'danger':
       buttonStyle = styles.btnDanger
-      break;
+      break
     default:
       buttonStyle = ''
   }
 
   return (
-      <button 
-        data-testid="button"
-        className={cx(styles.container, className, buttonStyle)} 
-        {...props}
-      >
-        {children}
-      </button>
+    <button
+      data-testid="button"
+      className={cx(styles.container, className, buttonStyle)}
+      {...props}
+    >
+      {children}
+    </button>
   )
 }
 
