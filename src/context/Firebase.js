@@ -28,17 +28,33 @@ export const signOut = () => {
 
 export const generateUserDocument = async (user, additionalData) => {
   if (!user) return
+
   const userRef = firestore.doc(`users/${user.uid}`)
-  const snapshot = await userRef.get()
+  let snapshot
+
+  try {
+    snapshot = await userRef.get()
+  } catch (err) {
+    console.log(err)
+    return
+  }
 
   // If a document has not yet been created for user, creat one
   if (!snapshot.exists) {
-    const { email, displayName, photoUrl } = user
+    const {
+      email,
+      displayName,
+      photoUrl = 'https://icons.iconarchive.com/icons/diversity-avatars/avatars/256/robot-03-icon.png'
+    } = user
 
     try {
       await userRef.set({ displayName, email, photoUrl, ...additionalData })
+      snapshot = await userRef.get()
     } catch (error) {
       console.error('Error creating user document', error)
+      return
     }
   }
+
+  return snapshot.data()
 }

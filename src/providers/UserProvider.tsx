@@ -8,11 +8,17 @@ interface FirebaseUser {
   photoUrl: string;
 }
 
-export const UserContext = createContext<FirebaseUser | null>(null)
+interface UserContext {
+  user: FirebaseUser | null;
+  authenticated: boolean;
+}
+
+export const UserContext = createContext<UserContext>({ user: null, authenticated: false })
 
 class UserProvider extends Component {
   state = {
-    user: null
+    user: null,
+    authenticated: false
   };
 
   static propTypes = {
@@ -22,13 +28,16 @@ class UserProvider extends Component {
   componentDidMount = () => {
     auth.onAuthStateChanged(async userAuth => {
       const user = await generateUserDocument(userAuth)
-      this.setState({ user })
+      this.setState({ user, authenticated: true })
     })
   };
 
   render () {
     return (
-      <UserContext.Provider value={this.state.user}>
+      <UserContext.Provider value={{
+        authenticated: this.state.authenticated,
+        user: this.state.user
+      }}>
         {this.props.children}
       </UserContext.Provider>
     )
