@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react'
 
 import { GlobalProvider } from './context/GlobalState'
-import { FirebaseProvider } from './context/Firebase'
-
-import IdeaForm from './containers/IdeaForm'
-import Ideas from './containers/Ideas'
 
 import brain from './brain.svg'
 import styles from './App.module.scss'
+import Application from './containers/Application'
+import UserProvider from './providers/UserProvider'
 
 function App () {
   const Brain = () => (
@@ -27,12 +25,11 @@ function App () {
         <Brain />
       </header>
       <main className={styles.main}>
-        <FirebaseProvider>
-          <GlobalProvider>
-            <IdeaForm/>
-            <Ideas/>
-          </GlobalProvider>
-        </FirebaseProvider>
+        <GlobalProvider>
+          <UserProvider>
+            <Application/>
+          </UserProvider>
+        </GlobalProvider>
       </main>
     </div>
   )
