@@ -34,12 +34,12 @@ function Application () {
       ? (
         <Router>
           <ProfilePage path="profile" />
-          <IdeasPath path="/" />
+          <IdeasPath default path="/" />
         </Router>
       )
       : (
         <Router>
-          <SignIn path="/" />
+          <SignIn path="/" default />
           <SignUp path="signUp" />
           <PasswordReset path = "passwordReset" />
         </Router>
