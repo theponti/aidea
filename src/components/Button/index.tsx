@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { ButtonHTMLAttributes } from 'react'
 import styles from './Button.module.scss'
 import cx from 'classnames'
 
-function Button ({ children, className, variant, ...props }) {
+interface Button extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant: string
+}
+
+function Button ({ children, className, variant, ...props }: Button) {
   let buttonStyle
 
   switch (variant) {

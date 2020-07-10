@@ -1,74 +1,92 @@
-
 import React from 'react'
 import { render, fireEvent, act } from '@testing-library/react'
 import IdeaListItem from '.'
-import { GlobalContext } from 'src/context/GlobalState'
-import { getMockState } from 'src/mocks'
+import { IdeasContext } from 'src/providers/IdeasProvider'
+import { getMockUserState, getMockState } from 'src/mocks'
+import { UserContext } from 'src/providers/UserProvider'
+import { actionTypes } from 'src/reducers/action-types'
+import { auth } from 'src/context/Firebase'
 
 describe('<IdeaListItem/>', () => {
   let idea
-  let state
+  let user
+  let dispatch
+  let ideas
+
+  const IdeasProvider = ({ children }) => (
+    <IdeasContext.Provider value={{ state: { ideas }, dispatch }}>
+      {children}
+    </IdeasContext.Provider>
+  )
 
   beforeEach(() => {
-    state = getMockState()
-    idea = { _id: 0, title: 'Some Idea', description: 'some description', votes: 0 }
+    ideas = getMockState().ideas
+    user = getMockUserState().user
+    auth.currentUser = user
+    dispatch = jest.fn()
+    idea = ideas[1]
   })
 
   afterEach(() => {
+    ideas = null
+    user = null
     idea = null
+    dispatch = null
   })
 
   it('should upvote idea', async () => {
-    const upvoteIdea = jest.fn()
     const { getByLabelText } = render(
-      <GlobalContext.Provider value={{ upvoteIdea, user: state.user }}>
-        <IdeaListItem idea={idea}/>
-      </GlobalContext.Provider>
+      <IdeasProvider>
+        <UserContext.Provider value={{ user }}>
+          <IdeaListItem idea={ideas[1]}/>
+        </UserContext.Provider>
+      </IdeasProvider>
     )
     const upvoteButton = getByLabelText(/upvote/i)
     await act(async () => fireEvent.click(upvoteButton))
-    expect(upvoteIdea).toBeCalledWith(0)
+    expect(dispatch).toBeCalledWith({ type: actionTypes.UPVOTE_IDEA, payload: '1' })
   })
 
   it('should not downvote idea if idea has 0 votes', async () => {
-    const downvoteIdea = jest.fn()
     const { getByLabelText } = render(
-      <GlobalContext.Provider value={{ downvoteIdea, user: state.user }}>
-        <IdeaListItem idea={idea}/>
-      </GlobalContext.Provider>
+      <IdeasProvider>
+        <UserContext.Provider value={{ user }}>
+          <IdeaListItem idea={idea}/>
+        </UserContext.Provider>
+      </IdeasProvider>
     )
-    const downvoteButton = getByLabelText(/downvote/i)
-    await act(async () => fireEvent.click(downvoteButton))
-    expect(downvoteIdea).not.toBeCalledWith()
+
+    await act(async () => fireEvent.click(getByLabelText(/downvote/i)))
+    expect(dispatch).not.toBeCalledWith()
   })
 
   it('should downvote idea if idea > 0 votes', async () => {
     // Increase number of votes in order to enable downvote button
     idea.votes = 5
 
-    const downvoteIdea = jest.fn()
-
     const { getByLabelText } = render(
-      <GlobalContext.Provider value={{ downvoteIdea, user: state.user }}>
-        <IdeaListItem idea={idea}/>
-      </GlobalContext.Provider>
+      <IdeasProvider>
+        <UserContext.Provider value={{ user }}>
+          <IdeaListItem idea={idea}/>
+        </UserContext.Provider>
+      </IdeasProvider>
     )
-    const downvoteButton = getByLabelText(/downvote/i)
-    await act(async () => fireEvent.click(downvoteButton))
-    expect(downvoteIdea).toBeCalledWith(0)
+
+    await act(async () => fireEvent.click(getByLabelText(/downvote/i)))
+    expect(dispatch).toBeCalledWith({ payload: '1', type: actionTypes.DOWNVOTE_IDEA })
   })
 
   it('should disable voting on ideas user already voted for', async () => {
     // Increase number of votes in order to enable downvote button
     idea.votes = 5
-    state.user.votes = [
+    user.votes = [
       idea._id
     ]
 
     const { getByLabelText } = render(
-      <GlobalContext.Provider value={{ user: state.user }}>
+      <UserContext.Provider value={{ user }}>
         <IdeaListItem idea={idea}/>
-      </GlobalContext.Provider>
+      </UserContext.Provider>
     )
 
     const downvoteButton = getByLabelText(/downvote/i)
@@ -81,12 +99,12 @@ describe('<IdeaListItem/>', () => {
     // Increase number of votes in order to enable downvote button
     idea.votes = 0
 
-    const downvoteIdea = jest.fn()
-
     const { getByLabelText } = render(
-      <GlobalContext.Provider value={{ downvoteIdea, user: state.user }}>
-        <IdeaListItem idea={idea}/>
-      </GlobalContext.Provider>
+      <IdeasProvider>
+        <UserContext.Provider value={{ user }}>
+          <IdeaListItem idea={idea}/>
+        </UserContext.Provider>
+      </IdeasProvider>
     )
     const upvoteButton = getByLabelText(/upvote/i)
     expect(upvoteButton.attributes.getNamedItem('disabled')).toBeFalsy()
@@ -95,12 +113,13 @@ describe('<IdeaListItem/>', () => {
   it('should disable upvote button if idea belongs to user', async () => {
     // Increase number of votes in order to enable downvote button
     idea.user = 'USER_ID'
-    const downvoteIdea = jest.fn()
 
     const { getByLabelText } = render(
-      <GlobalContext.Provider value={{ downvoteIdea, user: state.user }}>
-        <IdeaListItem idea={idea}/>
-      </GlobalContext.Provider>
+      <IdeasProvider>
+        <UserContext.Provider value={{ user }}>
+          <IdeaListItem idea={idea}/>
+        </UserContext.Provider>
+      </IdeasProvider>
     )
     const upvoteButton = getByLabelText(/upvote/i)
     expect(upvoteButton.attributes.getNamedItem('disabled')).toBeTruthy()
@@ -110,29 +129,15 @@ describe('<IdeaListItem/>', () => {
     // Increase number of votes in order to enable downvote button
     idea.votes = 5
     idea.user = 'USER_ID'
-    const downvoteIdea = jest.fn()
 
     const { getByLabelText } = render(
-      <GlobalContext.Provider value={{ downvoteIdea, user: state.user }}>
-        <IdeaListItem idea={idea}/>
-      </GlobalContext.Provider>
+      <IdeasProvider>
+        <UserContext.Provider value={{ user }}>
+          <IdeaListItem idea={idea}/>
+        </UserContext.Provider>
+      </IdeasProvider>
     )
     const button = getByLabelText(/downvote/i)
     expect(button.attributes.getNamedItem('disabled')).toBeTruthy()
-  })
-
-  it('should disable downvote button if idea.votes is === 0', async () => {
-    // Increase number of votes in order to enable downvote button
-    idea.votes = 0
-
-    const downvoteIdea = jest.fn()
-
-    const { getByLabelText } = render(
-      <GlobalContext.Provider value={{ downvoteIdea, user: state.user }}>
-        <IdeaListItem idea={idea}/>
-      </GlobalContext.Provider>
-    )
-    const downvoteButton = getByLabelText(/downvote/i)
-    expect(downvoteButton.attributes.getNamedItem('disabled')).toBeTruthy()
   })
 })

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import { GlobalProvider } from './context/GlobalState'
+import { IdeasProvider } from './providers/IdeasProvider'
 
 import brain from './brain.svg'
 import styles from './App.module.scss'
@@ -25,11 +25,11 @@ function App () {
         <Brain />
       </header>
       <main className={styles.main}>
-        <GlobalProvider>
+        <IdeasProvider>
           <UserProvider>
             <Application/>
           </UserProvider>
-        </GlobalProvider>
+        </IdeasProvider>
       </main>
     </div>
   )
