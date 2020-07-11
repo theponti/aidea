@@ -1,12 +1,7 @@
 import React, { Component, createContext } from 'react'
 import t from 'prop-types'
-import { auth, generateUserDocument } from '../context/Firebase'
-
-interface FirebaseUser {
-  displayName: string;
-  email: string;
-  photoUrl: string;
-}
+import { auth, generateUserDocument } from 'src/context/Firebase'
+import { FirebaseUser } from 'src/interfaces/User'
 
 interface UserContext {
   user: FirebaseUser | null;

@@ -17,6 +17,58 @@ firebase.initializeApp(firebaseConfig)
 export const auth = firebase.auth()
 export const firestore = firebase.firestore()
 
+export const getUser = () => {
+  return auth.currentUser
+}
+
+export async function addIdeaToUser (id) {
+  const user = auth.currentUser
+  const userRef = firestore.doc(`users/${user.uid}`)
+
+  try {
+    const snapshot = await userRef.get()
+    await userRef.set({ ideas: [...snapshot.data().ideas, id] })
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export const addVoteToUser = async (ideaUID) => {
+  const user = auth.currentUser
+  const userRef = firestore.doc(`users/${user.uid}`)
+
+  try {
+    const { data } = await userRef.get()
+    await userRef.set({ votes: [...data.votes, ideaUID] })
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export async function addVoteToIdea (id, amount) {
+  const ideaRef = await firestore.doc(`ideas/${id}`)
+  const snapshot = await ideaRef.get()
+
+  if (amount > 0) {
+    await ideaRef.set({ upvotes: snapshot.get('upvotes') + amount })
+    return await ideaRef.get()
+  } else if (amount < 0) {
+    await ideaRef.set({ downvotes: snapshot.get('downvotes') + amount })
+    return await ideaRef.get()
+  }
+}
+
+export async function saveIdea (idea) {
+  const user = auth.currentUser
+  const ideaRef = await firestore.collection('ideas').add({
+    upvotes: 0,
+    downvotes: 0,
+    user: user.uid,
+    ...idea
+  })
+  await addIdeaToUser(ideaRef)
+}
+
 export const signInWithGoogle = () => {
   const provider = new firebase.auth.GoogleAuthProvider()
   auth.signInWithPopup(provider)
@@ -24,6 +76,11 @@ export const signInWithGoogle = () => {
 
 export const signOut = () => {
   auth.signOut()
+}
+
+export const getIdeas = async () => {
+  const { data } = await firestore.collection('ideas').get()
+  return data
 }
 
 export const generateUserDocument = async (user, additionalData) => {

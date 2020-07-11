@@ -1,23 +1,27 @@
 import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form'
-import FormGroup from '../../components/FormGroup'
-import { GlobalContext } from '../../context/GlobalState'
+
 import styles from './IdeaForm.module.scss'
 import Button from 'src/components/Button'
-
-IdeaForm.propTypes = {}
+import FormGroup from 'src/components/FormGroup'
+import { actionTypes } from 'src/reducers/action-types'
+import { IdeasContext } from 'src/providers/IdeasProvider'
+import { saveIdea } from 'src/context/Firebase'
 
 export default function IdeaForm () {
-  const { register, handleSubmit, setValue } = useForm()
-  const { addIdea } = useContext(GlobalContext)
+  const { register, handleSubmit, reset } = useForm()
+  const { dispatch } = useContext(IdeasContext)
 
-  function onSubmit (record) {
+  async function onSubmit (idea) {
     // Dispatch event
-    addIdea({ ...record })
+    dispatch({ type: actionTypes.ADD_IDEA })
+
+    await saveIdea(idea)
+
+    dispatch({ type: actionTypes.LOADED })
 
     // Clear values from form
-    setValue('title', '')
-    setValue('description', '')
+    reset()
   }
 
   return (
