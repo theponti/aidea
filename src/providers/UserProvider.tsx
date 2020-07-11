@@ -1,6 +1,6 @@
 import React, { Component, createContext } from 'react'
 import t from 'prop-types'
-import { auth, generateUserDocument } from '../context/Firebase'
+import { auth, generateUserDocument } from 'src/context/Firebase'
 import { FirebaseUser } from 'src/interfaces/User'
 
 interface UserContext {

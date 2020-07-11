@@ -5,4 +5,12 @@
 import '@testing-library/jest-dom/extend-expect'
 import 'mutationobserver-shim'
 
-jest.mock('src/context/Firebase')
+jest.mock('src/context/Firebase', () => ({
+  auth: {
+    onAuthStateChanged: async () => ({})
+  },
+  signOut: jest.fn(),
+  generateUserDocument: jest.fn(),
+  saveIdea: jest.fn(),
+  addVoteToIdea: jest.fn()
+}))
