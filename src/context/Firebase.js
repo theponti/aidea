@@ -27,7 +27,7 @@ export async function addIdeaToUser (id) {
 
   try {
     const snapshot = await userRef.get()
-    await userRef.set({ ideas: [...snapshot.data().ideas, id] })
+    await userRef.update({ ideas: [...snapshot.get('ideas'), id] })
   } catch (err) {
     console.log(err)
   }
@@ -105,7 +105,13 @@ export const generateUserDocument = async (user, additionalData) => {
     } = user
 
     try {
-      await userRef.set({ displayName, email, photoUrl, ...additionalData })
+      await userRef.set({
+        displayName,
+        email,
+        photoUrl,
+        votes: [], // Add empty votes for new user
+        ideas: [] // Add empty ideas for new user
+      })
       snapshot = await userRef.get()
     } catch (error) {
       console.error('Error creating user document', error)
