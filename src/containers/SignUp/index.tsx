@@ -1,6 +1,7 @@
-import React, { useState, MouseEvent, ChangeEvent } from 'react'
 import { Link } from '@reach/router'
+import React, { ChangeEvent, MouseEvent, useState } from 'react'
 import { auth, generateUserDocument } from 'src/context/Firebase'
+
 const SignUp = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -13,7 +14,7 @@ const SignUp = () => {
 
       try {
         const { user } = await auth.createUserWithEmailAndPassword(email, password)
-        generateUserDocument(user, { displayName })
+        await generateUserDocument(user)
       } catch (error) {
         setError('Error signing up with email and password')
       }
@@ -25,6 +26,7 @@ const SignUp = () => {
 
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.currentTarget
+
     if (name === 'userEmail') {
       setEmail(value)
     } else if (name === 'userPassword') {
@@ -109,4 +111,5 @@ const SignUp = () => {
     </div>
   )
 }
+
 export default SignUp
