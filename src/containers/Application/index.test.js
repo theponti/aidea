@@ -1,15 +1,8 @@
-import React from 'react'
 import { render } from '@testing-library/react'
+import React from 'react'
+import { getMockUserState } from 'src/mocks'
 import { UserContext } from 'src/providers/UserProvider'
 import Application from '.'
-
-jest.mock('src/context/Firebase', () => ({
-  auth: {
-    onAuthStateChanged: async () => ({})
-  },
-  signOut: jest.fn(),
-  generateUserDocument: jest.fn()
-}))
 
 describe('', () => {
   beforeEach(() => {})
@@ -17,7 +10,7 @@ describe('', () => {
 
   it('should render loading if authenticated is false', () => {
     const { getByText } = render(
-      <UserContext.Provider value={{ authenticated: false }}>
+      <UserContext.Provider value={{ authenticated: false, user: getMockUserState().user }}>
         <Application/>
       </UserContext.Provider>
     )
@@ -35,7 +28,7 @@ describe('', () => {
 
   it('should render Ideas if authenticated is true and user is truthy', () => {
     const { getByText } = render(
-      <UserContext.Provider value={{ authenticated: true, user: { email: 'cats@dogs.com' } }}>
+      <UserContext.Provider value={{ authenticated: true, user: getMockUserState().user }}>
         <Application/>
       </UserContext.Provider>
     )

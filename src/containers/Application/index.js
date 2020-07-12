@@ -1,15 +1,12 @@
-import React, { useContext } from 'react'
 import { Router } from '@reach/router'
-
-import SignIn from '../SignIn'
-import SignUp from '../SignUp'
-import ProfilePage from '../ProfilePage'
-import PasswordReset from '../PasswordReset'
-
+import React, { useContext } from 'react'
+import { UserContext } from 'src/providers/UserProvider'
 import IdeaForm from '../IdeaForm'
 import Ideas from '../Ideas'
-import { UserContext } from 'src/providers/UserProvider'
-
+import PasswordReset from '../PasswordReset'
+import ProfilePage from '../ProfilePage'
+import SignIn from '../SignIn'
+import SignUp from '../SignUp'
 import styles from './Application.module.scss'
 
 function IdeasPath () {
@@ -41,9 +38,10 @@ function Application () {
         <Router>
           <SignIn path="/" default />
           <SignUp path="signUp" />
-          <PasswordReset path = "passwordReset" />
+          <PasswordReset path="passwordReset" />
         </Router>
       )
   )
 }
+
 export default Application

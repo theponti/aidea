@@ -1,6 +1,12 @@
 import { Idea } from 'src/interfaces/Idea'
 
-export function getMockUserState () {
+export interface MockUserState {
+  uid: string,
+  ideas: string[],
+  votes: string[]
+}
+
+export function getMockUserState (): { authorized: boolean, user: MockUserState } {
   return {
     authorized: true,
     user: {

@@ -1,11 +1,11 @@
-import React, { Component, createContext } from 'react'
 import t from 'prop-types'
+import React, { Component, createContext } from 'react'
 import { auth, generateUserDocument } from 'src/context/Firebase'
 import { FirebaseUser } from 'src/interfaces/User'
 
 interface UserContext {
   user: FirebaseUser | null;
-  authenticated: boolean;
+  authenticated?: boolean;
 }
 
 export const UserContext = createContext<UserContext>({ user: null, authenticated: false })
