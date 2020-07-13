@@ -1,11 +1,11 @@
+import { act, fireEvent, render } from '@testing-library/react'
 import React from 'react'
-import { render, fireEvent, act } from '@testing-library/react'
-import IdeaListItem from '.'
+import { auth } from 'src/context/Firebase'
+import { getMockState, getMockUserState } from 'src/mocks'
 import { IdeasContext } from 'src/providers/IdeasProvider'
-import { getMockUserState, getMockState } from 'src/mocks'
 import { UserContext } from 'src/providers/UserProvider'
 import { actionTypes } from 'src/reducers/action-types'
-import { auth } from 'src/context/Firebase'
+import IdeaListItem from '.'
 
 describe('<IdeaListItem/>', () => {
   let idea
@@ -80,7 +80,7 @@ describe('<IdeaListItem/>', () => {
     // Increase number of votes in order to enable downvote button
     idea.votes = 5
     user.votes = [
-      idea._id
+      idea.id
     ]
 
     const { getByLabelText } = render(

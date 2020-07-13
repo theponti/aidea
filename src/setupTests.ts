@@ -12,5 +12,6 @@ jest.mock('src/context/Firebase', () => ({
   signOut: jest.fn(),
   generateUserDocument: jest.fn(),
   saveIdea: jest.fn(),
-  addVoteToIdea: jest.fn()
+  addVoteToIdea: jest.fn(),
+  getIdeas: jest.fn()
 }))
