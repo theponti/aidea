@@ -1,6 +1,6 @@
 
 export interface Idea {
-  _id: string;
+  id: string;
   title: string;
   description: string;
   upvotes: number;
@@ -9,6 +9,7 @@ export interface Idea {
 }
 
 export interface IdeasState {
-  ideas: Idea[]
+  ideas: Idea[] | void
   status?: string
+  error?: string | void
 }

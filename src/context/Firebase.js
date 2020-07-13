@@ -80,8 +80,8 @@ export const signOut = () => {
 }
 
 export const getIdeas = async () => {
-  const { data } = await firestore.collection('ideas').get()
-  return data
+  const { docs } = await firestore.collection('ideas').get()
+  return docs.map(t => ({ ...t.data(), id: t.id }))
 }
 
 export const generateUserDocument = async (user, additionalData) => {

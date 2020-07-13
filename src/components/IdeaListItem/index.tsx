@@ -23,7 +23,7 @@ IdeaListItem.propTypes = {
   }))
 }
 
-function IdeaListItem ({ idea: { _id, title, description, upvotes, downvotes, ...idea } }: IdeaListItemProps) {
+function IdeaListItem ({ idea: { id, title, description, upvotes, downvotes, ...idea } }: IdeaListItemProps) {
   const { dispatch } = useContext(IdeasContext)
   const { user } = useContext(UserContext)
 
@@ -42,10 +42,10 @@ function IdeaListItem ({ idea: { _id, title, description, upvotes, downvotes, ..
   }
 
   const isUser = idea.user === user.uid
-  const hasVoted = user.votes.indexOf(_id) !== -1
+  const hasVoted = user.votes.indexOf(id) !== -1
 
   return (
-    <ListItem key={_id}>
+    <ListItem>
       <div className={styles.title}>
         <p>{title}</p>
         <div className={styles.votes}>
@@ -62,13 +62,13 @@ function IdeaListItem ({ idea: { _id, title, description, upvotes, downvotes, ..
         <Button
           aria-label="upvote idea"
           variant="success"
-          onClick={() => upvoteIdea(_id)}
+          onClick={() => upvoteIdea(id)}
           disabled={hasVoted || isUser}
         > Upvote </Button>
         <Button
           aria-label="downvote idea"
           variant="danger"
-          onClick={() => downvoteIdea(_id)}
+          onClick={() => downvoteIdea(id)}
           disabled={hasVoted || isUser}> Downvote </Button>
       </div>
     </ListItem>

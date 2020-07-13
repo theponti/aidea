@@ -2,7 +2,7 @@ import { act, fireEvent, render } from '@testing-library/react'
 import React, { Dispatch } from 'react'
 import { addVoteToIdea, auth } from 'src/context/Firebase'
 import { Idea } from 'src/interfaces/Idea'
-import { getMockState, getMockUserState, MockUserState } from 'src/mocks'
+import { getMockState, getMockUserState } from 'src/mocks'
 import { IdeasContext } from 'src/providers/IdeasProvider'
 import { UserContext } from 'src/providers/UserProvider'
 import { actionTypes } from 'src/reducers/action-types'
@@ -10,7 +10,7 @@ import IdeaListItem from '.'
 
 describe('<IdeaListItem/>', () => {
   let idea: Idea
-  let user: MockUserState
+  let user: any
   let dispatch: Dispatch<any>
   let ideas: Idea[]
 
@@ -64,7 +64,7 @@ describe('<IdeaListItem/>', () => {
   it('should disable voting on ideas user already voted for', async () => {
     // Increase number of votes in order to enable downvote button
     user.votes = [
-      idea._id
+      idea.id
     ]
 
     const { getByLabelText } = render(
