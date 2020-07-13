@@ -1,15 +1,13 @@
-import React, { useContext } from 'react'
 import t from 'prop-types'
-
-import styles from './IdeaListItem.module.scss'
-
+import React, { useContext } from 'react'
 import Button from 'src/components/Button'
 import ListItem from 'src/components/ListItem'
-
+import { addVoteToIdea } from 'src/context/Firebase'
 import { Idea } from 'src/interfaces/Idea'
-import { UserContext } from 'src/providers/UserProvider'
 import { IdeasContext } from 'src/providers/IdeasProvider'
+import { UserContext } from 'src/providers/UserProvider'
 import { actionTypes } from 'src/reducers/action-types'
+import styles from './IdeaListItem.module.scss'
 
 interface IdeaListItemProps {
   idea: Idea
@@ -31,11 +29,20 @@ function IdeaListItem ({ idea: { _id, title, description, upvotes, downvotes, ..
 
   if (!user) return null
 
+  async function upvoteIdea (_id: string) {
+    dispatch({ type: actionTypes.UPVOTE_IDEA })
+    await addVoteToIdea(_id, 1)
+    dispatch({ type: actionTypes.LOADED })
+  }
+
+  async function downvoteIdea (_id: string) {
+    dispatch({ type: actionTypes.DOWNVOTE_IDEA })
+    await addVoteToIdea(_id, -1)
+    dispatch({ type: actionTypes.LOADED })
+  }
+
   const isUser = idea.user === user.uid
-  const hasVoted = (
-    user.votes &&
-    user.votes.indexOf(_id) !== -1
-  )
+  const hasVoted = user.votes.indexOf(_id) !== -1
 
   return (
     <ListItem key={_id}>
@@ -55,13 +62,13 @@ function IdeaListItem ({ idea: { _id, title, description, upvotes, downvotes, ..
         <Button
           aria-label="upvote idea"
           variant="success"
-          onClick={() => dispatch({ type: actionTypes.UPVOTE_IDEA, payload: _id })}
+          onClick={() => upvoteIdea(_id)}
           disabled={hasVoted || isUser}
         > Upvote </Button>
         <Button
           aria-label="downvote idea"
           variant="danger"
-          onClick={() => dispatch({ type: actionTypes.DOWNVOTE_IDEA, payload: _id })}
+          onClick={() => downvoteIdea(_id)}
           disabled={hasVoted || isUser}> Downvote </Button>
       </div>
     </ListItem>
