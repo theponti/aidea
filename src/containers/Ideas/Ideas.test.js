@@ -13,19 +13,17 @@ describe('<Ideas/>', () => {
     const state = getMockState()
     const { user } = getMockUserState()
     const dispatch = jest.fn()
-    let getByText
 
     getIdeas.mockReturnValue(state.ideas)
 
     await act(async () => {
-      const el = render(
+      render(
         <IdeasContext.Provider value={{ state: { ideas: undefined }, dispatch }}>
           <UserContext.Provider value={{ user }}>
             <Ideas/>
           </UserContext.Provider>
         </IdeasContext.Provider>
       )
-      getByText = el.getByText
     })
 
     expect(dispatch).toHaveBeenCalledWith({ type: actionTypes.FETCH_IDEAS })

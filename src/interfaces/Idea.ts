@@ -1,6 +1,6 @@
 
 export interface Idea {
-  _id: string;
+  id: string;
   title: string;
   description: string;
   upvotes: number;
