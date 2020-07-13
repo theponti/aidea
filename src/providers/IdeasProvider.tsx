@@ -1,20 +1,11 @@
-import React, { createContext, useReducer } from 'react'
 import t from 'prop-types'
-import AppReducer from '../reducers/AppReducer'
+import React, { createContext, useReducer } from 'react'
 import { IdeasState } from 'src/interfaces/Idea'
+import AppReducer from '../reducers/AppReducer'
 
 // Initial State
 const initialState: IdeasState = {
-  ideas: [
-    {
-      _id: '0',
-      title: 'Some Crazy Idea',
-      description: 'An elaborate description of why this idea will change the world!',
-      upvotes: 0,
-      downvotes: 0,
-      user: 'SOME_USER'
-    }
-  ]
+  ideas: undefined
 }
 
 // Context

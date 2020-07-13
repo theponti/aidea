@@ -21,7 +21,7 @@ export function getMockState (): { ideas: Idea[] } {
   return {
     ideas: [
       {
-        _id: '0',
+        id: '0',
         title: 'Some idea',
         description: 'Some description',
         upvotes: 0,
@@ -29,7 +29,7 @@ export function getMockState (): { ideas: Idea[] } {
         user: 'USER_ID'
       },
       {
-        _id: '1',
+        id: '1',
         title: 'Some another idea',
         description: 'Some another description',
         upvotes: 5,
