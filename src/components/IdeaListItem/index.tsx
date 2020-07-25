@@ -32,13 +32,13 @@ function IdeaListItem ({ idea: { id, title, description, upvotes, downvotes, ...
   async function upvoteIdea (_id: string) {
     dispatch({ type: actionTypes.UPVOTE_IDEA })
     await addVoteToIdea(_id, 1)
-    dispatch({ type: actionTypes.LOADED })
+    dispatch({ type: actionTypes.IDEA_UPDATED })
   }
 
   async function downvoteIdea (_id: string) {
     dispatch({ type: actionTypes.DOWNVOTE_IDEA })
     await addVoteToIdea(_id, -1)
-    dispatch({ type: actionTypes.LOADED })
+    dispatch({ type: actionTypes.IDEA_UPDATED })
   }
 
   const isUser = idea.user === user.uid

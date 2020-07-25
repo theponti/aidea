@@ -9,7 +9,7 @@ export interface Idea {
 }
 
 export interface IdeasState {
-  ideas: Idea[] | void
+  ideas: Idea[]
   status?: string
-  error?: string | void
+  error?: string | null
 }

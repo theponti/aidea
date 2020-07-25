@@ -40,7 +40,7 @@ describe('<IdeaListItem/>', () => {
     await act(async () => { fireEvent.click(upvoteButton) })
     expect(dispatch).toBeCalledWith({ type: actionTypes.UPVOTE_IDEA })
     expect(addVoteToIdea).toHaveBeenCalledWith('1', 1)
-    expect(dispatch).toBeCalledWith({ type: actionTypes.LOADED })
+    expect(dispatch).toBeCalledWith({ type: actionTypes.IDEA_UPDATED })
   })
 
   it('should downvote idea', async () => {
@@ -58,7 +58,7 @@ describe('<IdeaListItem/>', () => {
 
     expect(dispatch).toBeCalledWith({ type: actionTypes.DOWNVOTE_IDEA })
     expect(addVoteToIdea).toHaveBeenCalledWith('1', -1)
-    expect(dispatch).toBeCalledWith({ type: actionTypes.LOADED })
+    expect(dispatch).toBeCalledWith({ type: actionTypes.IDEA_UPDATED })
   })
 
   it('should disable voting on ideas user already voted for', async () => {

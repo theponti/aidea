@@ -1,4 +1,5 @@
-import { Idea } from 'src/interfaces/Idea'
+import { IdeasState } from 'src/interfaces/Idea'
+import { appStates } from './reducers/action-types'
 
 export interface MockUserState {
   uid: string,
@@ -17,8 +18,9 @@ export function getMockUserState (): { authorized: boolean, user: MockUserState 
   }
 }
 
-export function getMockState (): { ideas: Idea[] } {
+export function getMockState (): IdeasState {
   return {
+    status: appStates.LOADED,
     ideas: [
       {
         id: '0',

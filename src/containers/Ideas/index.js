@@ -1,35 +1,19 @@
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import IdeaListItem from 'src/components/IdeaListItem'
-import { getIdeas } from 'src/context/Firebase'
-import { IdeasContext } from 'src/providers/IdeasProvider'
-import { actionTypes } from 'src/reducers/action-types'
+import useIdeas from 'src/hooks/useIdeas'
+import { appStates } from 'src/reducers/action-types'
 import styles from './Ideas.module.scss'
 
 export default function Ideas () {
-  const { state: { ideas }, dispatch } = useContext(IdeasContext)
+  const { ideas, status, error } = useIdeas()
 
-  useEffect(() => {
-    async function fetchData () {
-      dispatch({ type: actionTypes.FETCH_IDEAS })
+  if (status === appStates.LOADING) return <div>Loading...</div>
 
-      try {
-        const ideas = await getIdeas()
-        dispatch({ type: actionTypes.FETCH_SUCCESS, payload: ideas })
-      } catch (error) {
-        dispatch({ type: actionTypes.FETCH_ERROR, error: error.message })
-      }
-    }
-
-    fetchData()
-  }, [dispatch])
-
-  if (!ideas) return <div>Loading...</div>
+  if (status === appStates.ERROR) return <div>Error... {error}</div>
 
   return (
-    // <IdeasProvider>
     <div className={styles.container}>
       {ideas.length ? ideas.map(idea => <IdeaListItem key={idea.id} idea={idea}/>) : null}
     </div>
-    // </IdeasProvider>
   )
 }

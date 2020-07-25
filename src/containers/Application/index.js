@@ -17,6 +17,7 @@ function IdeasPath () {
     </>
   )
 }
+
 function Application () {
   const { user, authenticated } = useContext(UserContext)
 
