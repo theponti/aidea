@@ -1,23 +1,23 @@
 import { IdeasState } from 'src/interfaces/Idea'
-import { actionTypes as actions, actionTypes } from './action-types'
+import { actionTypes as actions, appStates as states } from './action-types'
 
-const AppReducer = ({ ideas }: IdeasState, action: { type: string, payload: any }): IdeasState => {
+const AppReducer = ({ ideas = [] }: IdeasState, action: { type: string, payload: any }): IdeasState => {
   switch (action.type) {
     case actions.FETCH_IDEAS:
-      return { ideas, status: actionTypes.LOADING, error: undefined }
-    case actions.FETCH_SUCCESS:
-      return { status: actionTypes.LOADED, ideas: action.payload, error: undefined }
-    case actions.FETCH_ERROR:
-      return { status: actionTypes.LOADED, ideas, error: action.payload }
+      return { ideas, status: states.LOADING, error: null }
+    case actions.FETCH_IDEAS_SUCCESS:
+      return { status: states.LOADED, ideas: action.payload, error: null }
+    case actions.FETCH_IDEAS_ERROR:
+      return { status: states.LOADED, ideas, error: action.payload }
 
     case actions.ADD_IDEA:
-      return { ideas, status: actionTypes.LOADING }
     case actions.DOWNVOTE_IDEA:
-      return { ideas, status: actionTypes.LOADING }
     case actions.UPVOTE_IDEA:
-      return { ideas, status: actionTypes.LOADING }
+      return { ideas, status: states.LOADING }
+    case actions.IDEA_UPDATED:
+      return { ideas, status: states.LOADED, error: null }
     default:
-      return { ideas, status: actionTypes.LOADED }
+      return { ideas, status: states.LOADING, error: null }
   }
 }
 

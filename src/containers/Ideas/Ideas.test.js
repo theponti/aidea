@@ -5,7 +5,7 @@ import { getIdeas } from 'src/context/Firebase'
 import { getMockState, getMockUserState } from 'src/mocks'
 import { IdeasContext } from 'src/providers/IdeasProvider'
 import { UserContext } from 'src/providers/UserProvider'
-import { actionTypes } from 'src/reducers/action-types'
+import { actionTypes, appStates } from 'src/reducers/action-types'
 import Ideas from '.'
 
 describe('<Ideas/>', () => {
@@ -18,7 +18,14 @@ describe('<Ideas/>', () => {
 
     await act(async () => {
       render(
-        <IdeasContext.Provider value={{ state: { ideas: undefined }, dispatch }}>
+        <IdeasContext.Provider value={{
+          state: {
+            ideas: undefined,
+            status: appStates.LOADING,
+            error: null
+          },
+          dispatch
+        }}>
           <UserContext.Provider value={{ user }}>
             <Ideas/>
           </UserContext.Provider>
@@ -28,7 +35,7 @@ describe('<Ideas/>', () => {
 
     expect(dispatch).toHaveBeenCalledWith({ type: actionTypes.FETCH_IDEAS })
     expect(getIdeas).toHaveBeenCalled()
-    expect(dispatch).toHaveBeenCalledWith({ type: actionTypes.FETCH_SUCCESS, payload: state.ideas })
+    expect(dispatch).toHaveBeenCalledWith({ type: actionTypes.FETCH_IDEAS_SUCCESS, payload: state.ideas })
   })
 
   it('should render ideas', () => {
