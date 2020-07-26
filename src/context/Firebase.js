@@ -46,7 +46,7 @@ export const addVoteToUser = async (ideaUID) => {
 }
 
 export async function addVoteToIdea (id, amount) {
-  const ideaRef = await firestore.doc(`ideas/${id}`)
+  const ideaRef = firestore.doc(`ideas/${id}`)
   const snapshot = await ideaRef.get()
 
   if (amount > 0) {
