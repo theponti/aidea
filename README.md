@@ -2,14 +2,25 @@
 
 An application to allow teammates to suggest and join forces on ideas for new projects within an organization.
 
+## Stack
+- **React**
+- **Firebase**
+  - **Firebase Auth** for authentication
+  - **Firestore** for data storage
+  - **Firebase Functions** for tasks, data validation, etc
+  - **Firebase Hosting** for hosting web application
+- **Jest** for testing
+- **GitHub Actions** for CI and CD
+
 ## Features
 As a user, I can:
-- add an idea
-  - can add an unlimited number of ideas
+- join an organization based on my corporate email address
+- add ideas
+- edit ideas
 - upvote ideas
   - can only add one upvote per idea
   - cannot upvote my own ideas
 - downvote ideas
   - can only add one downvote per idea
-- join an idea
-  - can only join one idea team at a time
+  - cannot downvote my own ideas
+- "join" an idea to signify you'd like to work with that team
