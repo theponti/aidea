@@ -1,5 +1,5 @@
 import t from 'prop-types'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import Button from 'src/components/Button'
 import ListItem from 'src/components/ListItem'
 import { addVoteToIdea } from 'src/context/Firebase'
@@ -26,19 +26,20 @@ IdeaListItem.propTypes = {
 function IdeaListItem ({ idea: { id, title, description, upvotes, downvotes, ...idea } }: IdeaListItemProps) {
   const { dispatch } = useContext(IdeasContext)
   const { user } = useContext(UserContext)
+  const [error, setError] = useState(null)
 
   if (!user) return null
 
-  async function upvoteIdea (_id: string) {
-    dispatch({ type: actionTypes.UPVOTE_IDEA })
-    await addVoteToIdea(_id, 1)
-    dispatch({ type: actionTypes.IDEA_UPDATED })
-  }
+  async function voteOnIdea (_id: string, score: number) {
+    dispatch({ type: actionTypes.IDEA_UPDATE })
 
-  async function downvoteIdea (_id: string) {
-    dispatch({ type: actionTypes.DOWNVOTE_IDEA })
-    await addVoteToIdea(_id, -1)
-    dispatch({ type: actionTypes.IDEA_UPDATED })
+    try {
+      await addVoteToIdea(_id, score)
+      dispatch({ type: actionTypes.IDEA_UPDATE_SUCCESS })
+    } catch (err) {
+      setError(err.message)
+      dispatch({ type: actionTypes.IDEA_UPDATE_ERROR, payload: err.message })
+    }
   }
 
   const isUser = idea.user === user.uid
@@ -62,15 +63,16 @@ function IdeaListItem ({ idea: { id, title, description, upvotes, downvotes, ...
         <Button
           aria-label="upvote idea"
           variant="success"
-          onClick={() => upvoteIdea(id)}
+          onClick={() => voteOnIdea(id, 1)}
           disabled={hasVoted || isUser}
         > Upvote </Button>
         <Button
           aria-label="downvote idea"
           variant="danger"
-          onClick={() => downvoteIdea(id)}
+          onClick={() => voteOnIdea(id, -1)}
           disabled={hasVoted || isUser}> Downvote </Button>
       </div>
+      {error && <div className="error">{error}</div>}
     </ListItem>
   )
 }

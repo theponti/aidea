@@ -49,15 +49,20 @@ export async function addVoteToIdea (id, amount) {
   const ideaRef = firestore.doc(`ideas/${id}`)
   const snapshot = await ideaRef.get()
 
+  try {
   if (amount > 0) {
     await ideaRef.set({ upvotes: snapshot.get('upvotes') + amount })
-    await addVoteToUser(id)
-    return await ideaRef.get()
   } else if (amount < 0) {
     await ideaRef.set({ downvotes: snapshot.get('downvotes') + amount })
+    }
+  } catch (err) {
+    console.log('Issue updating idea', err)
+    throw err
+  }
+
+  await addVoteToUser(id)
     return await ideaRef.get()
   }
-}
 
 export async function saveIdea (idea) {
   const user = auth.currentUser
