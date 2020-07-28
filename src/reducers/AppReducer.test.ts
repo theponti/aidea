@@ -1,5 +1,5 @@
 import { getMockState } from 'src/mocks'
-import { appStates } from './action-types'
+import { actionTypes, appStates } from './action-types'
 import reducer from './AppReducer'
 
 describe('AppReducer', () => {
@@ -17,20 +17,18 @@ describe('AppReducer', () => {
     jest.resetAllMocks()
   })
 
-  it('should add new idea', () => {
-    const newState = reducer(state, { type: 'ADD_IDEA', payload: idea })
+  it('should set state to loading when IDEA_UPDATE', () => {
+    const newState = reducer(state, { type: actionTypes.IDEA_UPDATE, payload: idea })
     expect(newState).toEqual({ ...state, status: appStates.LOADING })
   })
 
-  it('should upvote an idea', () => {
-    const ideaID = '0'
-    const newState = reducer(state, { type: 'UPVOTE_IDEA', payload: ideaID })
-    expect(newState).toEqual({ ...state, status: appStates.LOADING })
+  it('should remove error and set state LOADED when IDEA_UPDATE_SUCCESS', () => {
+    const newState = reducer({ ...state, error: 'foo bar' }, { type: actionTypes.IDEA_UPDATE_SUCCESS, payload: 'foo bar' })
+    expect(newState).toEqual({ ...state, status: appStates.LOADED, error: null })
   })
 
-  it('should downvote an idea', () => {
-    const ideaID = '0'
-    const newState = reducer(state, { type: 'DOWNVOTE_IDEA', payload: ideaID })
-    expect(newState).toEqual({ ...state, status: appStates.LOADING })
+  it('should add erro when IDEA_UPDATE_ERROR', () => {
+    const newState = reducer(state, { type: actionTypes.IDEA_UPDATE_ERROR, payload: 'foo bar' })
+    expect(newState).toEqual({ ...state, status: appStates.LOADED, error: 'foo bar' })
   })
 })

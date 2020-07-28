@@ -38,9 +38,9 @@ describe('<IdeaListItem/>', () => {
     )
     const upvoteButton = getByLabelText(/upvote/i)
     await act(async () => { fireEvent.click(upvoteButton) })
-    expect(dispatch).toBeCalledWith({ type: actionTypes.UPVOTE_IDEA })
+    expect(dispatch).toBeCalledWith({ type: actionTypes.IDEA_UPDATE })
     expect(addVoteToIdea).toHaveBeenCalledWith('1', 1)
-    expect(dispatch).toBeCalledWith({ type: actionTypes.IDEA_UPDATED })
+    expect(dispatch).toBeCalledWith({ type: actionTypes.IDEA_UPDATE_SUCCESS })
   })
 
   it('should downvote idea', async () => {
@@ -56,9 +56,31 @@ describe('<IdeaListItem/>', () => {
       fireEvent.click(getByLabelText(/downvote/i))
     })
 
-    expect(dispatch).toBeCalledWith({ type: actionTypes.DOWNVOTE_IDEA })
+    expect(dispatch).toBeCalledWith({ type: actionTypes.IDEA_UPDATE })
     expect(addVoteToIdea).toHaveBeenCalledWith('1', -1)
-    expect(dispatch).toBeCalledWith({ type: actionTypes.IDEA_UPDATED })
+    expect(dispatch).toBeCalledWith({ type: actionTypes.IDEA_UPDATE_SUCCESS })
+  })
+
+  it('should catch error', async () => {
+    const { getByLabelText, getByText } = render(
+      <IdeasProvider>
+        <UserContext.Provider value={{ user }}>
+          <IdeaListItem idea={idea}/>
+        </UserContext.Provider>
+      </IdeasProvider>
+    )
+
+    const error = 'some error';
+    (addVoteToIdea as jest.Mock).mockImplementation(() => { throw new Error(error) })
+
+    await act(async () => {
+      fireEvent.click(getByLabelText(/downvote/i))
+    })
+
+    expect(dispatch).toBeCalledWith({ type: actionTypes.IDEA_UPDATE })
+    expect(addVoteToIdea).toHaveBeenCalledWith('1', -1)
+    expect(dispatch).toBeCalledWith({ type: actionTypes.IDEA_UPDATE_ERROR, payload: error })
+    expect(getByText(error)).toBeInTheDocument()
   })
 
   it('should disable voting on ideas user already voted for', async () => {

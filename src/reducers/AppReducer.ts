@@ -10,14 +10,15 @@ const AppReducer = ({ ideas = [] }: IdeasState, action: { type: string, payload:
     case actions.FETCH_IDEAS_ERROR:
       return { status: states.LOADED, ideas, error: action.payload }
 
-    case actions.ADD_IDEA:
-    case actions.DOWNVOTE_IDEA:
-    case actions.UPVOTE_IDEA:
+    case actions.IDEA_UPDATE:
       return { ideas, status: states.LOADING }
-    case actions.IDEA_UPDATED:
+    case actions.IDEA_UPDATE_SUCCESS:
       return { ideas, status: states.LOADED, error: null }
+    case actions.IDEA_UPDATE_ERROR:
+      return { ideas, status: states.LOADED, error: action.payload }
+
     default:
-      return { ideas, status: states.LOADING, error: null }
+      return { ideas, status: states.LOADED, error: null }
   }
 }
 
