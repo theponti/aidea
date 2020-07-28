@@ -125,5 +125,8 @@ export const generateUserDocument = async (user, additionalData) => {
     }
   }
 
-  return snapshot.data()
+  const data = snapshot.data()
+  data.uid = snapshot.id
+
+  return data
 }
