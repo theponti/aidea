@@ -26,7 +26,7 @@ const PasswordReset = () => {
   }
 
   return (
-    <div className="mt-8">
+    <>
       <h1 className="text-xl text-center font-bold mb-3">
         Reset your Password
       </h1>
@@ -68,7 +68,7 @@ const PasswordReset = () => {
           &larr; back to sign in page
         </Link>
       </div>
-    </div>
+    </>
   )
 }
 export default PasswordReset
