@@ -1,3 +1,4 @@
+import classnames from 'classnames'
 import React, { useEffect } from 'react'
 
 import { IdeasProvider } from './providers/IdeasProvider'
@@ -21,10 +22,8 @@ function App () {
     <div className={styles.container}>
       <header className={styles.header}>
         <Brain />
-        <h1>Idearz</h1>
-        <Brain />
       </header>
-      <main className={styles.main}>
+      <main className={classnames(styles.main, 'mt-8')}>
         <IdeasProvider>
           <UserProvider>
             <Application/>
