@@ -1,0 +1,30 @@
+type Idea
+  @model
+  @auth(
+    rules: [
+      { allow: owner, mutations: [create, update, delete] }
+    ]
+  )
+  @key(name: "byUser", fields: ["userID"]) {
+  id: ID!
+  title: String!
+  description: String
+  status: String
+  userID: ID!
+  user: User @connection(fields: ["userID"])
+}
+
+type User 
+  @model 
+  @auth(rules: [
+    { allow: owner, mutations: [create, update, delete] }
+  ]) {
+  id: ID!
+  email: String!
+  ideas: [Idea] @connection(keyName: "byUser", fields: ["id"])
+}
+
+type PrivateNote @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  content: String!
+}

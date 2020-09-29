@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form'
-
-import styles from './IdeaForm.module.scss'
 import Button from 'src/components/Button'
 import FormGroup from 'src/components/FormGroup'
-import { actionTypes } from 'src/reducers/action-types'
+import { saveIdea } from 'src/providers/Amplify'
 import { IdeasContext } from 'src/providers/IdeasProvider'
-import { saveIdea } from 'src/context/Firebase'
+import { actionTypes } from 'src/reducers/action-types'
+import styles from './IdeaForm.module.scss'
+
 
 export default function IdeaForm () {
   const { register, handleSubmit, reset } = useForm()

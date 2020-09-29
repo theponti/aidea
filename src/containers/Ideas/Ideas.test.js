@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 import { act } from 'react-dom/test-utils'
-import { getIdeas } from 'src/context/Firebase'
 import { getMockState, getMockUserState } from 'src/mocks'
+import { getIdeas } from 'src/providers/Amplify'
 import { IdeasContext } from 'src/providers/IdeasProvider'
 import { UserContext } from 'src/providers/UserProvider'
 import { actionTypes, appStates } from 'src/reducers/action-types'
@@ -11,7 +11,7 @@ import Ideas from '.'
 describe('<Ideas/>', () => {
   it('should render ideas', async () => {
     const state = getMockState()
-    const { user } = getMockUserState()
+    const user = getMockUserState()
     const dispatch = jest.fn()
 
     getIdeas.mockReturnValue(state.ideas)
@@ -40,7 +40,7 @@ describe('<Ideas/>', () => {
 
   it('should render ideas', () => {
     const state = getMockState()
-    const { user } = getMockUserState()
+    const user = getMockUserState()
     const dispatch = jest.fn()
     const { container } = render(
       <IdeasContext.Provider value={{ state, dispatch }}>

@@ -1,42 +1,35 @@
+import { onAuthUIStateChange } from '@aws-amplify/ui-components'
 import t from 'prop-types'
-import React, { Component, createContext } from 'react'
-import { auth, generateUserDocument } from 'src/context/Firebase'
-import { FirebaseUser } from 'src/interfaces/User'
+import React, { createContext, useState } from 'react'
+import { User } from 'src/interfaces/User'
 
 interface UserContext {
-  user: FirebaseUser | null;
-  authenticated?: boolean;
+  user?: User | undefined;
+  authState?: string;
 }
 
-export const UserContext = createContext<UserContext>({ user: null, authenticated: false })
+export const UserContext = createContext<UserContext>({ })
 
-class UserProvider extends Component {
-  state = {
-    user: null,
-    authenticated: false
-  };
+export const UserProvider: React.FC = ({ children }) => {
+  const [authState, setAuthState] = useState<string>()
+  const [user, setUser] = useState<User>()
 
-  static propTypes = {
-    children: t.node
-  }
-
-  componentDidMount = () => {
-    auth.onAuthStateChanged(async userAuth => {
-      const user = await generateUserDocument(userAuth)
-      this.setState({ user, authenticated: true })
+  React.useEffect(() => {
+    return onAuthUIStateChange((nextAuthState, authData) => {
+      setAuthState(nextAuthState)
+      setUser(authData as User)
     })
-  };
+  }, [])
 
-  render () {
-    return (
-      <UserContext.Provider value={{
-        authenticated: this.state.authenticated,
-        user: this.state.user
-      }}>
-        {this.props.children}
-      </UserContext.Provider>
-    )
-  }
+  return (
+    <UserContext.Provider value={{ authState, user }}>
+      {children}
+    </UserContext.Provider>
+  )
+}
+
+UserProvider.propTypes = {
+  children: t.node
 }
 
 export default UserProvider

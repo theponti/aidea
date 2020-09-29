@@ -5,7 +5,7 @@
 import '@testing-library/jest-dom/extend-expect'
 import 'mutationobserver-shim'
 
-jest.mock('src/context/Firebase', () => ({
+jest.mock('src/providers/Amplify', () => ({
   auth: {
     onAuthStateChanged: async () => ({})
   },

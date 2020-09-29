@@ -1,8 +1,9 @@
-import { act, fireEvent, render } from '@testing-library/react'
+import { act, render } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import React, { Dispatch } from 'react'
-import { addVoteToIdea, auth } from 'src/context/Firebase'
 import { Idea } from 'src/interfaces/Idea'
 import { getMockState, getMockUserState } from 'src/mocks'
+import { addVoteToIdea } from 'src/providers/Amplify'
 import { IdeasContext } from 'src/providers/IdeasProvider'
 import { UserContext } from 'src/providers/UserProvider'
 import { actionTypes } from 'src/reducers/action-types'
@@ -22,8 +23,7 @@ describe('<IdeaListItem/>', () => {
 
   beforeEach(() => {
     ideas = getMockState().ideas
-    user = getMockUserState().user
-    auth.currentUser = user
+    user = getMockUserState()
     dispatch = jest.fn()
     idea = ideas[1]
   })
@@ -37,7 +37,7 @@ describe('<IdeaListItem/>', () => {
       </IdeasProvider>
     )
     const upvoteButton = getByLabelText(/upvote/i)
-    await act(async () => { fireEvent.click(upvoteButton) })
+    await act(async () => { userEvent.click(upvoteButton) })
     expect(dispatch).toBeCalledWith({ type: actionTypes.IDEA_UPDATE })
     expect(addVoteToIdea).toHaveBeenCalledWith('1', 1)
     expect(dispatch).toBeCalledWith({ type: actionTypes.IDEA_UPDATE_SUCCESS })
@@ -52,9 +52,7 @@ describe('<IdeaListItem/>', () => {
       </IdeasProvider>
     )
 
-    await act(async () => {
-      fireEvent.click(getByLabelText(/downvote/i))
-    })
+    await act(async () => userEvent.click(getByLabelText(/downvote/i)))
 
     expect(dispatch).toBeCalledWith({ type: actionTypes.IDEA_UPDATE })
     expect(addVoteToIdea).toHaveBeenCalledWith('1', -1)
@@ -73,9 +71,7 @@ describe('<IdeaListItem/>', () => {
     const error = 'some error';
     (addVoteToIdea as jest.Mock).mockImplementation(() => { throw new Error(error) })
 
-    await act(async () => {
-      fireEvent.click(getByLabelText(/downvote/i))
-    })
+    await act(async () => userEvent.click(getByLabelText(/downvote/i)))
 
     expect(dispatch).toBeCalledWith({ type: actionTypes.IDEA_UPDATE })
     expect(addVoteToIdea).toHaveBeenCalledWith('1', -1)

@@ -1,4 +1,5 @@
 import { IdeasState } from 'src/interfaces/Idea'
+import { User } from './interfaces/User'
 import { appStates } from './reducers/action-types'
 
 export interface MockUserState {
@@ -7,14 +8,12 @@ export interface MockUserState {
   votes: string[]
 }
 
-export function getMockUserState (): { authorized: boolean, user: MockUserState } {
+export function getMockUserState (): User {
   return {
-    authorized: true,
-    user: {
-      uid: 'USER_ID',
-      ideas: [],
-      votes: []
-    }
+    id: 'USER_ID',
+    email: 'foo@bar.com',
+    ideas: [],
+    votes: []
   }
 }
 

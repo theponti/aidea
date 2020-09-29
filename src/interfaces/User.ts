@@ -1,9 +1,8 @@
-
-export interface FirebaseUser extends firebase.User {
-  uid: string;
-  displayName: string;
+export interface User {
+  id: string;
+  displayName?: string;
   email: string;
-  photoUrl: string;
-  votes: string[];
-  ideas: string[];
+  photoUrl?: string;
+  votes?: string[];
+  ideas?: string[];
 }

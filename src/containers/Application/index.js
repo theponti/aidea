@@ -1,48 +1,29 @@
+import { AuthState } from '@aws-amplify/ui-components'
 import { Router } from '@reach/router'
+import PropTypes from 'prop-types'
 import React, { useContext } from 'react'
+import AideaAuthenticator from 'src/components/Authenticator'
+import ProfilePage from 'src/containers/ProfilePage'
 import { UserContext } from 'src/providers/UserProvider'
-import IdeaForm from '../IdeaForm'
-import Ideas from '../Ideas'
-import PasswordReset from '../PasswordReset'
-import ProfilePage from '../ProfilePage'
-import SignIn from '../SignIn'
-import SignUp from '../SignUp'
-import styles from './Application.module.scss'
+// import styles from './Application.module.scss'
 
-function IdeasPath () {
+function Application () {
+  const { authState, user } = useContext(UserContext)
+
   return (
-    <>
-      <IdeaForm/>
-      <Ideas/>
-    </>
+    authState === AuthState.SignedIn && user
+      ? (
+        <Router>
+          <ProfilePage path="profile" user={user.attributes}/>
+        </Router>
+      )
+      : <AideaAuthenticator/>
   )
 }
 
-function Application () {
-  const { user, authenticated } = useContext(UserContext)
-
-  if (authenticated === false) {
-    return (
-      <h2 className={styles.loading}>Loading...</h2>
-    )
-  }
-
-  return (
-    user
-      ? (
-        <Router>
-          <ProfilePage path="profile" />
-          <IdeasPath default path="/" />
-        </Router>
-      )
-      : (
-        <Router>
-          <SignIn path="/" default />
-          <SignUp path="signUp" />
-          <PasswordReset path="passwordReset" />
-        </Router>
-      )
-  )
+Application.propTypes = {
+  user: PropTypes.object,
+  authState: PropTypes.string
 }
 
 export default Application

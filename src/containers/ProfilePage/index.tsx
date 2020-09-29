@@ -1,17 +1,18 @@
-import React, { useContext } from 'react'
-import { signOut } from 'src/context/Firebase'
-import { UserContext } from 'src/providers/UserProvider'
+import { AmplifySignOut } from '@aws-amplify/ui-react'
+import Grid from '@material-ui/core/Grid'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { User } from 'src/interfaces/User'
 
-const ProfilePage = () => {
-  const { user } = useContext(UserContext)
-  const { displayName, email, photoUrl } = user || { displayName: '', email: '', photoUrl: '' }
+const Profile = ({ user }: { authState: string, user: User }) => {
+  if (!user) return null
 
   return (
-    <div className = "mx-auto w-11/12 md:w-2/4 py-8 px-4 md:px-8">
-      <div className="flex border flex-col items-center md:flex-row md:items-start border-blue-400 px-3 py-4">
+    <Grid container justify="center">
+      <Grid item>
         <div
           style={{
-            background: `url(${photoUrl})  no-repeat center center`,
+            background: `url(${user.photoUrl})  no-repeat center center`,
             backgroundSize: 'cover',
             height: '200px',
             width: '200px'
@@ -19,17 +20,18 @@ const ProfilePage = () => {
           className="border border-blue-300"
         ></div>
         <div className = "md:pl-4">
-          <h2 className = "text-2xl font-semibold">{displayName}</h2>
-          <h3 className = "italic">{email}</h3>
+          <h2 className = "text-2xl font-semibold">{user.displayName}</h2>
+          <h3 className = "italic">{user.email}</h3>
         </div>
-      </div>
-      <button
-        className = "w-full py-3 bg-red-600 mt-4 text-white"
-        onClick={signOut}
-      >
-        Sign out
-      </button>
-    </div>
+        <AmplifySignOut />
+      </Grid>
+    </Grid>
   )
 }
-export default ProfilePage
+
+Profile.propTypes = {
+  authState: PropTypes.string,
+  user: PropTypes.object
+}
+
+export default Profile

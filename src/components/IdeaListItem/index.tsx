@@ -2,8 +2,8 @@ import t from 'prop-types'
 import React, { useContext, useState } from 'react'
 import Button from 'src/components/Button'
 import ListItem from 'src/components/ListItem'
-import { addVoteToIdea } from 'src/context/Firebase'
 import { Idea } from 'src/interfaces/Idea'
+import { addVoteToIdea } from 'src/providers/Amplify'
 import { IdeasContext } from 'src/providers/IdeasProvider'
 import { UserContext } from 'src/providers/UserProvider'
 import { actionTypes } from 'src/reducers/action-types'
@@ -42,7 +42,7 @@ function IdeaListItem ({ idea: { id, title, description, upvotes, downvotes, ...
     }
   }
 
-  const isUser = idea.user === user.uid
+  const isUser = idea.user === user.id
   const hasVoted = user.votes.indexOf(id) !== -1
 
   return (

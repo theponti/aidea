@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-aidea-dev-124813-authRole",
+      "UnauthRoleArn": "arn:aws:iam::882718322629:role/amplify-aidea-dev-124813-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::882718322629:role/amplify-aidea-dev-124813-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-aidea-dev-124813-deployment",
+      "UnauthRoleName": "amplify-aidea-dev-124813-unauthRole",
+      "StackName": "amplify-aidea-dev-124813",
+      "StackId": "arn:aws:cloudformation:us-east-1:882718322629:stack/amplify-aidea-dev-124813/67fbdec0-01aa-11eb-b4b8-0a39c55408a9",
+      "AmplifyAppId": "d2fcb205a4z9sh"
+    },
+    "categories": {
+      "auth": {
+        "aidead9e29f91": {}
+      }
+    }
+  }
+}

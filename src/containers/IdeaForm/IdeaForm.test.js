@@ -1,10 +1,10 @@
+import { act, fireEvent, render } from '@testing-library/react'
 import React from 'react'
-import { render, fireEvent, act } from '@testing-library/react'
-
 import IdeaForm from 'src/containers/IdeaForm'
+import { auth, saveIdea } from 'src/providers/Amplify'
 import { IdeasContext } from 'src/providers/IdeasProvider'
 import { actionTypes } from 'src/reducers/action-types'
-import { saveIdea, auth } from 'src/context/Firebase'
+
 
 describe('<IdeaForm/>', () => {
   it('should call addIdea with record', async () => {

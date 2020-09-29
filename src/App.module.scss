@@ -36,4 +36,6 @@ $header-font-size: 3rem;
 
 .main {
   @include bodyContainer;
+  display: flex;
+  justify-content: center;
 }
