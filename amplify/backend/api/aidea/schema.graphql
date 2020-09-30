@@ -10,6 +10,8 @@ type Idea
   title: String!
   description: String
   status: String
+  upvotes: Int
+  downvotes: Int
   userID: ID!
   user: User @connection(fields: ["userID"])
 }
