@@ -5,6 +5,7 @@ import React, { useContext } from 'react'
 import AideaAuthenticator from 'src/components/Authenticator'
 import ProfilePage from 'src/containers/ProfilePage'
 import { UserContext } from 'src/providers/UserProvider'
+import Ideas from '../Ideas'
 // import styles from './Application.module.scss'
 
 function Application () {
@@ -14,7 +15,8 @@ function Application () {
     authState === AuthState.SignedIn && user
       ? (
         <Router>
-          <ProfilePage path="profile" user={user.attributes}/>
+          <Ideas path="ideas"/>
+          <ProfilePage path="profile" user={user}/>
         </Router>
       )
       : <AideaAuthenticator/>

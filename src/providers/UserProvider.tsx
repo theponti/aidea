@@ -8,6 +8,16 @@ interface UserContext {
   authState?: string;
 }
 
+interface AuthData {
+  username: string
+  attributes: UserAttributes;
+}
+
+interface UserAttributes {
+  email: string;
+  'custom:displayName': string;
+}
+
 export const UserContext = createContext<UserContext>({ })
 
 export const UserProvider: React.FC = ({ children }) => {
@@ -15,9 +25,20 @@ export const UserProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User>()
 
   React.useEffect(() => {
-    return onAuthUIStateChange((nextAuthState, authData) => {
+    return onAuthUIStateChange((nextAuthState: string, authData) => {
       setAuthState(nextAuthState)
-      setUser(authData as User)
+
+      if (authData) {
+        const data = authData as AuthData
+        const attributes = data.attributes
+        setUser({
+          id: data.username,
+          email: attributes.email,
+          displayName: attributes['custom:displayName']
+        } as User)
+      } else {
+        setUser(undefined)
+      }
     })
   }, [])
 

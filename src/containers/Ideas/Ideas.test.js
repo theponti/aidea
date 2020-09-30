@@ -1,12 +1,12 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 import { act } from 'react-dom/test-utils'
+import { Ideas } from 'src/containers/Ideas'
 import { getMockState, getMockUserState } from 'src/mocks'
 import { getIdeas } from 'src/providers/Amplify'
 import { IdeasContext } from 'src/providers/IdeasProvider'
 import { UserContext } from 'src/providers/UserProvider'
 import { actionTypes, appStates } from 'src/reducers/action-types'
-import Ideas from '.'
 
 describe('<Ideas/>', () => {
   it('should render ideas', async () => {

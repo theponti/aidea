@@ -9,6 +9,8 @@ export const getIdea = /* GraphQL */ `
       title
       description
       status
+      upvotes
+      downvotes
       userID
       user {
         id
@@ -35,6 +37,8 @@ export const listIdeas = /* GraphQL */ `
         title
         description
         status
+        upvotes
+        downvotes
         userID
         createdAt
         updatedAt

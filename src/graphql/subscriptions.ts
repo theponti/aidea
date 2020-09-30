@@ -9,6 +9,8 @@ export const onCreateIdea = /* GraphQL */ `
       title
       description
       status
+      upvotes
+      downvotes
       userID
       user {
         id
@@ -30,6 +32,8 @@ export const onUpdateIdea = /* GraphQL */ `
       title
       description
       status
+      upvotes
+      downvotes
       userID
       user {
         id
@@ -51,6 +55,8 @@ export const onDeleteIdea = /* GraphQL */ `
       title
       description
       status
+      upvotes
+      downvotes
       userID
       user {
         id

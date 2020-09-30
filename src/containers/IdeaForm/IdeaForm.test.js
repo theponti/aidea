@@ -1,15 +1,13 @@
 import { act, fireEvent, render } from '@testing-library/react'
 import React from 'react'
 import IdeaForm from 'src/containers/IdeaForm'
-import { auth, saveIdea } from 'src/providers/Amplify'
+import { saveIdea } from 'src/providers/Amplify'
 import { IdeasContext } from 'src/providers/IdeasProvider'
 import { actionTypes } from 'src/reducers/action-types'
-
 
 describe('<IdeaForm/>', () => {
   it('should call addIdea with record', async () => {
     const dispatch = jest.fn()
-    auth.currentUser = { uid: 'SOME_ID' }
 
     const { container, getByText } = render(
       <IdeasContext.Provider value={{ dispatch }}>

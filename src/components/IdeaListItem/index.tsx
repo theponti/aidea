@@ -43,7 +43,7 @@ function IdeaListItem ({ idea: { id, title, description, upvotes, downvotes, ...
   }
 
   const isUser = idea.user === user.id
-  const hasVoted = user.votes.indexOf(id) !== -1
+  const hasVoted = user && user.votes && user.votes.indexOf(id) !== -1
 
   return (
     <ListItem>

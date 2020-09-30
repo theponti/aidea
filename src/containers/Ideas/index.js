@@ -1,10 +1,11 @@
 import React from 'react'
 import IdeaListItem from 'src/components/IdeaListItem'
 import useIdeas from 'src/hooks/useIdeas'
+import { IdeasProvider } from 'src/providers/IdeasProvider'
 import { appStates } from 'src/reducers/action-types'
 import styles from './Ideas.module.scss'
 
-export default function Ideas () {
+export function Ideas () {
   const { ideas, status, error } = useIdeas()
 
   if (status === appStates.LOADING) return <div>Loading...</div>
@@ -17,3 +18,13 @@ export default function Ideas () {
     </div>
   )
 }
+
+function IdeasContainer () {
+  return (
+    <IdeasProvider>
+      <Ideas/>
+    </IdeasProvider>
+  )
+}
+
+export default IdeasContainer

@@ -7,6 +7,8 @@ export type CreateIdeaInput = {
   title: string,
   description?: string | null,
   status?: string | null,
+  upvotes?: number | null,
+  downvotes?: number | null,
   userID: string,
 };
 
@@ -14,6 +16,8 @@ export type ModelIdeaConditionInput = {
   title?: ModelStringInput | null,
   description?: ModelStringInput | null,
   status?: ModelStringInput | null,
+  upvotes?: ModelIntInput | null,
+  downvotes?: ModelIntInput | null,
   userID?: ModelIDInput | null,
   and?: Array< ModelIdeaConditionInput | null > | null,
   or?: Array< ModelIdeaConditionInput | null > | null,
@@ -60,6 +64,18 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
 export type ModelIDInput = {
   ne?: string | null,
   eq?: string | null,
@@ -81,6 +97,8 @@ export type UpdateIdeaInput = {
   title?: string | null,
   description?: string | null,
   status?: string | null,
+  upvotes?: number | null,
+  downvotes?: number | null,
   userID?: string | null,
 };
 
@@ -135,6 +153,8 @@ export type ModelIdeaFilterInput = {
   title?: ModelStringInput | null,
   description?: ModelStringInput | null,
   status?: ModelStringInput | null,
+  upvotes?: ModelIntInput | null,
+  downvotes?: ModelIntInput | null,
   userID?: ModelIDInput | null,
   and?: Array< ModelIdeaFilterInput | null > | null,
   or?: Array< ModelIdeaFilterInput | null > | null,
@@ -169,6 +189,8 @@ export type CreateIdeaMutation = {
     title: string,
     description: string | null,
     status: string | null,
+    upvotes: number | null,
+    downvotes: number | null,
     userID: string,
     user:  {
       __typename: "User",
@@ -196,6 +218,8 @@ export type UpdateIdeaMutation = {
     title: string,
     description: string | null,
     status: string | null,
+    upvotes: number | null,
+    downvotes: number | null,
     userID: string,
     user:  {
       __typename: "User",
@@ -223,6 +247,8 @@ export type DeleteIdeaMutation = {
     title: string,
     description: string | null,
     status: string | null,
+    upvotes: number | null,
+    downvotes: number | null,
     userID: string,
     user:  {
       __typename: "User",
@@ -357,6 +383,8 @@ export type GetIdeaQuery = {
     title: string,
     description: string | null,
     status: string | null,
+    upvotes: number | null,
+    downvotes: number | null,
     userID: string,
     user:  {
       __typename: "User",
@@ -387,6 +415,8 @@ export type ListIdeasQuery = {
       title: string,
       description: string | null,
       status: string | null,
+      upvotes: number | null,
+      downvotes: number | null,
       userID: string,
       createdAt: string,
       updatedAt: string,
@@ -483,6 +513,8 @@ export type OnCreateIdeaSubscription = {
     title: string,
     description: string | null,
     status: string | null,
+    upvotes: number | null,
+    downvotes: number | null,
     userID: string,
     user:  {
       __typename: "User",
@@ -509,6 +541,8 @@ export type OnUpdateIdeaSubscription = {
     title: string,
     description: string | null,
     status: string | null,
+    upvotes: number | null,
+    downvotes: number | null,
     userID: string,
     user:  {
       __typename: "User",
@@ -535,6 +569,8 @@ export type OnDeleteIdeaSubscription = {
     title: string,
     description: string | null,
     status: string | null,
+    upvotes: number | null,
+    downvotes: number | null,
     userID: string,
     user:  {
       __typename: "User",
