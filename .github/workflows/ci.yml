@@ -1,9 +1,9 @@
-name: Idears Test
+name: aidea test
 
 # Workflow is triggers on pushes to repository
 on:
   pull_request:
-    branches: [ master ]
+    branches: [ mainline ]
 
 jobs:
   test:
