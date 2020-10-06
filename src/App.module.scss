@@ -1,41 +1,10 @@
-@mixin bodyContainer {
-  max-width: 90%;
-
-  @media (min-width: 700px) {
-    width: 700px;
-  }
-}
-
-$header-font-size: 3rem;
-
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-
-.header {
-  @include bodyContainer;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
-  margin-top: 1rem;
-  font-size: $header-font-size;
-  
-  h1 {
-    display: flex;
-    align-items: center;
-  }
-}
-
-.brain {
-  display: flex;
-  align-items: center;
-  height: 4.5rem;
 }
 
 .main {
-  @include bodyContainer;
+  padding: 2rem;
   display: flex;
   justify-content: center;
 }

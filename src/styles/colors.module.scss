@@ -25,6 +25,7 @@ $sage: rgba(185, 186, 163, 1);
 $timberwolf: rgba(214, 213, 201, 1);
 $auburn: rgba(162, 44, 41, 1);
 $burnt-umber: rgba(144, 41, 35, 1);
+$pink: rgba(255, 168, 192, 1);
 
 /* SCSS Gradient */
 $gradient-top: linear-gradient(0deg, #0a100dff, #b9baa3ff, #d6d5c9ff, #a22c29ff, #902923ff);
@@ -39,5 +40,5 @@ $gradient-radial: radial-gradient(#0a100dff, #b9baa3ff, #d6d5c9ff, #a22c29ff, #9
 
 $app-background: #2d132c;
 $text: #E3E3E3;
-$card-background: #e5e5e5;
+$card-background: white;
 $card-background--dark: #f3f3f3;

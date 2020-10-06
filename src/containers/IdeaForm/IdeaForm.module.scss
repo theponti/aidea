@@ -1,11 +1,11 @@
 @import "../../styles/colors.module.scss";
 
+$border: 1px solid $pink;
 $border-radius: 3px;
 
 .container {
   display: flex;
   flex-wrap: wrap;
-  background-color: $card-background--dark;
   border-radius: 3px;
   padding: 1rem;
 
@@ -13,11 +13,26 @@ $border-radius: 3px;
     min-height: 100%;
     padding-left: 0.5rem;
     border-radius: $border-radius;
+    border-bottom: $border;
+    border-top: $border;
+    
+    &:focus {
+      outline: 2px solid $border;
+      outline-style: auto;
+    }
   }
 
   textarea {
-    padding: 1rem;
+    margin-top: 1rem;
+    padding: 0.5rem;
     border-radius: $border-radius;
+    border-bottom: $border;
+    border-top: $border;
+
+    &:focus {
+      outline: 2px solid $border;
+      outline-style: auto;
+    }
   }
 }
 

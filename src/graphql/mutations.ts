@@ -131,42 +131,48 @@ export const deleteUser = /* GraphQL */ `
     }
   }
 `;
-export const createPrivateNote = /* GraphQL */ `
-  mutation CreatePrivateNote(
-    $input: CreatePrivateNoteInput!
-    $condition: ModelPrivateNoteConditionInput
+export const createIdeaVote = /* GraphQL */ `
+  mutation CreateIdeaVote(
+    $input: CreateIdeaVoteInput!
+    $condition: ModelIdeaVoteConditionInput
   ) {
-    createPrivateNote(input: $input, condition: $condition) {
+    createIdeaVote(input: $input, condition: $condition) {
       id
-      content
+      ideaID
+      userID
+      vote
       createdAt
       updatedAt
       owner
     }
   }
 `;
-export const updatePrivateNote = /* GraphQL */ `
-  mutation UpdatePrivateNote(
-    $input: UpdatePrivateNoteInput!
-    $condition: ModelPrivateNoteConditionInput
+export const updateIdeaVote = /* GraphQL */ `
+  mutation UpdateIdeaVote(
+    $input: UpdateIdeaVoteInput!
+    $condition: ModelIdeaVoteConditionInput
   ) {
-    updatePrivateNote(input: $input, condition: $condition) {
+    updateIdeaVote(input: $input, condition: $condition) {
       id
-      content
+      ideaID
+      userID
+      vote
       createdAt
       updatedAt
       owner
     }
   }
 `;
-export const deletePrivateNote = /* GraphQL */ `
-  mutation DeletePrivateNote(
-    $input: DeletePrivateNoteInput!
-    $condition: ModelPrivateNoteConditionInput
+export const deleteIdeaVote = /* GraphQL */ `
+  mutation DeleteIdeaVote(
+    $input: DeleteIdeaVoteInput!
+    $condition: ModelIdeaVoteConditionInput
   ) {
-    deletePrivateNote(input: $input, condition: $condition) {
+    deleteIdeaVote(input: $input, condition: $condition) {
       id
-      content
+      ideaID
+      userID
+      vote
       createdAt
       updatedAt
       owner

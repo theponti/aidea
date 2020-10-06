@@ -6,9 +6,9 @@ module.exports = {
     jest: true
   },
   extends: [
-    "react-app",
+    'eslint:recommended',
     'plugin:react/recommended',
-    'standard'
+    // 'airbnb-typescript'
   ],
   globals: {
     Atomics: 'readonly',
@@ -26,6 +26,9 @@ module.exports = {
   ],
   rules: {
     'react/react-in-jsx-scope': 0,
-    camelcase: 0
+    camelcase: 0,
+    'no-misleading-character-class': 0,
+    'no-async-promise-executor': 0,
+    'no-useless-catch': 0,
   }
 }

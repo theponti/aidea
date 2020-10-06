@@ -1,13 +1,17 @@
+import { makeStyles } from '@material-ui/core'
+import Button from '@material-ui/core/Button'
+import ThumbDown from '@material-ui/icons/ThumbDown'
+import ThumbUp from '@material-ui/icons/ThumbUp'
 import t from 'prop-types'
 import React, { useContext, useState } from 'react'
-import Button from 'src/components/Button'
 import ListItem from 'src/components/ListItem'
 import { Idea } from 'src/interfaces/Idea'
-import { addVoteToIdea } from 'src/providers/Amplify'
+import { addVote } from 'src/providers/Amplify'
 import { IdeasContext } from 'src/providers/IdeasProvider'
 import { UserContext } from 'src/providers/UserProvider'
 import { actionTypes } from 'src/reducers/action-types'
 import styles from './IdeaListItem.module.scss'
+
 
 interface IdeaListItemProps {
   idea: Idea
@@ -23,10 +27,18 @@ IdeaListItem.propTypes = {
   }))
 }
 
+const useStyles = makeStyles({
+  voteButton: {
+    width: '1rem',
+    marginRight: '0.5rem'
+  }
+})
+
 function IdeaListItem ({ idea: { id, title, description, upvotes, downvotes, ...idea } }: IdeaListItemProps) {
   const { dispatch } = useContext(IdeasContext)
   const { user } = useContext(UserContext)
   const [error, setError] = useState(null)
+  const classes  = useStyles()
 
   if (!user) return null
 
@@ -34,7 +46,7 @@ function IdeaListItem ({ idea: { id, title, description, upvotes, downvotes, ...
     dispatch({ type: actionTypes.IDEA_UPDATE })
 
     try {
-      await addVoteToIdea(_id, score)
+      await addVote(_id, user?.id, score)
       dispatch({ type: actionTypes.IDEA_UPDATE_SUCCESS })
     } catch (err) {
       setError(err.message)
@@ -49,28 +61,26 @@ function IdeaListItem ({ idea: { id, title, description, upvotes, downvotes, ...
     <ListItem>
       <div className={styles.title}>
         <p>{title}</p>
-        <div className={styles.votes}>
-          <p>
-            upvotes: {upvotes}
-          </p>
-          <p>
-            downvotes: {downvotes}
-          </p>
-        </div>
       </div>
       <div className={styles.description}>{description}</div>
       <div className={styles.btnContainer}>
         <Button
           aria-label="upvote idea"
-          variant="success"
+          color="primary"
+          variant="contained"
           onClick={() => voteOnIdea(id, 1)}
           disabled={hasVoted || isUser}
-        > Upvote </Button>
+        > 
+          <ThumbUp className={classes.voteButton}/> Upvote 
+        </Button>
         <Button
           aria-label="downvote idea"
-          variant="danger"
+          color="secondary"
+          variant="contained"
           onClick={() => voteOnIdea(id, -1)}
-          disabled={hasVoted || isUser}> Downvote </Button>
+          disabled={hasVoted || isUser}> 
+          <ThumbDown className={classes.voteButton}/> Downvote 
+        </Button>
       </div>
       {error && <div className="error">{error}</div>}
     </ListItem>

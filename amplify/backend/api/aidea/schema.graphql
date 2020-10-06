@@ -26,7 +26,9 @@ type User
   ideas: [Idea] @connection(keyName: "byUser", fields: ["id"])
 }
 
-type PrivateNote @model @auth(rules: [{ allow: owner }]) {
+type IdeaVote @model @auth(rules: [ { allow: owner }]) {
   id: ID!
-  content: String!
+  ideaID: ID!
+  userID: ID!
+  vote: Int
 }

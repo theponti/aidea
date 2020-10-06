@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import React, { Dispatch } from 'react'
 import { Idea } from 'src/interfaces/Idea'
 import { getMockState, getMockUserState } from 'src/mocks'
-import { addVoteToIdea } from 'src/providers/Amplify'
+import { addVote } from 'src/providers/Amplify'
 import { IdeasContext } from 'src/providers/IdeasProvider'
 import { UserContext } from 'src/providers/UserProvider'
 import { actionTypes } from 'src/reducers/action-types'
@@ -39,7 +39,7 @@ describe('<IdeaListItem/>', () => {
     const upvoteButton = getByLabelText(/upvote/i)
     await act(async () => { userEvent.click(upvoteButton) })
     expect(dispatch).toBeCalledWith({ type: actionTypes.IDEA_UPDATE })
-    expect(addVoteToIdea).toHaveBeenCalledWith('1', 1)
+    expect(addVote).toHaveBeenCalledWith("1", 'USER_ID', 1)
     expect(dispatch).toBeCalledWith({ type: actionTypes.IDEA_UPDATE_SUCCESS })
   })
 
@@ -55,7 +55,7 @@ describe('<IdeaListItem/>', () => {
     await act(async () => userEvent.click(getByLabelText(/downvote/i)))
 
     expect(dispatch).toBeCalledWith({ type: actionTypes.IDEA_UPDATE })
-    expect(addVoteToIdea).toHaveBeenCalledWith('1', -1)
+    expect(addVote).toHaveBeenCalledWith("1", 'USER_ID', -1)
     expect(dispatch).toBeCalledWith({ type: actionTypes.IDEA_UPDATE_SUCCESS })
   })
 
@@ -69,12 +69,12 @@ describe('<IdeaListItem/>', () => {
     )
 
     const error = 'some error';
-    (addVoteToIdea as jest.Mock).mockImplementation(() => { throw new Error(error) })
+    (addVote as jest.Mock).mockImplementation(() => { throw new Error(error) })
 
     await act(async () => userEvent.click(getByLabelText(/downvote/i)))
 
     expect(dispatch).toBeCalledWith({ type: actionTypes.IDEA_UPDATE })
-    expect(addVoteToIdea).toHaveBeenCalledWith('1', -1)
+    expect(addVote).toHaveBeenCalledWith("1", 'USER_ID', -1)
     expect(dispatch).toBeCalledWith({ type: actionTypes.IDEA_UPDATE_ERROR, payload: error })
     expect(getByText(error)).toBeInTheDocument()
   })

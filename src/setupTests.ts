@@ -26,10 +26,21 @@ jest.mock('src/aws-exports', () => ({
   ]
 }))
 
+jest.mock('aws-amplify', () => ({
+  API: {
+    graphql: jest.fn()
+  },
+  configure: jest.fn()
+}))
+
+jest.mock('src/graphql/mutations', () => ({
+  createIdea: jest.fn()
+}))
+
 jest.mock('src/providers/Amplify', () => ({
   signOut: jest.fn(),
   generateUserDocument: jest.fn(),
+  addVote: jest.fn(),
+  getIdeas: jest.fn(),
   saveIdea: jest.fn(),
-  addVoteToIdea: jest.fn(),
-  getIdeas: jest.fn()
 }))

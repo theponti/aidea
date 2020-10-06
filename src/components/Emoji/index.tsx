@@ -1,6 +1,6 @@
-import React from 'react'
+import clsx from 'clsx'
 import t from 'prop-types'
-import cx from 'classnames'
+import React from 'react'
 import styles from './Emoji.module.scss'
 
 interface EmojiProps {
@@ -19,7 +19,7 @@ function Emoji ({ className = '', label, emoji, ...props }: EmojiProps) {
   return (
     <span
       role="img"
-      className={cx(styles.container, className)}
+      className={clsx(styles.container, className)}
       aria-label={label}
       {...props}
     >

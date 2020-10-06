@@ -11,7 +11,7 @@ export interface MockUserState {
 export function getMockUserState (): User {
   return {
     id: 'USER_ID',
-    username: 'foo',
+    displayName: 'foo',
     email: 'foo@bar.com',
     ideas: [],
     votes: []
@@ -24,16 +24,16 @@ export function getMockState (): IdeasState {
     ideas: [
       {
         id: '0',
-        title: 'Some idea',
-        description: 'Some description',
+        title: 'Foo idea',
+        description: 'Foo idea description',
         upvotes: 0,
         downvotes: 5,
         user: 'USER_ID'
       },
       {
         id: '1',
-        title: 'Some another idea',
-        description: 'Some another description',
+        title: 'Bar idea',
+        description: 'Bar idea description',
         upvotes: 5,
         downvotes: 7,
         user: 'OTHER_USER_ID'

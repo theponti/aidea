@@ -49,7 +49,7 @@ describe('<Ideas/>', () => {
         </UserContext.Provider>
       </IdeasContext.Provider>
     )
-    expect(container).toHaveTextContent('upvotes: 0')
-    expect(container).toHaveTextContent('upvotes: 5')
+    expect(container).toHaveTextContent('Foo idea')
+    expect(container).toHaveTextContent('Bar idea')
   })
 })

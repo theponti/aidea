@@ -1,43 +1,55 @@
+import Button from '@material-ui/core/Button'
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
+import CardHeader from '@material-ui/core/CardHeader'
+import { navigate } from '@reach/router'
 import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form'
-import Button from 'src/components/Button'
 import FormGroup from 'src/components/FormGroup'
 import { saveIdea } from 'src/providers/Amplify'
 import { IdeasContext } from 'src/providers/IdeasProvider'
+import { UserContext } from 'src/providers/UserProvider'
 import { actionTypes } from 'src/reducers/action-types'
 import styles from './IdeaForm.module.scss'
 
-
 export default function IdeaForm () {
-  const { register, handleSubmit, reset } = useForm()
+  const { user } = useContext(UserContext)
+  const { register, handleSubmit } = useForm()
   const { dispatch } = useContext(IdeasContext)
 
   async function onSubmit (idea) {
     // Dispatch event
-    dispatch({ type: actionTypes.ADD_IDEA })
+    dispatch({ type: actionTypes.IDEA_UPDATE })
 
-    await saveIdea(idea)
+    await saveIdea({ ...idea, userID: user.id })
 
-    dispatch({ type: actionTypes.LOADED })
+    dispatch({ type: actionTypes.IDEA_UPDATE_SUCCESS })
 
     // Clear values from form
-    reset()
+    navigate('/ideas')
   }
 
   return (
-    <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
-      <FormGroup>
-        <input type="text" name="title" ref={register} placeholder="What's your idea's name?"/>
-      </FormGroup>
-      <FormGroup>
-        <textarea name="description" ref={register} placeholder="Describe it to us..."/>
-      </FormGroup>
-      <FormGroup>
-        <Button type="submit" variant="success">
-          Submit For Inspection
-          <span role="img" aria-label="inspect" className="ml1">🕵️‍♀️</span>
-        </Button>
-      </FormGroup>
-    </form>
+    <Card>
+      <CardContent>
+        <CardHeader>
+          Post New Idea
+        </CardHeader>
+        <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
+          <FormGroup>
+            <input type="text" name="title" ref={register} placeholder="What's your idea's name?"/>
+          </FormGroup>
+          <FormGroup>
+            <textarea name="description" ref={register} placeholder="Describe it to us..."/>
+          </FormGroup>
+          <FormGroup>
+            <Button type="submit" color="primary" variant="contained">
+              Submit For Inspection
+              <span role="img" aria-label="inspect" className="ml1">🕵️‍♀️</span>
+            </Button>
+          </FormGroup>
+        </form>
+      </CardContent>
+    </Card>
   )
 }

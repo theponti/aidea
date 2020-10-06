@@ -16,4 +16,6 @@ jobs:
             node-version: 12
         
       - run: npm install
+      - run: touch src/aws-exports.js
+      - run: echo "{}" >> src/aws-exports.js
       - run: npm test

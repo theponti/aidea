@@ -113,33 +113,39 @@ export const onDeleteUser = /* GraphQL */ `
     }
   }
 `;
-export const onCreatePrivateNote = /* GraphQL */ `
-  subscription OnCreatePrivateNote($owner: String!) {
-    onCreatePrivateNote(owner: $owner) {
+export const onCreateIdeaVote = /* GraphQL */ `
+  subscription OnCreateIdeaVote($owner: String!) {
+    onCreateIdeaVote(owner: $owner) {
       id
-      content
+      ideaID
+      userID
+      vote
       createdAt
       updatedAt
       owner
     }
   }
 `;
-export const onUpdatePrivateNote = /* GraphQL */ `
-  subscription OnUpdatePrivateNote($owner: String!) {
-    onUpdatePrivateNote(owner: $owner) {
+export const onUpdateIdeaVote = /* GraphQL */ `
+  subscription OnUpdateIdeaVote($owner: String!) {
+    onUpdateIdeaVote(owner: $owner) {
       id
-      content
+      ideaID
+      userID
+      vote
       createdAt
       updatedAt
       owner
     }
   }
 `;
-export const onDeletePrivateNote = /* GraphQL */ `
-  subscription OnDeletePrivateNote($owner: String!) {
-    onDeletePrivateNote(owner: $owner) {
+export const onDeleteIdeaVote = /* GraphQL */ `
+  subscription OnDeleteIdeaVote($owner: String!) {
+    onDeleteIdeaVote(owner: $owner) {
       id
-      content
+      ideaID
+      userID
+      vote
       createdAt
       updatedAt
       owner

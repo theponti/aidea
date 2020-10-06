@@ -80,27 +80,31 @@ export const listUsers = /* GraphQL */ `
     }
   }
 `;
-export const getPrivateNote = /* GraphQL */ `
-  query GetPrivateNote($id: ID!) {
-    getPrivateNote(id: $id) {
+export const getIdeaVote = /* GraphQL */ `
+  query GetIdeaVote($id: ID!) {
+    getIdeaVote(id: $id) {
       id
-      content
+      ideaID
+      userID
+      vote
       createdAt
       updatedAt
       owner
     }
   }
 `;
-export const listPrivateNotes = /* GraphQL */ `
-  query ListPrivateNotes(
-    $filter: ModelPrivateNoteFilterInput
+export const listIdeaVotes = /* GraphQL */ `
+  query ListIdeaVotes(
+    $filter: ModelIdeaVoteFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listPrivateNotes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listIdeaVotes(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        content
+        ideaID
+        userID
+        vote
         createdAt
         updatedAt
         owner

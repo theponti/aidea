@@ -52,7 +52,7 @@ $util.qr($context.args.input.put("updatedAt", $util.defaultIfNull($ctx.args.inpu
 ## [End] Check authMode and execute owner/group checks **
 
 ## [Start] Prepare DynamoDB PutItem Request. **
-$util.qr($context.args.input.put("__typename", "PrivateNote"))
+$util.qr($context.args.input.put("__typename", "IdeaVote"))
 #set( $condition = {
   "expression": "attribute_not_exists(#id)",
   "expressionNames": {

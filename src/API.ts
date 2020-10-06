@@ -127,24 +127,30 @@ export type DeleteUserInput = {
   id?: string | null,
 };
 
-export type CreatePrivateNoteInput = {
+export type CreateIdeaVoteInput = {
   id?: string | null,
-  content: string,
+  ideaID: string,
+  userID: string,
+  vote?: number | null,
 };
 
-export type ModelPrivateNoteConditionInput = {
-  content?: ModelStringInput | null,
-  and?: Array< ModelPrivateNoteConditionInput | null > | null,
-  or?: Array< ModelPrivateNoteConditionInput | null > | null,
-  not?: ModelPrivateNoteConditionInput | null,
+export type ModelIdeaVoteConditionInput = {
+  ideaID?: ModelIDInput | null,
+  userID?: ModelIDInput | null,
+  vote?: ModelIntInput | null,
+  and?: Array< ModelIdeaVoteConditionInput | null > | null,
+  or?: Array< ModelIdeaVoteConditionInput | null > | null,
+  not?: ModelIdeaVoteConditionInput | null,
 };
 
-export type UpdatePrivateNoteInput = {
+export type UpdateIdeaVoteInput = {
   id: string,
-  content?: string | null,
+  ideaID?: string | null,
+  userID?: string | null,
+  vote?: number | null,
 };
 
-export type DeletePrivateNoteInput = {
+export type DeleteIdeaVoteInput = {
   id?: string | null,
 };
 
@@ -169,12 +175,14 @@ export type ModelUserFilterInput = {
   not?: ModelUserFilterInput | null,
 };
 
-export type ModelPrivateNoteFilterInput = {
+export type ModelIdeaVoteFilterInput = {
   id?: ModelIDInput | null,
-  content?: ModelStringInput | null,
-  and?: Array< ModelPrivateNoteFilterInput | null > | null,
-  or?: Array< ModelPrivateNoteFilterInput | null > | null,
-  not?: ModelPrivateNoteFilterInput | null,
+  ideaID?: ModelIDInput | null,
+  userID?: ModelIDInput | null,
+  vote?: ModelIntInput | null,
+  and?: Array< ModelIdeaVoteFilterInput | null > | null,
+  or?: Array< ModelIdeaVoteFilterInput | null > | null,
+  not?: ModelIdeaVoteFilterInput | null,
 };
 
 export type CreateIdeaMutationVariables = {
@@ -324,48 +332,54 @@ export type DeleteUserMutation = {
   } | null,
 };
 
-export type CreatePrivateNoteMutationVariables = {
-  input: CreatePrivateNoteInput,
-  condition?: ModelPrivateNoteConditionInput | null,
+export type CreateIdeaVoteMutationVariables = {
+  input: CreateIdeaVoteInput,
+  condition?: ModelIdeaVoteConditionInput | null,
 };
 
-export type CreatePrivateNoteMutation = {
-  createPrivateNote:  {
-    __typename: "PrivateNote",
+export type CreateIdeaVoteMutation = {
+  createIdeaVote:  {
+    __typename: "IdeaVote",
     id: string,
-    content: string,
+    ideaID: string,
+    userID: string,
+    vote: number | null,
     createdAt: string,
     updatedAt: string,
     owner: string | null,
   } | null,
 };
 
-export type UpdatePrivateNoteMutationVariables = {
-  input: UpdatePrivateNoteInput,
-  condition?: ModelPrivateNoteConditionInput | null,
+export type UpdateIdeaVoteMutationVariables = {
+  input: UpdateIdeaVoteInput,
+  condition?: ModelIdeaVoteConditionInput | null,
 };
 
-export type UpdatePrivateNoteMutation = {
-  updatePrivateNote:  {
-    __typename: "PrivateNote",
+export type UpdateIdeaVoteMutation = {
+  updateIdeaVote:  {
+    __typename: "IdeaVote",
     id: string,
-    content: string,
+    ideaID: string,
+    userID: string,
+    vote: number | null,
     createdAt: string,
     updatedAt: string,
     owner: string | null,
   } | null,
 };
 
-export type DeletePrivateNoteMutationVariables = {
-  input: DeletePrivateNoteInput,
-  condition?: ModelPrivateNoteConditionInput | null,
+export type DeleteIdeaVoteMutationVariables = {
+  input: DeleteIdeaVoteInput,
+  condition?: ModelIdeaVoteConditionInput | null,
 };
 
-export type DeletePrivateNoteMutation = {
-  deletePrivateNote:  {
-    __typename: "PrivateNote",
+export type DeleteIdeaVoteMutation = {
+  deleteIdeaVote:  {
+    __typename: "IdeaVote",
     id: string,
-    content: string,
+    ideaID: string,
+    userID: string,
+    vote: number | null,
     createdAt: string,
     updatedAt: string,
     owner: string | null,
@@ -466,34 +480,38 @@ export type ListUsersQuery = {
   } | null,
 };
 
-export type GetPrivateNoteQueryVariables = {
+export type GetIdeaVoteQueryVariables = {
   id: string,
 };
 
-export type GetPrivateNoteQuery = {
-  getPrivateNote:  {
-    __typename: "PrivateNote",
+export type GetIdeaVoteQuery = {
+  getIdeaVote:  {
+    __typename: "IdeaVote",
     id: string,
-    content: string,
+    ideaID: string,
+    userID: string,
+    vote: number | null,
     createdAt: string,
     updatedAt: string,
     owner: string | null,
   } | null,
 };
 
-export type ListPrivateNotesQueryVariables = {
-  filter?: ModelPrivateNoteFilterInput | null,
+export type ListIdeaVotesQueryVariables = {
+  filter?: ModelIdeaVoteFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListPrivateNotesQuery = {
-  listPrivateNotes:  {
-    __typename: "ModelPrivateNoteConnection",
+export type ListIdeaVotesQuery = {
+  listIdeaVotes:  {
+    __typename: "ModelIdeaVoteConnection",
     items:  Array< {
-      __typename: "PrivateNote",
+      __typename: "IdeaVote",
       id: string,
-      content: string,
+      ideaID: string,
+      userID: string,
+      vote: number | null,
       createdAt: string,
       updatedAt: string,
       owner: string | null,
@@ -643,45 +661,51 @@ export type OnDeleteUserSubscription = {
   } | null,
 };
 
-export type OnCreatePrivateNoteSubscriptionVariables = {
+export type OnCreateIdeaVoteSubscriptionVariables = {
   owner: string,
 };
 
-export type OnCreatePrivateNoteSubscription = {
-  onCreatePrivateNote:  {
-    __typename: "PrivateNote",
+export type OnCreateIdeaVoteSubscription = {
+  onCreateIdeaVote:  {
+    __typename: "IdeaVote",
     id: string,
-    content: string,
+    ideaID: string,
+    userID: string,
+    vote: number | null,
     createdAt: string,
     updatedAt: string,
     owner: string | null,
   } | null,
 };
 
-export type OnUpdatePrivateNoteSubscriptionVariables = {
+export type OnUpdateIdeaVoteSubscriptionVariables = {
   owner: string,
 };
 
-export type OnUpdatePrivateNoteSubscription = {
-  onUpdatePrivateNote:  {
-    __typename: "PrivateNote",
+export type OnUpdateIdeaVoteSubscription = {
+  onUpdateIdeaVote:  {
+    __typename: "IdeaVote",
     id: string,
-    content: string,
+    ideaID: string,
+    userID: string,
+    vote: number | null,
     createdAt: string,
     updatedAt: string,
     owner: string | null,
   } | null,
 };
 
-export type OnDeletePrivateNoteSubscriptionVariables = {
+export type OnDeleteIdeaVoteSubscriptionVariables = {
   owner: string,
 };
 
-export type OnDeletePrivateNoteSubscription = {
-  onDeletePrivateNote:  {
-    __typename: "PrivateNote",
+export type OnDeleteIdeaVoteSubscription = {
+  onDeleteIdeaVote:  {
+    __typename: "IdeaVote",
     id: string,
-    content: string,
+    ideaID: string,
+    userID: string,
+    vote: number | null,
     createdAt: string,
     updatedAt: string,
     owner: string | null,
