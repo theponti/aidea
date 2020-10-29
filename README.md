@@ -4,11 +4,10 @@ An application to allow teammates to suggest and join forces on ideas for new pr
 
 ## Stack
 - **React**
-- **Firebase**
-  - **Firebase Auth** for authentication
-  - **Firestore** for data storage
-  - **Firebase Functions** for tasks, data validation, etc
-  - **Firebase Hosting** for hosting web application
+- **API**
+- **Storage**
+- **Hosting**
+- **Authentication**
 - **Jest** for testing
 - **GitHub Actions** for CI and CD
 
