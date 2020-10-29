@@ -1,6 +1,6 @@
-import React, { useState, MouseEvent, ChangeEvent } from 'react'
 import { Link } from '@reach/router'
-import { auth } from 'src/context/Firebase'
+import React, { ChangeEvent, MouseEvent, useState } from 'react'
+import { auth } from 'src/actions'
 
 export default function SignIn () {
   const [email, setEmail] = useState('')

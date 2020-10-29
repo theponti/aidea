@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 import { act } from 'react-dom/test-utils'
-import { getIdeas } from 'src/context/Firebase'
+import { getIdeas } from 'src/actions'
 import { getMockState, getMockUserState } from 'src/mocks'
 import { IdeasContext } from 'src/providers/IdeasProvider'
 import { UserContext } from 'src/providers/UserProvider'

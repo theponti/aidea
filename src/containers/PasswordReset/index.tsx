@@ -1,6 +1,6 @@
-import React, { useState, ChangeEvent, MouseEvent } from 'react'
 import { Link } from '@reach/router'
-import { auth } from 'src/context/Firebase'
+import React, { ChangeEvent, MouseEvent, useState } from 'react'
+import { auth } from 'src/actions'
 
 const PasswordReset = () => {
   const [email, setEmail] = useState('')

@@ -1,6 +1,6 @@
 import { Link } from '@reach/router'
 import React, { ChangeEvent, MouseEvent, useState } from 'react'
-import { auth, generateUserDocument } from 'src/context/Firebase'
+import { auth, generateUserDocument } from 'src/actions'
 
 const SignUp = () => {
   const [email, setEmail] = useState('')

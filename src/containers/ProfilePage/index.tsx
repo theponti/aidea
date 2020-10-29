@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { signOut } from 'src/context/Firebase'
+import { signOut } from 'src/actions'
 import { UserContext } from 'src/providers/UserProvider'
 
 const ProfilePage = () => {

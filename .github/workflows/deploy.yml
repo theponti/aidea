@@ -22,10 +22,3 @@ jobs:
       
       - name: Build applicaiton
         run: npm run build
-      
-      - name: Deploy to Firebase
-        uses: w9jds/firebase-action@master
-        with: 
-          args: deploy 
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

@@ -1,6 +1,6 @@
 import { act, fireEvent, render } from '@testing-library/react'
 import React, { Dispatch } from 'react'
-import { addVoteToIdea, auth } from 'src/context/Firebase'
+import { addVoteToIdea, auth } from 'src/actions'
 import { Idea } from 'src/interfaces/Idea'
 import { getMockState, getMockUserState } from 'src/mocks'
 import { IdeasContext } from 'src/providers/IdeasProvider'

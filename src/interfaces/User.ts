@@ -1,5 +1,5 @@
 
-export interface FirebaseUser extends firebase.User {
+export interface FirebaseUser {
   uid: string;
   displayName: string;
   email: string;

@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react'
-import { getIdeas } from 'src/context/Firebase'
+import { getIdeas } from 'src/actions'
 import { IdeasContext } from 'src/providers/IdeasProvider'
 import { actionTypes } from 'src/reducers/action-types'
 

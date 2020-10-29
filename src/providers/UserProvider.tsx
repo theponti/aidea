@@ -1,6 +1,6 @@
 import t from 'prop-types'
 import React, { Component, createContext } from 'react'
-import { auth, generateUserDocument } from 'src/context/Firebase'
+import { auth, generateUserDocument } from 'src/actions'
 import { FirebaseUser } from 'src/interfaces/User'
 
 interface UserContext {
@@ -21,7 +21,7 @@ class UserProvider extends Component {
   }
 
   componentDidMount = () => {
-    auth.onAuthStateChanged(async userAuth => {
+    auth.onAuthStateChanged(async (userAuth: any) => {
       const user = await generateUserDocument(userAuth)
       this.setState({ user, authenticated: true })
     })
