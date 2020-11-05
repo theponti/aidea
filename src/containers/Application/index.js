@@ -1,47 +1,33 @@
+import { useAuth0 } from '@auth0/auth0-react'
 import { Router } from '@reach/router'
-import React, { useContext } from 'react'
-import { UserContext } from 'src/providers/UserProvider'
-import IdeaForm from '../IdeaForm'
-import Ideas from '../Ideas'
-import PasswordReset from '../PasswordReset'
+import React from 'react'
+import Home from 'src/views/Home'
+import Ideas from 'src/views/Ideas'
 import ProfilePage from '../ProfilePage'
-import SignIn from '../SignIn'
-import SignUp from '../SignUp'
 import styles from './Application.module.scss'
 
-function IdeasPath () {
-  return (
-    <>
-      <IdeaForm/>
-      <Ideas/>
-    </>
-  )
-}
-
 function Application () {
-  const { user, authenticated } = useContext(UserContext)
+  const { isLoading, error } = useAuth0()
 
-  if (authenticated === false) {
+  if (isLoading) {
+    return <h2 className={styles.loading}>Loading...</h2>
+  }
+
+  if (error) {
     return (
-      <h2 className={styles.loading}>Loading...</h2>
+      <div>
+        <h2>Error</h2>
+        <p>{error.message}</p>
+      </div>
     )
   }
 
   return (
-    user
-      ? (
-        <Router>
-          <ProfilePage path="profile" />
-          <IdeasPath default path="/" />
-        </Router>
-      )
-      : (
-        <Router>
-          <SignIn path="/" default />
-          <SignUp path="signUp" />
-          <PasswordReset path="passwordReset" />
-        </Router>
-      )
+    <Router>
+      <Home default path="/" />
+      <ProfilePage path="profile" />
+      <Ideas path="/ideas" />
+    </Router>
   )
 }
 

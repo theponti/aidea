@@ -1,18 +1,20 @@
 import t from 'prop-types'
 import React, { createContext, useReducer } from 'react'
 import { IdeasState } from 'src/interfaces/Idea'
-import { appStates } from 'src/reducers/action-types'
 import AppReducer from '../reducers/AppReducer'
 
 // Initial State
 const initialState: IdeasState = {
   ideas: [],
-  status: appStates.LOADING,
+  isLoading: true,
   error: null
 }
 
 // Context
-export const IdeasContext = createContext<{ state: IdeasState; dispatch: React.Dispatch<any>}>({
+export const IdeasContext = createContext<{
+  state: IdeasState;
+  dispatch: React.Dispatch<any>;
+}>({
   state: initialState,
   dispatch: () => null
 })

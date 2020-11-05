@@ -1,10 +1,10 @@
 import { useContext, useEffect } from 'react'
-import { getIdeas } from 'src/context/Firebase'
+import { actionTypes, getIdeas } from 'src/actions'
 import { IdeasContext } from 'src/providers/IdeasProvider'
-import { actionTypes } from 'src/reducers/action-types'
 
 export default function useIdeas () {
-  const { state: { ideas, error, status }, dispatch } = useContext(IdeasContext)
+  const { state, dispatch } = useContext(IdeasContext)
+  const { ideas, error, isLoading } = state
 
   useEffect(() => {
     async function fetchData () {
@@ -21,5 +21,5 @@ export default function useIdeas () {
     fetchData()
   }, [dispatch])
 
-  return { status, ideas, error }
+  return { isLoading, ideas, error }
 }
