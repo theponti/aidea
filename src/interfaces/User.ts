@@ -1,4 +1,3 @@
-
 export interface FirebaseUser {
   uid: string;
   displayName: string;

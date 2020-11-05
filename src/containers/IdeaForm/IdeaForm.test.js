@@ -1,18 +1,21 @@
 import { act, fireEvent, render } from '@testing-library/react'
 import React from 'react'
-import { auth, saveIdea } from 'src/actions'
+import { actionTypes, saveIdea } from 'src/actions'
 import IdeaForm from 'src/containers/IdeaForm'
 import { IdeasContext } from 'src/providers/IdeasProvider'
-import { actionTypes } from 'src/reducers/action-types'
+
+jest.mock('src/actions', () => ({
+  saveIdea: jest.fn(),
+  actionTypes: {}
+}))
 
 describe('<IdeaForm/>', () => {
   it('should call addIdea with record', async () => {
     const dispatch = jest.fn()
-    auth.currentUser = { uid: 'SOME_ID' }
 
     const { container, getByText } = render(
       <IdeasContext.Provider value={{ dispatch }}>
-        <IdeaForm/>
+        <IdeaForm />
       </IdeasContext.Provider>
     )
 
@@ -23,11 +26,13 @@ describe('<IdeaForm/>', () => {
 
     const titleInput = container.querySelector('input')
     const descriptionInput = container.querySelector('textarea')
-    const button = getByText(/submit/ig)
+    const button = getByText(/submit/gi)
 
     await act(async () => {
       fireEvent.input(titleInput, { target: { value: idea.title } })
-      fireEvent.input(descriptionInput, { target: { value: idea.description } })
+      fireEvent.input(descriptionInput, {
+        target: { value: idea.description }
+      })
       fireEvent.click(button)
     })
 

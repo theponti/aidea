@@ -1,4 +1,3 @@
-
 export interface Idea {
   id: string;
   title: string;
@@ -9,7 +8,7 @@ export interface Idea {
 }
 
 export interface IdeasState {
-  ideas: Idea[]
-  status?: string
-  error?: string | null
+  ideas: Idea[];
+  isLoading: boolean;
+  error?: string | null;
 }

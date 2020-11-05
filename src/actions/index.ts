@@ -1,55 +1,30 @@
-export const auth = () => {
+export const appStates = {
+  LOADING: 'LOADING',
+  LOADED: 'LOADED',
+  ERROR: 'ERROR',
+};
 
+export const actionTypes = {
+  FETCH_IDEAS: 'FETCH_IDEAS',
+  FETCH_IDEAS_SUCCESS: 'FETCH_IDEAS_SUCCESS',
+  FETCH_IDEAS_ERROR: 'FETCH_IDEAS_ERROR',
+
+  IDEA_UPDATE: 'IDEA_UPDATE',
+  IDEA_UPDATE_SUCCESS: 'IDEA_UPDATE_SUCCESS',
+  IDEA_UPDATE_ERROR: 'IDEA_UPDATE_ERROR',
+};
+
+export function addVoteToIdea(id: string, score: number) {}
+
+export const auth = {
+  sendPasswordResetEmail(email: string) {},
+  signInWithEmailAndPassword(email: string, password: string) {},
+};
+
+export function generateUserDocument() {}
+
+export async function getIdeas() {
+  return [];
 }
 
-auth.sendPasswordResetEmail = (email: String) => {
-
-}
-
-auth.signInWithEmailAndPassword = (email: String, password: String) => {
-
-}
-
-auth.createUserWithEmailAndPassword = (email: String, password: String) => {
-  return { user: { } }
-}
-
-auth.onAuthStateChanged = (fn: Function) => {
-  fn()
-}
-
-export const getUser = () => {
-
-}
-
-export async function addIdeaToUser (id: string) {
-
-}
-
-export const addVoteToUser = async (ideaUID: string) => {
-
-}
-
-export async function addVoteToIdea (id: String, amount: Number) {
-
-}
-
-export async function saveIdea (idea: { title: String, description: String }) {
-
-}
-
-export const signInWithGoogle = () => {
-
-}
-
-export const signOut = () => {
-
-}
-
-export const getIdeas = async () => {
-
-}
-
-export const generateUserDocument = async (user: { }, additionalData?: any) => {
-
-}
+export function saveIdea() {}

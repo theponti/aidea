@@ -13,13 +13,13 @@ An application to allow teammates to suggest and join forces on ideas for new pr
 
 ## Features
 As a user, I can:
-- join an organization based on my corporate email address
-- add ideas
-- edit ideas
-- upvote ideas
+-[] create an account
+-[] add ideas
+-[] edit ideas
+-[] upvote ideas
   - can only add one upvote per idea
   - cannot upvote my own ideas
-- downvote ideas
+-[] downvote ideas
   - can only add one downvote per idea
   - cannot downvote my own ideas
-- "join" an idea to signify you'd like to work with that team
+-[]"join" an idea to signify you'd like to work with that team

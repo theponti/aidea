@@ -1,26 +1,22 @@
 import { IdeasState } from 'src/interfaces/Idea'
-import { appStates } from './reducers/action-types'
 
 export interface MockUserState {
-  uid: string,
-  ideas: string[],
-  votes: string[]
+  uid: string;
+  ideas: string[];
+  votes: string[];
 }
 
-export function getMockUserState (): { authorized: boolean, user: MockUserState } {
+export function getMockUserState (): MockUserState {
   return {
-    authorized: true,
-    user: {
-      uid: 'USER_ID',
-      ideas: [],
-      votes: []
-    }
+    uid: 'USER_ID',
+    ideas: [],
+    votes: []
   }
 }
 
 export function getMockState (): IdeasState {
   return {
-    status: appStates.LOADED,
+    isLoading: true,
     ideas: [
       {
         id: '0',
