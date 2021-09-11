@@ -13,7 +13,7 @@ describe('<IdeaForm/>', () => {
   it('should call addIdea with record', async () => {
     const dispatch = jest.fn()
 
-    const { container, getByText } = render(
+    const { container } = render(
       <IdeasContext.Provider value={{ dispatch }}>
         <IdeaForm />
       </IdeasContext.Provider>
@@ -26,14 +26,14 @@ describe('<IdeaForm/>', () => {
 
     const titleInput = container.querySelector('input')
     const descriptionInput = container.querySelector('textarea')
-    const button = getByText(/submit/gi)
+    const form = container.querySelector('form')
 
     await act(async () => {
       fireEvent.input(titleInput, { target: { value: idea.title } })
       fireEvent.input(descriptionInput, {
         target: { value: idea.description }
       })
-      fireEvent.click(button)
+      fireEvent.submit(form)
     })
 
     expect(dispatch).toHaveBeenCalledWith({

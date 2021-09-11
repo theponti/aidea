@@ -7,15 +7,14 @@ import appStore from 'src/reducers/AppReducer'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 import './styles/index.css'
-// Import styles
 import './styles/tailwind.generated.css'
 import history from './utils/history'
 
 const { REACT_APP_AUTH0_CLIENT_ID, REACT_APP_AUTH0_DOMAIN } = process.env
 
-const store = createStore(appStore as any)
+const store = createStore(appStore)
 
-const onRedirectCallback = (appState: any) => {
+const onRedirectCallback = (appState) => {
   history.push(
     appState && appState.returnTo ? appState.returnTo : window.location.pathname
   )
@@ -24,8 +23,8 @@ const onRedirectCallback = (appState: any) => {
 ReactDOM.render(
   <React.StrictMode>
     <Auth0Provider
-      domain={REACT_APP_AUTH0_DOMAIN as string}
-      clientId={REACT_APP_AUTH0_CLIENT_ID as string}
+      domain={REACT_APP_AUTH0_DOMAIN}
+      clientId={REACT_APP_AUTH0_CLIENT_ID}
       onRedirectCallback={onRedirectCallback}
       redirectUri={window.location.origin}
     >

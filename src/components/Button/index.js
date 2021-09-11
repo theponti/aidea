@@ -1,12 +1,9 @@
-import React, { ButtonHTMLAttributes } from 'react'
-import styles from './Button.module.scss'
 import cx from 'classnames'
+import t from 'prop-types'
+import React from 'react'
+import styles from './Button.module.scss'
 
-interface Button extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant: string;
-}
-
-function Button ({ children, className, variant, ...props }: Button) {
+function Button ({ children, className, variant, ...props }) {
   let buttonStyle
 
   switch (variant) {
@@ -29,6 +26,12 @@ function Button ({ children, className, variant, ...props }: Button) {
       {children}
     </button>
   )
+}
+
+Button.propTypes = {
+  children: t.node,
+  className: t.string,
+  variant: t.oneOf(['success', 'danger'])
 }
 
 export default Button

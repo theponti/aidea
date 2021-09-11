@@ -1,8 +1,7 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import { act, fireEvent, render } from '@testing-library/react'
-import React, { Dispatch } from 'react'
+import React from 'react'
 import { actionTypes, addVoteToIdea } from 'src/actions'
-import { Idea } from 'src/interfaces/Idea'
 import { getMockState, getMockUserState } from 'src/mocks'
 import { IdeasContext } from 'src/providers/IdeasProvider'
 import IdeaListItem from '.'
@@ -18,12 +17,12 @@ jest.mock('src/actions', () => ({
 }))
 
 describe('<IdeaListItem/>', () => {
-  let idea: Idea
-  let user: any
-  let dispatch: Dispatch<any>
-  let ideas: Idea[]
+  let dispatch
+  let idea
+  let ideas
+  let user
 
-  const IdeasProvider: React.FC = ({ children }) => (
+  const IdeasProvider = ({ children }) => ( // eslint-disable-line
     <IdeasContext.Provider value={{ state: { ideas }, dispatch }}>
       {children}
     </IdeasContext.Provider>
@@ -31,8 +30,8 @@ describe('<IdeaListItem/>', () => {
 
   beforeEach(() => {
     ideas = getMockState().ideas
-    user = getMockUserState().user;
-    (useAuth0 as jest.Mock).mockReturnValue({ user: { votes: [] } })
+    user = getMockUserState().user
+    useAuth0.mockReturnValue({ user: { votes: [] } })
     dispatch = jest.fn()
     idea = ideas[1]
   })
@@ -75,8 +74,8 @@ describe('<IdeaListItem/>', () => {
       </IdeasProvider>
     )
 
-    const error = 'some error';
-    (addVoteToIdea as jest.Mock).mockImplementation(() => {
+    const error = 'some error'
+    addVoteToIdea.mockImplementation(() => {
       throw new Error(error)
     })
 

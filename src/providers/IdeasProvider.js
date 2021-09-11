@@ -1,26 +1,19 @@
 import t from 'prop-types'
 import React, { createContext, useReducer } from 'react'
-import { IdeasState } from 'src/interfaces/Idea'
 import AppReducer from '../reducers/AppReducer'
 
-// Initial State
-const initialState: IdeasState = {
+const initialState = {
   ideas: [],
   isLoading: true,
   error: null
 }
 
-// Context
-export const IdeasContext = createContext<{
-  state: IdeasState;
-  dispatch: React.Dispatch<any>;
-}>({
+export const IdeasContext = createContext({
   state: initialState,
   dispatch: () => null
 })
 
-// Provider
-export const IdeasProvider: React.FC = ({ children }) => {
+export const IdeasProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState)
 
   return (

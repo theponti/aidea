@@ -5,20 +5,21 @@ export const appStates = {
 }
 
 export const actionTypes = {
+  ADD_IDEAS: 'ideas/add',
   FETCH_IDEAS: 'FETCH_IDEAS',
   FETCH_IDEAS_SUCCESS: 'FETCH_IDEAS_SUCCESS',
   FETCH_IDEAS_ERROR: 'FETCH_IDEAS_ERROR',
-
+  LOADED: 'ideas/loaded',
   IDEA_UPDATE: 'IDEA_UPDATE',
   IDEA_UPDATE_SUCCESS: 'IDEA_UPDATE_SUCCESS',
   IDEA_UPDATE_ERROR: 'IDEA_UPDATE_ERROR'
 }
 
-export function addVoteToIdea (id: string, score: number) {}
+export function addVoteToIdea (id, score) {}
 
 export const auth = {
-  sendPasswordResetEmail (email: string) {},
-  signInWithEmailAndPassword (email: string, password: string) {}
+  sendPasswordResetEmail (email) {},
+  signInWithEmailAndPassword (email, password) {}
 }
 
 export function generateUserDocument () {}
