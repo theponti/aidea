@@ -1,22 +1,22 @@
-import { useAuth0 } from '@auth0/auth0-react';
-import Button from '@material-ui/core/Button';
-import classnames from 'classnames';
-import React, { useEffect } from 'react';
-import styles from './App.module.scss';
-import brain from './brain.svg';
-import Application from './containers/Application';
-import { IdeasProvider } from './providers/IdeasProvider';
+import { useAuth0 } from '@auth0/auth0-react'
+import Button from '@material-ui/core/Button'
+import classnames from 'classnames'
+import React, { useEffect } from 'react'
+import styles from './App.module.scss'
+import brain from './brain.svg'
+import Application from './containers/Application'
+import { IdeasProvider } from './providers/IdeasProvider'
 
-function App() {
-  const { loginWithRedirect } = useAuth0();
+function App () {
+  const { loginWithRedirect } = useAuth0()
   const Brain = () => (
     <img src={brain} className={styles.brain} alt="brain emoji" />
-  );
+  )
 
   useEffect(() => {
-    document.title = 'Idears';
-    return () => {};
-  }, []);
+    document.title = 'Idears'
+    return () => {}
+  }, [])
 
   return (
     <div className={styles.container}>
@@ -36,7 +36,7 @@ function App() {
         </IdeasProvider>
       </main>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

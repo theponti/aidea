@@ -43,6 +43,10 @@ function IdeaListItem ({
     }
   }
 
+  if (!user) {
+    return null
+  }
+
   const isUser = idea.user === user.uid
   const hasVoted = user.votes.indexOf(id) !== -1
 

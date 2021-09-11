@@ -1,23 +1,23 @@
-import React, { ButtonHTMLAttributes } from 'react';
-import styles from './Button.module.scss';
-import cx from 'classnames';
+import React, { ButtonHTMLAttributes } from 'react'
+import styles from './Button.module.scss'
+import cx from 'classnames'
 
 interface Button extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant: string;
 }
 
-function Button({ children, className, variant, ...props }: Button) {
-  let buttonStyle;
+function Button ({ children, className, variant, ...props }: Button) {
+  let buttonStyle
 
   switch (variant) {
     case 'success':
-      buttonStyle = styles.btnSuccess;
-      break;
+      buttonStyle = styles.btnSuccess
+      break
     case 'danger':
-      buttonStyle = styles.btnDanger;
-      break;
+      buttonStyle = styles.btnDanger
+      break
     default:
-      buttonStyle = '';
+      buttonStyle = ''
   }
 
   return (
@@ -28,7 +28,7 @@ function Button({ children, className, variant, ...props }: Button) {
     >
       {children}
     </button>
-  );
+  )
 }
 
-export default Button;
+export default Button
