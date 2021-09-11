@@ -1,25 +1,25 @@
-import React, { useContext } from 'react';
-import { useForm } from 'react-hook-form';
-import { actionTypes, saveIdea } from 'src/actions';
-import Button from 'src/components/Button';
-import FormGroup from 'src/components/FormGroup';
-import { IdeasContext } from 'src/providers/IdeasProvider';
-import styles from './IdeaForm.module.scss';
+import React, { useContext } from 'react'
+import { useForm } from 'react-hook-form'
+import { actionTypes, saveIdea } from 'src/actions'
+import Button from 'src/components/Button'
+import FormGroup from 'src/components/FormGroup'
+import { IdeasContext } from 'src/providers/IdeasProvider'
+import styles from './IdeaForm.module.scss'
 
-export default function IdeaForm() {
-  const { register, handleSubmit, reset } = useForm();
-  const { dispatch } = useContext(IdeasContext);
+export default function IdeaForm () {
+  const { register, handleSubmit, reset } = useForm()
+  const { dispatch } = useContext(IdeasContext)
 
-  async function onSubmit(idea) {
+  async function onSubmit (idea) {
     // Dispatch event
-    dispatch({ type: actionTypes.ADD_IDEA });
+    dispatch({ type: actionTypes.ADD_IDEA })
 
-    await saveIdea(idea);
+    await saveIdea(idea)
 
-    dispatch({ type: actionTypes.LOADED });
+    dispatch({ type: actionTypes.LOADED })
 
     // Clear values from form
-    reset();
+    reset()
   }
 
   return (
@@ -48,5 +48,5 @@ export default function IdeaForm() {
         </Button>
       </FormGroup>
     </form>
-  );
+  )
 }
