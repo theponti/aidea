@@ -7,5 +7,5 @@ import '@testing-library/jest-dom/extend-expect'
 import 'mutationobserver-shim'
 import React from 'react'
 
-jest.mock('@auth0/auth0-react');
-(withAuthenticationRequired as jest.Mock).mockReturnValue(React.createElement('div'))
+jest.mock('@auth0/auth0-react')
+withAuthenticationRequired.mockReturnValue(React.createElement('div'))

@@ -4,34 +4,27 @@ import React, { useContext, useState } from 'react'
 import { actionTypes, addVoteToIdea } from 'src/actions'
 import Button from 'src/components/Button'
 import ListItem from 'src/components/ListItem'
-import { Idea } from 'src/interfaces/Idea'
 import { IdeasContext } from 'src/providers/IdeasProvider'
 import styles from './IdeaListItem.module.scss'
 
-interface IdeaListItemProps {
-  idea: Idea;
-}
-
 IdeaListItem.propTypes = {
-  ideas: t.arrayOf(
-    t.shape({
-      _id: t.string,
-      title: t.string,
-      description: t.string,
-      upvotes: t.number,
-      downvotes: t.number
-    })
-  )
+  idea: t.shape({
+    id: t.string.isRequired,
+    title: t.string.isRequired,
+    description: t.string.isRequired,
+    upvotes: t.number.isRequired,
+    downvotes: t.number.isRequired
+  })
 }
 
 function IdeaListItem ({
   idea: { id, title, description, upvotes, downvotes, ...idea }
-}: IdeaListItemProps) {
+}) {
   const { dispatch } = useContext(IdeasContext)
   const { user } = useAuth0()
   const [error, setError] = useState(null)
 
-  async function voteOnIdea (_id: string, score: number) {
+  async function voteOnIdea (_id, score) {
     dispatch({ type: actionTypes.IDEA_UPDATE })
 
     try {

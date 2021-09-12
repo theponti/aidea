@@ -1,20 +1,9 @@
-import { actionTypes as actions } from 'src/actions'
-import { IdeasState } from 'src/interfaces/Idea'
-
-const initialState = {
-  ideas: [],
-  isLoading: true
-}
-
-interface AppReducerAction {
-  type: String;
-  payload: any;
-}
+import { actionTypes as actions } from '../actions'
 
 const AppReducer = (
-  state: IdeasState = initialState,
-  action: AppReducerAction
-): IdeasState => {
+  state,
+  action
+) => {
   switch (action.type) {
     case actions.FETCH_IDEAS:
       return { ...state, isLoading: true, error: null }

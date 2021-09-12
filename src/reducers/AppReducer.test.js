@@ -1,10 +1,10 @@
-import { actionTypes } from 'src/actions'
-import { getMockState } from 'src/mocks'
+import { actionTypes } from '../actions'
+import { getMockState } from '../mocks'
 import reducer from './AppReducer'
 
 describe('AppReducer', () => {
-  let idea: any
-  let state: any
+  let idea
+  let state
 
   beforeEach(() => {
     idea = { title: 'some idea', description: 'some other idea' }

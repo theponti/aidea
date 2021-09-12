@@ -4,10 +4,9 @@ import ReactDOM from 'react-dom'
 import { Provider as ReduxProvider } from 'react-redux'
 import { createStore } from 'redux'
 import appStore from 'src/reducers/AppReducer'
-import App from './App'
+import App from './components/App'
 import * as serviceWorker from './serviceWorker'
 import './styles/index.css'
-import './styles/tailwind.generated.css'
 import history from './utils/history'
 
 const { REACT_APP_AUTH0_CLIENT_ID, REACT_APP_AUTH0_DOMAIN } = process.env
@@ -26,7 +25,7 @@ ReactDOM.render(
       domain={REACT_APP_AUTH0_DOMAIN}
       clientId={REACT_APP_AUTH0_CLIENT_ID}
       onRedirectCallback={onRedirectCallback}
-      redirectUri={window.location.origin}
+      redirectUri={`${window.location.origin}/callback`}
     >
       <ReduxProvider store={store}>
         <App />

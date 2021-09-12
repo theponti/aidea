@@ -1,12 +1,4 @@
-import { IdeasState } from 'src/interfaces/Idea'
-
-export interface MockUserState {
-  uid: string;
-  ideas: string[];
-  votes: string[];
-}
-
-export function getMockUserState (): MockUserState {
+export function getMockUserState () {
   return {
     uid: 'USER_ID',
     ideas: [],
@@ -14,7 +6,7 @@ export function getMockUserState (): MockUserState {
   }
 }
 
-export function getMockState (): IdeasState {
+export function getMockState () {
   return {
     isLoading: true,
     ideas: [

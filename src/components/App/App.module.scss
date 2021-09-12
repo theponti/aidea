@@ -1,27 +1,18 @@
-@mixin bodyContainer {
-  max-width: 90%;
-
-  @media (min-width: 700px) {
-    width: 700px;
-  }
-}
-
 $header-font-size: 3rem;
 
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .header {
-  @include bodyContainer;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   margin-bottom: 2rem;
   margin-top: 1rem;
   font-size: $header-font-size;
-  
+  margin: 8px 16px;
+
   h1 {
     display: flex;
     align-items: center;
@@ -31,9 +22,15 @@ $header-font-size: 3rem;
 .brain {
   display: flex;
   align-items: center;
-  height: 4.5rem;
+  height: 50px;
+}
+
+.loginButton {
+  max-height: 50px;
 }
 
 .main {
-  @include bodyContainer;
+  @media (min-width: 700px) {
+    width: 700px;
+  }
 }
