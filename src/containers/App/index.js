@@ -2,9 +2,9 @@ import { useAuth0 } from '@auth0/auth0-react'
 import Button from '@material-ui/core/Button'
 import classnames from 'classnames'
 import React, { useEffect } from 'react'
-import Application from '../../containers/Application'
 import { IdeasProvider } from '../../providers/IdeasProvider'
 import styles from './App.module.scss'
+import Application from './components/Application'
 import brain from './components/brain.svg'
 
 function App () {
