@@ -1,6 +1,6 @@
 # 🧠 Aidea 🧠
 
-An application to allow teammates to suggest and join forces on ideas for new projects within an organization.
+An application to allow people to suggest and join forces on ideas for new projects within an organization.
 
 ## Stack
 - **React**
