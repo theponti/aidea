@@ -25,7 +25,7 @@ ReactDOM.render(
       domain={REACT_APP_AUTH0_DOMAIN}
       clientId={REACT_APP_AUTH0_CLIENT_ID}
       onRedirectCallback={onRedirectCallback}
-      redirectUri={`${window.location.origin}/callback`}
+      redirectUri={window.location.origin}
     >
       <ReduxProvider store={store}>
         <App />
