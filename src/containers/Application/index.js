@@ -26,7 +26,7 @@ function Application () {
     <Router>
       <Home default path="/" />
       <ProfilePage path="profile" />
-      <Ideas path="/ideas" />
+      <Ideas path="ideas" />
     </Router>
   )
 }

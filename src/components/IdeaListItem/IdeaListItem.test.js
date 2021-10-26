@@ -8,12 +8,7 @@ import IdeaListItem from '.'
 
 jest.mock('src/actions', () => ({
   addVoteToIdea: jest.fn(),
-  appStates: {
-    LOADING: 'LOADING'
-  },
-  actionTypes: {
-    IDEA_UPDATE: 'IDEA_UPDATE'
-  }
+  actionTypes: {}
 }))
 
 describe('<IdeaListItem/>', () => {

@@ -1,53 +1,16 @@
-import React, { useCallback, useContext, useState } from 'react'
-import { actionTypes, saveIdea } from 'src/actions'
+import React, { useContext } from 'react'
 import Button from 'src/components/Button'
 import FormGroup from 'src/components/FormGroup'
 import { IdeasContext } from 'src/providers/IdeasProvider'
+import { useAddIdea } from './components/useAddIdea'
 import styles from './IdeaForm.module.scss'
 
-const useForm = function () {
-  const [description, setDescription] = useState('')
-  const [title, setTitle] = useState('')
-
-  const onDescriptionChange = useCallback(e => setDescription(e.target.value), [])
-  const onTitleChange = useCallback(e => setTitle(e.target.value), [])
-
-  const reset = useCallback(
-    () => {
-      setDescription('')
-      setTitle('')
-    },
-    []
-  )
-
-  const handleSubmit = useCallback(
-    submitFn => {
-      submitFn({ title, description })
-    },
-    [description, title]
-  )
-
-  return { description, handleSubmit, onDescriptionChange, onTitleChange, reset, title }
-}
-
 export default function IdeaForm () {
-  const { description, handleSubmit, onDescriptionChange, onTitleChange, reset, title } = useForm()
   const { dispatch } = useContext(IdeasContext)
-
-  async function onSubmit (idea) {
-    // Dispatch event
-    dispatch({ type: actionTypes.ADD_IDEA })
-
-    await saveIdea(idea)
-
-    dispatch({ type: actionTypes.LOADED })
-
-    // Clear values from form
-    reset()
-  }
-
+  const { description, onSubmit, onDescriptionChange, onTitleChange, title } = useAddIdea({ dispatch })
+  
   return (
-    <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
+    <form className={styles.container} onSubmit={onSubmit}>
       <FormGroup>
         <input
           name="title"

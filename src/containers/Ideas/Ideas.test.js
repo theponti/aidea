@@ -9,12 +9,7 @@ import Ideas from '.'
 
 jest.mock('src/actions', () => ({
   getIdeas: jest.fn(),
-  appStates: {
-    LOADING: 'LOADING'
-  },
-  actionTypes: {
-
-  }
+  actionTypes: {}
 }))
 
 describe('<Ideas/>', () => {
