@@ -1,14 +1,14 @@
-import React from 'react';
-import IdeaForm from '../../containers/IdeaForm';
-import IdeasList from '../../containers/Ideas';
+import React from "react";
+import IdeaForm from "./components/IdeaForm";
+import IdeasList from "./components/IdeasList";
 
-function Ideas () {
+function Ideas() {
   return (
     <>
       <IdeaForm />
       <IdeasList />
     </>
-  )
+  );
 }
 
 export default Ideas;

@@ -1,51 +1,51 @@
-import { actionTypes } from '../actions'
-import { getMockState } from '../mocks'
-import reducer from './AppReducer'
+import { actionTypes } from "../actions";
+import { getMockState } from "../mocks";
+import reducer from "./AppReducer";
 
-describe('AppReducer', () => {
-  let idea
-  let state
+describe("AppReducer", () => {
+  let idea;
+  let state;
 
   beforeEach(() => {
-    idea = { title: 'some idea', description: 'some other idea' }
-    state = getMockState()
-  })
+    idea = { title: "some idea", description: "some other idea" };
+    state = getMockState();
+  });
 
   afterEach(() => {
-    idea = null
-    state = null
-    jest.resetAllMocks()
-  })
+    idea = null;
+    state = null;
+    jest.resetAllMocks();
+  });
 
-  it('should set state to loading when IDEA_UPDATE', () => {
+  it("should set state to loading when IDEA_UPDATE", () => {
     const newState = reducer(state, {
       type: actionTypes.IDEA_UPDATE,
-      payload: idea
-    })
-    expect(newState).toEqual({ ...state, isLoading: true })
-  })
+      payload: idea,
+    });
+    expect(newState).toEqual({ ...state, isLoading: true });
+  });
 
-  it('should remove error and set state LOADED when IDEA_UPDATE_SUCCESS', () => {
+  it("should remove error and set state LOADED when IDEA_UPDATE_SUCCESS", () => {
     const newState = reducer(
-      { ...state, error: 'foo bar' },
-      { type: actionTypes.IDEA_UPDATE_SUCCESS, payload: 'foo bar' }
-    )
+      { ...state, error: "foo bar" },
+      { type: actionTypes.IDEA_UPDATE_SUCCESS, payload: "foo bar" }
+    );
     expect(newState).toEqual({
       ...state,
       isLoading: false,
-      error: null
-    })
-  })
+      error: null,
+    });
+  });
 
-  it('should add error when IDEA_UPDATE_ERROR', () => {
+  it("should add error when IDEA_UPDATE_ERROR", () => {
     const newState = reducer(state, {
       type: actionTypes.IDEA_UPDATE_ERROR,
-      payload: 'foo bar'
-    })
+      payload: "foo bar",
+    });
     expect(newState).toEqual({
       ...state,
       isLoading: false,
-      error: 'foo bar'
-    })
-  })
-})
+      error: "foo bar",
+    });
+  });
+});

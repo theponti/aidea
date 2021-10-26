@@ -1,31 +1,31 @@
-export function getMockUserState () {
+export function getMockUserState() {
   return {
-    uid: 'USER_ID',
+    uid: "USER_ID",
     ideas: [],
-    votes: []
-  }
+    votes: [],
+  };
 }
 
-export function getMockState () {
+export function getMockState() {
   return {
     isLoading: true,
     ideas: [
       {
-        id: '0',
-        title: 'Some idea',
-        description: 'Some description',
+        id: "0",
+        title: "Some idea",
+        description: "Some description",
         upvotes: 0,
         downvotes: 5,
-        user: 'USER_ID'
+        user: "USER_ID",
       },
       {
-        id: '1',
-        title: 'Some another idea',
-        description: 'Some another description',
+        id: "1",
+        title: "Some another idea",
+        description: "Some another description",
         upvotes: 5,
         downvotes: 7,
-        user: 'OTHER_USER_ID'
-      }
-    ]
-  }
+        user: "OTHER_USER_ID",
+      },
+    ],
+  };
 }

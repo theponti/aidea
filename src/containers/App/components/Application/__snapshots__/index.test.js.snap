@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[` should render error 1`] = `
-<p>
-  error
-</p>
-`;

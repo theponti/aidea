@@ -1,14 +1,15 @@
-import React, { useContext } from 'react'
-import Button from 'src/components/Button'
-import FormGroup from 'src/components/FormGroup'
-import { IdeasContext } from 'src/providers/IdeasProvider'
-import { useAddIdea } from './components/useAddIdea'
-import styles from './IdeaForm.module.scss'
+import React, { useContext } from "react";
+import Button from "src/components/Button";
+import FormGroup from "src/components/FormGroup";
+import { IdeasContext } from "src/providers/IdeasProvider";
+import { useAddIdea } from "./components/useAddIdea";
+import styles from "./IdeaForm.module.scss";
 
-export default function IdeaForm () {
-  const { dispatch } = useContext(IdeasContext)
-  const { description, onSubmit, onDescriptionChange, onTitleChange, title } = useAddIdea({ dispatch })
-  
+export default function IdeaForm() {
+  const { dispatch } = useContext(IdeasContext);
+  const { description, onSubmit, onDescriptionChange, onTitleChange, title } =
+    useAddIdea({ dispatch });
+
   return (
     <form className={styles.container} onSubmit={onSubmit}>
       <FormGroup>
@@ -37,5 +38,5 @@ export default function IdeaForm () {
         </Button>
       </FormGroup>
     </form>
-  )
+  );
 }

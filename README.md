@@ -3,6 +3,7 @@
 An application to allow people to suggest and join forces on ideas for new projects within an organization.
 
 ## Stack
+
 - **React**
 - **API**
 - **Storage**
@@ -12,7 +13,9 @@ An application to allow people to suggest and join forces on ideas for new proje
 - **GitHub Actions** for CI and CD
 
 ## Features
+
 As a user, I can:
+
 - [ ] create an account
 - [ ] add ideas
 - [ ] edit ideas

@@ -1,4 +1,4 @@
-@import "../../styles/colors.module.scss";
+@import "src/styles/colors.module.scss";
 
 .title {
   font-weight: 600;
@@ -12,7 +12,7 @@
 .votes {
   margin-top: 1rem;
   font-size: 0.9rem;
-  color: black
+  color: black;
 }
 
 .btnContainer {
