@@ -1,11 +1,11 @@
+import Button from "@aidea/components/Button";
+import FormGroup from "@aidea/components/FormGroup";
+import { IdeasContext } from "@aidea/providers/IdeasProvider";
 import React, { useContext } from "react";
-import Button from "src/components/Button";
-import FormGroup from "src/components/FormGroup";
-import { IdeasContext } from "src/providers/IdeasProvider";
 import { useAddIdea } from "./components/useAddIdea";
 import styles from "./IdeaForm.module.scss";
 
-export default function IdeaForm() {
+function IdeaForm() {
   const { dispatch } = useContext(IdeasContext);
   const { description, onSubmit, onDescriptionChange, onTitleChange, title } =
     useAddIdea({ dispatch });
@@ -40,3 +40,5 @@ export default function IdeaForm() {
     </form>
   );
 }
+
+export default IdeaForm;

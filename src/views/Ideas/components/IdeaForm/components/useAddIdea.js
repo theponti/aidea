@@ -1,5 +1,5 @@
+import { actionTypes, saveIdea } from "@aidea/actions";
 import { useCallback, useState } from "react";
-import { actionTypes, saveIdea } from "src/actions";
 
 export function useAddIdea({ dispatch }) {
   const [description, setDescription] = useState("");

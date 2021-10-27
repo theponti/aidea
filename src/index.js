@@ -1,9 +1,9 @@
+import appStore from "@aidea/reducers/AppReducer";
 import { Auth0Provider } from "@auth0/auth0-react";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider as ReduxProvider } from "react-redux";
 import { createStore } from "redux";
-import appStore from "src/reducers/AppReducer";
 import App from "./containers/App";
 import * as serviceWorker from "./serviceWorker";
 import "./styles/index.css";

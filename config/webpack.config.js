@@ -333,6 +333,7 @@ module.exports = function (webpackEnv) {
           "scheduler/tracing": "scheduler/tracing-profiling",
         }),
         src: path.resolve(__dirname, "../src"),
+        "@aidea": path.resolve(__dirname, "../src"),
         ...(modules.webpackAliases || {}),
       },
       plugins: [

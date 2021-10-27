@@ -1,7 +1,7 @@
+import { actionTypes, saveIdea } from "@aidea/actions";
+import { IdeasContext } from "@aidea/providers/IdeasProvider";
 import { act, fireEvent, render } from "@testing-library/react";
 import React from "react";
-import { actionTypes, saveIdea } from "src/actions";
-import { IdeasContext } from "src/providers/IdeasProvider";
 import IdeaForm from ".";
 
 jest.mock("src/actions", () => ({

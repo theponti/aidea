@@ -1,13 +1,13 @@
+import { actionTypes, getIdeas } from "@aidea/actions";
+import { getMockState, getMockUserState } from "@aidea/mocks";
+import { IdeasContext } from "@aidea/providers/IdeasProvider";
 import { useAuth0 } from "@auth0/auth0-react";
 import { render } from "@testing-library/react";
 import React from "react";
 import { act } from "react-dom/test-utils";
-import { actionTypes, getIdeas } from "src/actions";
-import { getMockState, getMockUserState } from "src/mocks";
-import { IdeasContext } from "src/providers/IdeasProvider";
 import Ideas from ".";
 
-jest.mock("src/actions", () => ({
+jest.mock("@aidea/actions", () => ({
   getIdeas: jest.fn(),
   actionTypes: {},
 }));

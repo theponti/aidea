@@ -1,6 +1,6 @@
+import { actionTypes, getIdeas } from "@aidea/actions";
+import { IdeasContext } from "@aidea/providers/IdeasProvider";
 import { useContext, useEffect } from "react";
-import { actionTypes, getIdeas } from "src/actions";
-import { IdeasContext } from "src/providers/IdeasProvider";
 
 export default function useIdeas() {
   const { state, dispatch } = useContext(IdeasContext);

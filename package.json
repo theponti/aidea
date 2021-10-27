@@ -92,8 +92,9 @@
     "eslint-config-react": "^1.1.7",
     "eslint-config-react-app": "^6.0.0",
     "eslint-config-standard": "^16.0.3",
+    "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-flowtype": "^5.2.0",
-    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-jest": "^24.1.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-node": "^11.1.0",
@@ -165,7 +166,8 @@
     "moduleNameMapper": {
       "^react-native$": "react-native-web",
       "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
-      "^src/(.*)$": "<rootDir>/src/$1"
+      "^src/(.*)$": "<rootDir>/src/$1",
+      "^@aidea/(.*)$": "<rootDir>/src/$1"
     },
     "moduleFileExtensions": [
       "web.js",
@@ -193,10 +195,12 @@
   "eslintConfig": {
     "extends": [
       "eslint:recommended",
+      "plugin:import/recommended",
       "plugin:react/recommended",
       "plugin:prettier/recommended"
     ],
     "plugins": [
+      "import",
       "react"
     ],
     "parserOptions": {
@@ -207,9 +211,27 @@
       "sourceType": "module"
     },
     "env": {
+      "node": true,
       "browser": true,
       "es2021": true,
       "jest": true
+    },
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "moduleDirectory": [
+            "node_modules"
+          ]
+        },
+        "alias": {
+          "map": [
+            [
+              "@aidea",
+              "./src/"
+            ]
+          ]
+        }
+      }
     }
   }
 }
