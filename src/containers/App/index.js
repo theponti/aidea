@@ -1,4 +1,4 @@
-import { IdeasProvider } from "@aidea/providers/IdeasProvider";
+import { IdeasProvider } from "@aidea/services/ideas/ideas.provider";
 import Home from "@aidea/views/Home";
 import Ideas from "@aidea/views/Ideas";
 import ProfilePage from "@aidea/views/ProfilePage";

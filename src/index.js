@@ -1,4 +1,4 @@
-import appStore from "@aidea/reducers/AppReducer";
+import { ideasReducer } from "@aidea/services/ideas/ideas.ducks";
 import { Auth0Provider } from "@auth0/auth0-react";
 import React from "react";
 import ReactDOM from "react-dom";
@@ -11,7 +11,7 @@ import history from "./utils/history";
 
 const { REACT_APP_AUTH0_CLIENT_ID, REACT_APP_AUTH0_DOMAIN } = process.env;
 
-const store = createStore(appStore);
+const store = createStore(ideasReducer);
 
 const onRedirectCallback = (appState) => {
   history.push(

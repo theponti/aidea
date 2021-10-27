@@ -1,25 +1,14 @@
-import { actionTypes, addVoteToIdea } from "@aidea/actions";
 import Button from "@aidea/components/Button";
 import ListItem from "@aidea/components/ListItem";
-import { IdeasContext } from "@aidea/providers/IdeasProvider";
+import { actionTypes, addVoteToIdea } from "@aidea/services/ideas/ideas.ducks";
+import { IdeasContext } from "@aidea/services/ideas/ideas.provider";
 import { useAuth0 } from "@auth0/auth0-react";
 import t from "prop-types";
 import React, { useContext, useState } from "react";
 import styles from "./IdeaListItem.module.scss";
 
-IdeaListItem.propTypes = {
-  idea: t.shape({
-    id: t.string.isRequired,
-    title: t.string.isRequired,
-    description: t.string.isRequired,
-    upvotes: t.number.isRequired,
-    downvotes: t.number.isRequired,
-  }),
-};
-
-function IdeaListItem({
-  idea: { id, title, description, upvotes, downvotes, ...idea },
-}) {
+function IdeaListItem({ idea }) {
+  const { id, title, description, upvotes, downvotes } = idea;
   const { dispatch } = useContext(IdeasContext);
   const { user } = useAuth0();
   const [error, setError] = useState(null);
@@ -77,5 +66,16 @@ function IdeaListItem({
     </ListItem>
   );
 }
+
+IdeaListItem.propTypes = {
+  idea: t.shape({
+    description: t.string.isRequired,
+    downvotes: t.number.isRequired,
+    id: t.string.isRequired,
+    title: t.string.isRequired,
+    upvotes: t.number.isRequired,
+    user: t.string.isRequired,
+  }),
+};
 
 export default IdeaListItem;

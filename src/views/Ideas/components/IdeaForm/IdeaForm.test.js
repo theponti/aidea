@@ -1,10 +1,10 @@
-import { actionTypes, saveIdea } from "@aidea/actions";
-import { IdeasContext } from "@aidea/providers/IdeasProvider";
+import { actionTypes, saveIdea } from "@aidea/services/ideas/ideas.ducks";
+import { IdeasContext } from "@aidea/services/ideas/ideas.provider";
 import { act, fireEvent, render } from "@testing-library/react";
 import React from "react";
 import IdeaForm from ".";
 
-jest.mock("src/actions", () => ({
+jest.mock("@aidea/services/ideas/ideas.ducks", () => ({
   saveIdea: jest.fn(),
   actionTypes: {},
 }));

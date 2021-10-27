@@ -1,6 +1,6 @@
 import t from "prop-types";
 import React, { createContext, useReducer } from "react";
-import AppReducer from "../reducers/AppReducer";
+import { ideasReducer } from "./ideas.ducks";
 
 const initialState = {
   ideas: [],
@@ -14,7 +14,7 @@ export const IdeasContext = createContext({
 });
 
 export const IdeasProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(AppReducer, initialState);
+  const [state, dispatch] = useReducer(ideasReducer, initialState);
 
   return (
     <IdeasContext.Provider value={{ state, dispatch }}>

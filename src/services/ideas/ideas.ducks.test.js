@@ -1,6 +1,5 @@
-import { actionTypes } from "../actions";
-import { getMockState } from "../mocks";
-import reducer from "./AppReducer";
+import { getMockState } from "../../mocks";
+import { actionTypes, ideasReducer } from "./ideas.ducks";
 
 describe("AppReducer", () => {
   let idea;
@@ -18,7 +17,7 @@ describe("AppReducer", () => {
   });
 
   it("should set state to loading when IDEA_UPDATE", () => {
-    const newState = reducer(state, {
+    const newState = ideasReducer(state, {
       type: actionTypes.IDEA_UPDATE,
       payload: idea,
     });
@@ -26,7 +25,7 @@ describe("AppReducer", () => {
   });
 
   it("should remove error and set state LOADED when IDEA_UPDATE_SUCCESS", () => {
-    const newState = reducer(
+    const newState = ideasReducer(
       { ...state, error: "foo bar" },
       { type: actionTypes.IDEA_UPDATE_SUCCESS, payload: "foo bar" }
     );
@@ -38,7 +37,7 @@ describe("AppReducer", () => {
   });
 
   it("should add error when IDEA_UPDATE_ERROR", () => {
-    const newState = reducer(state, {
+    const newState = ideasReducer(state, {
       type: actionTypes.IDEA_UPDATE_ERROR,
       payload: "foo bar",
     });

@@ -1,6 +1,6 @@
 import Button from "@aidea/components/Button";
 import FormGroup from "@aidea/components/FormGroup";
-import { IdeasContext } from "@aidea/providers/IdeasProvider";
+import { IdeasContext } from "@aidea/services/ideas/ideas.provider";
 import React, { useContext } from "react";
 import { useAddIdea } from "./components/useAddIdea";
 import styles from "./IdeaForm.module.scss";
