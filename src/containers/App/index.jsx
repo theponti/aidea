@@ -15,6 +15,9 @@ import Header from "./components/Header";
 const { APP_NAME } = constants;
 
 function App() {
+  // Used for debugging
+  // const [isLoading, setIsLoading] = useState(true);
+  // const { error } = useAuth0();
   const { isLoading, error } = useAuth0();
 
   useEffect(() => {

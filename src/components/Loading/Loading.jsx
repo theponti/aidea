@@ -6,8 +6,8 @@ import styles from "./Loading.module.scss";
 function Loading() {
   return (
     <div className={styles.loading}>
-      <Brain size={64} />
-      <h3>Loading...</h3>
+      <Brain size={164} />
+      <h3 className={styles.loadingText}>Loading...</h3>
       <LinearProgress className={styles.linearProgress} />
     </div>
   );
