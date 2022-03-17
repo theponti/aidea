@@ -22,8 +22,7 @@ export function useAddIdea({ dispatch }) {
 
       try {
         const idea = await saveIdea({ description, title });
-        console.log({ description, title });
-        dispatch({ type: actionTypes.ADD_IDEA_SUCCESS, idea });
+        dispatch({ type: actionTypes.ADD_IDEA_SUCCESS, payload: idea });
         reset(); // Clear values from form
       } catch (e) {
         dispatch({ type: actionTypes.ADD_IDEA_ERROR });

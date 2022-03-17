@@ -1,4 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
+import ThumbUp from "@mui/icons-material/ThumbUpAltRounded";
 import t from "prop-types";
 import React, { useContext, useState } from "react";
 import Button from "src/components/Button";
@@ -30,16 +31,13 @@ function IdeaListItem({ idea }) {
   }
 
   const isUser = idea.user === user.uid;
-  const hasVoted = user.votes.indexOf(id) !== -1;
+  const hasVoted = false;
+  // const hasVoted = user.votes.indexOf(id) !== -1;
 
   return (
     <ListItem>
       <div className={styles.title}>
         <p>{title}</p>
-        <div className={styles.votes}>
-          <p>upvotes: {upvotes}</p>
-          <p>downvotes: {downvotes}</p>
-        </div>
       </div>
       <div className={styles.description}>{description}</div>
       <div className={styles.btnContainer}>
@@ -49,8 +47,8 @@ function IdeaListItem({ idea }) {
           onClick={() => voteOnIdea(id, 1)}
           disabled={hasVoted || isUser}
         >
-          {" "}
-          Upvote{" "}
+          <ThumbUp />
+          Upvote {upvotes}
         </Button>
         <Button
           aria-label="downvote idea"
@@ -58,8 +56,7 @@ function IdeaListItem({ idea }) {
           onClick={() => voteOnIdea(id, -1)}
           disabled={hasVoted || isUser}
         >
-          {" "}
-          Downvote{" "}
+          Downvote {downvotes}
         </Button>
       </div>
       {error && <div className="error">{error}</div>}
