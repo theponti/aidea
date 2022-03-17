@@ -1,4 +1,4 @@
-import LinearProgress from "@material-ui/core/LinearProgress";
+import LinearProgress from "@mui/material/LinearProgress";
 import React from "react";
 import Brain from "../Brain";
 import styles from "./Loading.module.scss";

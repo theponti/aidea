@@ -1,5 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 import classNames from "classnames";
 import React from "react";
 import { Link } from "react-router-dom";
