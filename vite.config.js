@@ -8,7 +8,11 @@ export default defineConfig({
   plugins: [react()],
   build: {
     rollupOptions: {
-      plugins: [analyze()],
+      plugins: [
+        analyze({
+          summaryOnly: true,
+        }),
+      ],
     },
   },
   resolve: {
