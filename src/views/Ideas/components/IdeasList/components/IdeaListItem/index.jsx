@@ -1,11 +1,11 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import ThumbUp from "@mui/icons-material/ThumbUpAltRounded";
-import t from "prop-types";
 import React, { useContext, useState } from "react";
 import Button from "src/components/Button";
 import ListItem from "src/components/ListItem";
 import { actionTypes, addVoteToIdea } from "src/services/ideas/ideas.ducks";
 import { IdeasContext } from "src/services/ideas/ideas.provider";
+import { ideaPropType } from "src/utils/commonPropTypes";
 import styles from "./IdeaListItem.module.scss";
 
 function IdeaListItem({ idea }) {
@@ -65,14 +65,7 @@ function IdeaListItem({ idea }) {
 }
 
 IdeaListItem.propTypes = {
-  idea: t.shape({
-    description: t.string.isRequired,
-    downvotes: t.number.isRequired,
-    id: t.string.isRequired,
-    title: t.string.isRequired,
-    upvotes: t.number.isRequired,
-    user: t.string.isRequired,
-  }),
+  idea: ideaPropType,
 };
 
 export default IdeaListItem;

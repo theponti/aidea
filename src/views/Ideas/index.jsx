@@ -1,14 +1,14 @@
 import { withAuthenticationRequired } from "@auth0/auth0-react";
 import React, { Suspense } from "react";
 
-const IdeasScene = React.lazy(() => import("./Ideas"));
+const Scene = React.lazy(() => import("./Ideas"));
 
-function LazyIdeas() {
+function LazyScene() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <IdeasScene />
+      <Scene />
     </Suspense>
   );
 }
 
-export default withAuthenticationRequired(LazyIdeas);
+export default withAuthenticationRequired(LazyScene);

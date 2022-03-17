@@ -2,13 +2,14 @@ import React, { useContext } from "react";
 import Button from "src/components/Button";
 import FormGroup from "src/components/FormGroup";
 import { IdeasContext } from "src/services/ideas/ideas.provider";
+import { userPropType } from "src/utils/commonPropTypes";
 import { useAddIdea } from "./components/useAddIdea";
 import styles from "./IdeaForm.module.scss";
 
-function IdeaForm() {
+function IdeaForm({ user }) {
   const { dispatch } = useContext(IdeasContext);
   const { description, onSubmit, onDescriptionChange, onTitleChange, title } =
-    useAddIdea({ dispatch });
+    useAddIdea({ dispatch, user });
 
   return (
     <form className={styles.container} onSubmit={onSubmit}>
@@ -40,5 +41,9 @@ function IdeaForm() {
     </form>
   );
 }
+
+IdeaForm.propTypes = {
+  user: userPropType,
+};
 
 export default IdeaForm;
