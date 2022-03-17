@@ -3,7 +3,7 @@ import cx from "classnames";
 import React from "react";
 
 const ProfilePage = () => {
-  const { logout, user } = useAuth0();
+  const { user } = useAuth0();
   const { displayName, email, photoUrl } = user;
 
   return (
@@ -35,12 +35,6 @@ const ProfilePage = () => {
           <h3 className="italic">{email}</h3>
         </div>
       </div>
-      <button
-        className="w-full py-3 bg-red-600 mt-4 text-white"
-        onClick={logout}
-      >
-        Sign out
-      </button>
     </div>
   );
 };
