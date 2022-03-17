@@ -5,10 +5,10 @@ import Loading from "src/components/Loading";
 import constants from "src/constants";
 import * as routes from "src/constants/routes";
 import { IdeasProvider } from "src/services/ideas/ideas.provider";
+import Account from "src/views/Account";
 import Home from "src/views/Home";
 import Ideas from "src/views/Ideas";
 import NotFound from "src/views/NotFound/NotFound";
-import ProfilePage from "src/views/ProfilePage";
 import styles from "./App.module.scss";
 import Header from "./components/Header";
 
@@ -29,28 +29,28 @@ function App() {
   }
 
   return (
-    <IdeasProvider>
-      <Router>
-        <div className={styles.container}>
-          <Header />
-          <main className={styles.main}>
-            {error ? (
-              <div className={styles.error}>
-                <h2>Error</h2>
-                <p>{error.message}</p>
-              </div>
-            ) : (
+    <Router>
+      <div className={styles.container}>
+        <Header />
+        <main className={styles.main}>
+          {error ? (
+            <div className={styles.error}>
+              <h2>Error</h2>
+              <p>{error.message}</p>
+            </div>
+          ) : (
+            <IdeasProvider>
               <Switch>
-                <Route path={routes.ACCOUNT_PATH} component={ProfilePage} />
+                <Route path={routes.ACCOUNT_PATH} component={Account} />
                 <Route path={routes.IDEAS_PATH} component={Ideas} />
                 <Route exact path={routes.LANDING_PATH} component={Home} />
                 <Route path={routes.WILDCARD_PATH} component={NotFound} />
               </Switch>
-            )}
-          </main>
-        </div>
-      </Router>
-    </IdeasProvider>
+            </IdeasProvider>
+          )}
+        </main>
+      </div>
+    </Router>
   );
 }
 
