@@ -1,0 +1,8 @@
+.wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: calc(100vh - 42px - 100px);
+    width: 100%;
+}

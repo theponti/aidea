@@ -4,9 +4,11 @@ import classnames from "classnames";
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import constants from "src/constants";
+import * as routes from "src/constants/routes";
 import { IdeasProvider } from "src/services/ideas/ideas.provider";
 import Home from "src/views/Home";
 import Ideas from "src/views/Ideas";
+import NotFound from "src/views/NotFound/NotFound";
 import ProfilePage from "src/views/ProfilePage";
 import styles from "./App.module.scss";
 import Header from "./components/Header";
@@ -44,9 +46,10 @@ function App() {
               </div>
             ) : (
               <Switch>
-                <Route exact path="/" component={Home} />
-                <Route path="/profile" component={ProfilePage} />
-                <Route path="/ideas" component={Ideas} />
+                <Route path={routes.ACCOUNT_PATH} component={ProfilePage} />
+                <Route path={routes.IDEAS_PATH} component={Ideas} />
+                <Route exact path={routes.LANDING_PATH} component={Home} />
+                <Route path={routes.WILDCARD_PATH} component={NotFound} />
               </Switch>
             )}
           </main>
