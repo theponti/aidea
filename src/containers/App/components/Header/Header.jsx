@@ -1,12 +1,19 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import Button from "@mui/material/Button";
-import classNames from "classnames";
+import PropTypes from "prop-types";
 import React from "react";
 import { Link } from "react-router-dom";
 import constants from "src/constants";
 import { ACCOUNT_PATH } from "src/constants/routes";
 import Brain from "../../../../components/Brain";
 import styles from "./Header.module.scss";
+
+function MenuItem({ children }) {
+  return <div className={styles.menuItem}>{children}</div>;
+}
+
+MenuItem.propTypes = {
+  children: PropTypes.node,
+};
 
 function Header() {
   const { isAuthenticated, loginWithPopup, logout } = useAuth0();
@@ -20,35 +27,13 @@ function Header() {
         </Link>
       </div>
       <div className={styles.leftNav}>
-        <Link
-          to={ACCOUNT_PATH}
-          className={classNames(
-            styles.link,
-            "font-normal",
-            "text-slate-700",
-            "tracking-wide"
-          )}
-        >
+        <Link to={ACCOUNT_PATH} className={styles.menuItem}>
           Account
         </Link>
         {isAuthenticated ? (
-          <Button
-            variant="outlined"
-            color="primary"
-            size="small"
-            onClick={logout}
-          >
-            Log Out
-          </Button>
+          <MenuItem onClick={logout}>Log Out</MenuItem>
         ) : (
-          <Button
-            variant="outlined"
-            color="primary"
-            size="small"
-            onClick={loginWithPopup}
-          >
-            Log In
-          </Button>
+          <MenuItem onClick={loginWithPopup}>Log In</MenuItem>
         )}
       </div>
     </header>
