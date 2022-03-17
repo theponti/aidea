@@ -1,5 +1,5 @@
-import { useIdeas } from "@aidea/services/ideas/ideas.hooks";
 import React from "react";
+import { useIdeas } from "src/services/ideas/ideas.hooks";
 import IdeaListItem from "./components/IdeaListItem";
 import styles from "./IdeasList.module.scss";
 

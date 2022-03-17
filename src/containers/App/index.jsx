@@ -1,13 +1,14 @@
-import { IdeasProvider } from "@aidea/services/ideas/ideas.provider";
-import Home from "@aidea/views/Home";
-import Ideas from "@aidea/views/Ideas";
-import ProfilePage from "@aidea/views/ProfilePage";
 import { useAuth0 } from "@auth0/auth0-react";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import classnames from "classnames";
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import constants from "src/constants";
+import { IdeasProvider } from "src/services/ideas/ideas.provider";
+import Home from "src/views/Home";
+import Ideas from "src/views/Ideas";
+import ProfilePage from "src/views/ProfilePage";
 import styles from "./App.module.scss";
 import brain from "./components/brain.svg";
 

@@ -1,10 +1,10 @@
-import Button from "@aidea/components/Button";
-import ListItem from "@aidea/components/ListItem";
-import { actionTypes, addVoteToIdea } from "@aidea/services/ideas/ideas.ducks";
-import { IdeasContext } from "@aidea/services/ideas/ideas.provider";
 import { useAuth0 } from "@auth0/auth0-react";
 import t from "prop-types";
 import React, { useContext, useState } from "react";
+import Button from "src/components/Button";
+import ListItem from "src/components/ListItem";
+import { actionTypes, addVoteToIdea } from "src/services/ideas/ideas.ducks";
+import { IdeasContext } from "src/services/ideas/ideas.provider";
 import styles from "./IdeaListItem.module.scss";
 
 function IdeaListItem({ idea }) {

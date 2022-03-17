@@ -23,7 +23,7 @@ module.exports = {
         moduleDirectory: ["node_modules"],
       },
       alias: {
-        map: [["@aidea", "./src/"]],
+        map: [["src", "./src/"]],
       },
     },
   },

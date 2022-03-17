@@ -20,7 +20,7 @@ and productive developer experience while developing applications with this temp
 
 ### Import alias
 Using `/../....` to import modules above and outside a particular module can be quite
-an annoying experience. For this reason changes were made in order to allow for `@aidea/<path>`
+an annoying experience. For this reason changes were made in order to allow for `src/<path>`
 to be used when importing modules.
 
 #### Configurations

@@ -1,12 +1,12 @@
-import { getMockState, getMockUserState } from "@aidea/mocks";
-import { actionTypes, addVoteToIdea } from "@aidea/services/ideas/ideas.ducks";
-import { IdeasContext } from "@aidea/services/ideas/ideas.provider";
 import { useAuth0 } from "@auth0/auth0-react";
 import { act, fireEvent, render } from "@testing-library/react";
 import React from "react";
+import { getMockState, getMockUserState } from "src/mocks";
+import { actionTypes, addVoteToIdea } from "src/services/ideas/ideas.ducks";
+import { IdeasContext } from "src/services/ideas/ideas.provider";
 import IdeaListItem from ".";
 
-jest.mock("@aidea/services/ideas/ideas.ducks", () => ({
+jest.mock("src/services/ideas/ideas.ducks", () => ({
   addVoteToIdea: jest.fn(),
   actionTypes: {},
 }));

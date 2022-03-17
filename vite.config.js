@@ -13,7 +13,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@aidea": path.resolve(__dirname, "./src"),
+      src: path.resolve(__dirname, "./src"),
     },
   },
 });

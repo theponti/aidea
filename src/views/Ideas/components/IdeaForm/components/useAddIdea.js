@@ -1,5 +1,5 @@
-import { actionTypes, saveIdea } from "@aidea/services/ideas/ideas.ducks";
 import { useCallback, useState } from "react";
+import { actionTypes, saveIdea } from "src/services/ideas/ideas.ducks";
 
 export function useAddIdea({ dispatch }) {
   const [description, setDescription] = useState("");
