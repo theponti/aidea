@@ -1,29 +1,28 @@
-import { ideasReducer } from "@aidea/services/ideas/ideas.ducks";
 import { Auth0Provider } from "@auth0/auth0-react";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider as ReduxProvider } from "react-redux";
 import { createStore } from "redux";
 import App from "./containers/App";
+import { ideasReducer } from "./services/ideas/ideas.ducks";
 import * as serviceWorker from "./serviceWorker";
 import "./styles/index.css";
 import history from "./utils/history";
 
-const { REACT_APP_AUTH0_CLIENT_ID, REACT_APP_AUTH0_DOMAIN } = process.env;
+const { VITE_AUTH0_CLIENT_ID, VITE_AUTH0_DOMAIN } = import.meta.env;
 
 const store = createStore(ideasReducer);
 
 const onRedirectCallback = (appState) => {
-  history.push(
-    appState && appState.returnTo ? appState.returnTo : window.location.pathname
-  );
+  const returnTo = appState && appState.returnTo;
+  history.push(returnTo || window.location.pathname);
 };
 
 ReactDOM.render(
   <React.StrictMode>
     <Auth0Provider
-      domain={REACT_APP_AUTH0_DOMAIN}
-      clientId={REACT_APP_AUTH0_CLIENT_ID}
+      clientId={VITE_AUTH0_CLIENT_ID}
+      domain={VITE_AUTH0_DOMAIN}
       onRedirectCallback={onRedirectCallback}
       redirectUri={window.location.origin}
     >

@@ -3,19 +3,7 @@ import t from "prop-types";
 import cx from "classnames";
 import styles from "./Emoji.module.scss";
 
-interface EmojiProps {
-  className?: string;
-  label: string;
-  emoji: string;
-}
-
-Emoji.propTypes = {
-  className: t.string,
-  label: t.string,
-  emoji: t.string,
-};
-
-function Emoji({ className = "", label, emoji, ...props }: EmojiProps) {
+function Emoji({ className = "", label, emoji, ...props }) {
   return (
     <span
       role="img"
@@ -27,5 +15,11 @@ function Emoji({ className = "", label, emoji, ...props }: EmojiProps) {
     </span>
   );
 }
+
+Emoji.propTypes = {
+  className: t.string,
+  label: t.string,
+  emoji: t.string,
+};
 
 export default Emoji;

@@ -11,8 +11,8 @@ export const actionTypes = {
 };
 
 /**
- * @param id
- * @param score
+ * @param {string} id
+ * @param {number} score
  */
 export function addVoteToIdea() {}
 
@@ -35,14 +35,12 @@ export const ideasReducer = (state, action) => {
       };
     case actionTypes.FETCH_IDEAS_ERROR:
       return { ...state, isLoading: false, error: action.payload };
-
     case actionTypes.IDEA_UPDATE:
       return { ...state, isLoading: true };
     case actionTypes.IDEA_UPDATE_SUCCESS:
       return { ...state, isLoading: false, error: null };
     case actionTypes.IDEA_UPDATE_ERROR:
       return { ...state, isLoading: false, error: action.payload };
-
     default:
       return { ...state, isLoading: true, error: null };
   }

@@ -1,4 +1,4 @@
-name: Idears Deploy
+name: Deploy
 
 on:
   push:

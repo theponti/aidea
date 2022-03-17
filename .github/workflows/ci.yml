@@ -1,4 +1,4 @@
-name: Idears Test
+name: Test
 
 # Workflow is triggers on pushes to repository
 on:

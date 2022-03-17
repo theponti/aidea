@@ -4,6 +4,7 @@ import Ideas from "@aidea/views/Ideas";
 import ProfilePage from "@aidea/views/ProfilePage";
 import { useAuth0 } from "@auth0/auth0-react";
 import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import classnames from "classnames";
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
@@ -12,17 +13,19 @@ import brain from "./components/brain.svg";
 
 function App() {
   const { isLoading, error, loginWithRedirect } = useAuth0();
-  const Brain = () => (
-    <img src={brain} className={styles.brain} alt="brain emoji" />
-  );
 
   useEffect(() => {
-    document.title = "Idears";
+    document.title = "Aidea";
     return () => {};
   }, []);
 
   if (isLoading) {
-    return <h2 className={styles.loading}>Loading...</h2>;
+    return (
+      <div>
+        <CircularProgress size="" />
+        <h2 className={styles.loading}>Loading...</h2>
+      </div>
+    );
   }
 
   if (error) {
@@ -39,10 +42,10 @@ function App() {
       <Router>
         <div className={styles.container}>
           <header className={styles.header}>
-            <Brain />
+            <img alt="brain emoji" className={styles.brain} src={brain} />
             <Link to="ideas">Ideas</Link>
             <Button
-              variant="outlined"
+              variant="contained"
               color="primary"
               className={styles.loginButton}
               onClick={() => loginWithRedirect()}
