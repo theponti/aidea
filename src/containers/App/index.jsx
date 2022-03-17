@@ -1,39 +1,32 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import Button from "@material-ui/core/Button";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import LinearProgress from "@material-ui/core/LinearProgress";
 import classnames from "classnames";
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import constants from "src/constants";
 import { IdeasProvider } from "src/services/ideas/ideas.provider";
 import Home from "src/views/Home";
 import Ideas from "src/views/Ideas";
 import ProfilePage from "src/views/ProfilePage";
 import styles from "./App.module.scss";
-import brain from "./components/brain.svg";
+import Header from "./components/Header";
+import brain from "./components/Header/brain.svg";
+
+const { APP_NAME } = constants;
 
 function App() {
   const { isLoading, error, loginWithRedirect } = useAuth0();
 
   useEffect(() => {
-    document.title = "Aidea";
-    return () => {};
+    document.title = APP_NAME;
   }, []);
 
   if (isLoading) {
     return (
-      <div>
-        <CircularProgress size="" />
-        <h2 className={styles.loading}>Loading...</h2>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div>
-        <h2>Error</h2>
-        <p>{error.message}</p>
+      <div className={styles.loading}>
+        <img alt="brain emoji" className={styles.brain} src={brain} />
+        <h3>Loading...</h3>
+        <LinearProgress className={styles.linearProgress} />
       </div>
     );
   }
@@ -42,24 +35,20 @@ function App() {
     <IdeasProvider>
       <Router>
         <div className={styles.container}>
-          <header className={styles.header}>
-            <img alt="brain emoji" className={styles.brain} src={brain} />
-            <Link to="ideas">Ideas</Link>
-            <Button
-              variant="contained"
-              color="primary"
-              className={styles.loginButton}
-              onClick={() => loginWithRedirect()}
-            >
-              Log In
-            </Button>
-          </header>
+          <Header login={loginWithRedirect} />
           <main className={classnames(styles.main, "mt-8")}>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/profile" component={ProfilePage} />
-              <Route path="/ideas" component={Ideas} />
-            </Switch>
+            {error ? (
+              <div className={styles.error}>
+                <h2>Error</h2>
+                <p>{error.message}</p>
+              </div>
+            ) : (
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route path="/profile" component={ProfilePage} />
+                <Route path="/ideas" component={Ideas} />
+              </Switch>
+            )}
           </main>
         </div>
       </Router>

@@ -4,7 +4,7 @@ import Header from "./Header";
 
 describe("<Header/>", () => {
   it("should render component", () => {
-    const { container } = render(<Header>Expense Tracker</Header>);
+    const { container } = render(<Header login={() => {}} />);
     expect(container).toMatchSnapshot();
   });
 });
