@@ -2,6 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Brain from "src/components/Brain";
+import Button from "src/components/Button";
 import constants from "src/constants";
 import { ACCOUNT_PATH } from "src/constants/routes";
 import styles from "./Header.module.scss";
@@ -34,7 +35,7 @@ function Header() {
         {isAuthenticated ? (
           <MenuItem onClick={logout}>Log Out</MenuItem>
         ) : (
-          <MenuItem onClick={loginWithPopup}>Log In</MenuItem>
+          <Button onClick={loginWithPopup}>Log In</Button>
         )}
       </div>
     </header>

@@ -3,11 +3,11 @@
 exports[`<Header/> > should render authenticated header 1`] = `
 <div>
   <header
-    class="_header_29su1_1"
+    class="_header_ozyiz_1"
   >
     <div>
       <a
-        class="_appName_29su1_10"
+        class="_appName_ozyiz_10"
         href="/ideas"
       >
         <svg
@@ -175,16 +175,16 @@ exports[`<Header/> > should render authenticated header 1`] = `
       </a>
     </div>
     <div
-      class="_leftNav_29su1_20"
+      class="_leftNav_ozyiz_20"
     >
       <a
-        class="_menuItem_29su1_25"
+        class="_menuItem_ozyiz_25"
         href="/account"
       >
         Account
       </a>
       <div
-        class="_menuItem_29su1_25"
+        class="_menuItem_ozyiz_25"
       >
         Log Out
       </div>
@@ -196,11 +196,11 @@ exports[`<Header/> > should render authenticated header 1`] = `
 exports[`<Header/> > should render unauthenticated header 1`] = `
 <div>
   <header
-    class="_header_29su1_1"
+    class="_header_ozyiz_1"
   >
     <div>
       <a
-        class="_appName_29su1_10"
+        class="_appName_ozyiz_10"
         href="/ideas"
       >
         <svg
@@ -368,13 +368,14 @@ exports[`<Header/> > should render unauthenticated header 1`] = `
       </a>
     </div>
     <div
-      class="_leftNav_29su1_20"
+      class="_leftNav_ozyiz_20"
     >
-      <div
-        class="_menuItem_29su1_25"
+      <button
+        class="_container_1pont_1"
+        data-testid="button"
       >
         Log In
-      </div>
+      </button>
     </div>
   </header>
 </div>

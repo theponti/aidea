@@ -1,7 +1,14 @@
+$white: rgb(255 255 255);
+
 .container {
   min-height: 30px;
-  border-radius: 4px;
-  padding: 0.5rem;
+  border-radius: 10px;
+  border: 0;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: 500;
+  color: rgb(255 255 255);
+  background-color: rgb(0 133 255);
 
   &:disabled {
     opacity: 0.7;
@@ -10,11 +17,11 @@
 }
 
 .btnDanger {
-  color: white;
+  color: $white;
   background-color: red;
 }
 
 .btnSuccess {
-  color: white;
+  color: $white;
   background-color: #2ea44e;
 }

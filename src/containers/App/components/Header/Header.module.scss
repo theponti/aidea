@@ -19,8 +19,8 @@
 }
 
 .leftNav {
-    @apply flex;
-    @apply place-items-center;
+    display: flex;
+    align-items: center;
 }
 
 .menuItem {
