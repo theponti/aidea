@@ -1,10 +1,9 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import PropTypes from "prop-types";
-import React from "react";
 import { Link } from "react-router-dom";
+import Brain from "src/components/Brain";
 import constants from "src/constants";
 import { ACCOUNT_PATH } from "src/constants/routes";
-import Brain from "../../../../components/Brain";
 import styles from "./Header.module.scss";
 
 function MenuItem({ children }) {
@@ -27,9 +26,11 @@ function Header() {
         </Link>
       </div>
       <div className={styles.leftNav}>
-        <Link to={ACCOUNT_PATH} className={styles.menuItem}>
-          Account
-        </Link>
+        {isAuthenticated && (
+          <Link to={ACCOUNT_PATH} className={styles.menuItem}>
+            Account
+          </Link>
+        )}
         {isAuthenticated ? (
           <MenuItem onClick={logout}>Log Out</MenuItem>
         ) : (
