@@ -1,3 +1,4 @@
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { getMockState } from "../../mocks";
 import { actionTypes, ideasReducer } from "./ideas.ducks";
 
@@ -13,7 +14,7 @@ describe("AppReducer", () => {
   afterEach(() => {
     idea = null;
     state = null;
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it("should set state to loading when IDEA_UPDATE", () => {

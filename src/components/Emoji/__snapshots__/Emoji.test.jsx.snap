@@ -1,0 +1,13 @@
+// Vitest Snapshot v1
+
+exports[`<Emoji/> > should render component 1`] = `
+<div>
+  <span
+    aria-label="sheep"
+    class="_container_11i26_1"
+    role="img"
+  >
+    🐑
+  </span>
+</div>
+`;

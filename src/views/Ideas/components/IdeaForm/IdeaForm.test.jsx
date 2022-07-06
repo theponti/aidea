@@ -1,15 +1,15 @@
 import { act, fireEvent, render } from "@testing-library/react";
-import React from "react";
 import { actionTypes, saveIdea } from "src/services/ideas/ideas.ducks";
 import { IdeasContext } from "src/services/ideas/ideas.provider";
+import { describe, expect, it, vi } from "vitest";
 import IdeaForm from ".";
 
-jest.mock("src/services/ideas/ideas.ducks", () => ({
-  saveIdea: jest.fn(),
+vi.mock("src/services/ideas/ideas.ducks", () => ({
+  saveIdea: vi.fn(),
   actionTypes: {},
 }));
 
-xdescribe("<IdeaForm/>", () => {
+describe.skip("<IdeaForm/>", () => {
   it("should call addIdea with record", async () => {
     const dispatch = jest.fn();
 

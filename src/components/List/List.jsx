@@ -1,4 +1,3 @@
-import React from "react";
 import t from "prop-types";
 
 import ListItem from "../ListItem";
@@ -11,6 +10,7 @@ List.propTypes = {
     })
   ),
 };
+
 export function List({ data }) {
   return (
     <div className={styles.container}>

@@ -1,6 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import ThumbUp from "@mui/icons-material/ThumbUpAltRounded";
-import React, { useContext, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import Button from "src/components/Button";
 import ListItem from "src/components/ListItem";
 import { actionTypes, addVoteToIdea } from "src/services/ideas/ideas.ducks";
@@ -35,32 +35,35 @@ function IdeaListItem({ idea }) {
   // const hasVoted = user.votes.indexOf(id) !== -1;
 
   return (
-    <ListItem>
-      <div className={styles.title}>
-        <p>{title}</p>
-      </div>
-      <div className={styles.description}>{description}</div>
-      <div className={styles.btnContainer}>
-        <Button
-          aria-label="upvote idea"
-          variant="success"
-          onClick={() => voteOnIdea(id, 1)}
-          disabled={hasVoted || isUser}
-        >
-          <ThumbUp />
-          Upvote {upvotes}
-        </Button>
-        <Button
-          aria-label="downvote idea"
-          variant="danger"
-          onClick={() => voteOnIdea(id, -1)}
-          disabled={hasVoted || isUser}
-        >
-          Downvote {downvotes}
-        </Button>
-      </div>
-      {error && <div className="error">{error}</div>}
-    </ListItem>
+    <Fragment>
+      <h1>Cats</h1>
+      <ListItem>
+        <div className={styles.title}>
+          <p>{title}</p>
+        </div>
+        <div className={styles.description}>{description}</div>
+        <div className={styles.btnContainer}>
+          <Button
+            aria-label="upvote idea"
+            variant="success"
+            onClick={() => voteOnIdea(id, 1)}
+            disabled={hasVoted || isUser}
+          >
+            <ThumbUp />
+            Upvote {upvotes}
+          </Button>
+          <Button
+            aria-label="downvote idea"
+            variant="danger"
+            onClick={() => voteOnIdea(id, -1)}
+            disabled={hasVoted || isUser}
+          >
+            Downvote {downvotes}
+          </Button>
+        </div>
+        {error && <div className="error">{error}</div>}
+      </ListItem>
+    </Fragment>
   );
 }
 

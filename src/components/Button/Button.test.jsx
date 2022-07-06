@@ -1,5 +1,5 @@
-import React from "react";
 import { render } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 import Button from ".";
 
 describe("<Button/>", () => {
@@ -9,12 +9,12 @@ describe("<Button/>", () => {
   });
 
   it("should render a success button", () => {
-    const { getByTestId } = render(<Button variant="success" />);
-    expect(getByTestId("button").classList).toContain("btnSuccess");
+    const { container } = render(<Button variant="success" />);
+    expect(container).toMatchSnapshot();
   });
 
   it("should render a danger button", () => {
-    const { getByTestId } = render(<Button variant="danger" />);
-    expect(getByTestId("button").classList).toContain("btnDanger");
+    const { container } = render(<Button variant="danger" />);
+    expect(container).toMatchSnapshot();
   });
 });

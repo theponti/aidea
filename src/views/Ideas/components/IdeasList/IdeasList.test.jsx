@@ -1,19 +1,19 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { render } from "@testing-library/react";
-import React from "react";
 import { act } from "react-dom/test-utils";
 import { getMockState, getMockUserState } from "src/mocks";
 import { actionTypes, getIdeas } from "src/services/ideas/ideas.ducks";
 import { IdeasContext } from "src/services/ideas/ideas.provider";
+import { describe, it, vi } from 'vitest';
 import Ideas from ".";
 
-jest.mock("src/services/ideas/ideas.ducks", () => ({
-  getIdeas: jest.fn(),
+vi.mock("src/services/ideas/ideas.ducks", () => ({
+  getIdeas: vi.fn(),
   actionTypes: {},
 }));
 
-describe("<IdeasList/>", () => {
-  xit("should render ideas", async () => {
+describe.skip("<IdeasList/>", () => {
+  it("should render ideas", async () => {
     const state = getMockState();
     const dispatch = jest.fn();
 

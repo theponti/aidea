@@ -1,0 +1,26 @@
+// Vitest Snapshot v1
+
+exports[`<Button/> > should render a danger button 1`] = `
+<div>
+  <button
+    class="_container_tophr_1 _btnDanger_tophr_11"
+    data-testid="button"
+  />
+</div>
+`;
+
+exports[`<Button/> > should render a success button 1`] = `
+<div>
+  <button
+    class="_container_tophr_1 _btnSuccess_tophr_16"
+    data-testid="button"
+  />
+</div>
+`;
+
+exports[`<Button/> > should render component 1`] = `
+<button
+  class="_container_tophr_1"
+  data-testid="button"
+/>
+`;

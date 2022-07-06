@@ -1,0 +1,7 @@
+// Vitest Snapshot v1
+
+exports[`<List/> > should render component 1`] = `
+<div>
+  <div />
+</div>
+`;
