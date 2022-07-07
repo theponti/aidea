@@ -1,6 +1,32 @@
-import { useContext, useEffect } from "react";
-import { actionTypes, getIdeas } from "src/services/ideas/ideas.ducks";
+import { useContext, useEffect, useState } from "react";
+import {
+  actionTypes,
+  getIdeas,
+  voteOnIdea
+} from "src/services/ideas/ideas.ducks";
 import { IdeasContext } from "src/services/ideas/ideas.provider";
+
+export function useVoteOnIdea() {
+  const { dispatch } = useContext(IdeasContext);
+  const [error, setError] = useState(null);
+
+  async function vote(_id, score) {
+    dispatch({ type: actionTypes.IDEA_UPDATE });
+
+    try {
+      await voteOnIdea(_id, score);
+      dispatch({ type: actionTypes.IDEA_UPDATE_SUCCESS });
+    } catch (err) {
+      setError(err.message);
+      dispatch({ type: actionTypes.IDEA_UPDATE_ERROR, payload: err.message });
+    }
+  }
+
+  return {
+    error,
+    vote,
+  };
+}
 
 export function useIdeas() {
   const { state, dispatch } = useContext(IdeasContext);

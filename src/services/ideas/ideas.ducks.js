@@ -16,7 +16,7 @@ const ideas = [];
  * @param {string} id
  * @param {number} score
  */
-export async function addVoteToIdea() {}
+export async function voteOnIdea() {}
 
 export async function getIdeas() {
   return ideas;

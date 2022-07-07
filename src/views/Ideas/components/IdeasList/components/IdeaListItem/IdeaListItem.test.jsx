@@ -1,26 +1,29 @@
 import { act, fireEvent, render } from "@testing-library/react";
 import { getMockState, getMockUserState } from "src/mocks";
-import { actionTypes, addVoteToIdea } from "src/services/ideas/ideas.ducks";
 import { IdeasContext } from "src/services/ideas/ideas.provider";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import IdeaListItem from ".";
 
-// vi.mock("@auth0/auth0-react");
+let vote = vi.fn();
 
-vi.mock("src/services/ideas/ideas.ducks", () => ({
-  addVoteToIdea: vi.fn(),
-  actionTypes: {},
+vi.mock("@auth0/auth0-react", () => ({
+  useAuth0: () => ({ user: { votes: [] } }),
 }));
 
-describe.skip("<IdeaListItem/>", () => {
+vi.mock("src/services/ideas/ideas.hooks", () => ({
+  useVoteOnIdea: vi.fn(() => ({
+    vote,
+  })),
+}));
+
+describe("<IdeaListItem/>", () => {
   let dispatch;
   let idea;
   let ideas;
   let user;
 
-  const IdeasProvider = (
-    { children } // eslint-disable-line
-  ) => (
+  // eslint-disable-next-line
+  const IdeasProvider = ({ children }) => (
     <IdeasContext.Provider value={{ state: { ideas }, dispatch }}>
       {children}
     </IdeasContext.Provider>
@@ -29,12 +32,12 @@ describe.skip("<IdeaListItem/>", () => {
   beforeEach(() => {
     ideas = getMockState().ideas;
     user = getMockUserState().user;
-    // useAuth0.mockReturnValue({ user: { votes: [] } });
     dispatch = vi.fn();
     idea = ideas[1];
+    vi.clearAllMocks();
   });
 
-  it("should upvote idea", async () => {
+  it.skip("should upvote idea", async () => {
     const { container, getByLabelText } = render(
       <IdeasProvider>
         <IdeaListItem idea={idea} />
@@ -44,29 +47,27 @@ describe.skip("<IdeaListItem/>", () => {
     await act(async () => {
       fireEvent.click(upvoteButton);
     });
-    expect(dispatch).toBeCalledWith({ type: actionTypes.IDEA_UPDATE });
-    expect(addVoteToIdea).toHaveBeenCalledWith("1", 1);
-    expect(dispatch).toBeCalledWith({ type: actionTypes.IDEA_UPDATE_SUCCESS });
+
+    expect(vote).toHaveBeenCalledWith("1", 1);
     expect(container).toMatchSnapshot();
   });
 
   it("should downvote idea", async () => {
-    const { getByLabelText } = render(
+    const { getAllByLabelText } = render(
       <IdeasProvider>
         <IdeaListItem idea={idea} />
       </IdeasProvider>
     );
 
+    const downvoteButton = getAllByLabelText(/downvote/i)[0];
     await act(async () => {
-      fireEvent.click(getByLabelText(/downvote/i));
+      fireEvent.click(downvoteButton);
     });
 
-    expect(dispatch).toBeCalledWith({ type: actionTypes.IDEA_UPDATE });
-    expect(addVoteToIdea).toHaveBeenCalledWith("1", -1);
-    expect(dispatch).toBeCalledWith({ type: actionTypes.IDEA_UPDATE_SUCCESS });
+    expect(vote).toHaveBeenCalledWith("1", -1);
   });
 
-  it("should catch error", async () => {
+  it.skip("should catch error", async () => {
     const { getByLabelText, getByText } = render(
       <IdeasProvider>
         <IdeaListItem idea={idea} />
@@ -74,7 +75,7 @@ describe.skip("<IdeaListItem/>", () => {
     );
 
     const error = "some error";
-    addVoteToIdea.mockImplementation(() => {
+    vote.mockImplementation(() => {
       throw new Error(error);
     });
 
@@ -82,12 +83,7 @@ describe.skip("<IdeaListItem/>", () => {
       fireEvent.click(getByLabelText(/downvote/i));
     });
 
-    expect(dispatch).toBeCalledWith({ type: actionTypes.IDEA_UPDATE });
-    expect(addVoteToIdea).toHaveBeenCalledWith("1", -1);
-    expect(dispatch).toBeCalledWith({
-      type: actionTypes.IDEA_UPDATE_ERROR,
-      payload: error,
-    });
+    expect(vote).toHaveBeenCalledWith("1", -1);
     expect(getByText(error)).toBeInTheDocument();
   });
 
