@@ -4,13 +4,11 @@ An application to allow people to suggest and join forces on ideas for new proje
 
 ## Stack
 
-- **React**
-- **API**
-- **Storage**
-- **Hosting**
-- **Authentication**
-- **Jest** for testing
-- **GitHub Actions** for CI and CD
+**UI Framework:**  React  
+**Hosting:** Vercel  
+**Authentication**  Auth0  
+**Testing:** Vitest  
+**CI/CD:** GitHub Actions
 
 ## Configuration
 
@@ -19,12 +17,11 @@ After this, other modifications where made in order to provide for a more enjoya
 and productive developer experience while developing applications with this template:
 
 ### Import alias
-Using `/../....` to import modules above and outside a particular module can be quite
-an annoying experience. For this reason changes were made in order to allow for `src/<path>`
-to be used when importing modules.
+Using relative paths (ex: `/../....`) is cumbersome.   
+
+For this reason, we can import `src`-relative modules like `src/<path>` (ex: `src/components/Button`).
 
 #### Configurations
+- `.eslintrc.js`
 - `jsconfig.json`
-- `config/webpack.config.js`
-- `eslint` config in package.json
-- `jest` config in package.json
+- `vite.config.js`
