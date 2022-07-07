@@ -1,5 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
+import styled from "@emotion/styled";
 import PropTypes from "prop-types";
+import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import Brain from "src/components/Brain";
 import Button from "src/components/Button";
@@ -15,6 +17,11 @@ MenuItem.propTypes = {
   children: PropTypes.node,
 };
 
+const GetStartedButton = styled(Button)`
+  padding: 12px 16px;
+  background-color: black;
+`;
+
 function Header() {
   const { isAuthenticated, loginWithPopup, logout } = useAuth0();
 
@@ -27,21 +34,24 @@ function Header() {
         </Link>
       </div>
       <div className={styles.leftNav}>
-        {isAuthenticated && (
-          <Link to={ACCOUNT_PATH} className={styles.menuItem}>
-            Account
-          </Link>
-        )}
         {isAuthenticated ? (
-          <MenuItem onClick={logout}>Log Out</MenuItem>
+          <Fragment>
+            <Link to={ACCOUNT_PATH} className={styles.menuItem}>
+              Account
+            </Link>
+            <MenuItem onClick={logout}>Log Out</MenuItem>
+          </Fragment>
         ) : (
-          <Button onClick={loginWithPopup}>Log In</Button>
+          <Fragment>
+            <MenuItem onClick={loginWithPopup}>Log In</MenuItem>
+            <GetStartedButton onClick={loginWithPopup}>
+              Get Started
+            </GetStartedButton>
+          </Fragment>
         )}
       </div>
     </header>
   );
 }
-
-Header.propTypes = {};
 
 export default Header;

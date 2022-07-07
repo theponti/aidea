@@ -3,11 +3,11 @@
 exports[`<Header/> > should render authenticated header 1`] = `
 <div>
   <header
-    class="_header_ozyiz_1"
+    class="_header_1qsem_1"
   >
     <div>
       <a
-        class="_appName_ozyiz_10"
+        class="_appName_1qsem_9"
         href="/ideas"
       >
         <svg
@@ -175,16 +175,16 @@ exports[`<Header/> > should render authenticated header 1`] = `
       </a>
     </div>
     <div
-      class="_leftNav_ozyiz_20"
+      class="_leftNav_1qsem_22"
     >
       <a
-        class="_menuItem_ozyiz_25"
+        class="_menuItem_1qsem_27"
         href="/account"
       >
         Account
       </a>
       <div
-        class="_menuItem_ozyiz_25"
+        class="_menuItem_1qsem_27"
       >
         Log Out
       </div>
@@ -196,11 +196,11 @@ exports[`<Header/> > should render authenticated header 1`] = `
 exports[`<Header/> > should render unauthenticated header 1`] = `
 <div>
   <header
-    class="_header_ozyiz_1"
+    class="_header_1qsem_1"
   >
     <div>
       <a
-        class="_appName_ozyiz_10"
+        class="_appName_1qsem_9"
         href="/ideas"
       >
         <svg
@@ -368,13 +368,18 @@ exports[`<Header/> > should render unauthenticated header 1`] = `
       </a>
     </div>
     <div
-      class="_leftNav_ozyiz_20"
+      class="_leftNav_1qsem_22"
     >
-      <button
-        class="_container_1pont_1"
-        data-testid="button"
+      <div
+        class="_menuItem_1qsem_27"
       >
         Log In
+      </div>
+      <button
+        class="_container_1pont_1 css-rduvsv"
+        data-testid="button"
+      >
+        Get Started
       </button>
     </div>
   </header>
