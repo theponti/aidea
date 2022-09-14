@@ -14,7 +14,7 @@
     "@auth0/auth0-react": "^1.1.0",
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
-    "@mui/icons-material": "^5.5.1",
+    "@mui/icons-material": "^5.10.2",
     "@mui/material": "^5.5.1",
     "classnames": "^2.2.6",
     "history": "^5.0.0",
