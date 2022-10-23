@@ -16,13 +16,9 @@
   },
   "git.enableCommitSigning": true,
   "javascript.format.enable": false,
-  "stylelint.validate": ["css"],
+  "stylelint.validate": [
+    "css"
+  ],
   "typescript.disableAutomaticTypeAcquisition": true,
   "typescript.tsdk": "node_modules/typescript/lib",
-  "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
 }

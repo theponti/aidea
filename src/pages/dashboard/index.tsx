@@ -1,7 +1,7 @@
 import type { GetServerSidePropsContext, NextPage } from "next";
+import { getServerSideProtectedProps } from "src/utils";
 
 import PageWrap from "../../components/PageWrap";
-import { getServerAuthSession } from "../../server/common/get-server-auth-session";
 
 const Dashboard: NextPage = () => {
   return (
@@ -16,23 +16,9 @@ const Dashboard: NextPage = () => {
 };
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
-  const session = await getServerAuthSession(ctx);
+  const { props } = await getServerSideProtectedProps(ctx);
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/",
-        // Use `false` to prevent browser caching
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {
-      session,
-    },
-  };
+  return { props };
 }
 
 export default Dashboard;
