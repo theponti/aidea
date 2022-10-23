@@ -18,7 +18,7 @@ export default defineConfig({
   //   baseUrl: "http://localhost:4173/",
   //   specPattern: "cypress/e2e/**/*.{js,jsx,ts,tsx}",
   // },
-  projectId: "vy8idg",
+  projectId: "3n5c3n",
   component: {
     devServer: {
       framework: "next",
