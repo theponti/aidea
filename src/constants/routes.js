@@ -1,9 +1,0 @@
-export const LANDING_PATH = "/";
-export const SIGN_UP = "/signup";
-export const SIGN_IN = "/signin";
-export const HOME = "/home";
-export const ADMIN = "/admin";
-export const PASSWORD_FORGET = "/pw-forget";
-export const ACCOUNT_PATH = "/account";
-export const IDEAS_PATH = "/ideas";
-export const WILDCARD_PATH = "*";

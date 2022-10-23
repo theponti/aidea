@@ -1,0 +1,27 @@
+# Extensions
+*.css
+*.html
+*.scss
+*.snap
+*.sql
+*.svg
+*.toml
+*.webp
+*.yaml
+*.yml
+*.json
+
+# Directories
+public/**
+.github/**
+.husky/**
+
+# Files
+.cz.json
+.eslintcache
+.eslintignore
+postcss.config.js
+tailwind.config.js
+index.html
+LICENSE
+README.md

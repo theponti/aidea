@@ -1,35 +1,48 @@
 module.exports = {
-  extends: ["eslint:recommended", "plugin:react/recommended", "prettier"],
-  plugins: ["react", "prettier"],
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: 12,
-    sourceType: "module",
-  },
   env: {
-    node: true,
     browser: true,
     es2021: true,
-    jest: true,
+    node: true,
   },
-  settings: {
-    react: {
-      version: "detect",
-    },
-    "import/resolver": {
-      node: {
-        moduleDirectory: ["node_modules"],
-      },
-      alias: {
-        map: [["src", "./src/"]],
-      },
-    },
-  },
+  plugins: ["@typescript-eslint", "unused-imports"],
+  extends: [
+    "eslint:recommended",
+    "next",
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+  ],
   rules: {
-    "require-jsdoc": 0,
-    "react/react-in-jsx-scope": 0,
-    "prettier/prettier": "error",
+    "no-unused-vars": "off",
+    "no-console": "warn",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/quotes": "off",
+    "react/no-unescaped-entities": "off",
+
+    //#region  //*=========== React ===========
+    "react/display-name": "off",
+    "react/jsx-curly-brace-presence": [
+      "warn",
+      { props: "never", children: "never" },
+    ],
+    //#endregion  //*======== React ===========
+
+    //#region  //*=========== Unused Import ===========
+    "unused-imports/no-unused-imports": "warn",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        vars: "all",
+        varsIgnorePattern: "^_",
+        args: "after-used",
+        argsIgnorePattern: "^_",
+      },
+    ],
+    //#endregion  //*======== Unused Import ===========
+  },
+  globals: {
+    React: true,
+    JSX: true,
   },
 };

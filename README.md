@@ -1,27 +1,19 @@
 # 🧠 Aidea 🧠
 
-An application to allow people to suggest and join forces on ideas for new projects within an organization.
+Enabling users to join forces to build amazing projects.
 
-## Stack
+## Features
 
-**UI Framework:**  React  
-**Hosting:** Vercel  
-**Authentication**  Auth0  
-**Testing:** Vitest  
-**CI/CD:** GitHub Actions
+- ⚡️ [NextJS](https://nextjs.org/docs/getting-started)
+- ⚛️ React 18
+- ✨ TypeScript
+- 🔐 **Auth:** [Next-Auth.js](https://next-auth.js.org)
+- 🗂 **Data:** [Prisma](https://prisma.io)
+- 📞 **API:** [tRPC v10](https://trpc.io)
+- 💅 **Styling:** [TailwindCSS](https://tailwindcss.com) & [daisyUI](https://daisyui.com/docs/install/)
+- 🧪 **Testing:** [Vitest](https://vitest.dev/)
+- [Vercel](https://vercel.com)
 
-## Configuration
+## Notes
 
-The structure of this application was built upon an *ejected* **create-react-app**.
-After this, other modifications where made in order to provide for a more enjoyable 
-and productive developer experience while developing applications with this template:
-
-### Import alias
-Using relative paths (ex: `/../....`) is cumbersome.   
-
-For this reason, we can import `src`-relative modules like `src/<path>` (ex: `src/components/Button`).
-
-#### Configurations
-- `.eslintrc.js`
-- `jsconfig.json`
-- `vite.config.js`
+This application was built with (create-ponti-app)[https://github.com/theponti/create-ponti-app]
