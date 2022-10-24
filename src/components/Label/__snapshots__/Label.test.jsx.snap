@@ -1,9 +1,0 @@
-// Vitest Snapshot v1
-
-exports[`<Label/> > should render component 1`] = `
-<div>
-  <div
-    class="_container_uh62c_1"
-  />
-</div>
-`;

@@ -1,9 +1,0 @@
-// Vitest Snapshot v1
-
-exports[`<FormGroup/> > should render component 1`] = `
-<div>
-  <div
-    class="_container_er7mq_1"
-  />
-</div>
-`;

@@ -1,0 +1,107 @@
+# Inspired by:
+# https://github.com/kentcdodds/kentcdodds.com/blob/main/.github/workflows/deployment.yml
+name: 🧐 Code Quality
+on:
+  push:
+    branches:
+      - main
+  pull_request: {}
+
+jobs:
+  analyze:
+    name: 👩🏻‍💻 CodeQL
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [javascript]
+
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: ${{ matrix.language }}
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+
+  lint:
+    name: ⬣ Lint & ʦ Typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Set up PNPM
+        uses: pnpm/action-setup@v2.2.1
+        with:
+          version: latest
+          run_install: true
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+          cache: "pnpm"
+
+      - name: 📥 Download deps
+        run: pnpm install
+
+      - name: 🔬 Lint
+        run: pnpm lint:strict
+
+      - name: 🔎 Type check
+        run: pnpm typecheck
+
+  test:
+    name: 🃏 Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Set up PNPM
+        uses: pnpm/action-setup@v2.2.1
+        with:
+          version: latest
+          run_install: true
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+          cache: "pnpm"
+
+      - name: 📥 Download deps
+        run: pnpm install
+
+      - name: 🃏 Test
+        run: pnpm test
+
+      - name: End-to-End tests
+        uses: cypress-io/github-action@v2
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+        with:
+          command: pnpm run test:e2e:ci
+          install: false
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@v3
+        with:
+          fail_ci_if_error: true

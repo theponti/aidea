@@ -4,16 +4,13 @@
 /node_modules
 /.pnp
 .pnp.js
+pnpm-lock.yaml
 
 # testing
 /coverage
-cypress/videos
-
-# database
-/prisma/db.sqlite
-/prisma/db.sqlite-journal
 
 # next.js
+.next
 /.next/
 /out/
 
@@ -23,20 +20,16 @@ cypress/videos
 # misc
 .DS_Store
 *.pem
-.eslintcache
-.stylelintcache
+manifest.json
 
 # debug
 npm-debug.log*
-.pnpm-debug.log*
 
 # local env files
-.env
-.env*.local
-!.env.example
+.env.*
 
 # vercel
 .vercel
 
-# typescript
-*.tsbuildinfo
+# changelog
+CHANGELOG.md
