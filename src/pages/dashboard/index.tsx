@@ -7,9 +7,7 @@ const Dashboard: NextPage = () => {
   return (
     <main>
       <PageWrap>
-        <h1 className="text-5xl font-extrabold leading-normal text-gray-700 md:text-[5rem]">
-          Dashboard
-        </h1>
+        <h1>Dashboard</h1>
       </PageWrap>
     </main>
   );

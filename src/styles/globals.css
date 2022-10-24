@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+h1,
+h2,
+h3 {
+  @apply text-primary;
+  @apply font-bold;
+  @apply leading-normal;
+}
+
+h1 {
+  @apply md:text-[3rem];
+}
+
+h2 {
+  @apply font-semibold;
+  @apply md:text-[2.5rem];
+}
+
+h3 {
+  @apply font-medium;
+  @apply md:text-[2.25rem];
+}
+
+p {
+  @apply font-light;
+}
+
+button.btn-ghost {
+  @apply px-0;
+  @apply hover:underline;
+  @apply hover:bg-transparent;
+}

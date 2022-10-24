@@ -10,20 +10,18 @@ import PageWrap from "../../components/PageWrap";
 const Account: NextPage = () => {
   const { data: session } = useSession();
   const pictureUrl = session?.user?.image as string;
-  const deleteUser = trpc.useMutation("auth.deleteUser")
+  const deleteUser = trpc.useMutation("auth.deleteUser");
   const onDelectAccount = useCallback(async () => {
     // Delete user
-    await deleteUser.mutateAsync()
+    await deleteUser.mutateAsync();
     // Sign user out
     signOut();
-  }, [deleteUser])
+  }, [deleteUser]);
 
   return (
     <main>
       <PageWrap>
-        <h1 className="text-5xl font-extrabold leading-normal text-gray-700 md:text-[3rem]">
-          Account
-        </h1>
+        <h1>Account</h1>
 
         <div className="card bg-neutral-focus shadow-xl md:max-w-sm">
           <div className="card-body place-items-center">
@@ -37,30 +35,38 @@ const Account: NextPage = () => {
             <p className="text-lg">{session?.user?.name}</p>
           </div>
         </div>
-        <div className="flex flex-col mb-12">
+        <div className="flex flex-col mb-12"></div>
 
-        </div>
-
-        <button className="btn" onClick={() => signOut()}>
+        <button className="btn btn-ghost" onClick={() => signOut()}>
           Log out
         </button>
 
-        <div className="divider" />
+        <div className="mt-8 divider" />
 
-        <h2 className="text-error text-xl mb-4">
-          Danger
-        </h2>
-
-        {deleteUser.error && <div className="alert alert-error shadow-lg">
-          <div>
-            <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-            <span>
-              <p>Something went wrong! {deleteUser.error.message}</p>
-            </span>
+        {deleteUser.error && (
+          <div className="alert alert-error shadow-lg">
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="stroke-current flex-shrink-0 h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span>
+                <p>Something went wrong! {deleteUser.error.message}</p>
+              </span>
+            </div>
           </div>
-        </div>}
+        )}
 
-        <button className="btn" onClick={onDelectAccount}>
+        <button className="btn btn-ghost text-error" onClick={onDelectAccount}>
           Delete account
         </button>
       </PageWrap>
