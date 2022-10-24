@@ -68,4 +68,4 @@ For the `production` URL, you can find this on the project page.
 
 ## Notes
 
-This application was built with (create-ponti-app)[https://github.com/theponti/create-ponti-app]
+This application was built with [create-ponti-app](https://github.com/theponti/create-ponti-app)
