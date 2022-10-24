@@ -1,7 +1,9 @@
 import { GetServerSidePropsContext } from "next";
 import { getServerAuthSession } from "src/server/common/get-server-auth-session";
 
-export async function getServerSideProtectedProps(ctx: GetServerSidePropsContext) {
+export async function getServerSideProtectedProps(
+  ctx: GetServerSidePropsContext
+) {
   const session = await getServerAuthSession(ctx);
 
   if (!session) {
