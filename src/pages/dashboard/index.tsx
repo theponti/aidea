@@ -1,11 +1,10 @@
 import type { GetServerSidePropsContext, NextPage } from "next";
 
+import IdeaForm from "src/components/IdeaForm";
+import IdeaListItem from "src/components/IdeaListItem";
 import PageWrap from "src/components/PageWrap";
 import { getProtectedServerSideProps } from "src/utils";
 import { trpc } from "src/utils/trpc";
-
-import IdeaForm from "./IdeaForm";
-import IdeaListItem from "./IdeaListItem";
 
 const Dashboard: NextPage = () => {
   const { data, refetch } = trpc.useQuery(["idea.getIdeas"]);
