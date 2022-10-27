@@ -5,11 +5,11 @@ import PageWrap from "../../components/PageWrap";
 
 const Dashboard: NextPage = () => {
   return (
-    <main>
-      <PageWrap>
+    <PageWrap>
+      <div className="col-start-4 col-span-6">
         <h1>Dashboard</h1>
-      </PageWrap>
-    </main>
+      </div>
+    </PageWrap>
   );
 };
 
