@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+  height: 100vh;
+}
+
 h1,
 h2,
 h3 {
@@ -12,17 +17,17 @@ h3 {
 }
 
 h1 {
-  @apply md:text-[3rem];
+  @apply text-[3rem];
 }
 
 h2 {
   @apply font-semibold;
-  @apply md:text-[2.5rem];
+  @apply text-[2.5rem];
 }
 
 h3 {
   @apply font-medium;
-  @apply md:text-[2.25rem];
+  @apply text-[2.25rem];
 }
 
 p {
