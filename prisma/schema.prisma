@@ -59,7 +59,6 @@ model VerificationToken {
 
 model Idea {
   id           String   @id @default(cuid())
-  title        String
   description  String
   userId       String
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
