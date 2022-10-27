@@ -2,7 +2,8 @@ import type { GetServerSidePropsContext, NextPage } from "next";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/future/image";
 import { useCallback } from "react";
-import { getServerSideProtectedProps } from "src/utils";
+
+import { getProtectedServerSideProps } from "src/utils";
 import { trpc } from "src/utils/trpc";
 
 import PageWrap from "../../components/PageWrap";
@@ -75,9 +76,9 @@ const Account: NextPage = () => {
 };
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
-  const { props } = await getServerSideProtectedProps(ctx);
+  const response = await getProtectedServerSideProps(ctx);
 
-  return { props };
+  return response;
 }
 
 export default Account;

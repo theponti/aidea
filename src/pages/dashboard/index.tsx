@@ -1,5 +1,5 @@
 import type { GetServerSidePropsContext, NextPage } from "next";
-import { getServerSideProtectedProps } from "src/utils";
+import { getProtectedServerSideProps } from "src/utils";
 
 import PageWrap from "../../components/PageWrap";
 
@@ -14,9 +14,9 @@ const Dashboard: NextPage = () => {
 };
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
-  const { props } = await getServerSideProtectedProps(ctx);
+  const response = await getProtectedServerSideProps(ctx);
 
-  return { props };
+  return response;
 }
 
 export default Dashboard;

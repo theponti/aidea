@@ -3,8 +3,8 @@ import * as trpc from "@trpc/server";
 import { CreateNextContextOptions } from "@trpc/server/adapters/next";
 import { Session } from "next-auth";
 
-import { prisma } from "../db/client";
 import { getServerAuthSession } from "../../server/common/get-server-auth-session";
+import { prisma } from "../db/client";
 
 type CreateContextOptions = {
   session: Session | null;
