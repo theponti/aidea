@@ -1,13 +1,28 @@
 import type { GetServerSidePropsContext, NextPage } from "next";
-import { getProtectedServerSideProps } from "src/utils";
 
-import PageWrap from "../../components/PageWrap";
+import PageWrap from "src/components/PageWrap";
+import { getProtectedServerSideProps } from "src/utils";
+import { trpc } from "src/utils/trpc";
+
+import IdeaForm from "./IdeaForm";
+import IdeaListItem from "./IdeaListItem";
 
 const Dashboard: NextPage = () => {
+  const { data, refetch } = trpc.useQuery(["idea.getIdeas"]);
+
   return (
     <PageWrap>
-      <div className="col-start-4 col-span-6">
-        <h1>Dashboard</h1>
+      <div className="col-start-1 col-span-12 md:col-start-2 md:col-span-9 lg:col-start-4 lg:col-span-6 grid">
+        <IdeaForm onCreate={refetch} />
+        <div className="divider mt-8" />
+        <div>
+          {data?.length === 0 && "your thoughts will appear here"}
+          <ul className="space-y-6">
+            {data?.map((idea) => (
+              <IdeaListItem key={idea.id} idea={idea} onDelete={refetch} />
+            ))}
+          </ul>
+        </div>
       </div>
     </PageWrap>
   );
