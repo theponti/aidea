@@ -10,13 +10,16 @@ function useIdeaForm({ onCreate }: UseIdeaFormProps) {
   const [description, setDescription] = useState("");
   const [error, setError] = useState<string | undefined>();
   const onDescriptionChange = useCallback(
-    (e: SyntheticEvent<HTMLTextAreaElement>) =>
-      setDescription(e.currentTarget.value),
+    (e: SyntheticEvent<HTMLTextAreaElement>) => {
+      setDescription(e.currentTarget.value);
+      setError(undefined);
+    },
     []
   );
 
   const createIdea = useCallback(async () => {
     try {
+      setError(undefined);
       await mutation.mutateAsync({
         description,
       });
