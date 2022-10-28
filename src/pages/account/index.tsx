@@ -1,16 +1,15 @@
-import type { GetServerSidePropsContext, NextPage } from "next";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/future/image";
-import { useCallback } from "react";
+import { useRouter } from "next/router";
+import { useCallback, useEffect } from "react";
 
 import AlertError from "src/components/AlertError";
-import { getProtectedServerSideProps } from "src/utils";
+import PageWrap from "src/components/PageWrap";
 import { trpc } from "src/utils/trpc";
 
-import PageWrap from "../../components/PageWrap";
-
-const Account: NextPage = () => {
-  const { data: session } = useSession();
+const Account = () => {
+  const router = useRouter();
+  const { data: session, status } = useSession();
   const pictureUrl = session?.user?.image as string;
   const deleteUser = trpc.useMutation("auth.deleteUser");
   const onDelectAccount = useCallback(async () => {
@@ -19,6 +18,20 @@ const Account: NextPage = () => {
     // Sign user out
     signOut();
   }, [deleteUser]);
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/");
+    }
+  }, [router, status]);
+
+  if (status === "loading") {
+    return "Loading";
+  }
+
+  if (status === "unauthenticated") {
+    return <div />;
+  }
 
   return (
     <PageWrap>
@@ -54,11 +67,5 @@ const Account: NextPage = () => {
     </PageWrap>
   );
 };
-
-export async function getServerSideProps(ctx: GetServerSidePropsContext) {
-  const response = await getProtectedServerSideProps(ctx);
-
-  return response;
-}
 
 export default Account;

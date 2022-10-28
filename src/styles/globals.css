@@ -39,3 +39,9 @@ button.btn-ghost {
   @apply hover:underline;
   @apply hover:bg-transparent;
 }
+
+nav .menu button:hover,
+nav .btn.btn-ghost {
+  @apply hover:underline;
+  @apply hover:bg-transparent;
+}

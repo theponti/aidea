@@ -1,13 +1,27 @@
-import type { GetServerSidePropsContext, NextPage } from "next";
+import type { NextPage } from "next";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 import IdeaForm from "src/components/IdeaForm";
 import IdeaListItem from "src/components/IdeaListItem";
 import PageWrap from "src/components/PageWrap";
-import { getProtectedServerSideProps } from "src/utils";
 import { trpc } from "src/utils/trpc";
 
 const Dashboard: NextPage = () => {
+  const router = useRouter();
+  const { status } = useSession();
   const { data, refetch } = trpc.useQuery(["idea.getIdeas"]);
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/");
+    }
+  }, [router, status]);
+
+  if (status === "loading") {
+    return <PageWrap>"Loading"</PageWrap>;
+  }
 
   return (
     <PageWrap>
@@ -32,11 +46,5 @@ const Dashboard: NextPage = () => {
     </PageWrap>
   );
 };
-
-export async function getServerSideProps(ctx: GetServerSidePropsContext) {
-  const response = await getProtectedServerSideProps(ctx);
-
-  return response;
-}
 
 export default Dashboard;
