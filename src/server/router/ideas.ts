@@ -7,6 +7,7 @@ export const ideaRouter = createProtectedRouter()
     async resolve({ ctx }) {
       return ctx.prisma.idea.findMany({
         where: { userId: ctx.session.user.id },
+        orderBy: { createdAt: "desc" },
       });
     },
   })
