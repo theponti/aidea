@@ -58,7 +58,7 @@ export default function IdeaForm({ onCreate }: IdeaFormProps) {
       {error && <AlertError error={error} />}
 
       <form onSubmit={onFormSubmit}>
-        <div className="form-control w-full mb-8">
+        <div className="form-control w-full mb-4">
           <label className="label hidden">
             <span className="label-text">Description</span>
           </label>
@@ -69,7 +69,9 @@ export default function IdeaForm({ onCreate }: IdeaFormProps) {
             onChange={onDescriptionChange}
           />
         </div>
-        <button className="btn btn-success float-right">Submit</button>
+        <button className="btn btn-success float-right min-w-full">
+          Submit
+        </button>
       </form>
     </>
   );
