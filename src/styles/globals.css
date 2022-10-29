@@ -40,8 +40,12 @@ button.btn-ghost {
   @apply hover:bg-transparent;
 }
 
-nav .menu button:hover,
-nav .btn.btn-ghost {
-  @apply hover:underline;
-  @apply hover:bg-transparent;
+nav {
+  .menu button:hover,
+  .btn.btn-ghost,
+  .menu :where(*:hover) {
+    @apply hover:underline;
+    @apply hover:bg-transparent;
+    @apply underline-offset-4;
+  }
 }
