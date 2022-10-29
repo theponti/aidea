@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { SyntheticEvent, useCallback, useState } from "react";
 import AlertError from "src/components/AlertError";
 import { trpc } from "src/utils/trpc";
@@ -8,6 +9,7 @@ type UseIdeaFormProps = {
 function useIdeaForm({ onCreate }: UseIdeaFormProps) {
   const mutation = trpc.useMutation("idea.createIdea");
   const [description, setDescription] = useState("");
+  const [isLoading, setIsLoading] = useState<boolean>();
   const [error, setError] = useState<string | undefined>();
   const onDescriptionChange = useCallback(
     (e: SyntheticEvent<HTMLTextAreaElement>) => {
@@ -19,10 +21,12 @@ function useIdeaForm({ onCreate }: UseIdeaFormProps) {
 
   const createIdea = useCallback(async () => {
     try {
+      setIsLoading(true);
       setError(undefined);
       await mutation.mutateAsync({
         description,
       });
+      setIsLoading(false);
       setDescription("");
       onCreate();
     } catch (err) {
@@ -33,6 +37,7 @@ function useIdeaForm({ onCreate }: UseIdeaFormProps) {
   return {
     description,
     error,
+    isLoading,
     createIdea,
     onDescriptionChange,
   };
@@ -42,9 +47,10 @@ type IdeaFormProps = {
   onCreate: () => void;
 };
 export default function IdeaForm({ onCreate }: IdeaFormProps) {
-  const { error, description, createIdea, onDescriptionChange } = useIdeaForm({
-    onCreate,
-  });
+  const { error, description, isLoading, createIdea, onDescriptionChange } =
+    useIdeaForm({
+      onCreate,
+    });
   const onFormSubmit = useCallback(
     (e: SyntheticEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -69,7 +75,12 @@ export default function IdeaForm({ onCreate }: IdeaFormProps) {
             onChange={onDescriptionChange}
           />
         </div>
-        <button className="btn btn-success float-right min-w-full">
+        <button
+          className={classNames(
+            "btn btn-success float-right min-w-full",
+            isLoading && "loading"
+          )}
+        >
           Submit
         </button>
       </form>

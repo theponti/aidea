@@ -1,4 +1,5 @@
 import { Idea } from "@prisma/client";
+import classNames from "classnames";
 import React, { useCallback } from "react";
 import Trash from "src/components/Icons/Trash";
 import { trpc } from "src/utils/trpc";
@@ -24,8 +25,14 @@ function IdeaListItem({ idea, onDelete }: IdeaListItemProps) {
         {idea.createdAt.toISOString().split("T")[0]}
       </p>
       <p className="row-start-2 col-span-12">{idea.description}</p>
-      <button className="col-start-12 flex justify-end" onClick={deleteIdea}>
-        <Trash />
+      <button
+        className={classNames(
+          "btn btn-ghost col-start-12 flex justify-end text-red-500",
+          mutation.isLoading && "loading"
+        )}
+        onClick={deleteIdea}
+      >
+        {!mutation.isLoading && <Trash />}
       </button>
     </li>
   );
