@@ -70,7 +70,7 @@ export default function IdeaForm({ onCreate }: IdeaFormProps) {
           </label>
           <textarea
             placeholder="What's happening?"
-            className="textarea w-full text-lg h-24"
+            className="textarea w-full text-lg h-24 p-2"
             value={description}
             onChange={onDescriptionChange}
           />
@@ -78,7 +78,7 @@ export default function IdeaForm({ onCreate }: IdeaFormProps) {
         {!!description.length && (
           <button
             className={classNames(
-              "btn btn-primary float-right min-w-full",
+              "btn btn-primary float-right min-w-full mb-4",
               isLoading && "loading"
             )}
           >

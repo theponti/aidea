@@ -29,12 +29,11 @@ const Dashboard: NextPage = () => {
         <div>
           <IdeaForm onCreate={refetch} />
         </div>
-        <div className="divider mt-8" />
         <div>
           {data?.length === 0 && "your thoughts will appear here"}
           <div>
             {data && data.length > 0 && (
-              <ul className="space-y-6">
+              <ul className="space-y-2">
                 {data.map((idea) => (
                   <IdeaListItem key={idea.id} idea={idea} onDelete={refetch} />
                 ))}
