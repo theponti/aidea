@@ -64,25 +64,27 @@ export default function IdeaForm({ onCreate }: IdeaFormProps) {
       {error && <AlertError error={error} />}
 
       <form onSubmit={onFormSubmit}>
-        <div className="form-control w-full mb-4">
+        <div className="form-control w-full mb-2">
           <label className="label hidden">
             <span className="label-text">Description</span>
           </label>
           <textarea
             placeholder="What's happening?"
-            className="textarea textarea-bordered w-full text-lg"
+            className="textarea w-full text-lg h-24"
             value={description}
             onChange={onDescriptionChange}
           />
         </div>
-        <button
-          className={classNames(
-            "btn btn-success float-right min-w-full",
-            isLoading && "loading"
-          )}
-        >
-          Submit
-        </button>
+        {!!description.length && (
+          <button
+            className={classNames(
+              "btn btn-primary float-right min-w-full",
+              isLoading && "loading"
+            )}
+          >
+            Submit
+          </button>
+        )}
       </form>
     </>
   );
