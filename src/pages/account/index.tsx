@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useCallback, useEffect } from "react";
 
 import AlertError from "src/components/AlertError";
+import LoadingScene from "src/components/Loading";
 import PageWrap from "src/components/PageWrap";
 import { trpc } from "src/utils/trpc";
 
@@ -25,12 +26,13 @@ const Account = () => {
     }
   }, [router, status]);
 
-  if (status === "loading") {
-    return "Loading";
-  }
-
-  if (status === "unauthenticated") {
-    return <div />;
+  switch (status) {
+    case "loading":
+      return <LoadingScene />;
+    case "unauthenticated":
+      return <div />;
+    default:
+      break;
   }
 
   return (
