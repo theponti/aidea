@@ -1,18 +1,19 @@
-import cx from "classnames";
+import classNames from "classnames";
 import { ReactNode } from "react";
 
-function PageWrap({
-  className,
-  children,
-}: {
+type PageWrapProps = {
   className?: string;
   children: ReactNode;
-}) {
+};
+function PageWrap({ className, children }: PageWrapProps) {
   return (
     <div
-      className={cx("container mx-auto flex-col pt-14 px-4", {
-        [className || ""]: className,
-      })}
+      className={classNames(
+        "pt-20 col-start-2 col-span-10 grid grid-cols-12",
+        className && {
+          [className]: className,
+        }
+      )}
     >
       {children}
     </div>

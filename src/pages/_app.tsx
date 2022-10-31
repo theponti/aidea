@@ -30,7 +30,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
       <div data-theme="luxury">
         <SessionProvider session={session}>
           <Header />
-          <Component {...pageProps} />
+          <main className="grid grid-cols-12 min-h-screen">
+            <Component {...pageProps} />
+          </main>
         </SessionProvider>
       </div>
     </>
