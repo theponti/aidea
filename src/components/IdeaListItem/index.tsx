@@ -19,9 +19,9 @@ function IdeaListItem({ idea, onDelete }: IdeaListItemProps) {
   return (
     <li
       key={idea.id}
-      className="border-y-green-600 border-b-2 pt-4 pb-2 text-primary font-mono grid grid-cols-12"
+      className="border-y-zinc-900 border-b-2 pt-4 pb-2 text-primary font-mono grid grid-cols-12"
     >
-      <p className="col-start-7 col-span-6 md:col-start-10 md:col-span-3 text-end text-green-800">
+      <p className="col-start-7 col-span-6 md:col-start-10 md:col-span-3 text-end text-zinc-500">
         {idea.createdAt.toISOString().split("T")[0]}
       </p>
       <p className="row-start-2 col-span-12">{idea.description}</p>
