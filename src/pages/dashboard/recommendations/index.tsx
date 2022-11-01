@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import DashboardNav from "src/components/DashboardNav";
 import LoadingScene from "src/components/Loading";
 
 import PageWrap from "src/components/PageWrap";
@@ -33,6 +34,7 @@ const Recommendations: NextPage = () => {
 
   return (
     <PageWrap>
+      <DashboardNav router={router} />
       <div className="col-start-1 col-span-12 md:col-start-2 md:col-span-9 lg:col-start-4 lg:col-span-6 flex flex-col">
         <div>
           <RecommendationsForm onCreate={refetch} />
