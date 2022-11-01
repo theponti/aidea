@@ -23,6 +23,8 @@ function RecommendationListItem({
   return (
     <li className="text-primary bg-zinc-900 shadow-xl font-mono flex min-w-full rounded">
       <figure className="h-[150px] w-[150px] min-w-[150px] md:h-[200px] md:w-[200px] flex justify-center overflow-x-hidden">
+        {/* To support all possible og images, we aren't using Next Image */}
+        {/* eslint-disable-next-line */}
         <img alt={title} src={image} className="max-w-none" />
       </figure>
       <div className="flex-1 flex flex-col px-4 pt-4 pb-2">
