@@ -31,7 +31,7 @@ export default function IdeaForm({ onCreate }: IdeaFormProps) {
           </label>
           <textarea
             placeholder="What's happening?"
-            className="textarea w-full text-lg max-h-24 p-2 bg-zinc-900"
+            className="textarea w-full text-lg max-h-24 p-2 bg-secondary"
             value={description}
             onChange={onDescriptionChange}
           />

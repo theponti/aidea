@@ -27,7 +27,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div data-theme="luxury">
+      <div data-theme="cupcake">
         <SessionProvider session={session}>
           <Header />
           <main className="grid grid-cols-12 min-h-screen">

@@ -31,8 +31,9 @@ export default function RecommendationsForm({
             <span className="label-text">URL</span>
           </label>
           <input
-            placeholder="enter url"
-            className="textarea w-full text-lg p-2 bg-zinc-900"
+            type="url"
+            placeholder="Paste link here"
+            className="textarea w-full text-lg p-2 border-stone-300 rounded placeholder:text-zinc-400"
             value={url}
             onChange={onUrlChange}
           />
@@ -40,7 +41,7 @@ export default function RecommendationsForm({
         {!!url.length && (
           <button
             className={classNames(
-              "btn btn-primary float-right min-w-full mb-4",
+              "btn btn-primary float-right min-w-full mb-4 rounded text-white",
               isLoading && "loading"
             )}
           >
