@@ -21,35 +21,33 @@ function RecommendationListItem({
   }, [id, mutation, onDelete]);
 
   return (
-    <li className="text-primary font-mono grid grid-cols-12">
-      <div className="col-span-12 card card-side glass shadow-xl">
-        <figure>
-          <img
-            alt={title}
-            src={image}
-            className="h-[190px] w-[200px] m-w-[200px]"
-          />
-        </figure>
-        <div className="card-body">
-          <h2 className="card-title">{title ? title : siteName}</h2>
-          <div className="card-actions justify-end items-center">
-            <div className="mr-4">
-              {title && (
-                <a className="text-xs text-blue-300" href={url}>
-                  {siteName} 🔗
-                </a>
-              )}
-            </div>
-            <button
-              className={classNames(
-                "btn btn-ghost text-red-500",
-                mutation.isLoading && "loading"
-              )}
-              onClick={deleteIdea}
-            >
-              {!mutation.isLoading && <Trash />}
-            </button>
+    <li className="text-primary bg-zinc-900 shadow-xl font-mono flex min-w-full rounded">
+      <figure className="h-[150px] w-[150px] min-w-[150px] md:h-[200px] md:w-[200px] flex justify-center overflow-x-hidden">
+        <img alt={title} src={image} className="max-w-none" />
+      </figure>
+      <div className="flex-1 flex flex-col px-4 pt-4 pb-2">
+        <h2 className="flex flex-col flex-1 md:flex-row md:items-start">
+          <span className="text-neutral-content text-lg md:text-xl">
+            {title ? title : siteName}
+          </span>
+          <div className="flex flex-1 md:justify-end">
+            {title && (
+              <a className="text-xs text-blue-300" href={url}>
+                {siteName} 🔗
+              </a>
+            )}
           </div>
+        </h2>
+        <div className="card-actions justify-end items-end">
+          <button
+            className={classNames(
+              "btn btn-ghost text-red-500",
+              mutation.isLoading && "loading"
+            )}
+            onClick={deleteIdea}
+          >
+            {!mutation.isLoading && <Trash />}
+          </button>
         </div>
       </div>
     </li>
