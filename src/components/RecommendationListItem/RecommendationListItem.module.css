@@ -1,0 +1,12 @@
+.list-item {
+  @apply text-primary
+    flex
+    flex-col
+    min-h-full
+    w-full
+    rounded
+    shadow-md
+    md:flex-row
+    md:min-w-full
+    md:h-[200px];
+}

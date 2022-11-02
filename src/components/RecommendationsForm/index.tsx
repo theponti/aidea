@@ -33,7 +33,7 @@ export default function RecommendationsForm({
           <input
             type="url"
             placeholder="Paste link here"
-            className="textarea w-full text-lg p-2 border-stone-300 rounded placeholder:text-zinc-400"
+            className="input w-full text-lg p-2 border-stone-300 rounded placeholder:text-zinc-400"
             value={url}
             onChange={onUrlChange}
           />

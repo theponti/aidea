@@ -8,7 +8,7 @@ export default function DashboardNav({ router }: { router: NextRouter }) {
     { path: "/dashboard/recommendations", text: "Recommendations" },
   ];
   return (
-    <div className="col-start-1 col-span-12 md:col-start-2 md:col-span-9 lg:col-start-4 lg:col-span-6 flex gap-4 py-4">
+    <div className="col-start-1 col-span-12 md:col-start-2 md:col-span-10 lg:col-start-3 lg:col-span-8 flex gap-4 py-4">
       {links.map((link) => (
         <Link key={link.path} href={link.path}>
           <a

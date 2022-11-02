@@ -34,7 +34,7 @@ const Dashboard: NextPage = () => {
   return (
     <PageWrap>
       <DashboardNav router={router} />
-      <div className="col-start-1 col-span-12 md:col-start-2 md:col-span-9 lg:col-start-4 lg:col-span-6 flex flex-col">
+      <div className="col-start-1 col-span-12 md:col-start-2 md:col-span-10 lg:col-start-3 lg:col-span-8 flex flex-col">
         <div>
           <IdeaForm onCreate={refetch} />
         </div>
