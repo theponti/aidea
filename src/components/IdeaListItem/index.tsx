@@ -24,7 +24,7 @@ function IdeaListItem({ idea, onDelete }: IdeaListItemProps) {
       <p className="col-start-7 col-span-6 md:col-start-10 md:col-span-3 text-end text-zinc-500">
         {idea.createdAt.toISOString().split("T")[0]}
       </p>
-      <p className="row-start-2 col-span-12 whitespace-pre">
+      <p className="row-start-2 col-span-12 whitespace-pre-wrap">
         {idea.description}
       </p>
       <button
