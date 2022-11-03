@@ -20,7 +20,6 @@ pnpm-lock.yaml
 # misc
 .DS_Store
 *.pem
-manifest.json
 
 # debug
 npm-debug.log*
