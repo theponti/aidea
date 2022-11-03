@@ -25,7 +25,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
           name="description"
           content="An application to help you manage your mind."
         />
-        <link rel="manifest" href="/manifest.webmanifest" />
+        <link rel="manifest" href="/site.webmanifest" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div data-theme="lofi">
