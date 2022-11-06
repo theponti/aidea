@@ -15,7 +15,7 @@ function RecommendationListItem({
   onDelete,
 }: RecommendationListItemProps) {
   const { id, image, title, siteName, url } = recommendation;
-  const mutation = trpc.useMutation(["idea.deleteIdea"]);
+  const mutation = trpc.useMutation(["recommendations.delete"]);
   const { isLoading } = mutation;
 
   const deleteIdea = useCallback(
@@ -35,7 +35,7 @@ function RecommendationListItem({
         <img alt={title} src={image} className="object-cover min-w-full" />
       </figure>
       <div className="flex-1 flex flex-col px-4 pt-4 pb-2 bg-white rounded-b-md md:rounded-b-none md:rounded-r-md">
-        <h2 className="flex flex-col min-w-full md:flex-row md:items-center">
+        <h2 className="flex flex-col min-w-full">
           <span className="text-primary text-lg md:text-xl md:justify-start md:flex-1">
             {title ? title : siteName}
           </span>

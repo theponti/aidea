@@ -52,7 +52,7 @@ export const recommendationsRouter = createProtectedRouter()
       }
     },
   })
-  .mutation("deleteRecommendation", {
+  .mutation("delete", {
     input: z.object({
       id: z.string(),
     }),
