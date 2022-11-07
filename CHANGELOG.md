@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/theponti/aidea/compare/v1.0.0...v1.1.0) (2022-11-07)
+
+
+### Features
+
+* add Recommendations ([#80](https://github.com/theponti/aidea/issues/80)) ([ea4e151](https://github.com/theponti/aidea/commit/ea4e151cb2e4ca954f4fe054ebafea4521fc7c45))
+
 ## 1.0.0 (2022-10-31)
 
 
