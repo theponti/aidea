@@ -3,7 +3,8 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-import PageWrap from "../components/PageWrap";
+import LoadingScene from "src/components/Loading";
+import PageWrap from "src/components/PageWrap";
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -18,13 +19,10 @@ const Home: NextPage = () => {
   return (
     <PageWrap>
       <div className="col-span-12 flex justify-center flex-col">
-        <div className="px-6 md:px-12 xl:px-6=">
-          <div className="lg:w-4/5 text-center mx-auto">
-            <h1 className="text-gray-400 font-bold text-5xl md:text-6xl xl:text-7xl">
-              let your brain <span className="text-primary">free.</span>
-            </h1>
-          </div>
-        </div>
+        <h1 className="text-gray-400 font-bold text-5xl md:text-6xl xl:text-7xl mt-24 text-center">
+          let your brain <span className="text-primary">free.</span>
+        </h1>
+        {status === "loading" && <LoadingScene />}
       </div>
     </PageWrap>
   );

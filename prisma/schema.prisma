@@ -68,11 +68,19 @@ model Idea {
 }
 
 model Recommendation {
-  id          String  @id @default(cuid())
-  image       String
-  title       String
-  description String?
-  location    String
-  userId      String
-  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id              String   @id @default(cuid())
+  image           String
+  title           String
+  description     String
+  imageHeight     String?
+  imageWidth      String?
+  locationAddress String?
+  locationLat     String?
+  locationLng     String?
+  siteName        String
+  url             String
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }

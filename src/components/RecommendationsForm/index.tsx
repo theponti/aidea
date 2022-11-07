@@ -1,23 +1,24 @@
 import classNames from "classnames";
 import { SyntheticEvent, useCallback } from "react";
 import AlertError from "src/components/AlertError";
-import useIdeaForm from "./useIdeasForm";
+import useRecommendationsForm from "./useRecommendationsForm";
 
-type IdeaFormProps = {
+type RecommendationsFormProps = {
   onCreate: () => void;
 };
-export default function IdeaForm({ onCreate }: IdeaFormProps) {
-  const { error, description, isLoading, createIdea, onDescriptionChange } =
-    useIdeaForm({
+export default function RecommendationsForm({
+  onCreate,
+}: RecommendationsFormProps) {
+  const { error, isLoading, url, createRecommendation, onUrlChange } =
+    useRecommendationsForm({
       onCreate,
     });
-
   const onFormSubmit = useCallback(
     (e: SyntheticEvent<HTMLFormElement>) => {
       e.preventDefault();
-      createIdea();
+      createRecommendation();
     },
-    [createIdea]
+    [createRecommendation]
   );
 
   return (
@@ -27,19 +28,20 @@ export default function IdeaForm({ onCreate }: IdeaFormProps) {
       <form onSubmit={onFormSubmit}>
         <div className="form-control w-full mb-2">
           <label className="label hidden">
-            <span className="label-text">Description</span>
+            <span className="label-text">URL</span>
           </label>
-          <textarea
-            placeholder="What's happening?"
-            className="textarea w-full text-lg p-2 border-stone-300 rounded placeholder:text-zinc-400"
-            value={description}
-            onChange={onDescriptionChange}
+          <input
+            type="url"
+            placeholder="Paste link here"
+            className="input w-full text-lg p-2 border-stone-300 rounded placeholder:text-zinc-400"
+            value={url}
+            onChange={onUrlChange}
           />
         </div>
-        {!!description.length && (
+        {!!url.length && (
           <button
             className={classNames(
-              "btn btn-primary float-right min-w-full mb-4",
+              "btn btn-primary float-right min-w-full mb-4 rounded text-white",
               isLoading && "loading"
             )}
           >

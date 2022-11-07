@@ -10,7 +10,7 @@ import superjson from "superjson";
 import "../styles/globals.css";
 
 import Head from "next/head";
-import Header from "../components/Header";
+import Header from "src/components/Header";
 import type { AppRouter } from "../server/router";
 
 const MyApp: AppType<{ session: Session | null }> = ({
@@ -25,9 +25,10 @@ const MyApp: AppType<{ session: Session | null }> = ({
           name="description"
           content="An application to help you manage your mind."
         />
+        <link rel="manifest" href="/site.webmanifest" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div data-theme="luxury">
+      <div data-theme="lofi">
         <SessionProvider session={session}>
           <Header />
           <main className="grid grid-cols-12 min-h-screen">
