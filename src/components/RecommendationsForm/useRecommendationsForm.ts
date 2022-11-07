@@ -24,6 +24,7 @@ export default function useRecommendationsForm({
       await mutation.mutateAsync({
         url,
       });
+      setUrl("");
       setIsLoading(false);
       onCreate();
     } catch (err) {
