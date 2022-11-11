@@ -1,12 +1,12 @@
 import type { NextPage } from "next";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import DashboardNav from "src/components/DashboardNav";
 import ListForm from "src/components/ListForm";
 import LoadingScene from "src/components/Loading";
 
-import PageWrap from "src/components/PageWrap";
 import { trpc } from "src/utils/trpc";
 
 const Lists: NextPage = () => {
@@ -30,27 +30,24 @@ const Lists: NextPage = () => {
   }
 
   return (
-    <PageWrap>
+    <>
       <DashboardNav router={router} />
-      <div className="col-start-1 col-span-12 md:col-start-2 md:col-span-10 lg:col-start-3 lg:col-span-8 flex flex-col">
-        <ListForm onCreate={refetch} />
-        <div>
-          {data?.length === 0 && "Your lists will appear here."}
-          {data && data.length > 0 && (
-            <ul className="space-y-2">
-              {data.map((list) => (
-                <li
-                  key={list.listId}
-                  // onDelete={refetch}
-                >
-                  {list.list.name}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+      <h1>Lists</h1>
+      <ListForm onCreate={refetch} />
+      <div>
+        {data?.length === 0 && "Your lists will appear here."}
+        {data && data.length > 0 && (
+          <ul className="space-y-2">
+            {data.map(({ user, ...list }) => (
+              <li key={list.listId} className="card shadow-md p-4 text-lg">
+                <Link href={`/list/${list.listId}`}>{list.list.name}</Link>
+                {user && <p className="text-sm text-gray-400">{user.email}</p>}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
-    </PageWrap>
+    </>
   );
 };
 

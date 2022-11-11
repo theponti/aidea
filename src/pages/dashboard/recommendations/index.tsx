@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import DashboardNav from "src/components/DashboardNav";
 import LoadingScene from "src/components/Loading";
 
-import PageWrap from "src/components/PageWrap";
 import RecommendationListItem from "src/components/RecommendationListItem";
 import RecommendationsForm from "src/components/RecommendationsForm";
 import { trpc } from "src/utils/trpc";
@@ -33,28 +32,24 @@ const Recommendations: NextPage = () => {
   }
 
   return (
-    <PageWrap>
+    <>
       <DashboardNav router={router} />
-      <div className="col-start-1 col-span-12 md:col-start-2 md:col-span-10 lg:col-start-3 lg:col-span-8 flex flex-col">
-        <div>
-          <RecommendationsForm onCreate={refetch} />
-        </div>
-        <div>
-          {data?.length === 0 && "your recommendations will appear here"}
-          {data && data.length > 0 && (
-            <ul className="space-y-2">
-              {data.map((recommendation) => (
-                <RecommendationListItem
-                  key={recommendation.id}
-                  recommendation={recommendation}
-                  onDelete={refetch}
-                />
-              ))}
-            </ul>
-          )}
-        </div>
+      <RecommendationsForm onCreate={refetch} />
+      <div>
+        {data?.length === 0 && "your recommendations will appear here"}
+        {data && data.length > 0 && (
+          <ul className="space-y-2">
+            {data.map((recommendation) => (
+              <RecommendationListItem
+                key={recommendation.id}
+                recommendation={recommendation}
+                onDelete={refetch}
+              />
+            ))}
+          </ul>
+        )}
       </div>
-    </PageWrap>
+    </>
   );
 };
 

@@ -5,7 +5,6 @@ import { useCallback, useEffect } from "react";
 
 import AlertError from "src/components/AlertError";
 import LoadingScene from "src/components/Loading";
-import PageWrap from "src/components/PageWrap";
 import { trpc } from "src/utils/trpc";
 
 const Account = () => {
@@ -36,7 +35,7 @@ const Account = () => {
   }
 
   return (
-    <PageWrap>
+    <>
       <div className="col-span-12">
         <h1>Account</h1>
 
@@ -67,7 +66,7 @@ const Account = () => {
           Delete account
         </button>
       </div>
-    </PageWrap>
+    </>
   );
 };
 
