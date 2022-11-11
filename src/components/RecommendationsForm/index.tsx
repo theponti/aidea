@@ -32,7 +32,7 @@ export default function RecommendationsForm({
           </label>
           <input
             type="url"
-            placeholder="Paste link here"
+            placeholder="Add bookmark url"
             className="input w-full text-lg p-2 border-stone-300 rounded placeholder:text-zinc-400"
             value={url}
             onChange={onUrlChange}

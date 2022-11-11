@@ -7,7 +7,7 @@ const LINKS = [
   { path: "/dashboard", text: "Ideas" },
   { path: "/lists", text: "Lists" },
   { path: "/lists/invites", text: "Invites" },
-  { path: "/dashboard/recommendations", text: "Recommendations" },
+  { path: "/bookmarks", text: "Bookmarks" },
 ];
 
 function DashboardNav() {
