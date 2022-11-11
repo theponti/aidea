@@ -1,9 +1,8 @@
-import { ListInvite } from "@prisma/client";
 import type { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import AlertError from "src/components/AlertError";
 import DashboardNav from "src/components/DashboardNav";
 import LoadingScene from "src/components/Loading";
@@ -19,9 +18,6 @@ const List: NextPage = () => {
     refetch,
     status: listStatus,
   } = trpc.useQuery(["lists.findById", { listId }], { enabled: false });
-  const onInviteSuccess = useCallback((invite: ListInvite) => {
-    console.log({ invite });
-  }, []);
 
   useEffect(() => {
     if (status === "unauthenticated") {
