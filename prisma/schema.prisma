@@ -150,13 +150,14 @@ model List {
 }
 
 model ListInvite {
-  id               String  @id @default(uuid())
   accepted         Boolean @default(false)
   listId           String
   list             List    @relation(fields: [listId], references: [id], onDelete: Cascade)
   invitedUserEmail String  @db.Text()
-  invitedUserId    String
-  invitedUser      User    @relation(name: "receivedListInvites", fields: [invitedUserId], references: [id], onDelete: Cascade)
+  invitedUserId    String?
+  invitedUser      User?   @relation(name: "receivedListInvites", fields: [invitedUserId], references: [id], onDelete: Cascade)
   userId           String
   user             User    @relation(name: "sentListInvites", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([listId, invitedUserEmail])
 }
