@@ -2,23 +2,20 @@ import type { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import DashboardNav from "src/components/DashboardNav";
 
-import IdeaForm from "src/components/IdeaForm";
-import IdeaListItem from "src/components/IdeaListItem";
+import DashboardNav from "src/components/DashboardNav";
+import ListInviteItem from "src/components/ListInviteItem";
 import LoadingScene from "src/components/Loading";
 import { trpc } from "src/utils/trpc";
 
-const Dashboard: NextPage = () => {
+const ListInvites: NextPage = () => {
   const router = useRouter();
   const { status } = useSession();
   const {
     data,
     refetch,
-    status: ideasStatus,
-  } = trpc.useQuery(["idea.getIdeas"], {
-    enabled: false,
-  });
+    status: invitesStatus,
+  } = trpc.useQuery(["lists.invites"], { enabled: false });
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -42,14 +39,18 @@ const Dashboard: NextPage = () => {
   return (
     <>
       <DashboardNav />
-      <IdeaForm onCreate={refetch} />
-      <div className="">
-        {ideasStatus === "loading" && <LoadingScene />}
-        {data?.length === 0 && "your thoughts will appear here"}
+      <h1>List Invites</h1>
+      <div>
+        {invitesStatus === "loading" && <LoadingScene />}
+        {data?.length === 0 && "Your invites will appear here."}
         {data && data.length > 0 && (
           <ul className="space-y-2">
-            {data.map((idea) => (
-              <IdeaListItem key={idea.id} idea={idea} onDelete={refetch} />
+            {data.map((invite) => (
+              <ListInviteItem
+                key={invite.listId}
+                invite={invite}
+                onAcceptInvite={refetch}
+              />
             ))}
           </ul>
         )}
@@ -58,4 +59,4 @@ const Dashboard: NextPage = () => {
   );
 };
 
-export default Dashboard;
+export default ListInvites;

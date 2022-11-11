@@ -11,7 +11,7 @@ import { trpc } from "src/utils/trpc";
 
 const Lists: NextPage = () => {
   const router = useRouter();
-  const { status } = useSession();
+  const { data: session, status } = useSession();
   const { data, refetch } = trpc.useQuery(["lists.get"]);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const Lists: NextPage = () => {
 
   return (
     <>
-      <DashboardNav router={router} />
+      <DashboardNav />
       <h1>Lists</h1>
       <ListForm onCreate={refetch} />
       <div>
@@ -41,7 +41,12 @@ const Lists: NextPage = () => {
             {data.map(({ user, ...list }) => (
               <li key={list.listId} className="card shadow-md p-4 text-lg">
                 <Link href={`/list/${list.listId}`}>{list.list.name}</Link>
-                {user && <p className="text-sm text-gray-400">{user.email}</p>}
+                {/*
+                  Only display list owner if the list does not belong to current user
+                */}
+                {user.email !== session.user?.email && (
+                  <p className="text-xs text-gray-400">{user.email}</p>
+                )}
               </li>
             ))}
           </ul>

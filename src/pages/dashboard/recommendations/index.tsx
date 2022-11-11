@@ -33,7 +33,7 @@ const Recommendations: NextPage = () => {
 
   return (
     <>
-      <DashboardNav router={router} />
+      <DashboardNav />
       <RecommendationsForm onCreate={refetch} />
       <div>
         {data?.length === 0 && "your recommendations will appear here"}
