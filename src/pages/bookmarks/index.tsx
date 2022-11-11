@@ -12,15 +12,20 @@ import { trpc } from "src/utils/trpc";
 const Recommendations: NextPage = () => {
   const router = useRouter();
   const { status } = useSession();
-  const { data, refetch } = trpc.useQuery([
-    "recommendations.getRecommendations",
-  ]);
+  const {
+    data,
+    refetch,
+    status: bookmarksStatus,
+  } = trpc.useQuery(["recommendations.getRecommendations"], { enabled: false });
 
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/");
     }
-  }, [router, status]);
+    if (status === "authenticated") {
+      refetch();
+    }
+  }, [refetch, router, status]);
 
   switch (status) {
     case "loading":
@@ -36,6 +41,7 @@ const Recommendations: NextPage = () => {
       <DashboardNav />
       <RecommendationsForm onCreate={refetch} />
       <div>
+        {bookmarksStatus === "loading" && <LoadingScene />}
         {data?.length === 0 && "your recommendations will appear here"}
         {data && data.length > 0 && (
           <ul className="space-y-2">
