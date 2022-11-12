@@ -13,7 +13,7 @@ const LINKS = [
 function DashboardNav() {
   const router = useRouter();
   return (
-    <div className="col-start-1 col-span-12 md:col-start-2 md:col-span-10 lg:col-start-3 lg:col-span-8 flex gap-4 py-4">
+    <div className="flex gap-4 py-4">
       {LINKS.map((link) => (
         <Link key={link.path} href={link.path}>
           <a

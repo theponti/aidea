@@ -40,10 +40,12 @@ const Dashboard: NextPage = () => {
   }
 
   return (
-    <>
+    <div className="flex flex-col">
       <DashboardNav />
-      <IdeaForm onCreate={refetch} />
-      <div className="">
+      <div>
+        <IdeaForm onCreate={refetch} />
+      </div>
+      <div>
         {ideasStatus === "loading" && <LoadingScene />}
         {data?.length === 0 && "your thoughts will appear here"}
         {data && data.length > 0 && (
@@ -54,7 +56,7 @@ const Dashboard: NextPage = () => {
           </ul>
         )}
       </div>
-    </>
+    </div>
   );
 };
 
