@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import AlertError from "src/components/AlertError";
 import DashboardNav from "src/components/DashboardNav";
+import UserPlus from "src/components/Icons/UserPlus";
 import LoadingScene from "src/components/Loading";
 
 import { trpc } from "src/utils/trpc";
@@ -46,19 +47,17 @@ const List: NextPage = () => {
       {!data && <AlertError error="We could not find this list." />}
       {data && (
         <div className="flex flex-col px-0.5">
-          <h1 className="flex justify-between items-center">
+          <h1 className="mb-1">
             {data && data.list.name}
-            {/*
-              Only the owner of the list can invite other users
-             */}
-            {data.list.userId === session.user?.id && (
-              <Link href={`/list/${data.list.id}/invites`}>
-                <span className="text-blue-500 text-lg hover:cursor-pointer">
-                  ➕ Invite friends to list
-                </span>
-              </Link>
-            )}
+            {/* Only the owner of the list can invite other users */}
           </h1>
+          {data.list.userId === session.user?.id && (
+            <Link href={`/list/${data.list.id}/invites`}>
+              <span className="text-blue-500 text-lg hover:cursor-pointer">
+                <UserPlus stroke="black" className="w-6 h-6" />
+              </span>
+            </Link>
+          )}
         </div>
       )}
     </>
