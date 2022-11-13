@@ -11,7 +11,7 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     if (status === "authenticated") {
-      router.push("/dashboard");
+      router.push("/ideas");
     }
   }, [router, status]);
 

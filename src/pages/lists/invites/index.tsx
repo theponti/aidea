@@ -42,7 +42,7 @@ const ListInvites: NextPage = () => {
       <h1>List Invites</h1>
       <div>
         {invitesStatus === "loading" && <LoadingScene />}
-        {data?.length === 0 && "Your invites will appear here."}
+        {data?.length === 0 && "Invites others have sent you will appear here."}
         {data && data.length > 0 && (
           <ul className="space-y-2">
             {data.map((invite) => (

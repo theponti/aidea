@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import React from "react";
 
 const LINKS = [
-  { path: "/dashboard", text: "Ideas" },
+  { path: "/ideas", text: "Ideas" },
   { path: "/lists", text: "Lists" },
   { path: "/lists/invites", text: "Invites" },
   { path: "/bookmarks", text: "Bookmarks" },
