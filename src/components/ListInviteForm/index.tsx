@@ -25,17 +25,17 @@ export default function ListInviteForm({
   );
 
   return (
-    <>
+    <div className="mb-8">
       {error && <AlertError error={error} />}
 
       <form onSubmit={onFormSubmit}>
-        <div className="form-control w-full mb-2">
-          <label className="label hidden">
-            <span className="label-text">Name of list</span>
+        <div className="form-control w-full">
+          <label className="label">
+            <span className="label-text">Invite someone new</span>
           </label>
           <input
             type="text"
-            placeholder="Enter email to invite."
+            placeholder="What's their email?"
             className="input w-full text-lg p-2 border-stone-300 rounded placeholder:text-zinc-400"
             value={email}
             onChange={onEmailChange}
@@ -52,6 +52,6 @@ export default function ListInviteForm({
           </button>
         )}
       </form>
-    </>
+    </div>
   );
 }
