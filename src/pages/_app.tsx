@@ -31,7 +31,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
       <div data-theme="lofi">
         <SessionProvider session={session}>
           <Header />
-          <main className="grid grid-cols-12 min-h-screen pt-20">
+          <main className="container mx-auto md:max-w-[700px] lg:max-w-[1200px] px-4">
             <div className="col-start-2 col-span-10 lg:col-start-3 lg:col-span-8 flex flex-col">
               <div className="flex-1">
                 <Component {...pageProps} />

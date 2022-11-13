@@ -4,11 +4,11 @@ import Link from "next/link";
 function Header() {
   const { status } = useSession();
   return (
-    <nav className="navbar bg-base-100 absolute top-0 left-0">
-      <div className="container mx-auto">
+    <nav className="navbar bg-base-100 sticky top-0 left-0 px-0 drop-shadow-sm">
+      <div className="container mx-auto max-w-[1200px] px-4">
         <div className="flex-1 text-primary">
-          <span className="btn btn-ghost normal-case text-xl">
-            <Link href="/">Aidea</Link>
+          <span className="font-semibold text-2xl underline underline-offset-8">
+            <Link href="/">🧠 Aidea</Link>
           </span>
         </div>
         {status !== "loading" && (
