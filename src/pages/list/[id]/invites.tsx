@@ -66,9 +66,17 @@ const List: NextPage = () => {
       {listInvites &&
         (listInvites.length > 0 ? (
           <ul className="space-y-2">
-            {listInvites.map(({ invitedUserEmail }) => (
-              <li key={invitedUserEmail} className="card shadow-md p-4 text-lg">
+            {listInvites.map(({ accepted, invitedUserEmail }) => (
+              <li
+                key={invitedUserEmail}
+                className="card shadow-md p-4 text-lg flex flex-row justify-between"
+              >
                 <p className="text-sm text-gray-400">{invitedUserEmail}</p>
+                {accepted ? (
+                  <span className="text-sm">✅ Accepted</span>
+                ) : (
+                  <span className="text-sm">⏳ Pending</span>
+                )}
               </li>
             ))}
           </ul>
