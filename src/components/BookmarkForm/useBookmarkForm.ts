@@ -1,13 +1,11 @@
 import { SyntheticEvent, useCallback, useState } from "react";
 import { trpc } from "src/utils/trpc";
 
-type UseRecommendationsFormProps = {
+type UseBookmarkFormProps = {
   onCreate: () => void;
 };
-export default function useRecommendationsForm({
-  onCreate,
-}: UseRecommendationsFormProps) {
-  const mutation = trpc.useMutation("recommendations.createRecommendation");
+export default function useBookmarkForm({ onCreate }: UseBookmarkFormProps) {
+  const mutation = trpc.useMutation("bookmarks.create");
   const [url, setUrl] = useState("");
   const [isLoading, setIsLoading] = useState<boolean>();
   const [error, setError] = useState<string | undefined>();
@@ -17,7 +15,7 @@ export default function useRecommendationsForm({
     setError(undefined);
   }, []);
 
-  const createRecommendation = useCallback(async () => {
+  const createBookmark = useCallback(async () => {
     try {
       setIsLoading(true);
       setError(undefined);
@@ -37,7 +35,7 @@ export default function useRecommendationsForm({
     error,
     isLoading,
     url,
-    createRecommendation,
+    createBookmark,
     onUrlChange,
   };
 }

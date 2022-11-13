@@ -1,24 +1,22 @@
 import classNames from "classnames";
 import { SyntheticEvent, useCallback } from "react";
 import AlertError from "src/components/AlertError";
-import useRecommendationsForm from "./useRecommendationsForm";
+import useBookmarksForm from "./useBookmarkForm";
 
-type RecommendationsFormProps = {
+type BookmarksFormProps = {
   onCreate: () => void;
 };
-export default function RecommendationsForm({
-  onCreate,
-}: RecommendationsFormProps) {
-  const { error, isLoading, url, createRecommendation, onUrlChange } =
-    useRecommendationsForm({
+export default function BookmarksForm({ onCreate }: BookmarksFormProps) {
+  const { error, isLoading, url, createBookmark, onUrlChange } =
+    useBookmarksForm({
       onCreate,
     });
   const onFormSubmit = useCallback(
     (e: SyntheticEvent<HTMLFormElement>) => {
       e.preventDefault();
-      createRecommendation();
+      createBookmark();
     },
-    [createRecommendation]
+    [createBookmark]
   );
 
   return (

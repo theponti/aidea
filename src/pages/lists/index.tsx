@@ -12,13 +12,21 @@ import { trpc } from "src/utils/trpc";
 const Lists: NextPage = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
-  const { data, refetch } = trpc.useQuery(["lists.get"]);
+  const {
+    data,
+    refetch,
+    status: listsStatus,
+  } = trpc.useQuery(["lists.get"], { enabled: false });
 
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/");
     }
-  }, [router, status]);
+
+    if (status === "authenticated") {
+      refetch();
+    }
+  }, [refetch, router, status]);
 
   switch (status) {
     case "loading":
@@ -35,6 +43,7 @@ const Lists: NextPage = () => {
       <h1>Lists</h1>
       <ListForm onCreate={refetch} />
       <div>
+        {listsStatus === "loading" && <LoadingScene />}
         {data?.length === 0 && "Your lists will appear here."}
         {data && data.length > 0 && (
           <ul className="space-y-2">

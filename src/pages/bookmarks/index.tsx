@@ -5,8 +5,8 @@ import { useEffect } from "react";
 import DashboardNav from "src/components/DashboardNav";
 import LoadingScene from "src/components/Loading";
 
-import RecommendationListItem from "src/components/RecommendationListItem";
-import RecommendationsForm from "src/components/RecommendationsForm";
+import BookmarkForm from "src/components/BookmarkForm";
+import BookmarkListItem from "src/components/BookmarkListItem";
 import { trpc } from "src/utils/trpc";
 
 const Recommendations: NextPage = () => {
@@ -16,7 +16,7 @@ const Recommendations: NextPage = () => {
     data,
     refetch,
     status: bookmarksStatus,
-  } = trpc.useQuery(["recommendations.getRecommendations"], { enabled: false });
+  } = trpc.useQuery(["bookmarks.get"], { enabled: false });
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -39,16 +39,16 @@ const Recommendations: NextPage = () => {
   return (
     <>
       <DashboardNav />
-      <RecommendationsForm onCreate={refetch} />
+      <BookmarkForm onCreate={refetch} />
       <div>
         {bookmarksStatus === "loading" && <LoadingScene />}
-        {data?.length === 0 && "your recommendations will appear here"}
+        {data?.length === 0 && "your bookmarks will appear here"}
         {data && data.length > 0 && (
           <ul className="space-y-2">
-            {data.map((recommendation) => (
-              <RecommendationListItem
-                key={recommendation.id}
-                recommendation={recommendation}
+            {data.map((bookmark) => (
+              <BookmarkListItem
+                key={bookmark.id}
+                bookmark={bookmark}
                 onDelete={refetch}
               />
             ))}
