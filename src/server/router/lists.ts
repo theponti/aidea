@@ -66,6 +66,7 @@ export const listsRouter = createProtectedRouter()
         },
         include: {
           list: true,
+          user: true,
         },
       });
     },
