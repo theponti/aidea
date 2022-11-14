@@ -7,20 +7,28 @@ import DashboardNav from "src/components/DashboardNav";
 import IdeaForm from "src/components/IdeaForm";
 import IdeaListItem from "src/components/IdeaListItem";
 import LoadingScene from "src/components/Loading";
-import PageWrap from "src/components/PageWrap";
 import { trpc } from "src/utils/trpc";
 
 const Dashboard: NextPage = () => {
   const router = useRouter();
-
   const { status } = useSession();
-  const { data, refetch } = trpc.useQuery(["idea.getIdeas"]);
+  const {
+    data,
+    refetch,
+    status: ideasStatus,
+  } = trpc.useQuery(["idea.getIdeas"], {
+    enabled: false,
+  });
 
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/");
     }
-  }, [router, status]);
+
+    if (status === "authenticated") {
+      refetch();
+    }
+  }, [refetch, router, status]);
 
   switch (status) {
     case "loading":
@@ -32,24 +40,23 @@ const Dashboard: NextPage = () => {
   }
 
   return (
-    <PageWrap>
-      <DashboardNav router={router} />
-      <div className="col-start-1 col-span-12 md:col-start-2 md:col-span-10 lg:col-start-3 lg:col-span-8 flex flex-col">
-        <div>
-          <IdeaForm onCreate={refetch} />
-        </div>
-        <div>
-          {data?.length === 0 && "your thoughts will appear here"}
-          {data && data.length > 0 && (
-            <ul className="space-y-2">
-              {data.map((idea) => (
-                <IdeaListItem key={idea.id} idea={idea} onDelete={refetch} />
-              ))}
-            </ul>
-          )}
-        </div>
+    <div className="flex flex-col">
+      <DashboardNav />
+      <div>
+        <IdeaForm onCreate={refetch} />
       </div>
-    </PageWrap>
+      <div>
+        {ideasStatus === "loading" && <LoadingScene />}
+        {data?.length === 0 && "your thoughts will appear here"}
+        {data && data.length > 0 && (
+          <ul className="space-y-2">
+            {data.map((idea) => (
+              <IdeaListItem key={idea.id} idea={idea} onDelete={refetch} />
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
   );
 };
 

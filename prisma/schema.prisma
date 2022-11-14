@@ -44,10 +44,16 @@ model User {
   email           String?          @unique
   emailVerified   DateTime?
   image           String?
+  // Relations
   accounts        Account[]
   sessions        Session[]
   ideas           Idea[]
   recommendations Recommendation[]
+  flights         Flight[]
+  lists           UserLists[]
+  receivedInvites ListInvite[]     @relation(name: "receivedListInvites")
+  sentInvites     ListInvite[]     @relation(name: "sentListInvites")
+  List            List[]
 }
 
 model VerificationToken {
@@ -83,4 +89,75 @@ model Recommendation {
   user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+}
+
+model Flight {
+  id                String   @id @default(uuid())
+  flightNumber      String   @db.Text()
+  departureAirport  String   @db.Text()
+  departureDate     DateTime @db.Timestamp()
+  arrivalDate       DateTime @db.Timestamp()
+  arrivalAirport    String   @db.Text()
+  airline           String   @db.Text()
+  reservationNumber String   @db.Text()
+  url               String   @db.Text()
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  // Relations
+  userId            String
+  createdBy         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  listId            String?
+  list              List?    @relation(fields: [listId], references: [id])
+}
+
+model Item {
+  id        String   @id @default(uuid())
+  type      String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  // Relations
+  itemId    String
+  list      List?    @relation(fields: [listId], references: [id])
+  listId    String?
+}
+
+model UserLists {
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  listId String
+  list   List   @relation(fields: [listId], references: [id], onDelete: Cascade)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Compound ID to ensure that relation is unique.
+  @@id([listId, userId])
+}
+
+model List {
+  id          String       @id @default(uuid())
+  name        String       @db.Text
+  description String?      @db.Text
+  userId      String       @db.Text()
+  createdBy   User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  users       UserLists[]
+  items       Item[]
+  invites     ListInvite[]
+  Flight      Flight[]
+}
+
+model ListInvite {
+  accepted         Boolean @default(false)
+  listId           String
+  list             List    @relation(fields: [listId], references: [id], onDelete: Cascade)
+  invitedUserEmail String  @db.Text()
+  invitedUserId    String?
+  invitedUser      User?   @relation(name: "receivedListInvites", fields: [invitedUserId], references: [id], onDelete: Cascade)
+  userId           String
+  user             User    @relation(name: "sentListInvites", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([listId, invitedUserEmail])
 }

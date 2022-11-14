@@ -4,18 +4,15 @@ import React, { SyntheticEvent, useCallback } from "react";
 import Trash from "src/components/Icons/Trash";
 import { trpc } from "src/utils/trpc";
 
-import styles from "./RecommendationListItem.module.css";
+import styles from "./BookmarkListItem.module.css";
 
-type RecommendationListItemProps = {
-  recommendation: Recommendation;
+type BookmarkListItemProps = {
+  bookmark: Recommendation;
   onDelete: () => void;
 };
-function RecommendationListItem({
-  recommendation,
-  onDelete,
-}: RecommendationListItemProps) {
-  const { id, image, title, siteName, url } = recommendation;
-  const mutation = trpc.useMutation(["recommendations.delete"]);
+function BookmarkListItem({ bookmark, onDelete }: BookmarkListItemProps) {
+  const { id, image, title, siteName, url } = bookmark;
+  const mutation = trpc.useMutation(["bookmarks.delete"]);
   const { isLoading } = mutation;
 
   const deleteIdea = useCallback(
@@ -64,4 +61,4 @@ function RecommendationListItem({
   );
 }
 
-export default React.memo(RecommendationListItem);
+export default React.memo(BookmarkListItem);

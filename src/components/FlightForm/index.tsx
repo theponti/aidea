@@ -1,24 +1,26 @@
 import classNames from "classnames";
 import { SyntheticEvent, useCallback } from "react";
 import AlertError from "src/components/AlertError";
-import useRecommendationsForm from "./useRecommendationsForm";
+import useListInviteForm from "./useListInviteForm";
 
-type RecommendationsFormProps = {
+type ListInviteFormProps = {
+  listId: string;
   onCreate: () => void;
 };
-export default function RecommendationsForm({
+export default function ListInviteForm({
+  listId,
   onCreate,
-}: RecommendationsFormProps) {
-  const { error, isLoading, url, createRecommendation, onUrlChange } =
-    useRecommendationsForm({
+}: ListInviteFormProps) {
+  const { error, isLoading, email, createListInvite, onNameChange } =
+    useListInviteForm({
       onCreate,
     });
   const onFormSubmit = useCallback(
     (e: SyntheticEvent<HTMLFormElement>) => {
       e.preventDefault();
-      createRecommendation();
+      createListInvite({ listId });
     },
-    [createRecommendation]
+    [createListInvite, listId]
   );
 
   return (
@@ -28,17 +30,17 @@ export default function RecommendationsForm({
       <form onSubmit={onFormSubmit}>
         <div className="form-control w-full mb-2">
           <label className="label hidden">
-            <span className="label-text">URL</span>
+            <span className="label-text">Name of list</span>
           </label>
           <input
-            type="url"
-            placeholder="Paste link here"
+            type="text"
+            placeholder="What should we call this list?"
             className="input w-full text-lg p-2 border-stone-300 rounded placeholder:text-zinc-400"
-            value={url}
-            onChange={onUrlChange}
+            value={email}
+            onChange={onNameChange}
           />
         </div>
-        {!!url.length && (
+        {!!email.length && (
           <button
             className={classNames(
               "btn btn-primary float-right min-w-full mb-4 rounded text-white",

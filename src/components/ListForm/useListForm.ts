@@ -1,43 +1,41 @@
 import { SyntheticEvent, useCallback, useState } from "react";
 import { trpc } from "src/utils/trpc";
 
-type UseRecommendationsFormProps = {
+type UseListFormProps = {
   onCreate: () => void;
 };
-export default function useRecommendationsForm({
-  onCreate,
-}: UseRecommendationsFormProps) {
-  const mutation = trpc.useMutation("recommendations.createRecommendation");
-  const [url, setUrl] = useState("");
+export default function useListForm({ onCreate }: UseListFormProps) {
+  const mutation = trpc.useMutation("lists.create");
+  const [name, setUrl] = useState("");
   const [isLoading, setIsLoading] = useState<boolean>();
   const [error, setError] = useState<string | undefined>();
 
-  const onUrlChange = useCallback((e: SyntheticEvent<HTMLInputElement>) => {
+  const onNameChange = useCallback((e: SyntheticEvent<HTMLInputElement>) => {
     setUrl(e.currentTarget.value);
     setError(undefined);
   }, []);
 
-  const createRecommendation = useCallback(async () => {
+  const createList = useCallback(async () => {
     try {
       setIsLoading(true);
       setError(undefined);
       await mutation.mutateAsync({
-        url,
+        name,
       });
       setUrl("");
       setIsLoading(false);
       onCreate();
     } catch (err) {
-      setError("OG could not be generated. Try again later.");
+      setError("The list could not be create. Try again later.");
       setIsLoading(false);
     }
-  }, [url, mutation, onCreate]);
+  }, [name, mutation, onCreate]);
 
   return {
     error,
     isLoading,
-    url,
-    createRecommendation,
-    onUrlChange,
+    name,
+    createList,
+    onNameChange,
   };
 }

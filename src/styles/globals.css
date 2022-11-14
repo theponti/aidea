@@ -49,3 +49,13 @@ nav {
     @apply underline-offset-4;
   }
 }
+
+a {
+  @apply bg-transparent;
+
+  &:focus {
+    @apply bg-transparent;
+    @apply underline;
+    @apply underline-offset-4;
+  }
+}

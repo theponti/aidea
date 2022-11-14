@@ -9,8 +9,8 @@ function getOgContent($: CheerioAPI, type: string): string {
 }
 
 // Example router with queries that can only be hit if the user requesting is signed in
-export const recommendationsRouter = createProtectedRouter()
-  .query("getRecommendations", {
+export const bookmarksRouter = createProtectedRouter()
+  .query("get", {
     async resolve({ ctx }) {
       return ctx.prisma.recommendation.findMany({
         where: { userId: ctx.session.user.id },
@@ -18,7 +18,7 @@ export const recommendationsRouter = createProtectedRouter()
       });
     },
   })
-  .mutation("createRecommendation", {
+  .mutation("create", {
     input: z.object({
       url: z.string(),
     }),
