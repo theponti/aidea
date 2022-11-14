@@ -9,7 +9,7 @@ on:
       - main
   pull_request: {}
 jobs:
-  Deploy-Production:
+  deploy-migrations:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
