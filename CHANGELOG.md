@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.1](https://github.com/theponti/aidea/compare/v1.1.0...v1.1.1) (2023-04-24)
+
+
+### Bug Fixes
+
+* **github:** do not use latest pnpm in github actions ([9b71c9b](https://github.com/theponti/aidea/commit/9b71c9b656664579009bfa9f1f73955458d6f00e))
+* **github:** use pnpm v7.29.1 in github actions ([d4756b3](https://github.com/theponti/aidea/commit/d4756b37f7aeba4990a799bb63374557d69a3c6e))
+
 ## [1.1.0](https://github.com/theponti/aidea/compare/v1.0.0...v1.1.0) (2022-11-07)
 
 
