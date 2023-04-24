@@ -42,6 +42,7 @@ jobs:
       - name: Set up PNPM
         uses: pnpm/action-setup@v2.2.1
         with:
+          version: 7.29.1
           run_install: true
 
       - name: Set up Node.js
@@ -72,6 +73,7 @@ jobs:
       - name: Set up PNPM
         uses: pnpm/action-setup@v2.2.1
         with:
+          version: 7.29.1
           run_install: true
 
       - name: Set up Node.js
