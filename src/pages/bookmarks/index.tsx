@@ -16,7 +16,7 @@ const Recommendations: NextPage = () => {
     data,
     refetch,
     status: bookmarksStatus,
-  } = trpc.useQuery(["bookmarks.get"], { enabled: false });
+  } = trpc.bookmarks.get.useQuery(undefined, { enabled: false });
 
   useEffect(() => {
     if (status === "unauthenticated") {

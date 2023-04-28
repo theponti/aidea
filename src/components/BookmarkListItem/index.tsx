@@ -12,7 +12,7 @@ type BookmarkListItemProps = {
 };
 function BookmarkListItem({ bookmark, onDelete }: BookmarkListItemProps) {
   const { id, image, title, siteName, url } = bookmark;
-  const mutation = trpc.useMutation(["bookmarks.delete"]);
+  const mutation = trpc.bookmarks.delete.useMutation();
   const { isLoading } = mutation;
 
   const deleteIdea = useCallback(

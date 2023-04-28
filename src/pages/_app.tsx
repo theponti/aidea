@@ -11,7 +11,7 @@ import "../styles/globals.css";
 
 import Head from "next/head";
 import Header from "src/components/Header";
-import type { AppRouter } from "../server/router";
+import type { AppRouter } from "../server";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,

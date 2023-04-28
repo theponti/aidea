@@ -16,7 +16,7 @@ const Dashboard: NextPage = () => {
     data,
     refetch,
     status: ideasStatus,
-  } = trpc.useQuery(["idea.getIdeas"], {
+  } = trpc.idea.getIdeas.useQuery(undefined, {
     enabled: false,
   });
 

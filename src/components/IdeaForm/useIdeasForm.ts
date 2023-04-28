@@ -5,7 +5,7 @@ type UseIdeaFormProps = {
   onCreate: () => void;
 };
 export default function useIdeaForm({ onCreate }: UseIdeaFormProps) {
-  const mutation = trpc.useMutation("idea.createIdea");
+  const mutation = trpc.idea.createIdea.useMutation();
   const [description, setDescription] = useState("");
   const [isLoading, setIsLoading] = useState<boolean>();
   const [error, setError] = useState<string | undefined>();
