@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0](https://github.com/theponti/aidea/compare/v1.1.1...v1.2.0) (2023-05-18)
+
+
+### Features
+
+* upgrade to trpc version 10 ([#87](https://github.com/theponti/aidea/issues/87)) ([d13516d](https://github.com/theponti/aidea/commit/d13516d1e2778ed7310020690c0138b498e3dd04))
+
+
+### Bug Fixes
+
+* **next-auth:** upgrade next-auth to 4.22.1 ([18190d2](https://github.com/theponti/aidea/commit/18190d24fb73ff4e0cbb8d04741dcb8bf87b7a8c))
+
 ## [1.1.1](https://github.com/theponti/aidea/compare/v1.1.0...v1.1.1) (2023-04-24)
 
 
