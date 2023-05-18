@@ -5,7 +5,7 @@ type UseBookmarkFormProps = {
   onCreate: () => void;
 };
 export default function useBookmarkForm({ onCreate }: UseBookmarkFormProps) {
-  const mutation = trpc.useMutation("bookmarks.create");
+  const mutation = trpc.bookmarks.create.useMutation();
   const [url, setUrl] = useState("");
   const [isLoading, setIsLoading] = useState<boolean>();
   const [error, setError] = useState<string | undefined>();

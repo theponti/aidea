@@ -15,7 +15,7 @@ const ListInvites: NextPage = () => {
     data,
     refetch,
     status: invitesStatus,
-  } = trpc.useQuery(["lists.invites"], { enabled: false });
+  } = trpc.lists.invites.useQuery(undefined, { enabled: false });
 
   useEffect(() => {
     if (status === "unauthenticated") {

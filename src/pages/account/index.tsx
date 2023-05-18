@@ -11,11 +11,9 @@ const Account = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
   const pictureUrl = session?.user?.image as string;
-  const deleteUser = trpc.useMutation("auth.deleteUser");
+  const deleteUser = trpc.auth.deleteUser.useMutation();
   const onDelectAccount = useCallback(async () => {
-    // Delete user
     await deleteUser.mutateAsync();
-    // Sign user out
     signOut();
   }, [deleteUser]);
 

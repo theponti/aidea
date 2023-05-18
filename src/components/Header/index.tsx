@@ -7,7 +7,7 @@ function Header() {
     <nav className="navbar bg-base-100 sticky top-0 left-0 px-0 drop-shadow-sm">
       <div className="container mx-auto max-w-[1200px] px-4">
         <div className="flex-1 text-primary">
-          <span className="font-semibold text-2xl underline underline-offset-8">
+          <span className="font-semibold text-2xl">
             <Link href="/">🧠 Aidea</Link>
           </span>
         </div>

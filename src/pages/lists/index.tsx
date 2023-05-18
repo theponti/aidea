@@ -16,7 +16,7 @@ const Lists: NextPage = () => {
     data,
     refetch,
     status: listsStatus,
-  } = trpc.useQuery(["lists.get"], { enabled: false });
+  } = trpc.lists.get.useQuery(undefined, { enabled: false });
 
   useEffect(() => {
     if (status === "unauthenticated") {

@@ -8,7 +8,7 @@ type ListInviteItemProps = {
   onAcceptInvite: () => void;
 };
 function ListInviteItem({ invite, onAcceptInvite }: ListInviteItemProps) {
-  const mutation = trpc.useMutation("lists.acceptInvite");
+  const mutation = trpc.lists.acceptInvite.useMutation();
   const acceptInvite = useCallback(async () => {
     await mutation.mutateAsync({ listId: invite.listId });
     onAcceptInvite();

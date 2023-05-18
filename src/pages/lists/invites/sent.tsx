@@ -11,7 +11,7 @@ import { trpc } from "src/utils/trpc";
 const ListInvites: NextPage = () => {
   const router = useRouter();
   const { status } = useSession();
-  const { data } = trpc.useQuery(["lists.sentInvites"]);
+  const { data } = trpc.lists.sentInvites.useQuery();
 
   useEffect(() => {
     if (status === "unauthenticated") {

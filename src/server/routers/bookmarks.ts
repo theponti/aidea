@@ -2,27 +2,27 @@ import { TRPCError } from "@trpc/server";
 import { CheerioAPI, load } from "cheerio";
 import ky from "ky";
 import { z } from "zod";
-import { createProtectedRouter } from "./context";
+import { authenticatedProcedure, router } from "../common/context";
 
 function getOgContent($: CheerioAPI, type: string): string {
   return $(`meta[property="og:${type}"]`).attr("content") || "";
 }
 
 // Example router with queries that can only be hit if the user requesting is signed in
-export const bookmarksRouter = createProtectedRouter()
-  .query("get", {
-    async resolve({ ctx }) {
-      return ctx.prisma.recommendation.findMany({
-        where: { userId: ctx.session.user.id },
-        orderBy: { createdAt: "desc" },
-      });
-    },
-  })
-  .mutation("create", {
-    input: z.object({
-      url: z.string(),
-    }),
-    async resolve({ ctx, input }) {
+export const bookmarksRouter = router({
+  get: authenticatedProcedure.query(async ({ ctx }) => {
+    return ctx.prisma.recommendation.findMany({
+      where: { userId: ctx.session.user.id },
+      orderBy: { createdAt: "desc" },
+    });
+  }),
+  create: authenticatedProcedure
+    .input(
+      z.object({
+        url: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
       try {
         const html = await ky(input.url);
         const text = await html.text();
@@ -50,15 +50,16 @@ export const bookmarksRouter = createProtectedRouter()
           message: "Recommendation could not be created",
         });
       }
-    },
-  })
-  .mutation("delete", {
-    input: z.object({
-      id: z.string(),
     }),
-    async resolve({ ctx, input }) {
+  delete: authenticatedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
       return await ctx.prisma.recommendation.delete({
         where: { id: input.id },
       });
-    },
-  });
+    }),
+});

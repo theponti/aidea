@@ -8,7 +8,7 @@ type UseListInviteFormProps = {
 export default function useListInviteForm({
   onCreate,
 }: UseListInviteFormProps) {
-  const mutation = trpc.useMutation("lists.invite");
+  const mutation = trpc.lists.invite.useMutation();
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState<boolean>();
   const [error, setError] = useState<string | undefined>();

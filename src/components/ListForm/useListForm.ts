@@ -5,7 +5,7 @@ type UseListFormProps = {
   onCreate: () => void;
 };
 export default function useListForm({ onCreate }: UseListFormProps) {
-  const mutation = trpc.useMutation("lists.create");
+  const mutation = trpc.lists.create.useMutation();
   const [name, setUrl] = useState("");
   const [isLoading, setIsLoading] = useState<boolean>();
   const [error, setError] = useState<string | undefined>();

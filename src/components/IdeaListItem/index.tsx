@@ -9,7 +9,7 @@ type IdeaListItemProps = {
   onDelete: () => void;
 };
 function IdeaListItem({ idea, onDelete }: IdeaListItemProps) {
-  const mutation = trpc.useMutation(["idea.deleteIdea"]);
+  const mutation = trpc.idea.deleteIdea.useMutation();
 
   const deleteIdea = useCallback(async () => {
     await mutation.mutateAsync({ id: idea.id });

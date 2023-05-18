@@ -17,12 +17,12 @@ const List: NextPage = () => {
     data: userList,
     status: listStatus,
     refetch: getList,
-  } = trpc.useQuery(["lists.findById", { listId }], { enabled: false });
+  } = trpc.lists.findById.useQuery({ listId }, { enabled: false });
   const {
     data: listInvites,
     status: invitesStatus,
     refetch: getInvites,
-  } = trpc.useQuery(["lists.listInvites", { listId }], { enabled: false });
+  } = trpc.lists.listInvites.useQuery({ listId }, { enabled: false });
   const onInviteSuccess = useCallback(() => getInvites(), [getInvites]);
 
   useEffect(() => {
