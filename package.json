@@ -11,7 +11,7 @@
     "lint": "eslint --cache --ignore-path .gitignore --ext .ts,.tsx src",
     "lint:fix": "eslint --cache --fix --ignore-path .gitignore --ext .ts,.tsx src",
     "lint:strict": "eslint --max-warnings=0 src",
-    "postinstall": "prisma generate",
+    "postinstall": "prisma generate && cypress install",
     "preview": "next start --port 4173",
     "preview:test": "start-server-and-test preview http://localhost:4173",
     "start": "next start",
