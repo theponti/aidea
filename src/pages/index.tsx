@@ -17,7 +17,10 @@ const Home: NextPage = () => {
 
   return (
     <div className="flex justify-center flex-col">
-      <h1 className="text-gray-400 font-bold text-5xl md:text-6xl xl:text-7xl mt-24 text-center">
+      <h1
+        data-testid="LandingHeader"
+        className="text-gray-400 font-bold text-5xl md:text-6xl xl:text-7xl mt-24 text-center"
+      >
         let your brain <span className="text-primary">free.</span>
       </h1>
       {status === "loading" && <LoadingScene />}
