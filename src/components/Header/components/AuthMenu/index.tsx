@@ -33,7 +33,7 @@ function AuthMenu() {
   }
 
   return (
-    <div className="flex-none gap-2">
+    <div data-testid="AuthMenu" className="flex-none gap-2">
       <ul className="menu menu-horizontal p-0">
         <li>
           <AuthMenuButton status={status} />
