@@ -1,18 +1,23 @@
+[![🧐 Code Quality](https://github.com/theponti/aidea/actions/workflows/code-quality.yml/badge.svg)](https://github.com/theponti/aidea/actions/workflows/code-quality.yml)
+
 # 🧠 Aidea 🧠
 
 Enabling users to join forces to build amazing projects.
 
 ## Features
 
-- ⚡️ [NextJS](https://nextjs.org/docs/getting-started)
-- ⚛️ React 18
-- ✨ TypeScript
+- 🤟 **Language:** Typescript
+- 🖥️ **UI:** ⚡️ [NextJS](https://nextjs.org/docs/getting-started) w/ ⚛️ React 18
 - 🔐 **Auth:** [Next-Auth.js](https://next-auth.js.org)
 - 🗂 **Data:** [Prisma](https://prisma.io)
 - 📞 **API:** [tRPC v10](https://trpc.io)
-- 💅 **Styling:** [TailwindCSS](https://tailwindcss.com) & [daisyUI](https://daisyui.com/docs/install/)
-- 🧪 **Testing:** [Vitest](https://vitest.dev/)
-- [Vercel](https://vercel.com)
+- 💅 **Styling:** [TailwindCSS](https://tailwindcss.com) with [daisyUI](https://daisyui.com)
+- 🧪 **Testing:**
+  - [Vitest](https://vitest.dev/)
+  - [Cypress](https://www.cypress.io/)
+- 🚀 **Deployment**
+  - [Vercel](https://vercel.com)
+  - [Railway](https://railway.app)
 
 ## Set up
 
