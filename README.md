@@ -46,6 +46,12 @@ docker-compose up -d
 pnpm install
 ```
 
+7. Run migrations
+
+```sh
+pnpm run db:migrate:dev
+```
+
 ### Github
 
 This repository runs several Github actions for code quality, testing, and deployment.
