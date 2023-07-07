@@ -7,24 +7,14 @@
 
 # testing
 /coverage
-cypress/videos
+/cypress/videos
 
 # database
 /prisma/db.sqlite
 /prisma/db.sqlite-journal
 
-# next.js
-/.next/
-/out/
-
 # production
 /build
-
-# misc
-.DS_Store
-*.pem
-.eslintcache
-.stylelintcache
 
 # debug
 npm-debug.log*
@@ -35,8 +25,19 @@ npm-debug.log*
 .env*.local
 !.env.example
 
+# NextJS
+/.next/
+/out/
+
+# Turbo
+.turbo
+
 # vercel
 .vercel
 
-# typescript
+# misc
+.DS_Store
+*.pem
+.eslintcache
+.stylelintcache
 *.tsbuildinfo
