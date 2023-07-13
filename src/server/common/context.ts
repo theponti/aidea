@@ -9,21 +9,24 @@ import { getServerAuthSession } from "./get-server-auth-session";
 interface Context {
   prisma: typeof prisma;
   session: Session | null;
-  [key: string]: unknown;
 }
 
 const t = initTRPC.context<Context>().create({
   transformer: superjson,
 });
-export const router = t.router;
 export const middleware = t.middleware;
 export const publicProcedure = t.procedure;
+export const router = t.router;
 
 /** Use this helper for:
  * - testing, where we dont have to Mock Next.js' req/res
  * - trpc's `createSSGHelpers` where we don't have req/res
  **/
-export const createContextInner = async ({ session }: { session: Session }) => {
+export const createContextInner = async ({
+  session,
+}: {
+  session: Session | null;
+}) => {
   return { prisma, session };
 };
 
@@ -43,7 +46,7 @@ export const createContext = async (opts: CreateNextContextOptions) => {
  * If the user is authenticated, the session and user will be added to
  * the request context.
  **/
-const isAuthenticated = middleware(({ ctx, next }) => {
+const isAuthenticated = middleware(async ({ ctx, next }) => {
   if (!ctx.session || !ctx.session.user) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
