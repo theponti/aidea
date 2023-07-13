@@ -18,8 +18,7 @@ module.exports = {
         "plugin:import/errors",
         "plugin:import/typescript",
         "plugin:@typescript-eslint/recommended",
-        "plugin:@typescript-eslint/recommended-requiring-type-checking",
-        "airbnb-typescript/base",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
       ],
       rules: {
         "@typescript-eslint/no-unused-expressions": "off",
