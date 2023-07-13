@@ -23,11 +23,7 @@ export const publicProcedure = t.procedure;
  * - testing, where we dont have to Mock Next.js' req/res
  * - trpc's `createSSGHelpers` where we don't have req/res
  **/
-export const createContextInner = async ({
-  session,
-}: {
-  session: Session | null;
-}) => {
+export const createContextInner = async ({ session }: { session: Session }) => {
   return { prisma, session };
 };
 
