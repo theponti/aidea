@@ -22,6 +22,7 @@ describe("Header", async () => {
   it("should render unauthenticated header", () => {
     render(<Header />);
     const signInButton = screen.getByTestId("signInButton");
+    expect(screen.queryByTestId("AuthenticatedMenu")).toBeNull();
     expect(signInButton).to.exist;
     signInButton.click();
     expect(signIn).toHaveBeenCalled();
@@ -33,8 +34,8 @@ describe("Header", async () => {
       status: "authenticated",
     });
     render(<Header />);
-    expect(screen.getByText("My Account")).to.exist;
     expect(screen.queryByTestId("AuthMenu")).not.toBeNull();
+    expect(screen.queryByTestId("AuthenticatedMenu")).not.toBeNull();
   });
 
   it("should not render authenticated menu while loading", async () => {
@@ -44,5 +45,6 @@ describe("Header", async () => {
     });
     render(<Header />);
     expect(screen.queryByTestId("AuthMenu")).toBeNull();
+    expect(screen.queryByTestId("AuthenticatedMenu")).toBeNull();
   });
 });

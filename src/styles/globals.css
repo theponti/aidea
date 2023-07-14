@@ -1,3 +1,6 @@
+@import "@radix-ui/colors/black-alpha.css";
+@import "@radix-ui/colors/violet.css";
+@import "@radix-ui/colors/mauve.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -58,4 +61,9 @@ a {
     @apply underline;
     @apply underline-offset-4;
   }
+}
+
+/* reset */
+button {
+  all: unset;
 }

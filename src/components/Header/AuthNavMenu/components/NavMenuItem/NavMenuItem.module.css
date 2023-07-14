@@ -1,0 +1,11 @@
+.menuItem {
+  margin-right: 10px;
+}
+
+.menuItem:last-child {
+  margin-right: 0;
+}
+
+.menuItem a {
+  text-decoration: none;
+}

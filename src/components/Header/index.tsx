@@ -1,5 +1,5 @@
 import Link from "next/link";
-import AuthMenu from "./components/AuthMenu";
+import AuthMenu from "./AuthMenu";
 
 function Header() {
   return (

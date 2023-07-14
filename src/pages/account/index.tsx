@@ -52,10 +52,6 @@ const Account = () => {
         </div>
         <div className="flex flex-col mb-12"></div>
 
-        <button className="btn btn-ghost" onClick={() => signOut()}>
-          Log out
-        </button>
-
         <div className="divider" />
 
         {deleteUser.error && <AlertError error={deleteUser.error.message} />}

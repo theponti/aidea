@@ -1,6 +1,6 @@
 import { signIn, useSession } from "next-auth/react";
-import Link from "next/link";
 import { useCallback } from "react";
+import AuthNavMenu from "../AuthNavMenu";
 
 interface AuthMenuButtonProps {
   status: string;
@@ -18,11 +18,7 @@ function AuthMenuButton({ status }: AuthMenuButtonProps) {
     );
   }
 
-  return (
-    <Link data-testid="accountLink" href="/account">
-      My Account
-    </Link>
-  );
+  return <AuthNavMenu />;
 }
 
 function AuthMenu() {
@@ -33,7 +29,7 @@ function AuthMenu() {
   }
 
   return (
-    <div className="flex-none gap-2">
+    <div className="flex-none gap-2" data-testid="AuthMenu">
       <ul className="menu menu-horizontal p-0">
         <li>
           <AuthMenuButton status={status} />
