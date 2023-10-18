@@ -28,7 +28,7 @@ colloborate with others.
 1. Copy environment variable example file
 
 ```sh
-cp .env.example .env.local
+cp .env.example .env.development
 ```
 
 2. Set `NEXTAUTH_SECRET` to a random string using helper script
