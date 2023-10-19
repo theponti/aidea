@@ -84,7 +84,7 @@
     "jsdom": "^22.1.0",
     "lint-staged": "13.2.3",
     "next-router-mock": "^0.9.7",
-    "postcss": "8.4.25",
+    "postcss": "8.4.31",
     "postcss-import": "^15.1.0",
     "prettier": "3.0.0",
     "prettier-plugin-tailwindcss": "^0.4.0",
