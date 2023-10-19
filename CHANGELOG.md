@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/theponti/aidea/compare/v1.2.0...v1.3.0) (2023-10-19)
+
+
+### Features
+
+* **header:** add auth menu with avatar ([24c15b3](https://github.com/theponti/aidea/commit/24c15b3e0c5318806166560b723579f78de65337))
+
 ## [1.2.0](https://github.com/theponti/aidea/compare/v1.1.1...v1.2.0) (2023-05-18)
 
 
