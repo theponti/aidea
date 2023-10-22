@@ -14,11 +14,9 @@ import styles from "./AuthNavMenu.module.css";
 
 const Wrap = styled(NavMenuItem)`
   display: flex;
-  gap: 10px;
   border: 1px solid slateblue;
   border-radius: 50px;
   padding: 4px;
-  margin: -4px -4px 0 0;
 
   &:hover {
     box-shadow: 0px 2px 5px 0px slateblue;
@@ -47,11 +45,7 @@ const AuthNavMenu = () => {
 
   return (
     <Wrap data-testid="AuthenticatedMenu">
-      <Avatar
-        src={pictureUrl}
-        alt={session?.user?.name || ""}
-        fallback="My account"
-      />
+      <Avatar src={pictureUrl} alt={session?.user?.name || ""} />
       <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild>
           <button className={styles.IconButton} aria-label="account menu">
