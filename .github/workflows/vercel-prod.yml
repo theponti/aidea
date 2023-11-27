@@ -6,6 +6,10 @@ on:
   push:
     branches:
       - main
+  workflow_run:
+    workflows: ["🧐 Code Quality"]
+    types:
+      - completed
 jobs:
   Deploy-Production:
     runs-on: ubuntu-latest
