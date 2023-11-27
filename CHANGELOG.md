@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/theponti/aidea/compare/v1.3.0...v1.4.0) (2023-11-27)
+
+
+### Features
+
+* **ci:** run deploy after code quality success ([5e8bec8](https://github.com/theponti/aidea/commit/5e8bec84ff3b92ed4c3a8c05d750efcff8bd813e))
+
 ## [1.3.0](https://github.com/theponti/aidea/compare/v1.2.0...v1.3.0) (2023-10-19)
 
 
