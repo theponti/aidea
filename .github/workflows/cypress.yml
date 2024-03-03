@@ -7,17 +7,10 @@ jobs:
     if: github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
     steps:
-      - name: Set up PNPM
-        uses: pnpm/action-setup@v2.2.1
-        with:
-          version: 7.29.1
-          run_install: true
-
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "16"
-          cache: "pnpm"
 
       - name: Print URL 🖨
         run: echo Testing URL ${{ github.event.deployment_status.target_url }}

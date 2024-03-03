@@ -43,13 +43,13 @@ docker-compose up -d
 6. Install dependencies
 
 ```sh
-pnpm install
+npm run install
 ```
 
 7. Run migrations
 
 ```sh
-pnpm run db:migrate:dev
+pnnpm run run db:migrate:dev
 ```
 
 ### Github

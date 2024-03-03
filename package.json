@@ -12,15 +12,15 @@
     "lint:fix": "eslint --cache --fix --ignore-path .gitignore --ext .ts,.tsx src",
     "lint:strict": "eslint --max-warnings=0 src",
     "postinstall": "cypress install",
-    "preview": "pnpm build && next start --port 4173",
+    "preview": "npm run build && next start --port 4173",
     "preview:test": "start-server-and-test preview http://localhost:4173",
     "start": "next start",
     "test": "vitest --run",
     "test:ci": "vitest run",
     "test:coverage": "pnpx vite preview --outDir coverage/lcov-report",
-    "test:e2e": "pnpm preview:test 'cypress open'",
-    "test:e2e:ci": "pnpm preview:test 'pnpm cypress run --record'",
-    "test:e2e:headless": "pnpm preview:test 'cypress run'",
+    "test:e2e": "npm run preview:test 'cypress open'",
+    "test:e2e:ci": "npm run preview:test 'npx cypress run --record'",
+    "test:e2e:headless": "npm run preview:test 'cypress run'",
     "test:update": "vitest run -u",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit --incremental false"
@@ -100,7 +100,7 @@
   "lint-staged": {
     "*.css": "stylelint --cache --fix",
     "*.{ts,tsx}": [
-      "pnpm lint:fix",
+      "npm run lint:fix",
       "vitest related --run --coverage=false"
     ]
   },
