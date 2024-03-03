@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.5.0](https://github.com/theponti/aidea/compare/v1.4.0...v1.5.0) (2024-03-03)
+
+
+### Features
+
+* **package:** remove pnpm ([a675154](https://github.com/theponti/aidea/commit/a6751546f7d35dde24e0468ef667447de9872bcf))
+
+
+### Bug Fixes
+
+* **package:** upgrade to node 20 ([c65b7e0](https://github.com/theponti/aidea/commit/c65b7e07d05cb45711c1ca19860d2c66d447b5cc))
+* **package:** use node 16 for install ([51e4ec5](https://github.com/theponti/aidea/commit/51e4ec56fbda1e156ec9c9d84b9909fc35bc70ee))
+
 ## [1.4.0](https://github.com/theponti/aidea/compare/v1.3.0...v1.4.0) (2023-11-27)
 
 
