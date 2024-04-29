@@ -45,7 +45,7 @@ jobs:
           node-version: "20"
 
       - name: 📥 Download deps
-        run: npm run install
+        run: npm install
 
       - name: 🔬 Lint
         run: npm run lint:strict
@@ -69,7 +69,7 @@ jobs:
           node-version: "20"
 
       - name: 📥 Download deps
-        run: npm run install
+        run: npm install
 
       - name: 🃏 Test
         run: npm run test
