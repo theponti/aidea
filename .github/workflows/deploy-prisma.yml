@@ -1,4 +1,4 @@
-name: 🚀 Deploy >> Prisma
+name: deploy-prisma
 env:
   DATABASE_URL: ${{ secrets.DATABASE_URL }}
 on:
@@ -8,8 +8,10 @@ on:
     branches:
       - main
   pull_request: {}
+
 jobs:
-  deploy-migrations:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

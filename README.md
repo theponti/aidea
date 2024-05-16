@@ -66,30 +66,6 @@ gh secret set NEXTAUTH_SECRET
 gh secret set NEXTAUTH_URL
 gh secret set GOOGLE_CLIENT_ID
 gh secret set GOOGLE_CLIENT_SECRET
-
-# Continuous deployment
-gh secret set VERCEL_ORG_ID
-gh secret set VERCEL_PROJECT_ID
-gh secret set VERCEL_TOKEN
-```
-
-### Vercel
-
-This repo deploys to Vercel. For the application to run properly, some secrets need to be set:
-
-```sh
-vercel env add DATABASE_URL <environment>
-vercel env add NEXTAUTH_SECRET <environment>
-vercel env add GOOGLE_CLIENT_ID <environment>
-vercel env add GOOGLE_CLIENT_SECRET <environment>
-
-# Vercel automatically creates previews of branches, which # is fantastic! For these previews to work with NextAuth, # set up these env variables:
-
-# The `preview` URL should be the static URL without a unique hash shown on the Vercel dashboard. This URL is different from the project's `production` URL.
-vercel env add NEXTAUTH_URL preview
-
-# The `production` URL, you can find this on the project page.
-vercel env add NEXTAUTH_URL production
 ```
 
 ## Notes
