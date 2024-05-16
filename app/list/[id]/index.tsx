@@ -2,10 +2,10 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { api } from "@/lib/trpc/server";
+import { getServerAuthSession } from "@/server/auth";
 import AlertError from "components/AlertError";
 import DashboardNav from "components/DashboardNav";
 import UserPlus from "components/Icons/UserPlus";
-import { getServerAuthSession } from "server/auth";
 
 export default async function List({
   params: { id: listId },

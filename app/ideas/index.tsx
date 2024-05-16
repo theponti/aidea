@@ -2,10 +2,10 @@ import type { NextPage } from "next";
 import { redirect } from "next/navigation";
 
 import { api } from "@/lib/trpc/server";
+import { getServerAuthSession } from "@/server/auth";
 import DashboardNav from "components/DashboardNav";
 import IdeaForm from "components/IdeaForm";
 import IdeaListItem from "components/IdeaListItem";
-import { getServerAuthSession } from "server/auth";
 
 const Dashboard: NextPage = async () => {
   const session = await getServerAuthSession();

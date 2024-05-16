@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { getServerAuthSession } from "server/auth";
+import { getServerAuthSession } from "@/server/auth";
 import AuthNavMenu from "./AuthNavMenu";
 
 async function Header() {
