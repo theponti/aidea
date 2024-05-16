@@ -1,20 +1,19 @@
 import { Idea } from "@prisma/client";
 import classNames from "classnames";
-import Trash from "components/Icons/Trash";
-import { trpc } from "lib/trpc";
 import React, { useCallback } from "react";
+
+import { api } from "@/lib/trpc/react";
+import Trash from "components/Icons/Trash";
 
 type IdeaListItemProps = {
   idea: Idea;
-  onDelete: () => void;
 };
-function IdeaListItem({ idea, onDelete }: IdeaListItemProps) {
-  const mutation = trpc.idea.deleteIdea.useMutation();
+function IdeaListItem({ idea }: IdeaListItemProps) {
+  const mutation = api.idea.deleteIdea.useMutation();
 
   const deleteIdea = useCallback(async () => {
     await mutation.mutateAsync({ id: idea.id });
-    onDelete();
-  }, [idea.id, mutation, onDelete]);
+  }, [idea.id, mutation]);
 
   return (
     <li
@@ -30,11 +29,11 @@ function IdeaListItem({ idea, onDelete }: IdeaListItemProps) {
       <button
         className={classNames(
           "btn btn-ghost col-start-12 flex justify-end text-red-500",
-          mutation.isLoading && "loading",
+          mutation.isPending && "loading",
         )}
         onClick={deleteIdea}
       >
-        {!mutation.isLoading && <Trash />}
+        {!mutation.isPending && <Trash />}
       </button>
     </li>
   );

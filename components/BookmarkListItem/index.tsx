@@ -1,9 +1,9 @@
 import { Recommendation } from "@prisma/client";
 import classNames from "classnames";
 import Trash from "components/Icons/Trash";
-import { trpc } from "lib/trpc";
 import React, { SyntheticEvent, useCallback } from "react";
 
+import { api } from "@/lib/trpc/react";
 import styles from "./BookmarkListItem.module.css";
 
 type BookmarkListItemProps = {
@@ -12,8 +12,8 @@ type BookmarkListItemProps = {
 };
 function BookmarkListItem({ bookmark, onDelete }: BookmarkListItemProps) {
   const { id, image, title, siteName, url } = bookmark;
-  const mutation = trpc.bookmarks.delete.useMutation();
-  const { isLoading } = mutation;
+  const mutation = api.bookmarks.delete.useMutation();
+  const { isPending } = mutation;
 
   const deleteIdea = useCallback(
     async (e: SyntheticEvent<HTMLButtonElement>) => {
@@ -50,10 +50,10 @@ function BookmarkListItem({ bookmark, onDelete }: BookmarkListItemProps) {
         <p className="flex-1" />
         <div className="flex justify-end items-end">
           <button
-            className={classNames("btn btn-ghost", isLoading && "loading")}
+            className={classNames("btn btn-ghost", isPending && "loading")}
             onClick={deleteIdea}
           >
-            {!isLoading && <Trash className="text-red-700" />}
+            {!isPending && <Trash className="text-red-700" />}
           </button>
         </div>
       </div>

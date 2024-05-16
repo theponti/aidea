@@ -3,15 +3,15 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
+import { api } from "@/lib/trpc/react";
 import DashboardNav from "components/DashboardNav";
 import LinkButton from "components/LinkButton";
 import LoadingScene from "components/Loading";
-import { trpc } from "lib/trpc";
 
 const ListInvites: NextPage = () => {
   const router = useRouter();
   const { status } = useSession();
-  const { data } = trpc.lists.sentInvites.useQuery();
+  const { data } = api.lists.sentInvites.useQuery();
 
   useEffect(() => {
     if (status === "unauthenticated") {

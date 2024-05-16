@@ -1,11 +1,11 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { publicProcedure, router } from "../common/context";
 
-// Example router with queries that can only be hit if the user requesting is signed in
-export const listsRouter = router({
+import { createTRPCRouter, publicProcedure } from "../trpc";
+
+export const listsRouter = createTRPCRouter({
   get: publicProcedure.query(async ({ ctx }) => {
-    const lists = await ctx.prisma.userLists.findMany({
+    const lists = await ctx.db.userLists.findMany({
       where: { userId: ctx.session?.user?.id },
       orderBy: { createdAt: "desc" },
       include: { list: true, user: true },
@@ -16,10 +16,10 @@ export const listsRouter = router({
     .input(
       z.object({
         listId: z.string(),
-      })
+      }),
     )
     .query(async ({ ctx, input }) => {
-      return ctx.prisma.userLists.findUnique({
+      return ctx.db.userLists.findUnique({
         where: {
           listId_userId: {
             listId: input.listId,
@@ -33,18 +33,18 @@ export const listsRouter = router({
     .input(
       z.object({
         name: z.string(),
-      })
+      }),
     )
     .mutation(async ({ ctx, input }) => {
       try {
-        const list = await ctx.prisma.list.create({
+        const list = await ctx.db.list.create({
           data: {
             name: input.name,
             userId: ctx.session?.user?.id as string,
           },
         });
         // Create join record
-        await ctx.prisma.userLists.create({
+        await ctx.db.userLists.create({
           data: {
             listId: list.id,
             userId: ctx.session?.user?.id as string,
@@ -59,7 +59,7 @@ export const listsRouter = router({
       }
     }),
   invites: publicProcedure.query(async ({ ctx }) => {
-    return await ctx.prisma.listInvite.findMany({
+    return await ctx.db.listInvite.findMany({
       where: {
         invitedUserEmail: ctx.session?.user?.email as string,
       },
@@ -73,10 +73,10 @@ export const listsRouter = router({
     .input(
       z.object({
         listId: z.string(),
-      })
+      }),
     )
     .query(async ({ ctx, input }) => {
-      return await ctx.prisma.listInvite.findMany({
+      return await ctx.db.listInvite.findMany({
         where: {
           listId: input.listId,
         },
@@ -86,7 +86,7 @@ export const listsRouter = router({
       });
     }),
   sentInvites: publicProcedure.query(async ({ ctx }) => {
-    return await ctx.prisma.listInvite.findMany({
+    return await ctx.db.listInvite.findMany({
       where: {
         userId: ctx.session?.user?.id,
       },
@@ -101,10 +101,10 @@ export const listsRouter = router({
       z.object({
         email: z.string(),
         listId: z.string(),
-      })
+      }),
     )
     .mutation(async ({ ctx, input }) => {
-      return await ctx.prisma.listInvite.create({
+      return await ctx.db.listInvite.create({
         data: {
           invitedUserEmail: input.email,
           listId: input.listId,
@@ -116,11 +116,11 @@ export const listsRouter = router({
     .input(
       z.object({
         listId: z.string(),
-      })
+      }),
     )
     .mutation(async ({ ctx, input }) => {
       // Accept invite
-      await ctx.prisma.listInvite.update({
+      await ctx.db.listInvite.update({
         where: {
           listId_invitedUserEmail: {
             listId: input.listId,
@@ -133,7 +133,7 @@ export const listsRouter = router({
       });
 
       // Create link between user and list
-      const list = await ctx.prisma.userLists.create({
+      const list = await ctx.db.userLists.create({
         data: {
           listId: input.listId,
           userId: ctx.session?.user?.id as string,
@@ -146,10 +146,10 @@ export const listsRouter = router({
     .input(
       z.object({
         id: z.string(),
-      })
+      }),
     )
     .mutation(async ({ ctx, input }) => {
-      return await ctx.prisma.list.delete({
+      return await ctx.db.list.delete({
         where: { id: input.id },
       });
     }),

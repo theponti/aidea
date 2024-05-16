@@ -1,13 +1,13 @@
-import AlertError from "components/AlertError";
-import LinkButton from "components/LinkButton";
-import ListInviteForm from "components/ListInviteForm";
-import LoadingScene from "components/Loading";
 import type { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useCallback, useEffect } from "react";
 
-import { trpc } from "lib/trpc";
+import { api } from "@/lib/trpc/react";
+import AlertError from "components/AlertError";
+import LinkButton from "components/LinkButton";
+import ListInviteForm from "components/ListInviteForm";
+import LoadingScene from "components/Loading";
 
 const List: NextPage = () => {
   const router = useRouter();
@@ -17,12 +17,12 @@ const List: NextPage = () => {
     data: userList,
     status: listStatus,
     refetch: getList,
-  } = trpc.lists.findById.useQuery({ listId }, { enabled: false });
+  } = api.lists.findById.useQuery({ listId }, { enabled: false });
   const {
     data: listInvites,
     status: invitesStatus,
     refetch: getInvites,
-  } = trpc.lists.listInvites.useQuery({ listId }, { enabled: false });
+  } = api.lists.listInvites.useQuery({ listId }, { enabled: false });
   const onInviteSuccess = useCallback(() => getInvites(), [getInvites]);
 
   useEffect(() => {

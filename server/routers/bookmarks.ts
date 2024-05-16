@@ -2,21 +2,23 @@ import { TRPCError } from "@trpc/server";
 import { CheerioAPI, load } from "cheerio";
 import ky from "ky";
 import { z } from "zod";
-import { authenticatedProcedure, router } from "../common/context";
+import { createTRPCRouter, protectedProcedure } from "../trpc";
 
 function getOgContent($: CheerioAPI, type: string): string {
   return $(`meta[property="og:${type}"]`).attr("content") || "";
 }
 
-// Example router with queries that can only be hit if the user requesting is signed in
-export const bookmarksRouter = router({
-  get: authenticatedProcedure.query(async ({ ctx }) => {
-    return ctx.prisma.recommendation.findMany({
+export const bookmarksRouter = createTRPCRouter({
+  get: protectedProcedure.query(async ({ ctx }) => {
+    const records = await ctx.db.recommendation.findMany({
       where: { userId: ctx.session.user.id },
       orderBy: { createdAt: "desc" },
     });
+
+    console.log({ records });
+    return records;
   }),
-  create: authenticatedProcedure
+  create: protectedProcedure
     .input(
       z.object({
         url: z.string(),
@@ -37,7 +39,7 @@ export const bookmarksRouter = router({
           imageHeight: getOgContent($, "image:height"),
         };
 
-        const obj = await ctx.prisma.recommendation.create({
+        const obj = await ctx.db.recommendation.create({
           data: {
             ...recommendation,
             userId: ctx.session.user.id,
@@ -51,14 +53,14 @@ export const bookmarksRouter = router({
         });
       }
     }),
-  delete: authenticatedProcedure
+  delete: protectedProcedure
     .input(
       z.object({
         id: z.string(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
-      return await ctx.prisma.recommendation.delete({
+      return await ctx.db.recommendation.delete({
         where: { id: input.id },
       });
     }),

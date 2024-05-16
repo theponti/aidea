@@ -1,29 +1,23 @@
-"use client";
-
-import { trpc } from "@/lib/trpc";
+import { api } from "@/lib/trpc/server";
 import classNames from "classnames";
 import AlertError from "components/AlertError";
-import { SyntheticEvent, useCallback, useState } from "react";
+import { url } from "inspector";
+import { SyntheticEvent, useCallback } from "react";
 
 type BookmarksFormProps = {
-  onCreate: () => void;
+  onCreate?: () => void;
 };
 export default function BookmarksForm({ onCreate }: BookmarksFormProps) {
-  const { isPending, isError, mutateAsync } = trpc.bookmarks.create.useMutation(
-    { onSuccess: onCreate },
-  );
-  const [url, setUrl] = useState("");
-
-  const onUrlChange = useCallback((e: SyntheticEvent<HTMLInputElement>) => {
-    setUrl(e.currentTarget.value);
-  }, []);
+  const { isPending, isError, mutateAsync } = api.bookmarks.create.useMutation({
+    onSuccess: onCreate,
+  });
 
   const onFormSubmit = useCallback(
     (e: SyntheticEvent<HTMLFormElement>) => {
       e.preventDefault();
-      mutateAsync({ url });
+      mutateAsync({ url: e.currentTarget.url.value });
     },
-    [mutateAsync, url],
+    [mutateAsync],
   );
 
   return (
@@ -41,8 +35,6 @@ export default function BookmarksForm({ onCreate }: BookmarksFormProps) {
             type="url"
             placeholder="Add bookmark url"
             className="input w-full text-lg p-2 border-stone-300 rounded placeholder:text-zinc-400"
-            value={url}
-            onChange={onUrlChange}
           />
         </div>
         {!!url.length && (

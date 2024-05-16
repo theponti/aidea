@@ -1,22 +1,21 @@
 import { z } from "zod";
-import { authenticatedProcedure, router } from "../common/context";
+import { createTRPCRouter, protectedProcedure } from "../trpc";
 
-// Example router with queries that can only be hit if the user requesting is signed in
-export const ideaRouter = router({
-  getIdeas: authenticatedProcedure.query(async ({ ctx }) => {
-    return ctx.prisma.idea.findMany({
+export const ideaRouter = createTRPCRouter({
+  getIdeas: protectedProcedure.query(async ({ ctx }) => {
+    return ctx.db.idea.findMany({
       where: { userId: ctx.session.user.id },
       orderBy: { createdAt: "desc" },
     });
   }),
-  createIdea: authenticatedProcedure
+  createIdea: protectedProcedure
     .input(
       z.object({
         description: z.string(),
-      })
+      }),
     )
     .mutation(async ({ ctx, input }) => {
-      const idea = await ctx.prisma.idea.create({
+      const idea = await ctx.db.idea.create({
         data: {
           description: input.description,
           userId: ctx.session.user.id,
@@ -24,14 +23,14 @@ export const ideaRouter = router({
       });
       return idea;
     }),
-  deleteIdea: authenticatedProcedure
+  deleteIdea: protectedProcedure
     .input(
       z.object({
         id: z.string(),
-      })
+      }),
     )
     .mutation(async ({ ctx, input }) => {
-      const idea = await ctx.prisma.idea.delete({
+      const idea = await ctx.db.idea.delete({
         where: { id: input.id },
       });
       return idea;

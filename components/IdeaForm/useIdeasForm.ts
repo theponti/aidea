@@ -1,11 +1,12 @@
-import { trpc } from "lib/trpc";
 import { SyntheticEvent, useCallback, useState } from "react";
+
+import { api } from "@/lib/trpc/react";
 
 type UseIdeaFormProps = {
   onCreate: () => void;
 };
 export default function useIdeaForm({ onCreate }: UseIdeaFormProps) {
-  const mutation = trpc.idea.createIdea.useMutation();
+  const mutation = api.idea.createIdea.useMutation();
   const [description, setDescription] = useState("");
   const [isLoading, setIsLoading] = useState<boolean>();
   const [error, setError] = useState<string | undefined>();

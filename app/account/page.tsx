@@ -1,35 +1,15 @@
-import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import { useCallback, useEffect } from "react";
 
-import AlertError from "components/AlertError";
-import LoadingScene from "components/Loading";
-import { trpc } from "lib/trpc";
+import { redirect } from "next/navigation";
+import { getServerAuthSession } from "server/auth";
+import AccountDelete from "./account-delete";
 
-const Account = () => {
-  const router = useRouter();
-  const { data: session, status } = useSession();
+const Account = async () => {
+  const session = await getServerAuthSession();
   const pictureUrl = session?.user?.image as string;
-  const deleteUser = trpc.auth.deleteUser.useMutation();
-  const onDelectAccount = useCallback(async () => {
-    await deleteUser.mutateAsync();
-    signOut();
-  }, [deleteUser]);
 
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/");
-    }
-  }, [router, status]);
-
-  switch (status) {
-    case "loading":
-      return <LoadingScene />;
-    case "unauthenticated":
-      return <div />;
-    default:
-      break;
+  if (!session) {
+    redirect("/");
   }
 
   return (
@@ -54,11 +34,7 @@ const Account = () => {
 
         <div className="divider" />
 
-        {deleteUser.error && <AlertError error={deleteUser.error.message} />}
-
-        <button className="btn btn-ghost text-error" onClick={onDelectAccount}>
-          Delete account
-        </button>
+        <AccountDelete />
       </div>
     </>
   );

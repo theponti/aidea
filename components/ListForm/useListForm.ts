@@ -1,11 +1,11 @@
-import { trpc } from "lib/trpc";
+import { api } from "@/lib/trpc/react";
 import { SyntheticEvent, useCallback, useState } from "react";
 
 type UseListFormProps = {
   onCreate: () => void;
 };
 export default function useListForm({ onCreate }: UseListFormProps) {
-  const mutation = trpc.lists.create.useMutation();
+  const mutation = api.lists.create.useMutation();
   const [name, setUrl] = useState("");
   const [isLoading, setIsLoading] = useState<boolean>();
   const [error, setError] = useState<string | undefined>();

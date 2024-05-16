@@ -1,22 +1,20 @@
-import DashboardNav from "components/DashboardNav";
-import ListForm from "components/ListForm";
-import LoadingScene from "components/Loading";
 import type { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-import { trpc } from "lib/trpc";
+import { api } from "@/lib/trpc/react";
+import DashboardNav from "components/DashboardNav";
+import ListForm from "components/ListForm";
+import LoadingScene from "components/Loading";
 
 const Lists: NextPage = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
-  const {
-    data,
-    refetch,
-    status: listsStatus,
-  } = trpc.lists.get.useQuery(undefined, { enabled: false });
+  const { data, refetch, isPending } = api.lists.get.useQuery(undefined, {
+    enabled: false,
+  });
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -43,7 +41,7 @@ const Lists: NextPage = () => {
       <h1>Lists</h1>
       <ListForm onCreate={refetch} />
       <div>
-        {listsStatus === "loading" && <LoadingScene />}
+        {isPending && <LoadingScene />}
         {data?.length === 0 && "Your lists will appear here."}
         {data && data.length > 0 && (
           <ul className="space-y-2">

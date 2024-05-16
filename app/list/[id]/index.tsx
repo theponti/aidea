@@ -1,44 +1,22 @@
+import Link from "next/link";
+import { redirect } from "next/navigation";
+
+import { api } from "@/lib/trpc/server";
 import AlertError from "components/AlertError";
 import DashboardNav from "components/DashboardNav";
 import UserPlus from "components/Icons/UserPlus";
-import LoadingScene from "components/Loading";
-import type { NextPage } from "next";
-import { useSession } from "next-auth/react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { getServerAuthSession } from "server/auth";
 
-import { trpc } from "lib/trpc";
+export default async function List({
+  params: { id: listId },
+}: {
+  params: { id: string };
+}) {
+  const session = await getServerAuthSession();
+  const data = await api.lists.findById({ listId });
 
-const List: NextPage = () => {
-  const router = useRouter();
-  const { data: session, status } = useSession();
-  const listId = router.query.id as string;
-  const {
-    data,
-    refetch,
-    status: listStatus,
-  } = trpc.lists.findById.useQuery({ listId }, { enabled: false });
-
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/");
-    }
-
-    if (status === "authenticated") {
-      refetch();
-    }
-  }, [refetch, router, status]);
-
-  switch (status) {
-    case "unauthenticated":
-      return <div />;
-    default:
-      break;
-  }
-
-  if (!session || [status, listStatus].indexOf("loading") !== -1) {
-    return <LoadingScene />;
+  if (!session) {
+    redirect("/");
   }
 
   return (
@@ -62,6 +40,4 @@ const List: NextPage = () => {
       )}
     </>
   );
-};
-
-export default List;
+}

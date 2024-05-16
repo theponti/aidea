@@ -1,12 +1,11 @@
-import { authenticatedProcedure, router } from "../common/context";
+import { createTRPCRouter, protectedProcedure } from "../trpc";
 
-// Example router with queries that can only be hit if the user requesting is signed in
-export const userRouter = router({
-  getSession: authenticatedProcedure.query(async ({ ctx }) => {
+export const userRouter = createTRPCRouter({
+  getSession: protectedProcedure.query(async ({ ctx }) => {
     return ctx.session;
   }),
-  deleteUser: authenticatedProcedure.mutation(async ({ ctx }) => {
-    await ctx.prisma.user.delete({ where: { id: ctx.session?.user?.id } });
+  deleteUser: protectedProcedure.mutation(async ({ ctx }) => {
+    await ctx.db.user.delete({ where: { id: ctx.session?.user?.id } });
     return true;
   }),
 });

@@ -1,28 +1,26 @@
-import classNames from "classnames";
-import AlertError from "components/AlertError";
-import { SyntheticEvent, useCallback } from "react";
-import useIdeaForm from "./useIdeasForm";
+"use client";
 
-type IdeaFormProps = {
-  onCreate: () => void;
-};
-export default function IdeaForm({ onCreate }: IdeaFormProps) {
-  const { error, description, isLoading, createIdea, onDescriptionChange } =
-    useIdeaForm({
-      onCreate,
-    });
+import classNames from "classnames";
+import { SyntheticEvent, useCallback, useState } from "react";
+
+import { api } from "@/lib/trpc/react";
+import AlertError from "components/AlertError";
+
+export default function IdeaForm() {
+  const [description, setDescription] = useState("");
+  const { isError, mutate } = api.idea.createIdea.useMutation();
 
   const onFormSubmit = useCallback(
     (e: SyntheticEvent<HTMLFormElement>) => {
       e.preventDefault();
-      createIdea();
+      mutate({ description });
     },
-    [createIdea],
+    [mutate, description],
   );
 
   return (
     <>
-      {error && <AlertError error={error} />}
+      {isError && <AlertError error="There was an issue saving your idea." />}
 
       <form onSubmit={onFormSubmit}>
         <div className="form-control w-full mb-2">
@@ -33,7 +31,7 @@ export default function IdeaForm({ onCreate }: IdeaFormProps) {
             placeholder="What's happening?"
             className="textarea w-full text-lg p-2 border-stone-300 rounded placeholder:text-zinc-400"
             value={description}
-            onChange={onDescriptionChange}
+            onChange={(e) => setDescription(e.currentTarget.value)}
           />
         </div>
         {!!description.length && (

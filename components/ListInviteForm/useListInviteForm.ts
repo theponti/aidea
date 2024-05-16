@@ -1,5 +1,5 @@
+import { api } from "@/lib/trpc/react";
 import { ListInvite } from "@prisma/client";
-import { trpc } from "lib/trpc";
 import { SyntheticEvent, useCallback, useState } from "react";
 
 type UseListInviteFormProps = {
@@ -8,7 +8,7 @@ type UseListInviteFormProps = {
 export default function useListInviteForm({
   onCreate,
 }: UseListInviteFormProps) {
-  const mutation = trpc.lists.invite.useMutation();
+  const mutation = api.lists.invite.useMutation();
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState<boolean>();
   const [error, setError] = useState<string | undefined>();
