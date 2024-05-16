@@ -4,9 +4,9 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "name": "Aidea",
-  "short_name": "Aidea",
-  "description": "store all your things",
+  "name": "aidea",
+  "short_name": "aidea",
+  "description": "manage your mind with ease.",
   "icons": [
     {
       "src": "/icon-192x192.png",

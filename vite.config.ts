@@ -12,12 +12,7 @@ export default defineConfig({
     coverage: {
       clean: true,
       enabled: true,
-      exclude: [
-        "src/services/constants",
-        "src/styles",
-        "src/testUtils",
-        "src/**/*.spec.{ts,tsx}",
-      ],
+      exclude: [],
       reporter: ["lcov"],
       reportsDirectory: "coverage",
     },

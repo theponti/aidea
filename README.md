@@ -1,6 +1,6 @@
 [![🧐 Code Quality](https://github.com/theponti/aidea/actions/workflows/code-quality.yml/badge.svg)](https://github.com/theponti/aidea/actions/workflows/code-quality.yml)
 
-# 🧠 Aidea 🧠
+# 🧠 aidea 🧠
 
 An application to help you keep track of your ideas, your thoughts, your lists, and
 colloborate with others.
