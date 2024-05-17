@@ -14,7 +14,7 @@
 # Directories
 public/**
 .github/**
-.husky/**
+.lefthook/**
 
 # Files
 .cz.json

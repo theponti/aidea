@@ -2,6 +2,7 @@
   "name": "aidea",
   "version": "1.4.0",
   "private": true,
+  "packageManager": "yarn@4.2.2",
   "scripts": {
     "db:migrate:dev": "dotenv -e .env -- prisma migrate dev",
     "dev": "next dev -H 127.0.0.1 -p 5000",
