@@ -1,8 +1,3 @@
-import { StreamingTextResponse, Message as VercelChatMessage } from "ai";
-import { NextRequest, NextResponse } from "next/server";
-
-import { createClient } from "@supabase/supabase-js";
-
 import { SupabaseVectorStore } from "@langchain/community/vectorstores/supabase";
 import { Document } from "@langchain/core/documents";
 import {
@@ -12,8 +7,9 @@ import {
 import { PromptTemplate } from "@langchain/core/prompts";
 import { RunnableSequence } from "@langchain/core/runnables";
 import { ChatOpenAI, OpenAIEmbeddings } from "@langchain/openai";
-
-export const runtime = "edge";
+import { createClient } from "@supabase/supabase-js";
+import { StreamingTextResponse, Message as VercelChatMessage } from "ai";
+import { NextRequest, NextResponse } from "next/server";
 
 const combineDocumentsFn = (docs: Document[]) => {
   const serializedDocs = docs.map((doc) => doc.pageContent);

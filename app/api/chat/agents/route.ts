@@ -1,18 +1,14 @@
-import { StreamingTextResponse, Message as VercelChatMessage } from "ai";
-import { NextRequest, NextResponse } from "next/server";
-
 import { Calculator } from "@langchain/community/tools/calculator";
 import { SerpAPI } from "@langchain/community/tools/serpapi";
 import { AIMessage, ChatMessage, HumanMessage } from "@langchain/core/messages";
-import { ChatOpenAI } from "@langchain/openai";
-import { AgentExecutor, createToolCallingAgent } from "langchain/agents";
-
 import {
   ChatPromptTemplate,
   MessagesPlaceholder,
 } from "@langchain/core/prompts";
-
-export const runtime = "edge";
+import { ChatOpenAI } from "@langchain/openai";
+import { StreamingTextResponse, Message as VercelChatMessage } from "ai";
+import { AgentExecutor, createToolCallingAgent } from "langchain/agents";
+import { NextRequest, NextResponse } from "next/server";
 
 const convertVercelMessageToLangChainMessage = (message: VercelChatMessage) => {
   if (message.role === "user") {

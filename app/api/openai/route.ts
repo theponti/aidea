@@ -3,8 +3,6 @@ import { OpenAI } from "openai";
 
 const { OPENAI_API_KEY, OPENAI_ORG_ID } = process.env;
 
-export const runtime = "edge";
-
 // Initialize OpenAI API client
 const openai = new OpenAI({
   organization: OPENAI_ORG_ID,

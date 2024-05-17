@@ -1,10 +1,8 @@
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 import { getServerAuthSession } from "@/server/auth";
-import { redirect } from "next/navigation";
 import AccountDelete from "../../components/account-delete";
-
-export const runtime = "edge";
 
 const Account = async () => {
   const session = await getServerAuthSession();

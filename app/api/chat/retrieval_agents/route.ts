@@ -1,20 +1,15 @@
-import { StreamingTextResponse, Message as VercelChatMessage } from "ai";
-import { NextRequest, NextResponse } from "next/server";
-
-import { createClient } from "@supabase/supabase-js";
-
 import { SupabaseVectorStore } from "@langchain/community/vectorstores/supabase";
 import { AIMessage, ChatMessage, HumanMessage } from "@langchain/core/messages";
-import { ChatOpenAI, OpenAIEmbeddings } from "@langchain/openai";
-import { AgentExecutor, createToolCallingAgent } from "langchain/agents";
-import { createRetrieverTool } from "langchain/tools/retriever";
-
 import {
   ChatPromptTemplate,
   MessagesPlaceholder,
 } from "@langchain/core/prompts";
-
-export const runtime = "edge";
+import { ChatOpenAI, OpenAIEmbeddings } from "@langchain/openai";
+import { createClient } from "@supabase/supabase-js";
+import { StreamingTextResponse, Message as VercelChatMessage } from "ai";
+import { AgentExecutor, createToolCallingAgent } from "langchain/agents";
+import { createRetrieverTool } from "langchain/tools/retriever";
+import { NextRequest, NextResponse } from "next/server";
 
 const convertVercelMessageToLangChainMessage = (message: VercelChatMessage) => {
   if (message.role === "user") {

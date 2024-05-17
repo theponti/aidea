@@ -3,8 +3,6 @@
 import type React from "react";
 import { useState } from "react";
 
-export const runtime = "edge";
-
 const LandingPage: React.FC = () => {
   const [responseValue, setResponseValue] = useState("");
   const [inputValue, setInputValue] = useState("");

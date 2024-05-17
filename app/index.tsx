@@ -5,8 +5,6 @@ import { useEffect } from "react";
 
 import LoadingScene from "components/Loading";
 
-export const runtime = "edge";
-
 const Home: NextPage = () => {
   const router = useRouter();
   const { status } = useSession();

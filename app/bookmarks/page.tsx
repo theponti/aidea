@@ -4,8 +4,6 @@ import { redirect } from "next/navigation";
 import Bookmarks from "@/components/bookmarks";
 import { getServerAuthSession } from "@/server/auth";
 
-export const runtime = "edge";
-
 export default async function BookmarksPage() {
   const session = await getServerAuthSession();
 

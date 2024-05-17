@@ -10,7 +10,6 @@ import { NextResponse } from "next/server";
 
 import { DEFAULT_MODEL_OPTIONS } from "@/lib/utils";
 
-export const runtime = "edge";
 export const dynamic = "force-dynamic";
 
 export async function POST(req: Request) {

@@ -11,8 +11,6 @@ import { HttpResponseOutputParser } from "langchain/output_parsers";
 import { formatDocumentsAsString } from "langchain/util/document";
 import { NextResponse } from "next/server";
 
-export const runtime = "edge";
-
 const loader = new JSONLoader("@/data/states.json", [
   "/state",
   "/code",

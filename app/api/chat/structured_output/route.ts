@@ -7,8 +7,6 @@ import { PromptTemplate } from "@langchain/core/prompts";
 import { ChatOpenAI } from "@langchain/openai";
 import { JsonOutputFunctionsParser } from "langchain/output_parsers";
 
-export const runtime = "edge";
-
 const TEMPLATE = `Extract the requested fields from the input.
 
 The field "entity" refers to the first mentioned entity in the input.
