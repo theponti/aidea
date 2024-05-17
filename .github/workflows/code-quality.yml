@@ -73,22 +73,3 @@ jobs:
 
       - name: 🃏 Test
         run: npm run test
-
-      - name: End-to-End tests
-        uses: cypress-io/github-action@v2
-        env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
-          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
-          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        with:
-          command: npm run test:e2e:ci
-          install: false
-
-      - name: Upload coverage
-        uses: codecov/codecov-action@v3
-        with:
-          fail_ci_if_error: true

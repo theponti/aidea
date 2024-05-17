@@ -35,6 +35,6 @@
     ".next/types/**/*.ts",
     "vite.config.mts"
   ],
-  "exclude": ["node_modules", "cypress", "vite.config.mts"],
+  "exclude": ["node_modules", "vite.config.mts"],
   "moduleResolution": ["node_modules", ".next", "node"]
 }

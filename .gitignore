@@ -7,7 +7,6 @@
 
 # testing
 /coverage
-/cypress/videos
 
 # database
 /prisma/db.sqlite

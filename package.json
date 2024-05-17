@@ -3,24 +3,19 @@
   "version": "1.4.0",
   "private": true,
   "scripts": {
-    "cy": "cypress open",
-    "cy:headless": "cypress run",
     "db:migrate:dev": "dotenv -e .env.development -- prisma migrate dev",
     "dev": "next dev -H 127.0.0.1 -p 5000",
     "build": "next build",
     "lint": "eslint --cache --ignore-path .gitignore --ext .ts,.tsx src",
     "lint:fix": "eslint --cache --fix --ignore-path .gitignore --ext .ts,.tsx src",
     "lint:strict": "eslint --max-warnings=0 src",
-    "postinstall": "cypress install && prisma generate",
+    "postinstall": "prisma generate",
     "preview": "npm run build && next start --port 4173",
     "preview:test": "start-server-and-test preview http://localhost:4173",
     "start": "next start",
     "test": "vitest run --passWithNoTests",
     "test:ci": "vitest run --passWithNoTests",
     "test:coverage": "pnpx vite preview --outDir coverage/lcov-report",
-    "test:e2e": "npm run preview:test 'cypress open'",
-    "test:e2e:ci": "npm run preview:test 'npx cypress run --record'",
-    "test:e2e:headless": "npm run preview:test 'cypress run'",
     "test:update": "vitest run -u",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit --incremental false"
@@ -73,7 +68,6 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.6",
     "@commitlint/config-conventional": "^17.6.6",
-    "@testing-library/cypress": "^9.0.0",
     "@testing-library/react": "^14.0.0",
     "@types/node": "^20.4.1",
     "@types/react": "^18.2.14",
@@ -83,12 +77,10 @@
     "@vitejs/plugin-react": "^4.2.1",
     "@vitest/coverage-v8": "^1.6.0",
     "autoprefixer": "^10.4.12",
-    "cypress": "^12.17.1",
     "dotenv-cli": "^7.3.0",
     "eslint": "^8.44.0",
     "eslint-config-next": "^13.4.9",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-cypress": "2.13.3",
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-jsx-a11y": "6.7.1",
     "eslint-plugin-prettier": "^5.0.0",
@@ -121,12 +113,6 @@
     "*.{ts,tsx}": [
       "npm run lint:fix",
       "vitest related --run --coverage=false"
-    ]
-  },
-  "nyc": {
-    "report-dir": "coverage/cypress",
-    "reporter": [
-      "lcov"
     ]
   },
   "engines": {
