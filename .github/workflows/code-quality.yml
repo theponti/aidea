@@ -68,6 +68,9 @@ jobs:
         with:
           node-version: "20"
 
+      - name: ⬇️ Upgrade Yarn
+        run: yarn set version stable
+
       - name: 📥 Download deps
         run: yarn install
 
