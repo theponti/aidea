@@ -2,7 +2,6 @@
   "name": "aidea",
   "version": "1.4.0",
   "private": true,
-  "packageManager": "yarn@4.2.2",
   "scripts": {
     "db:migrate:dev": "dotenv -e .env -- prisma migrate dev",
     "dev": "next dev -H 127.0.0.1 -p 5000",
@@ -10,7 +9,7 @@
     "lint": "eslint --max-warnings=0 --ignore-path .gitignore --ext .ts,.tsx app server components lib",
     "lint:fix": "eslint --fix --ignore-path .gitignore --ext .ts,.tsx app server components lib",
     "postinstall": "prisma generate",
-    "preview": "yarn build && next start --port 4173",
+    "preview": "npm run build && next start --port 4173",
     "preview:test": "start-server-and-test preview http://localhost:4173",
     "start": "next start",
     "test": "vitest run --passWithNoTests app server components lib",

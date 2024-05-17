@@ -7,7 +7,7 @@
 #   commands:
 #     packages-audit:
 #       tags: frontend security
-#       run: yarn audit
+#       run: npm run audit
 #     gems-audit:
 #       tags: backend security
 #       run: bundle audit
@@ -16,20 +16,20 @@ commit-msg:
   commands:
     lint:
       glob: "*"
-      run: yarn commitlint --edit $1
+      run: npx commitlint --config commitlint.config.mjs --edit $1
 pre-commit:
   parallel: true
   commands:
     lint:
       glob: "*.{js,ts,jsx,tsx}"
-      run: yarn eslint {staged_files}
+      run: npx eslint {staged_files}
     stylelint:
       tags: frontend style
       glob: "*.{css,scss}"
-      run: yarn stylelint {staged_files}
+      run: npx stylelint {staged_files}
     typecheck:
       tags: frontend
-      run: yarn tsc --noEmit --incremental false
+      run: npx tsc --noEmit --incremental false
     test:
       tags: frontend
       run: npx vitest run --passWithNoTests app server components lib

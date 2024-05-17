@@ -22,6 +22,7 @@ public/**
 .eslintignore
 postcss.config.js
 tailwind.config.js
+commitlint.config.js
 index.html
 LICENSE
 README.md
