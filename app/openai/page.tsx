@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import type React from 'react';
-import {useState} from 'react';
+import type React from "react";
+import { useState } from "react";
 
 const LandingPage: React.FC = () => {
-  const [responseValue, setResponseValue] = useState('');
-  const [inputValue, setInputValue] = useState('');
-  const [error, setError] = useState(null);
+  const [responseValue, setResponseValue] = useState("");
+  const [inputValue, setInputValue] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
       // Make a POST request to the API route
-      const response = await fetch('/api/openai', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+      const response = await fetch("/api/openai", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           prompt: inputValue,
         }),
@@ -28,8 +28,9 @@ const LandingPage: React.FC = () => {
         setResponseValue(data.response);
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error(error);
-      setError(error.message);
+      setError("There was an error with your request. Please try again.");
     }
   };
 
@@ -48,7 +49,7 @@ const LandingPage: React.FC = () => {
           <input
             type="text"
             value={inputValue}
-            onChange={e => setInputValue(e.target.value)}
+            onChange={(e) => setInputValue(e.target.value)}
             placeholder="Enter your value"
             className="p-2 w-full border border-gray-300 focus:outline-none flex-1 rounded-r-none rounded-l-md"
           />

@@ -1,4 +1,5 @@
 import { OpenAIStream, StreamingTextResponse } from "ai";
+import { NextResponse } from "next/server";
 import OpenAI from "openai/index.mjs";
 
 import { DEFAULT_MODEL_OPTIONS } from "@/lib/utils";
@@ -27,8 +28,9 @@ export async function POST(req: Request) {
     // Respond with the stream
     return new StreamingTextResponse(stream);
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.error({ error: e });
-    return Response.json(null, {
+    return NextResponse.json(null, {
       status: (e as { status: number }).status ?? 500,
     });
   }

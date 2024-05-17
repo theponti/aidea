@@ -6,6 +6,7 @@ import {
   createStreamDataTransformer,
 } from "ai";
 import { HttpResponseOutputParser } from "langchain/output_parsers";
+import { NextResponse } from "next/server";
 
 import { DEFAULT_MODEL_OPTIONS } from "@/lib/utils";
 
@@ -22,7 +23,7 @@ export async function POST(req: Request) {
     const message = messages.at(-1)?.content;
 
     if (!message) {
-      return Response.json(
+      return NextResponse.json(
         { error: "No message was provided in the request body" },
         { status: 400 },
       );
@@ -52,6 +53,6 @@ export async function POST(req: Request) {
     );
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (e: any) {
-    return Response.json({ error: e.message }, { status: e.status ?? 500 });
+    return NextResponse.json({ error: e.message }, { status: e.status ?? 500 });
   }
 }

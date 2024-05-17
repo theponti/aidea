@@ -1,11 +1,11 @@
+import { StreamingTextResponse, Message as VercelChatMessage } from "ai";
 import { NextRequest, NextResponse } from "next/server";
-import { Message as VercelChatMessage, StreamingTextResponse } from "ai";
 
-import { AgentExecutor, createToolCallingAgent } from "langchain/agents";
-import { ChatOpenAI } from "@langchain/openai";
-import { SerpAPI } from "@langchain/community/tools/serpapi";
 import { Calculator } from "@langchain/community/tools/calculator";
+import { SerpAPI } from "@langchain/community/tools/serpapi";
 import { AIMessage, ChatMessage, HumanMessage } from "@langchain/core/messages";
+import { ChatOpenAI } from "@langchain/openai";
+import { AgentExecutor, createToolCallingAgent } from "langchain/agents";
 
 import {
   ChatPromptTemplate,
@@ -140,7 +140,11 @@ export async function POST(req: NextRequest) {
         { status: 200 },
       );
     }
-  } catch (e: any) {
-    return NextResponse.json({ error: e.message }, { status: e.status ?? 500 });
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e);
+    return NextResponse.json(null, {
+      status: (e as { status: number })?.status ?? 500,
+    });
   }
 }

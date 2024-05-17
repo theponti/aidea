@@ -10,6 +10,7 @@ import { ReactElement, useRef, useState } from "react";
 
 import { ChatMessageBubble } from "@/components/ChatMessageBubble";
 import { UploadDocumentsForm } from "@/components/UploadDocumentsForm";
+import { Source } from "@/lib/types";
 import { IntermediateStep } from "./IntermediateStep";
 
 export function ChatWindow(props: {
@@ -53,7 +54,7 @@ export function ChatWindow(props: {
   );
 
   const [sourcesForMessages, setSourcesForMessages] = useState<
-    Record<string, any>
+    Record<string, Source[]>
   >({});
 
   const {

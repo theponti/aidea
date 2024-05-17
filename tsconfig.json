@@ -28,7 +28,13 @@
       }
     ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules", "cypress", "vite.config.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "vite.config.mts"
+  ],
+  "exclude": ["node_modules", "cypress", "vite.config.mts"],
   "moduleResolution": ["node_modules", ".next", "node"]
 }

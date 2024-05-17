@@ -10,7 +10,8 @@ export function Chat() {
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     api: "api/basic-langchain",
     onError: (e) => {
-      console.log(e);
+      // eslint-disable-next-line no-console
+      console.error(e);
     },
   });
   const chatParent = useRef<HTMLUListElement>(null);

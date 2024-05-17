@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { zodToJsonSchema } from "zod-to-json-schema";
 
-import { ChatOpenAI } from "@langchain/openai";
 import { PromptTemplate } from "@langchain/core/prompts";
+import { ChatOpenAI } from "@langchain/openai";
 import { JsonOutputFunctionsParser } from "langchain/output_parsers";
 
 export const runtime = "edge";
@@ -84,7 +84,11 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json(result, { status: 200 });
-  } catch (e: any) {
-    return NextResponse.json({ error: e.message }, { status: e.status ?? 500 });
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e);
+    return NextResponse.json(null, {
+      status: (e as { status: number })?.status ?? 500,
+    });
   }
 }

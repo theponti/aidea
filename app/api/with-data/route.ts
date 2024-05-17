@@ -9,6 +9,7 @@ import {
 import { JSONLoader } from "langchain/document_loaders/fs/json";
 import { HttpResponseOutputParser } from "langchain/output_parsers";
 import { formatDocumentsAsString } from "langchain/util/document";
+import { NextResponse } from "next/server";
 
 const loader = new JSONLoader("@/data/states.json", [
   "/state",
@@ -94,6 +95,6 @@ export async function POST(req: Request) {
     );
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (e: any) {
-    return Response.json({ error: e.message }, { status: e.status ?? 500 });
+    return NextResponse.json({ error: e.message }, { status: e.status ?? 500 });
   }
 }

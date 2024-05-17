@@ -8,6 +8,7 @@ import {
 import { HttpResponseOutputParser } from "langchain/output_parsers";
 
 import { DEFAULT_MODEL_OPTIONS, createChainFromModal } from "@/lib/utils";
+import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
@@ -61,7 +62,11 @@ export async function POST(req: Request) {
     return new StreamingTextResponse(
       stream.pipeThrough(createStreamDataTransformer()),
     );
-  } catch (e: any) {
-    return Response.json({ error: e.message }, { status: e.status ?? 500 });
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e);
+    return NextResponse.json(null, {
+      status: (e as { status: number })?.status ?? 500,
+    });
   }
 }

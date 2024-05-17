@@ -8,7 +8,7 @@ import AlertError from "components/AlertError";
 
 export default function IdeaForm() {
   const [description, setDescription] = useState("");
-  const { isError, mutate } = api.idea.createIdea.useMutation();
+  const { isError, isPending, mutate } = api.idea.createIdea.useMutation();
 
   const onFormSubmit = useCallback(
     (e: SyntheticEvent<HTMLFormElement>) => {
@@ -38,7 +38,7 @@ export default function IdeaForm() {
           <button
             className={classNames(
               "btn btn-primary float-right min-w-full mb-4",
-              isLoading && "loading",
+              isPending && "loading",
             )}
           >
             Submit

@@ -1,17 +1,17 @@
+import { StreamingTextResponse, Message as VercelChatMessage } from "ai";
 import { NextRequest, NextResponse } from "next/server";
-import { Message as VercelChatMessage, StreamingTextResponse } from "ai";
 
 import { createClient } from "@supabase/supabase-js";
 
-import { ChatOpenAI, OpenAIEmbeddings } from "@langchain/openai";
-import { PromptTemplate } from "@langchain/core/prompts";
 import { SupabaseVectorStore } from "@langchain/community/vectorstores/supabase";
 import { Document } from "@langchain/core/documents";
-import { RunnableSequence } from "@langchain/core/runnables";
 import {
   BytesOutputParser,
   StringOutputParser,
 } from "@langchain/core/output_parsers";
+import { PromptTemplate } from "@langchain/core/prompts";
+import { RunnableSequence } from "@langchain/core/runnables";
+import { ChatOpenAI, OpenAIEmbeddings } from "@langchain/openai";
 
 export const runtime = "edge";
 
@@ -166,7 +166,11 @@ export async function POST(req: NextRequest) {
         "x-sources": serializedSources,
       },
     });
-  } catch (e: any) {
-    return NextResponse.json({ error: e.message }, { status: e.status ?? 500 });
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e);
+    return NextResponse.json(null, {
+      status: (e as { status: number })?.status ?? 500,
+    });
   }
 }

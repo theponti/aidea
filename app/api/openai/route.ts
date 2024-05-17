@@ -35,6 +35,7 @@ export async function POST(req: Request) {
     // Return the generated response in the API response
     return NextResponse.json({ response: generatedResponse }, { status: 200 });
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error({ error });
     return NextResponse.json(
       { error: "Failed to generate response" },

@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from "next/server";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
+import { NextRequest, NextResponse } from "next/server";
 
 import { createClient } from "@supabase/supabase-js";
-import { SupabaseVectorStore } from "langchain/vectorstores/supabase";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
+import { SupabaseVectorStore } from "langchain/vectorstores/supabase";
 
 export const runtime = "edge";
 
@@ -46,6 +46,7 @@ export async function POST(req: NextRequest) {
 
     const splitDocuments = await splitter.createDocuments([text]);
 
+    // eslint-disable-next-line unused-imports/no-unused-vars
     const vectorstore = await SupabaseVectorStore.fromDocuments(
       splitDocuments,
       new OpenAIEmbeddings(),
@@ -57,7 +58,9 @@ export async function POST(req: NextRequest) {
     );
 
     return NextResponse.json({ ok: true }, { status: 200 });
-  } catch (e: any) {
-    return NextResponse.json({ error: e.message }, { status: 500 });
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e);
+    return NextResponse.json(null, { status: 500 });
   }
 }

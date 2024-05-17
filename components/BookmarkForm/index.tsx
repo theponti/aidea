@@ -1,4 +1,6 @@
-import { api } from "@/lib/trpc/server";
+"use client";
+
+import { api } from "@/lib/trpc/react";
 import classNames from "classnames";
 import AlertError from "components/AlertError";
 import { url } from "inspector";
