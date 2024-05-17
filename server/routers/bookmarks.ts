@@ -10,13 +10,10 @@ function getOgContent($: CheerioAPI, type: string): string {
 
 export const bookmarksRouter = createTRPCRouter({
   get: protectedProcedure.query(async ({ ctx }) => {
-    const records = await ctx.db.recommendation.findMany({
+    return ctx.db.recommendation.findMany({
       where: { userId: ctx.session.user.id },
       orderBy: { createdAt: "desc" },
     });
-
-    console.log({ records });
-    return records;
   }),
   create: protectedProcedure
     .input(
