@@ -6,7 +6,7 @@
     "db:migrate:dev": "dotenv -e .env.development -- prisma migrate dev",
     "dev": "next dev -H 127.0.0.1 -p 5000",
     "build": "next build",
-    "lint": "eslint --max-warnings=0 --ignore-path .gitignore --ext .ts,.tsx eslint --cache --ignore-path .gitignore --ext .ts,.tsx app server components lib",
+    "lint": "eslint --max-warnings=0 --ignore-path .gitignore --ext .ts,.tsx app server components lib",
     "lint:fix": "eslint --fix --ignore-path .gitignore --ext .ts,.tsx app server components lib",
     "postinstall": "prisma generate",
     "preview": "npm run build && next start --port 4173",
