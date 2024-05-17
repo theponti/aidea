@@ -1,0 +1,50 @@
+# EXAMPLE USAGE:
+#
+#   Refer for explanation to following link:
+#   https://github.com/evilmartians/lefthook/blob/master/docs/configuration.md
+#
+# pre-push:
+#   commands:
+#     packages-audit:
+#       tags: frontend security
+#       run: yarn audit
+#     gems-audit:
+#       tags: backend security
+#       run: bundle audit
+#
+commit-msg:
+  commands:
+    lint:
+      glob: "*"
+      run: yarn commitlint --edit $1
+pre-commit:
+  parallel: true
+  commands:
+    lint:
+      glob: "*.{js,ts,jsx,tsx}"
+      run: yarn eslint {staged_files}
+    stylelint:
+      tags: frontend style
+      glob: "*.{css,scss}"
+      run: yarn stylelint {staged_files}
+    typecheck:
+      tags: frontend
+      run: yarn tsc --noEmit --incremental false
+    test:
+      tags: frontend
+      run: npx vitest run --passWithNoTests app server components lib
+#     rubocop:
+#       tags: backend style
+#       glob: "*.rb"
+#       exclude: '(^|/)(application|routes)\.rb$'
+#       run: bundle exec rubocop --force-exclusion {all_files}
+#     govet:
+#       tags: backend style
+#       files: git ls-files -m
+#       glob: "*.go"
+#       run: go vet {files}
+#   scripts:
+#     "hello.js":
+#       runner: node
+#     "any.go":
+#       runner: go run
