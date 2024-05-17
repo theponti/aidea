@@ -28,7 +28,7 @@ colloborate with others.
 1. Copy environment variable example file
 
 ```sh
-cp .env.example .env.development
+cp .env.example .env
 ```
 
 2. Set `NEXTAUTH_SECRET` to a random string using helper script
@@ -43,13 +43,13 @@ docker-compose up -d
 6. Install dependencies
 
 ```sh
-npm install
+yarn install
 ```
 
 7. Run migrations
 
 ```sh
-npm run db:migrate:dev
+yarn db:migrate:dev
 ```
 
 ### Github

@@ -3,17 +3,17 @@
   "version": "1.4.0",
   "private": true,
   "scripts": {
-    "db:migrate:dev": "dotenv -e .env.development -- prisma migrate dev",
+    "db:migrate:dev": "dotenv -e .env -- prisma migrate dev",
     "dev": "next dev -H 127.0.0.1 -p 5000",
     "build": "next build",
     "lint": "eslint --max-warnings=0 --ignore-path .gitignore --ext .ts,.tsx app server components lib",
     "lint:fix": "eslint --fix --ignore-path .gitignore --ext .ts,.tsx app server components lib",
     "postinstall": "prisma generate",
-    "preview": "npm run build && next start --port 4173",
+    "preview": "yarn build && next start --port 4173",
     "preview:test": "start-server-and-test preview http://localhost:4173",
     "start": "next start",
     "test": "vitest run --passWithNoTests app server components lib",
-    "test:coverage": "npx vite preview --outDir coverage/lcov-report",
+    "test:coverage": "vite preview --outDir coverage/lcov-report",
     "test:update": "vitest run -u",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit --incremental false"
@@ -105,13 +105,6 @@
     "vite": "^5.2.11",
     "vite-tsconfig-paths": "^4.3.2",
     "vitest": "^1.6.0"
-  },
-  "lint-staged": {
-    "*.css": "stylelint --cache --fix",
-    "*.{ts,tsx}": [
-      "npm run lint:fix",
-      "vitest related --run --coverage=false"
-    ]
   },
   "engines": {
     "node": ">=20.0.0"
