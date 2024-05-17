@@ -5,6 +5,8 @@ import { appRouter } from "@/server/index";
 import { createTRPCContext } from "@/server/trpc";
 import { env } from "env";
 
+export const runtime = "edge";
+
 /**
  * This wraps the `createTRPCContext` helper and provides the required context for the tRPC API when
  * handling a HTTP request (e.g. when you make requests from Client Components).
