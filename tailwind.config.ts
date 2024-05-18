@@ -72,6 +72,10 @@ const config = {
         },
       },
       animation: {
+        "animate-spin-slow": "animate-spin 3s linear infinite",
+        "animate-spin-fast": "animate-spin 1s linear infinite",
+        "animate-pulse-slow": "animate-pulse 3s linear infinite",
+        "animate-pulse-fast": "animate-pulse 1s linear infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
