@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   test: {
     environment: "jsdom",
-    setupFiles: ["./vitest.setup.js"],
+    setupFiles: ["./tests/vitest.setup.ts"],
     clearMocks: true,
     coverage: {
       clean: true,
