@@ -162,7 +162,7 @@ export function ChatWindow(props: {
   }
 
   return (
-    <div className="flex flex-col max-w-3xl mx-auto items-center p-4 md:p-8 rounded grow overflow-hidden">
+    <div className="flex flex-col w-full max-w-3xl mx-auto items-center p-4 md:p-8 rounded grow overflow-hidden">
       <h2 className={`${messages.length > 0 ? "" : "hidden"} text-2xl`}>
         {emoji} {titleText}
       </h2>
