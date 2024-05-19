@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import OpenAI from "openai/index.mjs";
 
 import { DEFAULT_MODEL_OPTIONS } from "@/lib/utils";
+import { getServerAuthSession } from "@/server/auth";
 
 export const dynamic = "force-dynamic";
 
@@ -11,6 +12,12 @@ const openai = new OpenAI({
 });
 
 export async function POST(req: Request) {
+  const session = await getServerAuthSession();
+
+  if (!session) {
+    return NextResponse.json(null, { status: 401 });
+  }
+
   try {
     // Extract the `messages` from the body of the request
     const { messages } = await req.json();

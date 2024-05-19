@@ -9,11 +9,12 @@ import IdeaListItem from "components/IdeaListItem";
 
 const Dashboard: NextPage = async () => {
   const session = await getServerAuthSession();
-  const data = await api.idea.getIdeas();
 
   if (session) {
     redirect("/");
   }
+
+  const data = await api.idea.getIdeas();
 
   return (
     <div className="flex flex-col">

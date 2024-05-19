@@ -1,32 +1,17 @@
-import type { NextPage } from "next";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-
-import { api } from "@/lib/trpc/react";
+import { api } from "@/lib/trpc/server";
+import { getServerAuthSession } from "@/server/auth";
 import DashboardNav from "components/DashboardNav";
 import LinkButton from "components/LinkButton";
-import LoadingScene from "components/Loading";
+import { redirect } from "next/navigation";
 
-const ListInvites: NextPage = () => {
-  const router = useRouter();
-  const { status } = useSession();
-  const { data } = api.lists.sentInvites.useQuery();
+export default async function ListInvitesSentPage() {
+  const session = await getServerAuthSession();
 
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/");
-    }
-  }, [router, status]);
-
-  switch (status) {
-    case "loading":
-      return <LoadingScene />;
-    case "unauthenticated":
-      return <div />;
-    default:
-      break;
+  if (!session) {
+    return redirect("/login");
   }
+
+  const data = await api.lists.sentInvites();
 
   return (
     <>
@@ -62,6 +47,4 @@ const ListInvites: NextPage = () => {
       </div>
     </>
   );
-};
-
-export default ListInvites;
+}

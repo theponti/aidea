@@ -1,3 +1,4 @@
+import { getServerAuthSession } from "@/server/auth";
 import { PromptTemplate } from "@langchain/core/prompts";
 import { RunnableSequence } from "@langchain/core/runnables";
 import { ChatOpenAI } from "@langchain/openai";
@@ -46,6 +47,12 @@ user: {question}
 assistant:`;
 
 export async function POST(req: Request) {
+  const session = await getServerAuthSession();
+
+  if (!session) {
+    return NextResponse.json(null, { status: 401 });
+  }
+
   try {
     // 👇 Extract the `messages` from the body of the request
     const { messages } = await req.json();

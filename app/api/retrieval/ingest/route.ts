@@ -1,6 +1,7 @@
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 import { NextRequest, NextResponse } from "next/server";
 
+import { getServerAuthSession } from "@/server/auth";
 import { createClient } from "@supabase/supabase-js";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { SupabaseVectorStore } from "langchain/vectorstores/supabase";
@@ -16,6 +17,12 @@ import { SupabaseVectorStore } from "langchain/vectorstores/supabase";
  * https://js.langchain.com/docs/modules/data_connection/vectorstores/integrations/supabase
  */
 export async function POST(req: NextRequest) {
+  const session = await getServerAuthSession();
+
+  if (!session) {
+    return NextResponse.json(null, { status: 401 });
+  }
+
   const body = await req.json();
   const text = body.text;
 

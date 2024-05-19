@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { zodToJsonSchema } from "zod-to-json-schema";
 
+import { getServerAuthSession } from "@/server/auth";
 import { PromptTemplate } from "@langchain/core/prompts";
 import { ChatOpenAI } from "@langchain/openai";
 import { JsonOutputFunctionsParser } from "langchain/output_parsers";
@@ -22,6 +23,12 @@ Input:
  * https://js.langchain.com/docs/modules/chains/popular/structured_output
  */
 export async function POST(req: NextRequest) {
+  const session = await getServerAuthSession();
+
+  if (!session) {
+    return NextResponse.json(null, { status: 401 });
+  }
+
   try {
     const body = await req.json();
     const messages = body.messages ?? [];

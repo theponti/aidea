@@ -1,3 +1,4 @@
+import { getServerAuthSession } from "@/server/auth";
 import { PromptTemplate } from "@langchain/core/prompts";
 import { ChatOpenAI } from "@langchain/openai";
 import { StreamingTextResponse, Message as VercelChatMessage } from "ai";
@@ -22,6 +23,12 @@ AI:`;
  * https://js.langchain.com/docs/guides/expression_language/cookbook#prompttemplate--llm--outputparser
  */
 export async function POST(req: NextRequest) {
+  const session = await getServerAuthSession();
+
+  if (!session) {
+    return NextResponse.json(null, { status: 401 });
+  }
+
   try {
     const body = await req.json();
     const messages = body.messages ?? [];

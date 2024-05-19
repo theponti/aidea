@@ -1,3 +1,4 @@
+import { getServerAuthSession } from "@/server/auth";
 import { SupabaseVectorStore } from "@langchain/community/vectorstores/supabase";
 import { AIMessage, ChatMessage, HumanMessage } from "@langchain/core/messages";
 import {
@@ -32,6 +33,12 @@ If you don't know how to answer a question, use the available tools to look up r
  * https://js.langchain.com/docs/use_cases/question_answering/conversational_retrieval_agents
  */
 export async function POST(req: NextRequest) {
+  const session = await getServerAuthSession();
+
+  if (!session) {
+    return NextResponse.json(null, { status: 401 });
+  }
+
   try {
     const body = await req.json();
     /**

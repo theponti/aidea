@@ -1,3 +1,4 @@
+import { getServerAuthSession } from "@/server/auth";
 import { NextResponse } from "next/server";
 import { OpenAI } from "openai";
 
@@ -11,6 +12,12 @@ const openai = new OpenAI({
 
 // Define the Next.js API route handler
 export async function POST(req: Request) {
+  const session = await getServerAuthSession();
+
+  if (!session) {
+    return NextResponse.json(null, { status: 401 });
+  }
+
   try {
     // Retrieve the prompt from the request body
     const { prompt } = await req.json();

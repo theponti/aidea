@@ -1,6 +1,8 @@
+"use client";
+
 import classNames from "classnames";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import React from "react";
 
 const LINKS = [
@@ -11,7 +13,8 @@ const LINKS = [
 ];
 
 function DashboardNav() {
-  const router = useRouter();
+  const pathname = usePathname();
+
   return (
     <div className="flex gap-4 py-4 mt-2">
       {LINKS.map((link) => (
@@ -19,7 +22,7 @@ function DashboardNav() {
           key={link.path}
           href={link.path}
           className={classNames(
-            router.pathname === link.path &&
+            pathname === link.path &&
               "underline underline-offset-4 decoration-black text-primary font-bold decoration-2",
           )}
         >

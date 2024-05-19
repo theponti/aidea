@@ -1,3 +1,4 @@
+import { getServerAuthSession } from "@/server/auth";
 import { Calculator } from "@langchain/community/tools/calculator";
 import { SerpAPI } from "@langchain/community/tools/serpapi";
 import { AIMessage, ChatMessage, HumanMessage } from "@langchain/core/messages";
@@ -29,6 +30,12 @@ const AGENT_SYSTEM_TEMPLATE = `You are a talking parrot named Polly. All final r
  * https://js.langchain.com/docs/modules/agents/agent_types/openai_functions_agent
  */
 export async function POST(req: NextRequest) {
+  const session = await getServerAuthSession();
+
+  if (!session) {
+    return NextResponse.json(null, { status: 401 });
+  }
+
   try {
     const body = await req.json();
     /**

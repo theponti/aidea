@@ -1,3 +1,4 @@
+import { getServerAuthSession } from "@/server/auth";
 import { SupabaseVectorStore } from "@langchain/community/vectorstores/supabase";
 import { Document } from "@langchain/core/documents";
 import {
@@ -64,6 +65,12 @@ const answerPrompt = PromptTemplate.fromTemplate(ANSWER_TEMPLATE);
  * https://js.langchain.com/docs/guides/expression_language/cookbook#conversational-retrieval-chain
  */
 export async function POST(req: NextRequest) {
+  const session = await getServerAuthSession();
+
+  if (!session) {
+    return NextResponse.json(null, { status: 401 });
+  }
+
   try {
     const body = await req.json();
     const messages = body.messages ?? [];

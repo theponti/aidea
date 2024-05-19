@@ -8,6 +8,7 @@ import {
 import { HttpResponseOutputParser } from "langchain/output_parsers";
 
 import { DEFAULT_MODEL_OPTIONS, createChainFromModal } from "@/lib/utils";
+import { getServerAuthSession } from "@/server/auth";
 import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
@@ -30,6 +31,12 @@ user: {input}
 assistant:`;
 
 export async function POST(req: Request) {
+  const session = await getServerAuthSession();
+
+  if (!session) {
+    return NextResponse.json(null, { status: 401 });
+  }
+
   try {
     // Extract the `messages` from the body of the request
     const { messages } = await req.json();
