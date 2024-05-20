@@ -1,13 +1,6 @@
+import { openai } from "@/lib/openai";
 import { getServerAuthSession } from "@/server/auth";
 import { NextResponse } from "next/server";
-import { OpenAI } from "openai";
-
-const { OPENAI_API_KEY, OPENAI_ORG_ID } = process.env;
-
-const openai = new OpenAI({
-  organization: OPENAI_ORG_ID,
-  apiKey: OPENAI_API_KEY,
-});
 
 export async function POST(req: Request) {
   const session = await getServerAuthSession();
