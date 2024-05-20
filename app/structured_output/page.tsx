@@ -45,38 +45,6 @@ export default function AgentsPage() {
             you&apos;d like!
           </span>
         </li>
-        <li className="hidden text-l md:block">
-          💎
-          <span className="ml-2">
-            It uses a lightweight, convenient, and powerful{" "}
-            <a href="https://zod.dev/" target="_blank">
-              schema validation library called Zod
-            </a>{" "}
-            to define schemas, but you can initialize the chain with JSON schema
-            too.
-          </span>
-        </li>
-        <li className="hidden text-l md:block">
-          🎨
-          <span className="ml-2">
-            The main frontend logic is found in{" "}
-            <code>app/structured_output/page.tsx</code>.
-          </span>
-        </li>
-        <li className="text-l">
-          🐙
-          <span className="ml-2">
-            This template is open source - you can see the source code and
-            deploy your own version{" "}
-            <a
-              href="https://github.com/langchain-ai/langchain-nextjs-template"
-              target="_blank"
-            >
-              from the GitHub repo
-            </a>
-            !
-          </span>
-        </li>
         <li className="text-l">
           👇
           <span className="ml-2">

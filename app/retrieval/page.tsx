@@ -10,7 +10,7 @@ export default function AgentsPage() {
         <li className="hidden text-l md:block">
           🔗
           <span className="ml-2">
-            This template showcases how to perform retrieval with a{" "}
+            Perform retrieval with a{" "}
             <a href="https://js.langchain.com/" target="_blank">
               LangChain.js
             </a>{" "}
@@ -42,39 +42,11 @@ export default function AgentsPage() {
             </li>
           </ul>
         </li>
-        <li className="hidden text-l md:block">
-          💻
-          <span className="ml-2">
-            You can find the prompt and model logic for this use-case in{" "}
-            <code>app/api/chat/retrieval/route.ts</code>.
-          </span>
-        </li>
         <li>
           🐶
           <span className="ml-2">
             By default, the agent is pretending to be a talking puppy, but you
             can change the prompt to whatever you want!
-          </span>
-        </li>
-        <li className="text-l">
-          🎨
-          <span className="ml-2">
-            The main frontend logic is found in{" "}
-            <code>app/retrieval/page.tsx</code>.
-          </span>
-        </li>
-        <li className="text-l">
-          🐙
-          <span className="ml-2">
-            This template is open source - you can see the source code and
-            deploy your own version{" "}
-            <a
-              href="https://github.com/langchain-ai/langchain-nextjs-template"
-              target="_blank"
-            >
-              from the GitHub repo
-            </a>
-            !
           </span>
         </li>
         <li className="hidden text-l md:block">

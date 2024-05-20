@@ -1,14 +1,18 @@
 "use client";
 
 import BookmarkListItem from "@/components/BookmarkListItem";
-import LoadingScene from "@/components/Loading";
 import { api } from "@/lib/trpc/react";
+import { Loader } from "lucide-react";
 
 export default function Bookmarks({ onDelete }: { onDelete?: () => void }) {
   const { data: bookmarks, isError, isPending } = api.bookmarks.get.useQuery();
 
   if (isPending) {
-    return <LoadingScene />;
+    return (
+      <div className="flex justify-center items-center h-96">
+        <Loader className="animate-spin-slow" />
+      </div>
+    );
   }
 
   if (isError) {

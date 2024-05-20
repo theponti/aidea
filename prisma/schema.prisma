@@ -215,3 +215,16 @@ model Message {
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
+// create table documents (
+//   id bigserial primary key,
+//   content text, -- corresponds to Document.pageContent
+//   metadata jsonb, -- corresponds to Document.metadata
+//   embedding vector(1536) -- 1536 works for OpenAI embeddings, change if needed
+// );
+model documents {
+  id        Int     @id @default(autoincrement())
+  content   String
+  metadata  Json
+  embedding Float[]
+}
