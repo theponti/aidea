@@ -4,13 +4,11 @@ import { OpenAI } from "openai";
 
 const { OPENAI_API_KEY, OPENAI_ORG_ID } = process.env;
 
-// Initialize OpenAI API client
 const openai = new OpenAI({
   organization: OPENAI_ORG_ID,
   apiKey: OPENAI_API_KEY,
 });
 
-// Define the Next.js API route handler
 export async function POST(req: Request) {
   const session = await getServerAuthSession();
 

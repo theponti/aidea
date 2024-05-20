@@ -1,5 +1,5 @@
 import { ChatOpenAI, ChatOpenAICallOptions } from "@langchain/openai";
-import { type ClassValue, clsx } from "clsx";
+import { clsx, type ClassValue } from "clsx";
 import { BaseLanguageModelInput } from "langchain/base_language";
 import { HttpResponseOutputParser } from "langchain/output_parsers";
 import { PromptTemplate } from "langchain/prompts";
@@ -11,12 +11,12 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function createChainFromModal(
+export function createChainFromModel(
   model:
     | ChatOpenAI
     | Runnable<BaseLanguageModelInput, AIMessageChunk, ChatOpenAICallOptions>,
   prompt: PromptTemplate,
-  parser: HttpResponseOutputParser
+  parser: HttpResponseOutputParser,
 ) {
   return prompt.pipe(model).pipe(parser);
 }

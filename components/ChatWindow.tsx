@@ -18,6 +18,7 @@ import { Button } from "./ui/button";
 export function ChatWindow(props: {
   endpoint: string;
   emptyStateComponent: ReactElement;
+  isJSONResponse?: boolean;
   placeholder?: string;
   titleText?: string;
   emoji?: string;
@@ -29,6 +30,7 @@ export function ChatWindow(props: {
   const {
     endpoint,
     emptyStateComponent,
+    isJSONResponse,
     placeholder,
     titleText = "ChatLM",
     showIngestForm,
@@ -69,12 +71,13 @@ export function ChatWindow(props: {
     setMessages,
   } = useChat({
     api: endpoint,
-    onResponse(response) {
+    async onResponse(response) {
       const sourcesHeader = response.headers.get("x-sources");
       const sources = sourcesHeader
         ? JSON.parse(Buffer.from(sourcesHeader, "base64").toString("utf8"))
         : [];
       const messageIndexHeader = response.headers.get("x-message-index");
+
       if (sources.length && messageIndexHeader !== null) {
         setSourcesForMessages({
           ...sourcesForMessages,
@@ -82,6 +85,7 @@ export function ChatWindow(props: {
         });
       }
     },
+    streamMode: isJSONResponse ? "text" : "stream-data",
     onError: (e) => {
       toast(e.message, {
         theme: "dark",
@@ -100,11 +104,14 @@ export function ChatWindow(props: {
     if (chatEndpointIsLoading ?? intermediateStepsLoading) {
       return;
     }
+
     if (!showIntermediateSteps) {
       handleSubmit(e);
       // Some extra work to show intermediate steps properly
     } else {
-      setIntermediateStepsLoading(true);
+      if (showIntermediateSteps) {
+        setIntermediateStepsLoading(true);
+      }
       setInput("");
       const messagesWithUserReply = messages.concat({
         id: messages.length.toString(),
@@ -204,7 +211,7 @@ export function ChatWindow(props: {
           />
           <Button
             type="submit"
-            className="bg-black text-white rounded-r-xl h-[50px]"
+            className="bg-black text-white rounded-r-xl h-[50px] hover:bg-[rgba(0,0,0,0.9)]"
           >
             {chatEndpointIsLoading || intermediateStepsLoading ? (
               <div role="status" className="flex justify-center">

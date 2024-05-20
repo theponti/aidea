@@ -7,7 +7,7 @@ import {
 } from "ai";
 import { HttpResponseOutputParser } from "langchain/output_parsers";
 
-import { DEFAULT_MODEL_OPTIONS, createChainFromModal } from "@/lib/utils";
+import { DEFAULT_MODEL_OPTIONS, createChainFromModel } from "@/lib/utils";
 import { getServerAuthSession } from "@/server/auth";
 import { NextResponse } from "next/server";
 
@@ -57,7 +57,7 @@ export async function POST(req: Request) {
      */
     const parser = new HttpResponseOutputParser();
 
-    const chain = createChainFromModal(model, prompt, parser);
+    const chain = createChainFromModel(model, prompt, parser);
 
     // Convert the response into a friendly text-stream
     const stream = await chain.stream({
