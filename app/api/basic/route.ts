@@ -1,15 +1,11 @@
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import { NextResponse } from "next/server";
-import OpenAI from "openai/index.mjs";
 
+import { openai } from "@/lib/openai";
 import { DEFAULT_MODEL_OPTIONS } from "@/lib/utils";
 import { getServerAuthSession } from "@/server/auth";
 
 export const dynamic = "force-dynamic";
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY!,
-});
 
 export async function POST(req: Request) {
   const session = await getServerAuthSession();
