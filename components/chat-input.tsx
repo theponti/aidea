@@ -2,6 +2,7 @@
 
 import { Loader } from "lucide-react";
 
+import { useQuery } from "@tanstack/react-query";
 import { AgentStep } from "langchain/schema";
 import { useState } from "react";
 import { Button } from "./ui/button";
@@ -11,6 +12,27 @@ type Message = {
   content: string;
   role: string;
 };
+
+function useLangchainBasicChat({
+  enabled,
+  message,
+}: {
+  enabled: boolean;
+  message: string;
+}) {
+  return useQuery({
+    queryKey: ["langchain-basic", message ?? ""],
+    queryFn: async ({ queryKey }) => {
+      const response = await fetch("api/chat/basic-langchain", {
+        method: "POST",
+        body: JSON.stringify({ message: queryKey[1] }),
+      });
+      const json = await response.json();
+      return json;
+    },
+    enabled,
+  });
+}
 
 export default function ChatForm({
   endpoint,
@@ -32,14 +54,16 @@ export default function ChatForm({
   onSuccessfulIntermediateSteps: (messages: Message[]) => void;
 }) {
   const [input, setInput] = useState("");
-  const [chatEndpointIsLoading, setChatEndpointIsLoading] = useState(false);
   const [showIntermediateSteps, setShowIntermediateSteps] = useState(false);
   const [intermediateStepsLoading, setIntermediateStepsLoading] =
     useState(false);
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
+  const { isPending, refetch } = useLangchainBasicChat({
+    enabled: false,
+    message: input,
+  });
 
   const sendMessage = async (e: React.FormEvent<HTMLFormElement>) => {
     if (showIntermediateSteps) {
@@ -48,12 +72,7 @@ export default function ChatForm({
     }
 
     e.preventDefault();
-    setChatEndpointIsLoading(true);
-    // await fetch("api/chat/basic-langchain", {
-    //   method: "POST",
-    //   body: JSON.stringify({ message: input }),
-    // });
-    setChatEndpointIsLoading(false);
+    refetch();
     setInput("");
     onSubmit(e);
   };
@@ -139,7 +158,7 @@ export default function ChatForm({
           type="submit"
           className="bg-black text-white rounded-r-xl h-[50px] hover:bg-[rgba(0,0,0,0.9)]"
         >
-          {chatEndpointIsLoading || intermediateStepsLoading ? (
+          {isPending || intermediateStepsLoading ? (
             <div role="status" className="flex justify-center">
               <Loader className="animate-spin-slow" />
               <span className="sr-only">Loading...</span>
