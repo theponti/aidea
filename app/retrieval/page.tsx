@@ -1,75 +1,22 @@
 import { ChatWindow } from "@/components/ChatWindow";
 
+/**
+ * LangChain.js Retrieval Chain 🦜🔗
+ *
+ * 🔗 Perform retrievalings using LangChain chain.
+ * 🪜 The chain works in two steps:
+ *    1️⃣ Rephrases the input question into a "standalone" question,
+ *       dereferencing pronouns based on the chat history.
+ *    2️⃣ Queries for document similar to the dereferenced question
+ *    3️⃣ Composes an answer.
+ *
+ * 🔱 This uses a vector store on Supabase.
+ */
 export default function AgentsPage() {
-  const InfoCard = (
-    <div className="p-4 md:p-8 rounded w-full max-h-[85%] overflow-hidden">
-      <h1 className="text-3xl md:text-4xl mb-4">
-        LangChain.js Retrieval Chain 🦜🔗
-      </h1>
-      <ul>
-        <li className="hidden text-l md:block">
-          🔗
-          <span className="ml-2">
-            Perform retrieval with a{" "}
-            <a href="https://js.langchain.com/" target="_blank">
-              LangChain.js
-            </a>{" "}
-            chain and the Vercel{" "}
-            <a href="https://sdk.vercel.ai/docs" target="_blank">
-              AI SDK
-            </a>{" "}
-            .
-          </span>
-        </li>
-        <li className="hidden text-l md:block">
-          🪜
-          <span className="ml-2">The chain works in two steps:</span>
-          <ul>
-            <li className="ml-4">
-              1️⃣
-              <span className="ml-2">
-                First, it rephrases the input question into a
-                &quot;standalone&quot; question, dereferencing pronouns based on
-                the chat history.
-              </span>
-            </li>
-            <li className="ml-4">
-              2️⃣
-              <span className="ml-2">
-                Then, it queries the retriever for documents similar to the
-                dereferenced question and composes an answer.
-              </span>
-            </li>
-          </ul>
-        </li>
-        <li>
-          🐶
-          <span className="ml-2">
-            By default, the agent is pretending to be a talking puppy, but you
-            can change the prompt to whatever you want!
-          </span>
-        </li>
-        <li className="hidden text-l md:block">
-          🔱
-          <span className="ml-2">
-            Before running this example on your own, you&apos;ll first need to
-            set up a Supabase vector store. See the README for more details.
-          </span>
-        </li>
-        <li className="text-l">
-          👇
-          <span className="ml-2">
-            Upload some text, then try asking e.g.{" "}
-            <code>What is a document loader?</code> below!
-          </span>
-        </li>
-      </ul>
-    </div>
-  );
   return (
     <ChatWindow
       endpoint="api/chat/retrieval"
-      emptyStateComponent={InfoCard}
+      emptyStateComponent={<div />}
       showIngestForm={true}
       placeholder={
         'I\'ve got a nose for finding the right documents! Ask, "What is a document loader?"'

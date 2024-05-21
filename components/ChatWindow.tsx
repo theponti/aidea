@@ -4,16 +4,13 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { useChat } from "ai/react";
-import type { AgentStep } from "langchain/schema";
 import type { FormEvent } from "react";
 import { ReactElement, useRef, useState } from "react";
 
 import { ChatMessageBubble } from "@/components/ChatMessageBubble";
-import { UploadDocumentsForm } from "@/components/UploadDocumentsForm";
 import { Source } from "@/lib/types";
-import { Loader } from "lucide-react";
 import { IntermediateStep } from "./IntermediateStep";
-import { Button } from "./ui/button";
+import ChatForm from "./chat-input";
 
 export function ChatWindow(props: {
   endpoint: string;
@@ -27,35 +24,10 @@ export function ChatWindow(props: {
 }) {
   const messageContainerRef = useRef<HTMLDivElement | null>(null);
 
-  const {
-    endpoint,
-    emptyStateComponent,
-    isJSONResponse,
-    placeholder,
-    titleText = "ChatLM",
-    showIngestForm,
-    showIntermediateStepsToggle,
-    emoji,
-  } = props;
+  const { emoji, endpoint, isJSONResponse, placeholder, titleText } = props;
 
-  const [showIntermediateSteps, setShowIntermediateSteps] = useState(false);
   const [intermediateStepsLoading, setIntermediateStepsLoading] =
     useState(false);
-  const ingestForm = showIngestForm && (
-    <UploadDocumentsForm></UploadDocumentsForm>
-  );
-  const intemediateStepsToggle = showIntermediateStepsToggle && (
-    <div>
-      <input
-        type="checkbox"
-        id="show_intermediate_steps"
-        name="show_intermediate_steps"
-        checked={showIntermediateSteps}
-        onChange={(e) => setShowIntermediateSteps(e.target.checked)}
-      ></input>
-      <label htmlFor="show_intermediate_steps"> Show intermediate steps</label>
-    </div>
-  );
 
   const [sourcesForMessages, setSourcesForMessages] = useState<
     Record<string, Source[]>
@@ -63,9 +35,6 @@ export function ChatWindow(props: {
 
   const {
     messages,
-    input,
-    setInput,
-    handleInputChange,
     handleSubmit,
     isLoading: chatEndpointIsLoading,
     setMessages,
@@ -104,68 +73,7 @@ export function ChatWindow(props: {
     if (chatEndpointIsLoading ?? intermediateStepsLoading) {
       return;
     }
-
-    if (!showIntermediateSteps) {
-      handleSubmit(e);
-      // Some extra work to show intermediate steps properly
-    } else {
-      if (showIntermediateSteps) {
-        setIntermediateStepsLoading(true);
-      }
-      setInput("");
-      const messagesWithUserReply = messages.concat({
-        id: messages.length.toString(),
-        content: input,
-        role: "user",
-      });
-      setMessages(messagesWithUserReply);
-      const response = await fetch(endpoint, {
-        method: "POST",
-        body: JSON.stringify({
-          messages: messagesWithUserReply,
-          show_intermediate_steps: true,
-        }),
-      });
-      const json = await response.json();
-      setIntermediateStepsLoading(false);
-      if (response.status === 200) {
-        // Represent intermediate steps as system messages for display purposes
-        const intermediateStepMessages = (json.intermediate_steps ?? []).map(
-          (intermediateStep: AgentStep, i: number) => {
-            return {
-              id: (messagesWithUserReply.length + i).toString(),
-              content: JSON.stringify(intermediateStep),
-              role: "system",
-            };
-          },
-        );
-        const newMessages = messagesWithUserReply;
-        for (const message of intermediateStepMessages) {
-          newMessages.push(message);
-          setMessages([...newMessages]);
-          await new Promise((resolve) =>
-            setTimeout(resolve, 1000 + Math.random() * 1000),
-          );
-        }
-        setMessages([
-          ...newMessages,
-          {
-            id: (
-              newMessages.length + intermediateStepMessages.length
-            ).toString(),
-            content: json.output,
-            role: "assistant",
-          },
-        ]);
-      } else {
-        if (json.error) {
-          toast(json.error, {
-            theme: "dark",
-          });
-          throw new Error(json.error);
-        }
-      }
-    }
+    e;
   }
 
   return (
@@ -173,8 +81,8 @@ export function ChatWindow(props: {
       <h2 className={`${messages.length > 0 ? "" : "hidden"} text-2xl`}>
         {emoji} {titleText}
       </h2>
-      {messages.length === 0 ? emptyStateComponent : ""}
       <div
+        data-testid="chat-window"
         className="relative flex flex-col-reverse w-full mb-4 overflow-auto transition-[flex-grow] ease-in-out"
         ref={messageContainerRef}
       >
@@ -194,36 +102,17 @@ export function ChatWindow(props: {
             })
           : ""}
       </div>
-
-      {messages.length === 0 && ingestForm}
-
-      <form
-        onSubmit={sendMessage}
-        className="absolute bottom-4 flex flex-col mx-auto w-[95%] md:max-w-2xl p-2"
-      >
-        <div className="flex">{intemediateStepsToggle}</div>
-        <div className="flex w-full items-center">
-          <input
-            className="grow p-4 rounded-l-xl border h-[50px]"
-            value={input}
-            placeholder={placeholder ?? "Enter a message..."}
-            onChange={handleInputChange}
-          />
-          <Button
-            type="submit"
-            className="bg-black text-white rounded-r-xl h-[50px] hover:bg-[rgba(0,0,0,0.9)]"
-          >
-            {chatEndpointIsLoading || intermediateStepsLoading ? (
-              <div role="status" className="flex justify-center">
-                <Loader className="animate-spin-slow" />
-                <span className="sr-only">Loading...</span>
-              </div>
-            ) : (
-              <span>Send</span>
-            )}
-          </Button>
-        </div>
-      </form>
+      <ChatForm
+        endpoint={endpoint}
+        onSubmit={handleSubmit}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        onSuccessfulIntermediateSteps={(messages: any[]) =>
+          setMessages(messages)
+        }
+        messages={messages}
+        hasIntermediateSteps={messages.some((m) => m.role === "system")}
+        placeholder={placeholder}
+      />
       <ToastContainer />
     </div>
   );
