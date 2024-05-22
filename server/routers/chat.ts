@@ -16,7 +16,7 @@ export const chatRouter = createTRPCRouter({
         message: z.string(),
       }),
     )
-    .mutation(async ({ ctx, input }) => {
+    .mutation(async ({ input }) => {
       const { message } = input;
 
       const response = await openai.chat.completions.create({
@@ -34,7 +34,7 @@ export const chatRouter = createTRPCRouter({
 
       return { stream };
     }),
-  getChatResponse: protectedProcedure
+  structuredOutput: protectedProcedure
     .input(
       z.object({
         chatId: z.string(),
@@ -43,24 +43,21 @@ export const chatRouter = createTRPCRouter({
     )
     .mutation(async ({ ctx, input }) => {
       const { chatId, message } = input;
-      const [chat, messages] = await ctx.db.$transaction([
-        ctx.db.chat.findUnique({
-          where: { id: chatId },
-        }),
+      const [messages] = await ctx.db.$transaction([
         ctx.db.message.findMany({
           where: { chatId },
         }),
       ]);
-      const currentMessageContent = message;
 
-      const TEMPLATE = `Extract the requested fields from the input.
-
+      const TEMPLATE = `
+        Extract the requested fields from the input.
         The field "entity" refers to the first mentioned entity in the input.
 
         Input:
         {input}`;
 
       const prompt = PromptTemplate.fromTemplate(TEMPLATE);
+
       /**
        * Function calling is currently only supported with ChatOpenAI models
        */
@@ -70,8 +67,7 @@ export const chatRouter = createTRPCRouter({
       });
 
       /**
-       * We use Zod (https://zod.dev) to define our schema for convenience,
-       * but you can pass JSON Schema directly if desired.
+       * Define schema for type safety.
        */
       const schema = z.object({
         tone: z
@@ -111,9 +107,12 @@ export const chatRouter = createTRPCRouter({
         .pipe(new JsonOutputFunctionsParser());
 
       const result = await chain.invoke({
-        input: currentMessageContent,
+        input: [...messages.map((m) => m.content), message].join("\n"),
       });
 
-      return result;
+      return {
+        chatId,
+        result,
+      };
     }),
 });
