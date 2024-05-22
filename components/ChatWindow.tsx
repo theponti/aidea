@@ -10,7 +10,7 @@ import { ReactElement, useRef, useState } from "react";
 import { ChatMessageBubble } from "@/components/ChatMessageBubble";
 import { Source } from "@/lib/types";
 import { IntermediateStep } from "./IntermediateStep";
-import ChatForm from "./chat-input";
+import ChatForm from "./chat-form";
 
 export function ChatWindow(props: {
   endpoint: string;
@@ -110,7 +110,7 @@ export function ChatWindow(props: {
           setMessages(messages)
         }
         messages={messages}
-        hasIntermediateSteps={messages.some((m) => m.role === "system")}
+        hasIntermediateSteps={true}
         placeholder={placeholder}
       />
       <ToastContainer />

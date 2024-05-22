@@ -128,25 +128,11 @@ export default function ChatForm({
     }
   };
 
-  const intemediateStepsToggle = hasIntermediateSteps && (
-    <div>
-      <input
-        type="checkbox"
-        id="show_intermediate_steps"
-        name="show_intermediate_steps"
-        checked={showIntermediateSteps}
-        onChange={(e) => setShowIntermediateSteps(e.target.checked)}
-      ></input>
-      <label htmlFor="show_intermediate_steps"> Show intermediate steps</label>
-    </div>
-  );
-
   return (
     <form
       onSubmit={sendMessage}
       className="absolute bottom-4 flex flex-col mx-auto w-[95%] md:max-w-2xl p-2"
     >
-      <div className="flex">{intemediateStepsToggle}</div>
       <div className="flex w-full items-center">
         <input
           className="grow p-4 rounded-l-xl border h-[50px]"
