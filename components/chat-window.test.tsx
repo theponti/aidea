@@ -32,8 +32,11 @@ describe("ChatWindow", () => {
     );
 
     expect(
-      screen.getByText(`${mockEmoji} ${mockTitleText}`),
+      screen.queryByText(`${mockEmoji} ${mockTitleText}`),
     ).toBeInTheDocument();
+    expect(
+      screen.queryByTestId("chat-form-button-status"),
+    ).not.toBeInTheDocument();
   });
 
   test("displays the title text and emoji when messages exist", async () => {

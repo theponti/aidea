@@ -55,10 +55,11 @@ export default function ChatForm({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
-  const { isPending, refetch } = useLangchainBasicChat({
+  const { refetch, isFetching, isRefetching } = useLangchainBasicChat({
     enabled: false,
     message: input,
   });
+  const isLoading = isFetching || isRefetching;
 
   const sendMessage = async (e: React.FormEvent<HTMLFormElement>) => {
     // if (showIntermediateSteps) {
@@ -139,8 +140,12 @@ export default function ChatForm({
           type="submit"
           className="bg-black text-white rounded-r-xl h-[50px] hover:bg-[rgba(0,0,0,0.9)]"
         >
-          {isPending ? (
-            <div role="status" className="flex justify-center">
+          {isLoading ? (
+            <div
+              data-testid="chat-form-button-status"
+              role="status"
+              className="flex justify-center"
+            >
               <Loader className="animate-spin-slow" />
               <span className="sr-only">Loading...</span>
             </div>
