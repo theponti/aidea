@@ -4,7 +4,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { useChat } from "ai/react";
-import type { FormEvent } from "react";
 import { ReactElement, useRef, useState } from "react";
 
 import { ChatMessageBubble } from "@/components/ChatMessageBubble";
@@ -20,25 +19,16 @@ export function ChatWindow(props: {
   titleText?: string;
   emoji?: string;
   showIngestForm?: boolean;
-  showIntermediateStepsToggle?: boolean;
 }) {
   const messageContainerRef = useRef<HTMLDivElement | null>(null);
 
   const { emoji, endpoint, isJSONResponse, placeholder, titleText } = props;
 
-  const [intermediateStepsLoading, setIntermediateStepsLoading] =
-    useState(false);
-
   const [sourcesForMessages, setSourcesForMessages] = useState<
     Record<string, Source[]>
   >({});
 
-  const {
-    messages,
-    handleSubmit,
-    isLoading: chatEndpointIsLoading,
-    setMessages,
-  } = useChat({
+  const { messages, handleSubmit, setMessages } = useChat({
     api: endpoint,
     async onResponse(response) {
       const sourcesHeader = response.headers.get("x-sources");
@@ -61,20 +51,6 @@ export function ChatWindow(props: {
       });
     },
   });
-
-  async function sendMessage(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (messageContainerRef.current) {
-      messageContainerRef.current.classList.add("grow");
-    }
-    if (!messages.length) {
-      await new Promise((resolve) => setTimeout(resolve, 300));
-    }
-    if (chatEndpointIsLoading ?? intermediateStepsLoading) {
-      return;
-    }
-    e;
-  }
 
   return (
     <div className="flex flex-col w-full max-w-3xl mx-auto items-center p-4 md:p-8 rounded grow overflow-hidden">
@@ -110,7 +86,6 @@ export function ChatWindow(props: {
           setMessages(messages)
         }
         messages={messages}
-        hasIntermediateSteps={true}
         placeholder={placeholder}
       />
       <ToastContainer />

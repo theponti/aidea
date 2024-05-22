@@ -1,4 +1,4 @@
-import { ChatWindow } from "@/components/ChatWindow";
+import { ChatWindow } from "@/components/chat-window";
 import { getServerAuthSession } from "@/server/auth";
 
 export default async function Home() {

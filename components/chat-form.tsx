@@ -36,14 +36,12 @@ function useLangchainBasicChat({
 
 export default function ChatForm({
   endpoint,
-  hasIntermediateSteps,
   messages,
   onSubmit,
   placeholder = "Enter a message...",
   onSuccessfulIntermediateSteps,
 }: {
   endpoint: string;
-  hasIntermediateSteps?: boolean;
   messages: {
     id: string;
     content: string;
@@ -54,9 +52,6 @@ export default function ChatForm({
   onSuccessfulIntermediateSteps: (messages: Message[]) => void;
 }) {
   const [input, setInput] = useState("");
-  const [showIntermediateSteps, setShowIntermediateSteps] = useState(false);
-  const [intermediateStepsLoading, setIntermediateStepsLoading] =
-    useState(false);
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
@@ -66,10 +61,10 @@ export default function ChatForm({
   });
 
   const sendMessage = async (e: React.FormEvent<HTMLFormElement>) => {
-    if (showIntermediateSteps) {
-      setIntermediateStepsLoading(true);
-      return handleIntermediateSteps();
-    }
+    // if (showIntermediateSteps) {
+    //   setIntermediateStepsLoading(true);
+    //   return handleIntermediateSteps();
+    // }
 
     e.preventDefault();
     refetch();
@@ -77,6 +72,7 @@ export default function ChatForm({
     onSubmit(e);
   };
 
+  // eslint-disable-next-line unused-imports/no-unused-vars
   const handleIntermediateSteps = async () => {
     setInput("");
     const messagesWithUserReply = messages.concat({
@@ -95,8 +91,6 @@ export default function ChatForm({
     });
 
     const json = await response.json();
-
-    setIntermediateStepsLoading(false);
 
     if (response.status === 200) {
       // Represent intermediate steps as system messages for display purposes
@@ -130,6 +124,7 @@ export default function ChatForm({
 
   return (
     <form
+      role="form"
       onSubmit={sendMessage}
       className="absolute bottom-4 flex flex-col mx-auto w-[95%] md:max-w-2xl p-2"
     >
@@ -144,7 +139,7 @@ export default function ChatForm({
           type="submit"
           className="bg-black text-white rounded-r-xl h-[50px] hover:bg-[rgba(0,0,0,0.9)]"
         >
-          {isPending || intermediateStepsLoading ? (
+          {isPending ? (
             <div role="status" className="flex justify-center">
               <Loader className="animate-spin-slow" />
               <span className="sr-only">Loading...</span>

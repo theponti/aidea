@@ -1,4 +1,4 @@
-import { ChatWindow } from "@/components/ChatWindow";
+import { ChatWindow } from "@/components/chat-window";
 import { UploadDocumentsForm } from "@/components/UploadDocumentsForm";
 
 /**
@@ -18,7 +18,6 @@ export default function AgentsPage() {
         endpoint="api/chat/retrieval_agents"
         emptyStateComponent={<div />}
         showIngestForm={true}
-        showIntermediateStepsToggle={true}
         placeholder={
           'Beep boop! I\'m a robot retrieval-focused agent! Ask, "What are some ways of doing retrieval in LangChain.js?"'
         }

@@ -11,7 +11,15 @@ async function Header() {
       <div className="container mx-auto max-w-[1200px] px-4">
         <div className="flex-1 text-primary">
           <span className="font-semibold text-2xl">
-            <Link href="/">🧠 AIdea</Link>
+            <Link
+              href="/"
+              className="text-xl text-slate-600 font-extrabold uppercase tracking-tighter"
+            >
+              <span role="img" className="mr-2 text-lg">
+                🦜
+              </span>
+              polly
+            </Link>
           </span>
         </div>
         <div className="flex-none gap-2" data-testid="AuthMenu">

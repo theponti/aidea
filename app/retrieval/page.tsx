@@ -1,4 +1,4 @@
-import { ChatWindow } from "@/components/ChatWindow";
+import { ChatWindow } from "@/components/chat-window";
 
 /**
  * LangChain.js Retrieval Chain 🦜🔗

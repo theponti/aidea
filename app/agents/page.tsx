@@ -1,4 +1,4 @@
-import { ChatWindow } from "@/components/ChatWindow";
+import { ChatWindow } from "@/components/chat-window";
 
 export default function AgentsPage() {
   const InfoCard = (
@@ -41,7 +41,6 @@ export default function AgentsPage() {
       placeholder="Squawk! I'm a conversational agent! Ask me about the current weather in Honolulu!"
       titleText="Polly the Agentic Parrot"
       emoji="🦜"
-      showIntermediateStepsToggle={true}
     ></ChatWindow>
   );
 }
