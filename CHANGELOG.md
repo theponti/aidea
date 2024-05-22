@@ -1,5 +1,45 @@
 # Changelog
 
+## [1.5.0](https://github.com/theponti/aidea/compare/v1.4.0...v1.5.0) (2024-05-22)
+
+
+### Features
+
+* **app/chat:** restyle chat input ([412542b](https://github.com/theponti/aidea/commit/412542b85f5da1965c1c4d812a2e232d66260fb7))
+* **app:** collapse landing page design ([2732c0e](https://github.com/theponti/aidea/commit/2732c0e6df06b3a7f9e112a394519b1d796cd701))
+* **app:** configure edge runtime ([856b319](https://github.com/theponti/aidea/commit/856b319f1102b411d6f6d892713156d0259ded67))
+* **app:** guard api routes with session ([4f79479](https://github.com/theponti/aidea/commit/4f794790278a15111ed9f0c181a2cad89594a22e))
+* **app:** remove runtime edge due to next-auth dep ([be68e22](https://github.com/theponti/aidea/commit/be68e221eebba2501909d0a53177bb959876019f))
+* **ci:** add env var for code-quality ([8340b58](https://github.com/theponti/aidea/commit/8340b5831b74ceb66c30837e7e9fd6ad3b3278d3))
+* **ci:** add lefthook ([c551a41](https://github.com/theponti/aidea/commit/c551a4174f647cf157baf79669521cab76e250c4))
+* **ci:** fix lint script ([ba46804](https://github.com/theponti/aidea/commit/ba46804245e3b8e6fc241635f74943001cba3a7e))
+* **ci:** remove deploy-prod workflow ([f87bd01](https://github.com/theponti/aidea/commit/f87bd018bb9633f02509a6712a319423d385c978))
+* **ci:** remove vercel deploy ([0d6613a](https://github.com/theponti/aidea/commit/0d6613a6806f3e48ae9ec7a9333eca85cc8d77bc))
+* **deps:** update prisma ([e4e20b9](https://github.com/theponti/aidea/commit/e4e20b9e3bc8c07e26a1ab82bfe6b59c34dc00cd))
+* **deps:** update project dependencies ([8888551](https://github.com/theponti/aidea/commit/888855155a551c06c66ef3a85de221b954708bac))
+* **git:** ignore yarn install-state ([f522af3](https://github.com/theponti/aidea/commit/f522af3b84c3e7c7f5b26cd42ad1dd4ff925f314))
+* **package:** remove pnpm ([a675154](https://github.com/theponti/aidea/commit/a6751546f7d35dde24e0468ef667447de9872bcf))
+* **repo:** switch to yarn ([4039f70](https://github.com/theponti/aidea/commit/4039f7092185ff6f5cb8f48327d20dbec7d6b008))
+* **repo:** upgrade to latest yarn ([9db25d8](https://github.com/theponti/aidea/commit/9db25d8ea2b1a6acdb5e72954eb905e5473f4d51))
+* **repo:** upgrade typescript ([a2dda5d](https://github.com/theponti/aidea/commit/a2dda5d36e961c22515ad1df3415bb1093769843))
+* **test:** add playwright ([293bf1d](https://github.com/theponti/aidea/commit/293bf1d07cb7ef2a9219185bbab7ff428a7b6a9c))
+* **test:** remove cypress ([e87a8d0](https://github.com/theponti/aidea/commit/e87a8d00db6462f96b3ad911040b5ade79d26b42))
+
+
+### Bug Fixes
+
+* **app/api:** add missing trpc folder ([2c4de44](https://github.com/theponti/aidea/commit/2c4de44a69474ce530aaf0fbd3fd36254d6f87f9))
+* **app/api:** add missing trpc folder ([605e44e](https://github.com/theponti/aidea/commit/605e44e1e4996be9957d85fda4372709e3506dae))
+* **apps:** remove edge from next-auth ([b9c711e](https://github.com/theponti/aidea/commit/b9c711e5eb7aa824b5b13bebf0995d4f53241253))
+* **ci:** fix eslint command ([1c973dd](https://github.com/theponti/aidea/commit/1c973dd7836eee288d892e1c87833a15b439e4fa))
+* **ci:** fix install command ([4209672](https://github.com/theponti/aidea/commit/4209672c1f03b65cde08f228ef31f4e5c12944af))
+* **ci:** remove lint:strict script ([77a53a5](https://github.com/theponti/aidea/commit/77a53a58bef00fa66e6d79b3b3ac831b3f6388f0))
+* **ci:** set yarn version in code-quality ([d79a87c](https://github.com/theponti/aidea/commit/d79a87cec9a711e365965bd4cf7e4f8bfc8f3f0c))
+* fix eslint issues ([654665f](https://github.com/theponti/aidea/commit/654665f799ae99f0e04f4f6f1c26bfc936ed856a))
+* **lint:** add eslint-plugin-unused-imports ([56d4fb4](https://github.com/theponti/aidea/commit/56d4fb4419a5d840a4832803358b9788684644b6))
+* **package:** upgrade to node 20 ([c65b7e0](https://github.com/theponti/aidea/commit/c65b7e07d05cb45711c1ca19860d2c66d447b5cc))
+* **package:** use node 16 for install ([51e4ec5](https://github.com/theponti/aidea/commit/51e4ec56fbda1e156ec9c9d84b9909fc35bc70ee))
+
 ## [1.4.0](https://github.com/theponti/aidea/compare/v1.3.0...v1.4.0) (2023-11-27)
 
 
