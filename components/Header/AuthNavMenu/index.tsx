@@ -9,6 +9,7 @@ import Link from "next/link";
 import Avatar from "components/Avatar";
 import { ACCOUNT_PATH } from "lib/routes";
 
+import { Button } from "@/components/ui/button";
 import styles from "./AuthNavMenu.module.css";
 
 export default function AuthMenu({ session }: { session: Session | null }) {
@@ -16,9 +17,13 @@ export default function AuthMenu({ session }: { session: Session | null }) {
 
   if (!session) {
     return (
-      <button onClick={() => signIn("google")} data-testid="signInButton">
+      <Button
+        data-testid="signInButton"
+        className="bg-slate-600 text-white rounded-xl p-2 px-4 hover:bg-slateblue-600"
+        onClick={() => signIn("google")}
+      >
         Sign In
-      </button>
+      </Button>
     );
   }
 
