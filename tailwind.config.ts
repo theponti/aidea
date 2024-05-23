@@ -70,12 +70,19 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "animate-spin": {
+          to: { transform: "rotate(360deg)" },
+        },
+        "animate-pulse": {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.5" },
+        },
       },
       animation: {
-        "animate-spin-slow": "animate-spin 3s linear infinite",
-        "animate-spin-fast": "animate-spin 1s linear infinite",
-        "animate-pulse-slow": "animate-pulse 3s linear infinite",
-        "animate-pulse-fast": "animate-pulse 1s linear infinite",
+        "spin-slow": "animate-spin 3s linear infinite",
+        "spin-fast": "animate-spin 1s linear infinite",
+        "pulse-slow": "animate-pulse 3s linear infinite",
+        "pulse-fast": "animate-pulse 1s linear infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
