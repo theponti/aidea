@@ -10,7 +10,15 @@ services:
     networks:
       - aidea
     ports:
-      - "5433:5432"
+      - "0:5432"
+  chroma:
+    image: ghcr.io/chroma-core/chroma:latest
+    volumes:
+      - aidea:/chroma/.chroma/index
+    ports:
+      - 8000:8000
+    networks:
+      - aidea
 
 networks:
   aidea:

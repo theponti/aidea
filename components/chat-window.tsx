@@ -8,6 +8,7 @@ import { ReactElement, useRef, useState } from "react";
 
 import { ChatMessageBubble } from "@/components/ChatMessageBubble";
 import { Source } from "@/lib/types";
+import { Message } from "ai";
 import { IntermediateStep } from "./IntermediateStep";
 import ChatForm from "./chat-form";
 
@@ -28,7 +29,7 @@ export function ChatWindow(props: {
     Record<string, Source[]>
   >({});
 
-  const { messages, handleSubmit, setMessages } = useChat({
+  const { messages, append } = useChat({
     api: endpoint,
     async onResponse(response) {
       const sourcesHeader = response.headers.get("x-sources");
@@ -80,11 +81,7 @@ export function ChatWindow(props: {
       </div>
       <ChatForm
         endpoint={endpoint}
-        onSubmit={handleSubmit}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        onSuccessfulIntermediateSteps={(messages: any[]) =>
-          setMessages(messages)
-        }
+        onSubmit={(message: Message) => append(message)}
         messages={messages}
         placeholder={placeholder}
       />
