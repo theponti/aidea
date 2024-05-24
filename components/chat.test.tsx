@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import * as aiReact from "ai/react";
 import { describe, expect, test, vi } from "vitest";
-import { ChatWindow } from "./chat-window";
+import { ChatWindow } from "./chat";
 
 vi.mock("ai/react");
 
@@ -109,9 +109,7 @@ describe("ChatWindow", () => {
     fireEvent.submit(screen.getByRole("form"));
 
     await waitFor(() =>
-      expect(screen.getByTestId("chat-window")).toHaveTextContent(
-        "Test message",
-      ),
+      expect(screen.getByTestId("chat")).toHaveTextContent("Test message"),
     );
   });
 });

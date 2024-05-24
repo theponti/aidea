@@ -1,80 +1,95 @@
 "use client";
 
+import "react-toastify/dist/ReactToastify.css";
+
+import { Message } from "ai";
 import { useChat } from "ai/react";
-import { useEffect, useRef } from "react";
+import { ReactElement, useRef, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 
-import { Button } from "components/ui/button";
-import { Input } from "components/ui/input";
+import { ChatMessage } from "@/components/chat-message";
+import { Source } from "@/lib/types";
+import { IntermediateStep } from "./IntermediateStep";
+import ChatForm from "./chat-form";
 
-export function Chat() {
-  const { messages, input, handleInputChange, handleSubmit } = useChat({
-    api: "api/basic-langchain",
+export function ChatWindow(props: {
+  endpoint: string;
+  emptyStateComponent: ReactElement;
+  isJSONResponse?: boolean;
+  placeholder?: string;
+  titleText?: string;
+  emoji?: string;
+  showIngestForm?: boolean;
+}) {
+  const messageContainerRef = useRef<HTMLDivElement | null>(null);
+
+  const { emoji, endpoint, isJSONResponse, placeholder, titleText } = props;
+
+  const [sourcesForMessages, setSourcesForMessages] = useState<
+    Record<string, Source[]>
+  >({});
+
+  const { messages, append } = useChat({
+    api: endpoint,
+    async onResponse(response) {
+      const sourcesHeader = response.headers.get("x-sources");
+      const sources = sourcesHeader
+        ? JSON.parse(Buffer.from(sourcesHeader, "base64").toString("utf8"))
+        : [];
+      const messageIndexHeader = response.headers.get("x-message-index");
+
+      if (sources.length && messageIndexHeader !== null) {
+        setSourcesForMessages({
+          ...sourcesForMessages,
+          [messageIndexHeader]: sources,
+        });
+      }
+    },
+    streamMode: isJSONResponse ? "text" : "stream-data",
     onError: (e) => {
-      // eslint-disable-next-line no-console
-      console.error(e);
+      toast(e.message, {
+        theme: "dark",
+      });
     },
   });
-  const chatParent = useRef<HTMLUListElement>(null);
 
-  useEffect(() => {
-    const domNode = chatParent.current;
-    if (domNode) {
-      domNode.scrollTop = domNode.scrollHeight;
-    }
-  });
+  const onSuccessfulFormSubmission = (messages: Message[]) => {
+    messages.map((m) => append(m));
+  };
 
   return (
-    <main className="flex flex-col w-full h-screen max-h-dvh bg-background">
-      <header className="p-4 border-b w-full max-w-3xl mx-auto">
-        <h1 className="text-2xl font-bold">LangChain Chat</h1>
-      </header>
-
-      <section className="p-4">
-        <form
-          onSubmit={handleSubmit}
-          className="flex w-full max-w-3xl mx-auto items-center"
-        >
-          <Input
-            className="flex-1 min-h-[40px]"
-            placeholder="Type your question here..."
-            type="text"
-            value={input}
-            onChange={handleInputChange}
-          />
-          <Button className="ml-2" type="submit">
-            Submit
-          </Button>
-        </form>
-      </section>
-
-      <section className="container px-0 pb-10 flex flex-col flex-grow gap-4 mx-auto max-w-3xl">
-        <ul
-          ref={chatParent}
-          className="h-1 p-4 flex-grow bg-muted/50 rounded-lg overflow-y-auto flex flex-col gap-4"
-        >
-          {messages.map((m, index) => (
-            <div key={index}>
-              {m.role === "user" ? (
-                <li key={m.id} className="flex flex-row">
-                  <div className="rounded-xl p-4 bg-background shadow-md flex">
-                    <p className="text-primary whitespace-break-spaces">
-                      {m.content}
-                    </p>
-                  </div>
-                </li>
+    <div className="flex flex-col w-full max-w-3xl mx-auto items-center p-4 md:p-8 rounded grow overflow-hidden">
+      <h2 className={`${messages.length > 0 ? "" : "hidden"} text-2xl`}>
+        {emoji} {titleText}
+      </h2>
+      <div
+        data-testid="chat"
+        className="relative flex flex-col-reverse w-full mb-4 overflow-auto transition-[flex-grow] ease-in-out"
+        ref={messageContainerRef}
+      >
+        {messages.length > 0
+          ? [...messages].reverse().map((m, i) => {
+              const sourceKey = (messages.length - 1 - i).toString();
+              return m.role === "system" ? (
+                <IntermediateStep key={m.id} message={m}></IntermediateStep>
               ) : (
-                <li key={m.id} className="flex flex-row-reverse">
-                  <div className="rounded-xl p-4 bg-background shadow-md flex w-3/4">
-                    <p className="text-primary whitespace-break-spaces">
-                      {m.content}
-                    </p>
-                  </div>
-                </li>
-              )}
-            </div>
-          ))}
-        </ul>
-      </section>
-    </main>
+                <ChatMessage
+                  key={m.id}
+                  message={m}
+                  aiEmoji={emoji}
+                  sources={sourcesForMessages[sourceKey]}
+                ></ChatMessage>
+              );
+            })
+          : ""}
+      </div>
+      <ChatForm
+        endpoint={endpoint}
+        onSubmit={onSuccessfulFormSubmission}
+        messages={messages}
+        placeholder={placeholder}
+      />
+      <ToastContainer />
+    </div>
   );
 }

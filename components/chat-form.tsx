@@ -17,7 +17,7 @@ export default function ChatForm({
 }: {
   endpoint: string;
   messages: Message[];
-  onSubmit: (message: Message) => Promise<string | null | undefined>;
+  onSubmit: (message: Message[]) => void;
   placeholder?: string;
   onSuccessfulIntermediateSteps?: (messages: Message[]) => void;
   showIntermediateSteps?: boolean;
@@ -75,6 +75,18 @@ export default function ChatForm({
             role: "assistant",
           },
         ]);
+        onSubmit([
+          {
+            id: messages.length.toString(),
+            content: input,
+            role: "user",
+          },
+          {
+            id: messages.length.toString(),
+            content: json.output,
+            role: "assistant",
+          },
+        ]);
       }
     },
   });
@@ -82,11 +94,6 @@ export default function ChatForm({
   const sendMessage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await mutateAsync();
-    onSubmit({
-      id: messages.length.toString(),
-      content: input,
-      role: "user",
-    });
   };
 
   return (

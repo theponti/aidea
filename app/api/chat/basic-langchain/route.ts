@@ -1,14 +1,10 @@
 import { PromptTemplate } from "@langchain/core/prompts";
 import { ChatOpenAI } from "@langchain/openai";
-import {
-  StreamingTextResponse,
-  Message as VercelChatMessage,
-  createStreamDataTransformer,
-} from "ai";
-import { HttpResponseOutputParser } from "langchain/output_parsers";
+import { Message as VercelChatMessage } from "ai";
 
-import { DEFAULT_MODEL_OPTIONS, createChainFromModel } from "@/lib/utils";
+import { DEFAULT_MODEL_OPTIONS } from "@/lib/utils";
 import { getServerAuthSession } from "@/server/auth";
+import { HttpResponseOutputParser } from "langchain/output_parsers";
 import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
@@ -22,7 +18,15 @@ const formatMessage = (message: VercelChatMessage) => {
 };
 
 const TEMPLATE = `
-Only respond to user input about cats. If the topic is unrelated, please change the topic back to cats.
+You are an expert at what the user starts the conversation with.
+
+- Only respond based on the conversation topic that was set based on the user's first message.
+- Do not introduce new topics.
+- Do not provide any information that is not directly related to the user's first message.
+- Do not ask questions.
+- If the user asks a question, provide a direct answer.
+- If the user makes a statement, provide a response that is relevant to the user's statement.
+- If the user makes a statement that is not related to the conversation topic, inform the user what the conversation topic is.
 
 Current conversation:
 {chat_history}
@@ -49,26 +53,25 @@ export async function POST(req: Request) {
 
     const model = new ChatOpenAI({
       ...DEFAULT_MODEL_OPTIONS,
+      streaming: false,
     });
-
-    /**
-     * Chat models stream message chunks rather than bytes, so this
-     * output parser handles serialization and encoding.
-     */
-    const parser = new HttpResponseOutputParser();
-
-    const chain = createChainFromModel(model, prompt, parser);
 
     // Convert the response into a friendly text-stream
-    const stream = await chain.stream({
-      chat_history: formattedPreviousMessages.join("\n"),
-      input: currentMessageContent,
-    });
+    const result = await prompt
+      .pipe(model)
+      /**
+       * Chat models stream message chunks rather than bytes, so this
+       * output parser handles serialization and encoding.
+       */
+      .pipe(new HttpResponseOutputParser())
+      .invoke({
+        chat_history: formattedPreviousMessages.join("\n"),
+        input: currentMessageContent,
+      });
 
-    // Respond with the stream
-    return new StreamingTextResponse(
-      stream.pipeThrough(createStreamDataTransformer()),
-    );
+    const formattedBufferResult = Buffer.from(result).toString("utf-8");
+
+    return NextResponse.json({ output: formattedBufferResult });
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e);

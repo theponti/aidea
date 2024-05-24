@@ -1,4 +1,4 @@
-import { ChatWindow } from "@/components/chat-window";
+import { ChatWindow } from "@/components/chat";
 import { getServerAuthSession } from "@/server/auth";
 
 export default async function Home() {
@@ -8,7 +8,7 @@ export default async function Home() {
     return (
       <div className="flex justify-center flex-col flex-1">
         <ChatWindow
-          endpoint="api/chat"
+          endpoint="api/chat/basic-langchain"
           emptyStateComponent={<div />}
         ></ChatWindow>
       </div>
