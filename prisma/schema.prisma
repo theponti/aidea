@@ -199,8 +199,8 @@ model Chat {
   // Relations
   userId    String
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  listId    String
-  list      List      @relation(fields: [listId], references: [id], onDelete: Cascade)
+  listId    String?
+  list      List?     @relation(fields: [listId], references: [id], onDelete: Cascade)
   messages  Message[]
 }
 
@@ -209,6 +209,7 @@ model Message {
   content   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  role      String   @default("user")
   // Relations
   chatId    String
   chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)

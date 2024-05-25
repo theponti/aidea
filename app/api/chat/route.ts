@@ -3,6 +3,7 @@ import { PromptTemplate } from "@langchain/core/prompts";
 import { ChatOpenAI } from "@langchain/openai";
 import { StreamingTextResponse, Message as VercelChatMessage } from "ai";
 import { HttpResponseOutputParser } from "langchain/output_parsers";
+import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 const formatMessage = (message: VercelChatMessage) => {
@@ -77,4 +78,43 @@ export async function POST(req: NextRequest) {
       status: (e as { status: number })?.status ?? 500,
     });
   }
+}
+
+export async function GET() {
+  const session = await getServerAuthSession();
+
+  if (!session || !session.user || !prisma) {
+    return NextResponse.json(null, { status: 401 });
+  }
+
+  const cookieStore = cookies();
+  const activeChat = cookieStore.get("activeChat");
+
+  if (!activeChat) {
+    const newChat = await prisma.chat.create({
+      data: {
+        userId: session.user.id,
+      },
+    });
+    cookieStore.set("activeChat", newChat.id);
+    return NextResponse.json({ chatId: newChat.id, messages: [] });
+  }
+
+  const chat = await prisma.chat.findUnique({
+    where: {
+      id: activeChat.value,
+    },
+  });
+
+  if (!chat) {
+    return NextResponse.json(null, { status: 404 });
+  }
+
+  const messages = await prisma.message.findMany({
+    where: {
+      chatId: chat.id,
+    },
+  });
+
+  return NextResponse.json({ chatId: chat.id, messages });
 }

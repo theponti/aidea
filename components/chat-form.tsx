@@ -1,111 +1,75 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { useMutation } from "@tanstack/react-query";
 import { Message } from "ai/react";
-import { AgentStep } from "langchain/schema";
 import { Loader } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Button } from "./ui/button";
 
 export default function ChatForm({
   endpoint,
-  messages,
-  onSubmit,
+  onError,
+  onSubmit: setMessages,
   placeholder = "Enter a message...",
   onSuccessfulIntermediateSteps,
   showIntermediateSteps,
 }: {
   endpoint: string;
-  messages: Message[];
+  onError: (e: Error) => void;
   onSubmit: (message: Message[]) => void;
   placeholder?: string;
   onSuccessfulIntermediateSteps?: (messages: Message[]) => void;
   showIntermediateSteps?: boolean;
 }) {
-  const [input, setInput] = useState("");
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
-  };
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [message, setMessage] = useState("");
   const { isPending, mutateAsync } = useMutation({
     mutationKey: ["chat"],
-    mutationFn: async () => {
-      const messagesWithUserReply = messages.concat({
-        id: messages.length.toString(),
-        content: input,
-        role: "user",
-      });
-
-      const response = await fetch(endpoint, {
+    mutationFn: async ({ message }: { message: string }) =>
+      fetch(endpoint, {
         method: "POST",
         body: JSON.stringify({
-          messages: messagesWithUserReply,
+          message,
           show_intermediate_steps: showIntermediateSteps,
         }),
-      });
+      }),
+    onSuccess: async (response) => {
+      const { messages, intermediate_steps } = await response.json();
 
-      const json = await response.json();
-
-      if (response.status === 200) {
-        // Represent intermediate steps as system messages for display purposes
-        const intermediateStepMessages = (json.intermediate_steps ?? []).map(
-          (intermediateStep: AgentStep, i: number) => {
-            return {
-              id: (messagesWithUserReply.length + i).toString(),
-              content: JSON.stringify(intermediateStep),
-              role: "system",
-            };
-          },
-        );
-        const newMessages = messagesWithUserReply;
-
-        for (const message of intermediateStepMessages) {
-          newMessages.push(message);
-          await new Promise((resolve) =>
-            setTimeout(resolve, 1000 + Math.random() * 1000),
-          );
-        }
-
-        onSuccessfulIntermediateSteps?.([
-          ...newMessages,
-          {
-            id: (
-              newMessages.length + intermediateStepMessages.length
-            ).toString(),
-            content: json.output,
-            role: "assistant",
-          },
-        ]);
-        onSubmit([
-          {
-            id: messages.length.toString(),
-            content: input,
-            role: "user",
-          },
-          {
-            id: messages.length.toString(),
-            content: json.output,
-            role: "assistant",
-          },
-        ]);
+      // Represent intermediate steps as system messages for display purposes
+      if (!intermediate_steps) {
+        onSuccessfulIntermediateSteps?.(intermediate_steps);
       }
+
+      setMessages(messages);
+      setMessage("");
+      inputRef.current?.focus();
     },
+    onError,
   });
 
   const sendMessage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await mutateAsync();
+    await mutateAsync({ message });
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMessage(e.target.value);
   };
 
   return (
     <form
       role="form"
       onSubmit={sendMessage}
-      className="absolute bottom-4 flex flex-col mx-auto w-[95%] md:max-w-2xl p-2"
+      className="flex flex-col mx-auto w-[95%] md:max-w-2xl p-2"
     >
       <div className="flex w-full items-center">
         <input
-          className="grow p-4 rounded-l-xl border h-[50px]"
-          value={input}
+          ref={inputRef}
+          autoFocus
+          className="grow p-4 rounded-l-xl border h-[50px] rounded-r-none focus:border-none focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-inset"
+          value={message}
           placeholder={placeholder ?? "Enter a message..."}
           onChange={handleInputChange}
         />
@@ -113,18 +77,15 @@ export default function ChatForm({
           type="submit"
           className="bg-black text-white rounded-r-xl h-[50px] hover:bg-[rgba(0,0,0,0.9)]"
         >
-          {isPending ? (
-            <div
-              data-testid="chat-form-button-status"
-              role="status"
-              className="flex justify-center"
-            >
-              <Loader className="animate-spin-slow" />
-              <span className="sr-only">Loading...</span>
-            </div>
-          ) : (
-            <span>Send</span>
-          )}
+          <div
+            data-testid="chat-form-button-status"
+            role="status"
+            className={cn("flex justify-center", { hidden: !isPending })}
+          >
+            <Loader className="animate-spin-slow" />
+            <span className="sr-only">Loading...</span>
+          </div>
+          <span className={cn({ hidden: isPending })}>Send</span>
         </Button>
       </div>
     </form>

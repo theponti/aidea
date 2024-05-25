@@ -1,11 +1,11 @@
-import { Public_Sans } from "next/font/google";
+import { Inter } from "next/font/google";
 
 import Header from "@/components/Header";
 
 import { TRPCReactProvider } from "@/lib/trpc/react";
 import "./globals.css";
 
-const publicSans = Public_Sans({ subsets: ["latin"] });
+const font = Inter({ subsets: ["latin"] });
 
 export default async function RootLayout({
   children,
@@ -28,7 +28,7 @@ export default async function RootLayout({
         <meta name="twitter:description" content="manage your mind with ease" />
         <meta name="twitter:image" content="/images/og-image.png" />
       </head>
-      <body className={publicSans.className} data-theme="lofi">
+      <body className={font.className} data-theme="lofi">
         <TRPCReactProvider>
           <Header />
           {children}

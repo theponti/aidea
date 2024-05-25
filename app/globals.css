@@ -15,7 +15,7 @@ body {
 
 body {
   color: #f8f8f8;
-  background: #131318;
+  background-color: hsl(210, 17%, 98%);
   display: flex;
   flex-direction: column;
 }
@@ -43,4 +43,16 @@ code {
 
 li {
   padding: 4px;
+}
+
+@layer base {
+  :root {
+    --b1: #f8f9fa;
+    /* hex code */
+    background-color: var(--b1);
+  }
+  [data-theme] {
+    --b1: #f8f9fa;
+    background-color: var(--b1);
+  }
 }

@@ -11,15 +11,17 @@ export function ChatMessage(props: {
     aiEmoji,
     message: { role },
   } = props;
-  const colorClassName =
-    role === "user" ? "bg-sky-600" : "bg-slate-50 text-black";
+
   const prefix = role === "user" ? "🧑" : aiEmoji;
   return (
     <div
       className={cn(
         role === "user" ? "ml-auto" : "mr-auto",
-        colorClassName,
-        "rounded-3xl px-2 py-4 max-w-[80%] mb-8 flex border-2 border-slate-200 rounded-bl-none",
+        role === "user" ? "bg-slate-100 text-black" : "bg-black text-slate-100",
+        role === "user"
+          ? "rounded-xl rounded-br-none"
+          : "rounded-xl rounded-bl-none",
+        "px-4 py-4 max-w-[80%] mb-8 flex border-2 border-slate-200",
       )}
     >
       <div className="mr-2">{prefix}</div>

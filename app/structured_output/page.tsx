@@ -11,7 +11,6 @@ import { ChatWindow } from "@/components/chat";
 export default function StructuredOutputPage() {
   return (
     <ChatWindow
-      isJSONResponse
       endpoint="api/chat/structured_output"
       emptyStateComponent={<div />}
       placeholder={`No matter what you type here, I'll always return the same JSON object with the same structure!`}

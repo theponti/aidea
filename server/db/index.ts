@@ -7,10 +7,22 @@ declare global {
   var prisma: PrismaClient | undefined;
 }
 
-export const prisma = new PrismaClient({
-  log: env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
-});
+let prismaClient: PrismaClient;
 
-export function getUserAccount(userId: string) {
-  return prisma.account.findMany({ where: { userId } });
+if (process.env.NODE_ENV === "production") {
+  prismaClient = new PrismaClient({
+    log:
+      env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
+  });
+} else {
+  if (!global.prisma) {
+    global.prisma = new PrismaClient({
+      log:
+        env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
+    });
+  }
+
+  prismaClient = global.prisma;
 }
+
+export const prisma = prismaClient!;

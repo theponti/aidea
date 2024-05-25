@@ -7,7 +7,7 @@ async function Header() {
   const session = await getServerAuthSession();
 
   return (
-    <nav className="navbar bg-base-100 sticky top-0 left-0 px-0 drop-shadow-sm">
+    <nav className="navbar bg-base-100 sticky top-0 left-0 px-0 drop-shadow-sm border-b border-purple-200">
       <div className="container mx-auto max-w-[1200px] px-4">
         <div className="flex-1 text-primary">
           <span className="font-semibold text-2xl">
