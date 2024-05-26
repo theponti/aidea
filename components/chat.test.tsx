@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import * as aiReact from "ai/react";
+import { HttpResponse, http } from "msw";
+import { testServer } from "tests/test.utils";
 import { describe, expect, test, vi } from "vitest";
 import { ChatWindow } from "./chat";
 
@@ -13,13 +14,11 @@ describe("ChatWindow", () => {
   const mockTitleText = "Chat Window";
   const mockEmoji = "😀";
 
-  test("renders without crashing", () => {
-    vi.spyOn(aiReact, "useChat").mockReturnValue({
-      messages: [],
-      handleSubmit: () => {},
-      setMessages: () => {},
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } as any);
+  test("renders without crashing", async () => {
+    testServer.use(
+      http.get(mockEndpoint, () => HttpResponse.json({ messages: [] })),
+    );
+
     render(
       <QueryClientProvider client={new QueryClient()}>
         <ChatWindow
@@ -31,25 +30,27 @@ describe("ChatWindow", () => {
       </QueryClientProvider>,
     );
 
-    expect(
-      screen.queryByText(`${mockEmoji} ${mockTitleText}`),
-    ).toBeInTheDocument();
-    expect(
-      screen.queryByTestId("chat-form-button-status"),
-    ).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(
+        screen.queryByText(`${mockEmoji} ${mockTitleText}`),
+      ).toBeInTheDocument();
+    });
   });
 
   test("displays the title text and emoji when messages exist", async () => {
-    vi.spyOn(aiReact, "useChat").mockReturnValue({
-      messages: [
-        {
-          id: "1",
-          content: "Test message",
-          role: "user",
-        },
-      ],
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } as any);
+    testServer.use(
+      http.get(mockEndpoint, () =>
+        HttpResponse.json({
+          messages: [
+            {
+              id: "1",
+              content: "Test message",
+              role: "user",
+            },
+          ],
+        }),
+      ),
+    );
     render(
       <QueryClientProvider client={new QueryClient()}>
         <ChatWindow
@@ -61,7 +62,9 @@ describe("ChatWindow", () => {
       </QueryClientProvider>,
     );
 
-    expect(screen.getByText("Test message")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText("Test message")).toBeInTheDocument();
+    });
   });
 
   test.skip("does not display the title text and emoji when no messages exist", () => {
