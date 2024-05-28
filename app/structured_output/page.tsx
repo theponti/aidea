@@ -1,4 +1,4 @@
-import { ChatWindow } from "@/components/chat";
+import { Chat } from "@/components/chat";
 
 /**
  * # LangChain.js Structured Output 🦜🔗
@@ -10,12 +10,12 @@ import { ChatWindow } from "@/components/chat";
  */
 export default function StructuredOutputPage() {
   return (
-    <ChatWindow
+    <Chat
       endpoint="api/chat/structured_output"
       emptyStateComponent={<div />}
       placeholder={`No matter what you type here, I'll always return the same JSON object with the same structure!`}
       emoji="🧱"
       titleText="Structured Output"
-    ></ChatWindow>
+    ></Chat>
   );
 }

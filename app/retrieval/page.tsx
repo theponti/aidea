@@ -1,4 +1,4 @@
-import { ChatWindow } from "@/components/chat";
+import { Chat } from "@/components/chat";
 
 /**
  * LangChain.js Retrieval Chain 🦜🔗
@@ -14,7 +14,7 @@ import { ChatWindow } from "@/components/chat";
  */
 export default function AgentsPage() {
   return (
-    <ChatWindow
+    <Chat
       endpoint="api/chat/retrieval"
       emptyStateComponent={<div />}
       showIngestForm={true}
@@ -23,6 +23,6 @@ export default function AgentsPage() {
       }
       emoji="🐶"
       titleText="Dana the Document-Retrieving Dog"
-    ></ChatWindow>
+    ></Chat>
   );
 }

@@ -23,7 +23,7 @@ const useActiveChat = () => {
   });
 };
 
-export function ChatWindow(props: {
+export function Chat(props: {
   endpoint: string;
   emptyStateComponent: ReactElement;
   placeholder?: string;

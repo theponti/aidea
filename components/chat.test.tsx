@@ -3,11 +3,11 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { HttpResponse, http } from "msw";
 import { testServer } from "tests/test.utils";
 import { describe, expect, test, vi } from "vitest";
-import { ChatWindow } from "./chat";
+import { Chat } from "./chat";
 
 vi.mock("ai/react");
 
-describe("ChatWindow", () => {
+describe("Chat", () => {
   const mockEndpoint = "http://localhost:3000/api/chat";
   const mockEmptyStateComponent = <div>Empty State</div>;
   const mockPlaceholder = "Type a message...";
@@ -21,7 +21,7 @@ describe("ChatWindow", () => {
 
     render(
       <QueryClientProvider client={new QueryClient()}>
-        <ChatWindow
+        <Chat
           endpoint={mockEndpoint}
           emptyStateComponent={mockEmptyStateComponent}
           titleText={mockTitleText}
@@ -53,7 +53,7 @@ describe("ChatWindow", () => {
     );
     render(
       <QueryClientProvider client={new QueryClient()}>
-        <ChatWindow
+        <Chat
           endpoint={mockEndpoint}
           emptyStateComponent={mockEmptyStateComponent}
           titleText={mockTitleText}
@@ -70,7 +70,7 @@ describe("ChatWindow", () => {
   test.skip("does not display the title text and emoji when no messages exist", () => {
     render(
       <QueryClientProvider client={new QueryClient()}>
-        <ChatWindow
+        <Chat
           endpoint={mockEndpoint}
           emptyStateComponent={mockEmptyStateComponent}
           titleText={mockTitleText}
@@ -84,7 +84,7 @@ describe("ChatWindow", () => {
   test.skip("displays the placeholder text in the input field", () => {
     render(
       <QueryClientProvider client={new QueryClient()}>
-        <ChatWindow
+        <Chat
           endpoint={mockEndpoint}
           emptyStateComponent={mockEmptyStateComponent}
           placeholder={mockPlaceholder}
@@ -97,7 +97,7 @@ describe("ChatWindow", () => {
   test.skip("sends a message when the form is submitted", async () => {
     render(
       <QueryClientProvider client={new QueryClient()}>
-        <ChatWindow
+        <Chat
           endpoint={mockEndpoint}
           emptyStateComponent={mockEmptyStateComponent}
           placeholder={mockPlaceholder}

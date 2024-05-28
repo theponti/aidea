@@ -1,4 +1,4 @@
-import { ChatWindow } from "@/components/chat";
+import { Chat } from "@/components/chat";
 
 export default function AgentsPage() {
   const InfoCard = (
@@ -35,12 +35,12 @@ export default function AgentsPage() {
     </div>
   );
   return (
-    <ChatWindow
+    <Chat
       endpoint="api/chat/agents"
       emptyStateComponent={InfoCard}
       placeholder="Squawk! I'm a conversational agent! Ask me about the current weather in Honolulu!"
       titleText="Polly the Agentic Parrot"
       emoji="🦜"
-    ></ChatWindow>
+    ></Chat>
   );
 }

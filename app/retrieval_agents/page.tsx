@@ -1,4 +1,4 @@
-import { ChatWindow } from "@/components/chat";
+import { Chat } from "@/components/chat";
 import { UploadDocumentsForm } from "@/components/UploadDocumentsForm";
 
 /**
@@ -14,7 +14,7 @@ export default function AgentsPage() {
   return (
     <>
       <UploadDocumentsForm />
-      <ChatWindow
+      <Chat
         endpoint="api/chat/retrieval_agents"
         emptyStateComponent={<div />}
         showIngestForm={true}
@@ -23,7 +23,7 @@ export default function AgentsPage() {
         }
         emoji="🤖"
         titleText="Robbie the Retrieval Robot"
-      ></ChatWindow>
+      ></Chat>
     </>
   );
 }
